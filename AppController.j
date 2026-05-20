@@ -140,6 +140,23 @@
     [self loadDocumentationData];
 }
 
+// Hilfsmethode, die das WebView bei jedem Klick neu aufbaut, um Browser-iFrame-Glitches zu verhindern
+- (void)updateWebViewWithHTML:(CPString)html
+{
+    var parentView = [docWebView superview];
+    if (parentView)
+    {
+        var frame = [docWebView frame];
+        [docWebView removeFromSuperview];
+        
+        docWebView = [[CPWebView alloc] initWithFrame:frame];
+        [docWebView setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
+        [parentView addSubview:docWebView];
+    }
+    
+    [docWebView loadHTMLString:html];
+}
+
 // ==============================================================================
 // Data Loading & Tree Building
 // ==============================================================================
@@ -442,7 +459,7 @@
 {
     var selectedRow = [outlineView selectedRow];
     if (selectedRow === -1) {
-        [docWebView loadHTMLString:@""];
+        [self updateWebViewWithHTML:@""];
         return;
     }
     
@@ -451,8 +468,14 @@
 }
 
 // ==============================================================================
-// HTML Rendering & Doxygen-Tag Cleaner
+// HTML Rendering & Hilfsfunktionen
 // ==============================================================================
+- (CPString)escapeHTML:(CPString)str
+{
+    if (!str || typeof str !== 'string') return "";
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
 - (void)renderHTMLForNode:(DocNode)node
 {
     try {
@@ -460,21 +483,24 @@
         var data = [node data];
         
         if (!data) {
-            [docWebView loadHTMLString:"<div style='padding:30px; font-family:sans-serif;'>No data available for this node.</div>"];
+            [self updateWebViewWithHTML:"<div style='padding:30px; font-family:sans-serif;'>No data available for this node.</div>"];
             return;
         }
         
         var html = [self htmlHeader];
 
+        // -----------------------------------------------------------
+        // CLASS RENDERER
+        // -----------------------------------------------------------
         if (type === "class") {
-            html += "<span class='badge'>" + ((data.metadata && data.metadata.role) ? data.metadata.role.toUpperCase() : "CLASS") + "</span>";
-            html += "<h1>" + [node title] + "</h1>";
+            html += "<span class='badge'>" + ((data.metadata && data.metadata.role) ? [self escapeHTML:data.metadata.role].toUpperCase() : "CLASS") + "</span>";
+            html += "<h1>" + [self escapeHTML:[node title]] + "</h1>";
             
             if (data.metadata) {
-                html += "<div class='meta'>Inherits from: " + (data.metadata.superclass || "CPObject") + " &nbsp;|&nbsp; Framework: " + (data.metadata.framework || "Unknown") + "</div>";
+                html += "<div class='meta'>Inherits from: " + [self escapeHTML:(data.metadata.superclass || "CPObject")] + " &nbsp;|&nbsp; Framework: " + [self escapeHTML:(data.metadata.framework || "Unknown")] + "</div>";
             }
             if (data.primaryContent && data.primaryContent.declaration) {
-                html += "<h2>Declaration</h2><pre>" + data.primaryContent.declaration + "</pre>";
+                html += "<h2>Declaration</h2><pre>" + [self escapeHTML:data.primaryContent.declaration] + "</pre>";
             }
             if (data.primaryContent && data.primaryContent.abstract) {
                 html += "<h2>Overview</h2><div class='discussion'>" + [self cleanText:data.primaryContent.abstract] + "</div>";
@@ -482,9 +508,44 @@
             if (data.primaryContent && data.primaryContent.discussion) {
                 html += "<h2>Discussion</h2><div class='discussion'>" + [self cleanText:data.primaryContent.discussion] + "</div>";
             }
+            
+            // Sammle direkt abhängige Topics & Symbole ("General") zur besseren Übersicht
+            var kids = [node children];
+            var topics = [];
+            var generalSyms = [];
+            for (var i = 0; i < [kids count]; i++) {
+                if ([kids[i] type] === @"topic") topics.push(kids[i]);
+                else if ([kids[i] type] === @"symbol") generalSyms.push(kids[i]);
+            }
+            
+            if (topics.length > 0 || generalSyms.length > 0) {
+                html += "<hr style='border:0; border-bottom:1px solid #d2d2d7; margin: 40px 0 20px 0;'/>";
+            }
+            if (topics.length > 0) {
+                html += "<h2>Topics</h2><ul>";
+                for (var i = 0; i < topics.length; i++) {
+                    html += "<li><strong>" + [self escapeHTML:[topics[i] title]] + "</strong></li>";
+                }
+                html += "</ul>";
+            }
+            if (generalSyms.length > 0) {
+                html += "<h2>General Symbols</h2><ul>";
+                for (var i = 0; i < generalSyms.length; i++) {
+                    var sym = generalSyms[i];
+                    var badge = ([sym data].kind || "Symbol").toUpperCase();
+                    html += "<li><span style='font-size:11px; color:#86868b; margin-right:5px;'>[" + [self escapeHTML:badge] + "]</span> <strong>" + [self escapeHTML:[sym title]] + "</strong>";
+                    if ([sym data].abstract) html += " - " + [self cleanText:[sym data].abstract];
+                    html += "</li>";
+                }
+                html += "</ul>";
+            }
         } 
+        
+        // -----------------------------------------------------------
+        // TOPIC RENDERER
+        // -----------------------------------------------------------
         else if (type === "topic") {
-            html += "<h1>" + [node title] + "</h1>";
+            html += "<h1>" + [self escapeHTML:[node title]] + "</h1>";
             if (data.abstract) {
                 html += "<div class='discussion'>" + [self cleanText:data.abstract] + "</div>";
             }
@@ -493,52 +554,66 @@
             var kids = [node children];
             for (var i = 0; i < [kids count]; i++) {
                 var sym = kids[i];
-                html += "<li><strong>" + [sym title] + "</strong>";
+                var badge = ([sym data].kind || "Symbol").toUpperCase();
+                html += "<li><span style='font-size:11px; color:#86868b; margin-right:5px;'>[" + [self escapeHTML:badge] + "]</span> <strong>" + [self escapeHTML:[sym title]] + "</strong>";
                 if ([sym data].abstract) html += " - " + [self cleanText:[sym data].abstract];
                 html += "</li>";
             }
             html += "</ul>";
         } 
+        
+        // -----------------------------------------------------------
+        // SYMBOL RENDERER (Methoden, Global Variables, Typedefs etc.)
+        // -----------------------------------------------------------
         else if (type === "symbol") {
-            html += "<span class='badge'>" + (data.kind || "Symbol").toUpperCase() + "</span>";
-            html += "<h1>" + [node title] + "</h1>";
+            html += "<span class='badge'>" + [self escapeHTML:(data.kind || "Symbol").toUpperCase()] + "</span>";
+            html += "<h1>" + [self escapeHTML:[node title]] + "</h1>";
             
             if (data.declaration) {
-                html += "<h2>Declaration</h2><pre>" + data.declaration + "</pre>";
+                html += "<h2>Declaration</h2><pre>" + [self escapeHTML:data.declaration] + "</pre>";
             }
+            
+            // Falls es sich um eine Variable handelt, zeige den Typ explizit an
+            if (data.type && data.kind !== "method") {
+                html += "<h2>Type</h2><p><code>" + [self escapeHTML:data.type] + "</code></p>";
+            }
+            
             if (data.abstract) {
                 html += "<h2>Overview</h2><div class='discussion'>" + [self cleanText:data.abstract] + "</div>";
             }
             if (data.discussion) {
                 html += "<h2>Discussion</h2><div class='discussion'>" + [self cleanText:data.discussion] + "</div>";
             }
+            
             if (data.parameters && data.parameters.length > 0) {
                 html += "<h2>Parameters</h2><ul>";
                 for (var p = 0; p < data.parameters.length; p++) {
                     var param = data.parameters[p];
-                    html += "<li><code>" + param.name + "</code> (" + param.type + ")</li>";
+                    html += "<li><code>" + [self escapeHTML:param.name] + "</code> (" + [self escapeHTML:param.type] + ")</li>";
                 }
                 html += "</ul>";
             }
+            
             if (data.returnType && data.returnType !== "void") {
-                html += "<h2>Return Value</h2><p>Type: <code>" + data.returnType + "</code></p>";
+                html += "<h2>Return Value</h2><p>Type: <code>" + [self escapeHTML:data.returnType] + "</code></p>";
             }
+            
             if (data.values && data.values.length > 0) {
                 html += "<h2>Values</h2><ul>";
                 for (var v = 0; v < data.values.length; v++) {
                     var val = data.values[v];
-                    html += "<li><code>" + val.name + "</code> = " + val.value + "</li>";
+                    html += "<li><code>" + [self escapeHTML:val.name] + "</code> = " + [self escapeHTML:val.value] + "</li>";
                 }
                 html += "</ul>";
             }
         }
 
         html += [self htmlFooter];
-        [docWebView loadHTMLString:html];
+        [self updateWebViewWithHTML:html];
         
     } catch (err) {
         CPLog.error("Render Error: " + err);
-        [docWebView loadHTMLString:"<div style='padding:30px; font-family:sans-serif; color:red;'>Error rendering node: " + err + "</div>"];
+        [self updateWebViewWithHTML:"<div style='padding:30px; font-family:sans-serif; color:red;'>Error rendering node: " + err + "</div>"];
     }
 }
 
@@ -548,16 +623,14 @@
     if (!str || typeof str !== 'string') return "";
     
     try {
-        // Entferne nutzlose Basis-Einrückungen, damit white-space: pre-wrap schön aussieht
         var cleaned = str.replace(/^[ \t]+/gm, '');
-        
-        // 1. Unnötige Tags unsichtbar machen
         cleaned = cleaned.replace(/@(class|ingroup|brief|details)\s+[^\n]*\n?/gi, '');
         
-        // 2. Format \c code word -> <code>code word</code>
-        cleaned = cleaned.replace(/\\c\s+([^\s,.;:<]+)/g, "<code>$1</code>");
+        // Unbedingt sofort escapen, bevor wir unsere eigenen HTML-Tags injizieren!
+        cleaned = cleaned.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         
-        // 3. Extrahieren und Stylen von Block-Tags. (Matchen bis zum nächsten "@"-Tag oder String-Ende)
+        // Inline-Code Formatierung (\c syntax)
+        cleaned = cleaned.replace(/\\c\s+([^\s,.;:]+)/g, "<code>$1</code>");
         
         // @param name description
         cleaned = cleaned.replace(/@param\s+([a-zA-Z0-9_]+)\s+([\s\S]*?)(?=\s*@\w+|$)/g, 
@@ -567,7 +640,7 @@
         cleaned = cleaned.replace(/@returns?\s+([\s\S]*?)(?=\s*@\w+|$)/g, 
             "<div class='doc-tag'><span class='tag-label'>Returns:</span> <span class='tag-desc'>$1</span></div>");
         
-        // @throws
+        // @throws exception description
         cleaned = cleaned.replace(/@throws\s+([a-zA-Z0-9_]+)\s+([\s\S]*?)(?=\s*@\w+|$)/g, 
             "<div class='doc-tag'><span class='tag-label'>Throws <code>$1</code>:</span> <span class='tag-desc'>$2</span></div>");
 
