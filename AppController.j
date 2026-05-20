@@ -35,10 +35,15 @@
     CPWindow        theWindow;
     CPOutlineView   outlineView;
     CPWebView       docWebView;
+    
     CPSearchField   searchField;
+    CPCheckBox      showPrivateCheckbox;
 
-    CPArray         _allRoots;       // Das Original-Wurzelobjekt (nur CPObject)
-    CPArray         _displayedRoots; // Aktuell gefilterte Daten
+    CPArray         _allRoots;       // Das Original-Wurzelobjekt
+    CPArray         _displayedRoots; // Aktuell gefilterte & sortierte Daten
+    
+    BOOL            _showPrivateClasses;
+    CPString        _currentSearchTerm;
 }
 
 - (void)applicationDidFinishLaunching:(CPNotification)aNotification
@@ -47,7 +52,11 @@
     var contentView = [theWindow contentView];
     var bounds = [contentView bounds];
 
-    // 1. Top Bar für die Suche
+    // Status-Variablen initialisieren
+    _showPrivateClasses = NO;
+    _currentSearchTerm = @"";
+
+    // 1. Top Bar für die Suche & Filter
     var topBarHeight = 50.0;
     var topBar = [[CPView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(bounds), topBarHeight)];
     [topBar setAutoresizingMask:CPViewWidthSizable | CPViewMaxYMargin];
@@ -58,6 +67,13 @@
     [searchField setTarget:self];
     [searchField setAction:@selector(searchAction:)];
     [topBar addSubview:searchField];
+    
+    showPrivateCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(340, 15, 250, 20)];
+    [showPrivateCheckbox setTitle:@"Show private classes (_*)"];
+    [showPrivateCheckbox setState:CPOffState];
+    [showPrivateCheckbox setTarget:self];
+    [showPrivateCheckbox setAction:@selector(togglePrivateAction:)];
+    [topBar addSubview:showPrivateCheckbox];
     
     [contentView addSubview:topBar];
 
@@ -129,7 +145,7 @@
     var classMap = {};
     var allClasses = [];
 
-    // 1. Zuerst alle Klassen-, Topic- und Symbol-Knoten flach erzeugen
+    // 1. Alle Knoten flach erzeugen
     for (var i = 0; i < jsonArray.length; i++) {
         var clsData = jsonArray[i];
         var title = (clsData.metadata && clsData.metadata.title) ? clsData.metadata.title : "Unknown Class";
@@ -153,7 +169,7 @@
         allClasses.push(clsNode);
     }
     
-    // 2. CPObject-Wurzel ausfindig machen (oder als Dummy erstellen, falls nicht vorhanden)
+    // 2. CPObject-Wurzel ausfindig machen
     var rootNode = classMap["CPObject"];
     if (!rootNode) {
         rootNode = [[DocNode alloc] initWithTitle:@"CPObject" type:@"class" data:{}];
@@ -163,52 +179,62 @@
     [_allRoots removeAllObjects];
     [_allRoots addObject:rootNode];
     
-    // 3. Hierarchie aufbauen (Klassen anhand von superclass ihren Eltern zuordnen)
+    // 3. Hierarchie aufbauen
     for (var i = 0; i < allClasses.length; i++) {
         var clsNode = allClasses[i];
         var title = [clsNode title];
         
         if (title === "CPObject") {
-            continue; // Die Wurzel bleibt stehen
+            continue;
         }
         
         var superclass = (clsNode._data.metadata && clsNode._data.metadata.superclass) ? clsNode._data.metadata.superclass : "CPObject";
         var parentNode = classMap[superclass];
         
-        if (!parentNode) {
-            parentNode = rootNode; // Fallback zur Root, wenn Superclass fehlt
-        }
+        if (!parentNode) parentNode = rootNode;
         
-        // Füge Unterklassen immer GANZ OBEN in die Kinderliste ein (Index 0),
-        // damit sie vor den "Topics" angezeigt werden.
-        [[parentNode children] insertObject:clsNode atIndex:0];
+        [[parentNode children] addObject:clsNode];
     }
     
-    _displayedRoots = [_allRoots copy];
-    [outlineView reloadData];
-    
-    // Klappe CPObject auf, damit man die ersten Unterklassen sofort sieht
-    if ([_displayedRoots count] > 0) {
-        [outlineView expandItem:_displayedRoots[0]];
-    }
+    // UI Update triggern (führt Suche, Filterung & Sortierung aus)
+    [self applySearchAndFilter];
 }
 
 // ==============================================================================
-// Search & Filter (Rekursiv)
+// Search, Filter & Sort Actions
 // ==============================================================================
 - (void)searchAction:(id)sender
 {
-    var searchTerm = [[sender stringValue] lowercaseString];
+    _currentSearchTerm = [[sender stringValue] lowercaseString];
+    [self applySearchAndFilter];
+}
+
+- (void)togglePrivateAction:(id)sender
+{
+    _showPrivateClasses = ([sender state] === CPOnState);
+    [self applySearchAndFilter];
+}
+
+- (void)applySearchAndFilter
+{
+    if (!_allRoots || [_allRoots count] === 0) return;
+
+    var term = _currentSearchTerm || @"";
     
-    if (!searchTerm || [searchTerm length] === 0) {
-        _displayedRoots = [_allRoots copy];
-        [outlineView reloadData];
-        return;
-    }
+    // 1. Filtern der Knoten anhand von Search-Term und Privat-Einstellung
+    _displayedRoots = [self filterNodes:_allRoots withTerm:term];
     
-    _displayedRoots = [self filterNodes:_allRoots withTerm:searchTerm];
+    // 2. Alphabetisch und nach Typ sortieren
+    [self sortNodesRecursively:_displayedRoots];
+
     [outlineView reloadData];
-    [outlineView expandItem:nil expandChildren:YES]; // Alles ausklappen beim Suchen
+    
+    // Expansion State
+    if ([term length] > 0) {
+        [outlineView expandItem:nil expandChildren:YES]; // Alles ausklappen bei Suche
+    } else if ([_displayedRoots count] > 0) {
+        [outlineView expandItem:_displayedRoots[0]]; // CPObject aufklappen im Normalzustand
+    }
 }
 
 - (CPArray)filterNodes:(CPArray)nodes withTerm:(CPString)term
@@ -217,18 +243,26 @@
     
     for (var i = 0; i < [nodes count]; i++) {
         var node = nodes[i];
-        var nodeTitle = [[node title] lowercaseString];
+        var nodeTitle = [node title];
+        var nodeTitleLower = [nodeTitle lowercaseString];
         
-        // Durchsuche die Unterpunkte
+        // Private Klassen (_MyClass) ggf. komplett ignorieren
+        if (!_showPrivateClasses && [nodeTitle hasPrefix:@"_"]) {
+            continue;
+        }
+        
+        // Rekursiv in den Unterpunkten weitersuchen (erhält bereits angewendeten Underscore-Filter)
         var matchedChildren = [self filterNodes:[node children] withTerm:term];
         
-        // Wenn der Knoten selbst passt, übernehmen wir ihn inkl. ALLER seiner Kinder
-        if ([nodeTitle rangeOfString:term].location !== CPNotFound) {
+        var matchesTerm = (term === @"") || ([nodeTitleLower rangeOfString:term].location !== CPNotFound);
+        
+        // Wenn der Knoten selbst passt, übernehmen wir ihn mit seinen erlaubten Kindern
+        if (matchesTerm) {
             var newNode = [[DocNode alloc] initWithTitle:[node title] type:[node type] data:[node data]];
-            [newNode setChildren:[node children]]; // Originale Kinder
+            [newNode setChildren:matchedChildren];
             [filtered addObject:newNode];
         }
-        // Wenn ein Unterpunkt passt, übernehmen wir den Knoten nur mit den passenden Kindern
+        // Wenn nur ein Unterpunkt passt, den Baumweg für diesen Knoten erhalten
         else if ([matchedChildren count] > 0) {
             var newNode = [[DocNode alloc] initWithTitle:[node title] type:[node type] data:[node data]];
             [newNode setChildren:matchedChildren];
@@ -238,6 +272,36 @@
     
     return filtered;
 }
+
+- (void)sortNodesRecursively:(CPArray)nodes
+{
+    [nodes sortUsingFunction:function(a, b, ctx) {
+        var typeA = [a type];
+        var typeB = [b type];
+        
+        // Sortierungsgewicht (Klassen immer über Topics, Topics über Symbolen)
+        var weightA = (typeA === "class") ? 1 : ((typeA === "topic") ? 2 : 3);
+        var weightB = (typeB === "class") ? 1 : ((typeB === "topic") ? 2 : 3);
+        
+        if (weightA !== weightB) {
+            return weightA - weightB;
+        }
+        
+        // Alphabetisch sortieren
+        var titleA = [[a title] lowercaseString];
+        var titleB = [[b title] lowercaseString];
+        
+        if (titleA < titleB) return -1;
+        if (titleA > titleB) return 1;
+        return 0;
+    } context:nil];
+    
+    // Für alle Sub-Elemente wiederholen
+    for (var i = 0; i < [nodes count]; i++) {
+        [self sortNodesRecursively:[nodes[i] children]];
+    }
+}
+
 
 // ==============================================================================
 // CPOutlineView Data Source & Delegate
@@ -291,6 +355,12 @@
     var type = [node type];
     var data = [node data];
     
+    // HILFSFUNKTION: Filtert @class, @ingroup, @brief und co. aus Doxygen/JSDoc Texten
+    var cleanText = function(str) {
+        if (!str || typeof str !== 'string') return "";
+        return str.replace(/@(class|ingroup|brief|details)\s+[^\n]*\n?/gi, '').trim();
+    };
+    
     var html = @"<html><head><style>" +
                @"body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; padding: 30px; color: #1d1d1f; line-height: 1.5; }" +
                @"h1 { font-size: 32px; margin-bottom: 5px; }" +
@@ -315,24 +385,24 @@
         }
         
         if (data.primaryContent && data.primaryContent.abstract) {
-            html += "<h2>Overview</h2><p class='discussion'>" + data.primaryContent.abstract + "</p>";
+            html += "<h2>Overview</h2><p class='discussion'>" + cleanText(data.primaryContent.abstract) + "</p>";
         }
         
         if (data.primaryContent && data.primaryContent.discussion) {
-            html += "<h2>Discussion</h2><p class='discussion'>" + data.primaryContent.discussion + "</p>";
+            html += "<h2>Discussion</h2><p class='discussion'>" + cleanText(data.primaryContent.discussion) + "</p>";
         }
     } 
     else if (type === "topic") {
         html += "<h1>" + [node title] + "</h1>";
         if (data.abstract) {
-            html += "<p>" + data.abstract + "</p>";
+            html += "<p>" + cleanText(data.abstract) + "</p>";
         }
         
         html += "<h2>Symbols</h2><ul>";
         var syms = data.symbols || [];
         for (var i = 0; i < syms.length; i++) {
             html += "<li><strong>" + syms[i].name + "</strong>";
-            if (syms[i].abstract) html += " - " + syms[i].abstract;
+            if (syms[i].abstract) html += " - " + cleanText(syms[i].abstract);
             html += "</li>";
         }
         html += "</ul>";
@@ -346,11 +416,11 @@
         }
         
         if (data.abstract) {
-            html += "<h2>Overview</h2><p>" + data.abstract + "</p>";
+            html += "<h2>Overview</h2><p>" + cleanText(data.abstract) + "</p>";
         }
         
         if (data.discussion) {
-            html += "<h2>Discussion</h2><div class='discussion'>" + data.discussion + "</div>";
+            html += "<h2>Discussion</h2><div class='discussion'>" + cleanText(data.discussion) + "</div>";
         }
         
         if (data.parameters && data.parameters.length > 0) {
