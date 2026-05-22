@@ -82,26 +82,26 @@
     [_searchStatusLabel setAlignment:CPRightTextAlignment];
     [topBar addSubview:_searchStatusLabel];
 
-    var prevBtn = [[CPButton alloc] initWithFrame:CGRectMake(20 + searchFieldWidth + 100, 13, 30, 24)];
+    var prevBtn = [[CPButton alloc] initWithFrame:CGRectMake(20 + searchFieldWidth + 10 , 13, 30, 24)];
     [prevBtn setTitle:@"<"];
     [prevBtn setTarget:self];
     [prevBtn setAction:@selector(prevMatch:)];
     [topBar addSubview:prevBtn];
 
-    var nextBtn = [[CPButton alloc] initWithFrame:CGRectMake(20 + searchFieldWidth + 135, 13, 30, 24)];
+    var nextBtn = [[CPButton alloc] initWithFrame:CGRectMake(20 + searchFieldWidth + 45, 13, 30, 24)];
     [nextBtn setTitle:@">"];
     [nextBtn setTarget:self];
     [nextBtn setAction:@selector(nextMatch:)];
     [topBar addSubview:nextBtn];
     
-    showPrivateCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(20 + searchFieldWidth + 180, 15, 200, 20)];
-    [showPrivateCheckbox setTitle:@"Show private classes (_*)"];
+    showPrivateCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(20 + searchFieldWidth + 300, 15, 200, 20)];
+    [showPrivateCheckbox setTitle:@"Show private classes"];
     [showPrivateCheckbox setState:CPOffState];
     [showPrivateCheckbox setTarget:self];
     [showPrivateCheckbox setAction:@selector(togglePrivateAction:)];
     [topBar addSubview:showPrivateCheckbox];
 
-    searchTitlesOnlyCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(20 + searchFieldWidth + 390, 15, 180, 20)];
+    searchTitlesOnlyCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(20 + searchFieldWidth + 90, 15, 180, 20)];
     [searchTitlesOnlyCheckbox setTitle:@"Search titles only"];
     [searchTitlesOnlyCheckbox setState:CPOffState];
     [searchTitlesOnlyCheckbox setTarget:self];
