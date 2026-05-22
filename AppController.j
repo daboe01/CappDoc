@@ -41,12 +41,14 @@
     CPSearchField   searchField;
     CPTextField     _searchStatusLabel;
     CPCheckBox      showPrivateCheckbox;
+    CPCheckBox      searchTitlesOnlyCheckbox;
 
     CPArray         _allRoots;       // Das Original-Wurzelobjekt
     CPArray         _matchedNodes;   // Die Suchergebnisse
     int             _currentMatchIndex;
     
     BOOL            _showPrivateClasses;
+    BOOL            _searchTitlesOnly;
     CPString        _currentSearchTerm;
 }
 
@@ -57,6 +59,7 @@
     var bounds = [contentView bounds];
 
     _showPrivateClasses = NO;
+    _searchTitlesOnly = NO;
     _currentSearchTerm = @"";
     _matchedNodes = [];
     _currentMatchIndex = -1;
@@ -97,6 +100,13 @@
     [showPrivateCheckbox setTarget:self];
     [showPrivateCheckbox setAction:@selector(togglePrivateAction:)];
     [topBar addSubview:showPrivateCheckbox];
+
+    searchTitlesOnlyCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(20 + searchFieldWidth + 390, 15, 180, 20)];
+    [searchTitlesOnlyCheckbox setTitle:@"Search titles only"];
+    [searchTitlesOnlyCheckbox setState:CPOffState];
+    [searchTitlesOnlyCheckbox setTarget:self];
+    [searchTitlesOnlyCheckbox setAction:@selector(toggleSearchTitlesOnlyAction:)];
+    [topBar addSubview:searchTitlesOnlyCheckbox];
     
     [contentView addSubview:topBar];
 
@@ -299,8 +309,9 @@
         var typeA = [a type];
         var typeB = [b type];
         
-        var weightA = (typeA === "class") ? 1 : ((typeA === "topic") ? 2 : 3);
-        var weightB = (typeB === "class") ? 1 : ((typeB === "topic") ? 2 : 3);
+        // Ordnet Subklassen (Type "class") unterhalb von Topics (1) und Symbols (2) ein.
+        var weightA = (typeA === "topic") ? 1 : ((typeA === "symbol") ? 2 : 3);
+        var weightB = (typeB === "topic") ? 1 : ((typeB === "symbol") ? 2 : 3);
         
         if (weightA !== weightB) return weightA - weightB;
         
@@ -352,7 +363,7 @@
     var matches = NO;
     if ([[node title] lowercaseString].indexOf(term) !== -1) matches = YES;
     
-    if (!matches && [node data]) {
+    if (!matches && !_searchTitlesOnly && [node data]) {
         var d = [node data];
         if (d.abstract && d.abstract.toLowerCase().indexOf(term) !== -1) matches = YES;
         if (d.discussion && d.discussion.toLowerCase().indexOf(term) !== -1) matches = YES;
@@ -419,6 +430,12 @@
     if ([_currentSearchTerm length] > 0) [self searchAction:searchField];
 }
 
+- (void)toggleSearchTitlesOnlyAction:(id)sender
+{
+    _searchTitlesOnly = ([sender state] === CPOnState);
+    if ([_currentSearchTerm length] > 0) [self searchAction:searchField];
+}
+
 
 // ==============================================================================
 // CPOutlineView Data Source & Delegate (dynamischer Filter für Private)
@@ -459,7 +476,7 @@
     var isDep = NO;
 
     if (type === "class") {
-        icon = ""; // Class
+        icon = "🔵 "; // Class
         if (data && data.metadata && data.metadata.deprecated) {
             isDep = YES;
         }
@@ -535,7 +552,7 @@
             }
 
             var titleStyle = classDep ? " class='deprecated-item'" : "";
-            html += "<span class='badge'>" + ((data.metadata && data.metadata.role) ? [self escapeHTML:data.metadata.role].toUpperCase() : "CLASS") + "</span>";
+            html += "<span class='badge badge-class'>" + ((data.metadata && data.metadata.role) ? [self escapeHTML:data.metadata.role].toUpperCase() : "CLASS") + "</span>";
             html += "<h1" + titleStyle + ">" + [self escapeHTML:[node title]] + "</h1>";
             
             if (data.metadata) {
@@ -577,14 +594,25 @@
                     var sData = [sym data];
                     
                     var badge = (sData.kind || "Symbol").toUpperCase();
-                    if (sData.kind === "method" && sData.scope) {
-                        badge = (sData.scope === "class" ? "CLASS " : "INSTANCE ") + badge;
+                    var badgeClass = "badge-default";
+                    if (sData.kind === "method") {
+                        if (sData.scope === "class") {
+                            badge = "CLASS METHOD";
+                            badgeClass = "badge-class-method";
+                        } else {
+                            badge = "INSTANCE METHOD";
+                            badgeClass = "badge-instance-method";
+                        }
+                    } else if (sData.kind === "global_variable") {
+                        badgeClass = "badge-global";
+                    } else if (sData.kind === "typedef") {
+                        badgeClass = "badge-typedef";
                     }
                     
                     var isSymDep = sData.deprecated;
                     var itemClass = isSymDep ? " class='deprecated-item'" : "";
                     
-                    html += "<li" + itemClass + "><span style='font-size:11px; color:#86868b; margin-right:5px;'>[" + [self escapeHTML:badge] + "]</span> <strong>" + [self escapeHTML:[sym title]] + "</strong>";
+                    html += "<li" + itemClass + "><span class='badge-inline " + badgeClass + "'>" + [self escapeHTML:badge] + "</span> <strong>" + [self escapeHTML:[sym title]] + "</strong>";
                     if (isSymDep) {
                         html += " <span class='deprecation-inline-badge'>Deprecated</span>";
                     }
@@ -611,14 +639,25 @@
                 var sData = [sym data];
                 
                 var badge = (sData.kind || "Symbol").toUpperCase();
-                if (sData.kind === "method" && sData.scope) {
-                    badge = (sData.scope === "class" ? "CLASS " : "INSTANCE ") + badge;
+                var badgeClass = "badge-default";
+                if (sData.kind === "method") {
+                    if (sData.scope === "class") {
+                        badge = "CLASS METHOD";
+                        badgeClass = "badge-class-method";
+                    } else {
+                        badge = "INSTANCE METHOD";
+                        badgeClass = "badge-instance-method";
+                    }
+                } else if (sData.kind === "global_variable") {
+                    badgeClass = "badge-global";
+                } else if (sData.kind === "typedef") {
+                    badgeClass = "badge-typedef";
                 }
                 
                 var isSymDep = sData.deprecated;
                 var itemClass = isSymDep ? " class='deprecated-item'" : "";
                 
-                html += "<li" + itemClass + "><span style='font-size:11px; color:#86868b; margin-right:5px;'>[" + [self escapeHTML:badge] + "]</span> <strong>" + [self escapeHTML:[sym title]] + "</strong>";
+                html += "<li" + itemClass + "><span class='badge-inline " + badgeClass + "'>" + [self escapeHTML:badge] + "</span> <strong>" + [self escapeHTML:[sym title]] + "</strong>";
                 if (isSymDep) {
                     html += " <span class='deprecation-inline-badge'>Deprecated</span>";
                 }
@@ -638,11 +677,22 @@
             }
 
             var badgeText = (data.kind || "Symbol").toUpperCase();
-            if (data.kind === "method" && data.scope) {
-                badgeText = (data.scope === "class" ? "CLASS " : "INSTANCE ") + badgeText;
+            var badgeClass = "badge-default";
+            if (data.kind === "method") {
+                if (data.scope === "class") {
+                    badgeText = "CLASS METHOD";
+                    badgeClass = "badge-class-method";
+                } else {
+                    badgeText = "INSTANCE METHOD";
+                    badgeClass = "badge-instance-method";
+                }
+            } else if (data.kind === "global_variable") {
+                badgeClass = "badge-global";
+            } else if (data.kind === "typedef") {
+                badgeClass = "badge-typedef";
             }
             
-            html += "<span class='badge'>" + [self escapeHTML:badgeText] + "</span>";
+            html += "<span class='badge " + badgeClass + "'>" + [self escapeHTML:badgeText] + "</span>";
             
             var titleStyle = isDep ? " class='deprecated-item'" : "";
             html += "<h1" + titleStyle + ">" + [self escapeHTML:[node title]] + "</h1>";
@@ -714,9 +764,14 @@
         var cleaned = str.replace(/^[ \t]+/gm, '');
         cleaned = cleaned.replace(/@(class|ingroup|brief|details|deprecated)\s+[^\n]*\n?/gi, '');
         
-        // Unbedingt sofort escapen, bevor wir unsere eigenen HTML-Tags injizieren!
+        // Escape standard characters
         cleaned = cleaned.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         
+        // Selektives Wiederherstellen standardmäßiger Formatierungs-Tags (HTML-Whitelist)
+        cleaned = cleaned.replace(/&lt;(\/?(?:p|strong|pre|br|code|em|ul|ol|li|b|i|blockquote|span|div|a)\b[^&]*\/?)&gt;/gi, function(match, p1) {
+            return "<" + p1.replace(/&quot;/g, '"').replace(/&amp;/g, '&') + ">";
+        });
+
         // Inline-Code Formatierung (\c syntax)
         cleaned = cleaned.replace(/\\c\s+([^\s,.;:]+)/g, "<code>$1</code>");
         
@@ -754,7 +809,14 @@
            @"h2 { font-size: 22px; border-bottom: 1px solid #d2d2d7; padding-bottom: 8px; margin-top: 35px; font-weight: 600; }" +
            @"pre { background: #f5f5f7; padding: 15px; border-radius: 8px; overflow-x: auto; font-family: 'SF Mono', Consolas, monospace; font-size: 14px; border: 1px solid #d2d2d7; }" +
            @"code { font-family: 'SF Mono', Consolas, monospace; font-size: 13.5px; background: #f0f0f2; padding: 2px 5px; border-radius: 4px; color: #d63384; }" +
-           @".badge { display: inline-block; background: #0071e3; color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; margin-bottom: 10px; letter-spacing: 0.5px; }" +
+           @".badge { display: inline-block; color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; margin-bottom: 10px; letter-spacing: 0.5px; }" +
+           @".badge-inline { display: inline-block; color: white; padding: 2px 6px; border-radius: 6px; font-size: 10px; font-weight: bold; margin-right: 5px; letter-spacing: 0.5px; vertical-align: middle; }" +
+           @".badge-class { background: #0071e3; }" +
+           @".badge-instance-method { background: #ff3b30; }" +
+           @".badge-class-method { background: #ff9500; }" +
+           @".badge-global { background: #ffcc00; color: #1d1d1f; }" +
+           @".badge-typedef { background: #a2845e; }" +
+           @".badge-default { background: #8e8e93; }" +
            @".meta { color: #86868b; font-size: 14px; margin-bottom: 20px; }" +
            @".discussion { white-space: pre-wrap; font-size: 15px; line-height: 1.6; color: #333336; }" +
            @".doc-tag { background: #f5f5f7; padding: 12px 16px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #0071e3; white-space: normal; }" +
