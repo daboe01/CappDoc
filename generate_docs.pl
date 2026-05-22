@@ -62,6 +62,7 @@ sub parse_file {
     my $class_decl = "";
     my $class_abstract = "";
     my $class_discussion = "";
+    my $class_deprecated = "";
     
     my @topics;
     my $current_topic = { title => "General", symbols => [] };
@@ -78,10 +79,17 @@ sub parse_file {
     # Helper to consume doc blocks, retaining structure
     my $consume_doc = sub {
         my @lines;
+        my $deprecated = "";
         for my $l (@doc_buffer) {
             $l =~ s/^\s*\*\s?//; # Strip leading asterisks
             $l =~ s/\s+$//;      # Strip trailing spaces
-            push @lines, $l;
+            
+            # Extract @deprecated directives and their descriptive text
+            if ($l =~ /^\@deprecated\s+(.*)/i) {
+                $deprecated = $1;
+            } else {
+                push @lines, $l;
+            }
         }
         @doc_buffer = ();
         
@@ -89,12 +97,12 @@ sub parse_file {
         while (@lines && $lines[0] =~ /^\s*$/) { shift @lines; }
         while (@lines && $lines[-1] =~ /^\s*$/) { pop @lines; }
         
-        return ("", "") unless @lines;
+        return ("", "", "") unless @lines || $deprecated;
         
-        my $abstract = shift @lines;
+        my $abstract = shift @lines || "";
         my $discussion = join("\n", @lines); # Maintain newlines for @code
         
-        return ($abstract, $discussion);
+        return ($abstract, $discussion, $deprecated);
     };
     
     # Helper to accurately count braces ignoring comments and strings
@@ -144,7 +152,7 @@ sub parse_file {
         
         return if $name =~ /^_/; # Skip internal / private methods
         
-        my ($abstract, $discussion) = $consume_doc->();
+        my ($abstract, $discussion, $deprecated) = $consume_doc->();
         my $sym = {
             kind        => 'method',
             scope       => $scope,
@@ -155,6 +163,7 @@ sub parse_file {
         $sym->{parameters} = \@params if @params;
         $sym->{abstract}   = $abstract if $abstract;
         $sym->{discussion} = $discussion if $discussion;
+        $sym->{deprecated} = $deprecated if $deprecated;
         
         push @{$current_topic->{symbols}}, $sym;
     };
@@ -176,7 +185,7 @@ sub parse_file {
         # --- Multi-line Typedef State ---
         if ($state eq 'typedef') {
             if ($line =~ /^\s*$/ || $line =~ /^\s*\@/ || $line =~ /^\s*\#/) {
-                my ($abstract, $discussion) = $consume_doc->();
+                my ($abstract, $discussion, $deprecated) = $consume_doc->();
                 my $sym = {
                     kind        => 'typedef',
                     name        => $typedef_name,
@@ -185,13 +194,33 @@ sub parse_file {
                 $sym->{values}     = [@typedef_vals] if @typedef_vals;
                 $sym->{abstract}   = $abstract if $abstract;
                 $sym->{discussion} = $discussion if $discussion;
+                $sym->{deprecated} = $deprecated if $deprecated;
                 push @{$current_topic->{symbols}}, $sym;
                 
                 $state = 'search';
             } else {
                 $typedef_decl .= "\n$line";
-                if ($line =~ /([A-Za-z0-9_]+)\s*=\s*(.*?);/) {
-                    push @typedef_vals, { name => $1, value => $2 };
+                # Extract constants with option for deprecated inline comments
+                # Match: CPSwitchButton = 3; // Deprecated, use CPCheckBox instead.
+                if ($line =~ /([A-Za-z0-9_]+)\s*=\s*([^;\/]+)\s*;\s*(?:\/\/\s*(.*))?/) {
+                    my $val_name = $1;
+                    my $val_value = $2;
+                    my $val_comment = $3 || "";
+                    
+                    $val_value =~ s/\s+$//;
+                    $val_comment =~ s/\s+$//;
+                    
+                    my $val_dep = "";
+                    if ($val_comment =~ /deprecated/i) {
+                        $val_dep = $val_comment;
+                    }
+                    
+                    push @typedef_vals, { 
+                        name => $val_name, 
+                        value => $val_value, 
+                        comment => $val_comment,
+                        deprecated => $val_dep || undef
+                    };
                 }
                 next;
             }
@@ -274,9 +303,10 @@ sub parse_file {
                     $class_name = $parsed_cname;
                     $superclass = $parsed_sclass if $parsed_sclass;
                     
-                    my ($abstract, $discussion) = $consume_doc->();
+                    my ($abstract, $discussion, $deprecated) = $consume_doc->();
                     $class_abstract = $abstract if $abstract;
                     $class_discussion = $discussion if $discussion;
+                    $class_deprecated = $deprecated if $deprecated;
                 }
             } else {
                 # It is a category like `(CPCoding)` or an extension `()`.
@@ -307,15 +337,16 @@ sub parse_file {
         if ($line =~ /^\s*var\s+([A-Za-z0-9_]+)\s*=\s*(.*?);/) {
             my $name = $1;
             my $val = $2;
-            my ($abstract, $discussion) = $consume_doc->();
+            my ($abstract, $discussion, $deprecated) = $consume_doc->();
             my $sym = {
                 kind        => 'global_variable',
                 name        => $name,
                 declaration => "var $name = $val",
-                type        => 'float' # Placeholder 
+                type        => 'id'
             };
             $sym->{abstract} = $abstract if $abstract;
             $sym->{discussion} = $discussion if $discussion;
+            $sym->{deprecated} = $deprecated if $deprecated;
             push @{$current_topic->{symbols}}, $sym;
             next;
         }
@@ -361,7 +392,8 @@ sub parse_file {
             role           => "class",
             title          => $class_name,
             superclass     => $superclass,
-            navigatorTitle => $class_name
+            navigatorTitle => $class_name,
+            deprecated     => $class_deprecated || undef
         },
         primaryContent => {
             declaration => $class_decl,

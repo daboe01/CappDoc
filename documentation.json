@@ -1,6 +1,7 @@
 [
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPWebView",
@@ -610,6 +611,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPAccordionViewItem",
@@ -971,6 +973,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPDictionaryController",
@@ -1085,6 +1088,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPCornerView",
@@ -1167,6 +1171,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPArrayController",
@@ -1867,6 +1872,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPCollectionView",
@@ -2075,7 +2081,7 @@
                   "declaration" : "var HORIZONTAL_MARGIN = 2",
                   "kind" : "global_variable",
                   "name" : "HORIZONTAL_MARGIN",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (id)initWithFrame:(CGRect)aFrame",
@@ -2995,6 +3001,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPButtonBar",
@@ -3014,7 +3021,7 @@
                   "declaration" : "var SharedDummyButtonBar = nil",
                   "kind" : "global_variable",
                   "name" : "SharedDummyButtonBar",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "@typedef CPButtonBarStyle\nCPButtonBarLegacyStyle = 1;\nCPButtonBarModernStyle = 2;\nCPButtonBarSmoothStyle = 3;",
@@ -3022,14 +3029,20 @@
                   "name" : "CPButtonBarStyle",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPButtonBarLegacyStyle",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPButtonBarModernStyle",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPButtonBarSmoothStyle",
                         "value" : "3"
                      }
@@ -3041,14 +3054,20 @@
                   "name" : "CPTemplateImage",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPAddTemplateImage",
                         "value" : "@\"CPAddTemplate\""
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPRemoveTemplateImage",
                         "value" : "@\"CPRemoveTemplate\""
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPActionTemplateImage",
                         "value" : "@\"CPActionTemplate\""
                      }
@@ -3058,7 +3077,7 @@
                   "declaration" : "var CPButtonBarPopulateButtonBarSelector = 1 << 1",
                   "kind" : "global_variable",
                   "name" : "CPButtonBarPopulateButtonBarSelector",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (void)populateButtonBar:(CPButtonBar)buttonBar",
@@ -4541,6 +4560,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPScrollView",
@@ -4587,13 +4607,13 @@
                   "declaration" : "var usingOverlayScrollers = outer.clientWidth === outer.offsetWidth",
                   "kind" : "global_variable",
                   "name" : "usingOverlayScrollers",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var CPScrollViewBorderSuffixes = @[@\"no-border\", @\"line-border\", @\"bezel-border\", @\"groove-border\"]",
                   "kind" : "global_variable",
                   "name" : "CPScrollViewBorderSuffixes",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -5501,6 +5521,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPEvent",
@@ -6013,7 +6034,7 @@
                   "declaration" : "var CPEventClass = [CPEvent class]",
                   "kind" : "global_variable",
                   "name" : "CPEventClass",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -6022,6 +6043,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPStackView",
@@ -6043,22 +6065,32 @@
                   "name" : "CPStackViewGravity",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPStackViewGravityTop",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPStackViewGravityLeading",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPStackViewGravityCenter",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPStackViewGravityBottom",
                         "value" : "3"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPStackViewGravityTrailing",
                         "value" : "3"
                      }
@@ -6070,26 +6102,38 @@
                   "name" : "CPStackViewDistribution",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPStackViewDistributionGravityAreas",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPStackViewDistributionFill",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPStackViewDistributionFillEqually",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPStackViewDistributionFillProportionally",
                         "value" : "3"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPStackViewDistributionEqualSpacing",
                         "value" : "4"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPStackViewDistributionEqualCentering",
                         "value" : "5"
                      }
@@ -6101,10 +6145,14 @@
                   "name" : "CPStackViewVisibilityPriority",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPStackViewVisibilityPriorityMustHold",
                         "value" : "1000.0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPStackViewVisibilityPriorityNotVisible",
                         "value" : "0.0"
                      }
@@ -6114,7 +6162,7 @@
                   "declaration" : "var CPStackViewSpacingUseDefault = 3.40282347e+38",
                   "kind" : "global_variable",
                   "name" : "CPStackViewSpacingUseDefault",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -6519,6 +6567,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPBrowser",
@@ -8049,6 +8098,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPToolbarShowColorsItem",
@@ -8110,6 +8160,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPSlider",
@@ -8132,10 +8183,14 @@
                   "name" : "CPSliderType",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPLinearSlider",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPCircularSlider",
                         "value" : "1"
                      }
@@ -8148,18 +8203,26 @@
                   "name" : "CPTickMarkPosition",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTickMarkPositionBelow",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTickMarkPositionAbove",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTickMarkPositionLeading",
                         "value" : "CPTickMarkPositionAbove"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTickMarkPositionTrailing",
                         "value" : "CPTickMarkPositionBelow"
                      }
@@ -8171,7 +8234,7 @@
                   "discussion" : " Tick mark affinity distance",
                   "kind" : "global_variable",
                   "name" : "AFFINITY",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (CPString)defaultThemeClass",
@@ -8746,6 +8809,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPTableColumnHeaderView",
@@ -9154,7 +9218,7 @@
                   "declaration" : "var CPTableHeaderViewTableViewKey = @\"CPTableHeaderViewTableViewKey\"",
                   "kind" : "global_variable",
                   "name" : "CPTableHeaderViewTableViewKey",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "CPTableHeaderViewPrivate"
@@ -9194,6 +9258,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPSplitViewController",
@@ -9213,7 +9278,7 @@
                   "declaration" : "var CPSplitViewControllerAutomaticDimension = -1.0",
                   "kind" : "global_variable",
                   "name" : "CPSplitViewControllerAutomaticDimension",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (id)init",
@@ -9529,6 +9594,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPDisplayServer",
@@ -9548,25 +9614,25 @@
                   "declaration" : "var UID = [anObject UID]",
                   "kind" : "global_variable",
                   "name" : "UID",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var index = displayObjects.length",
                   "kind" : "global_variable",
                   "name" : "index",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var UID = [anObject UID]",
                   "kind" : "global_variable",
                   "name" : "UID",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var index = layoutObjects.length",
                   "kind" : "global_variable",
                   "name" : "index",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (void)run",
@@ -9582,6 +9648,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPColorPanel",
@@ -9790,7 +9857,7 @@
                   "declaration" : "var CPColorPanelSwatchesCookie = \"CPColorPanelSwatchesCookie\"",
                   "kind" : "global_variable",
                   "name" : "CPColorPanelSwatchesCookie",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (id)initWithFrame:(CGRect)aFrame",
@@ -10074,6 +10141,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPButton",
@@ -10095,66 +10163,98 @@
                   "name" : "CPBezelStyle",
                   "values" : [
                      {
+                        "comment" : "Push",
+                        "deprecated" : null,
                         "name" : "CPRoundedBezelStyle",
                         "value" : "1"
                      },
                      {
+                        "comment" : "Bevel",
+                        "deprecated" : null,
                         "name" : "CPRegularSquareBezelStyle",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPThickSquareBezelStyle",
                         "value" : "3"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPThickerSquareBezelStyle",
                         "value" : "4"
                      },
                      {
+                        "comment" : "Disclosure triangle",
+                        "deprecated" : null,
                         "name" : "CPDisclosureBezelStyle",
                         "value" : "5"
                      },
                      {
+                        "comment" : "Square",
+                        "deprecated" : null,
                         "name" : "CPShadowlessSquareBezelStyle",
                         "value" : "6"
                      },
                      {
+                        "comment" : "Round",
+                        "deprecated" : null,
                         "name" : "CPCircularBezelStyle",
                         "value" : "7"
                      },
                      {
+                        "comment" : "Textured",
+                        "deprecated" : null,
                         "name" : "CPTexturedSquareBezelStyle",
                         "value" : "8"
                      },
                      {
+                        "comment" : "Help",
+                        "deprecated" : null,
                         "name" : "CPHelpButtonBezelStyle",
                         "value" : "9"
                      },
                      {
+                        "comment" : "Gradient",
+                        "deprecated" : null,
                         "name" : "CPSmallSquareBezelStyle",
                         "value" : "10"
                      },
                      {
+                        "comment" : "Round Textured",
+                        "deprecated" : null,
                         "name" : "CPTexturedRoundedBezelStyle",
                         "value" : "11"
                      },
                      {
+                        "comment" : "Round Rect",
+                        "deprecated" : null,
                         "name" : "CPRoundRectBezelStyle",
                         "value" : "12"
                      },
                      {
+                        "comment" : "Recessed",
+                        "deprecated" : null,
                         "name" : "CPRecessedBezelStyle",
                         "value" : "13"
                      },
                      {
+                        "comment" : "Disclosure",
+                        "deprecated" : null,
                         "name" : "CPRoundedDisclosureBezelStyle",
                         "value" : "14"
                      },
                      {
+                        "comment" : "Inline",
+                        "deprecated" : null,
                         "name" : "CPInlineBezelStyle",
                         "value" : "15"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPHUDBezelStyle",
                         "value" : "-1"
                      }
@@ -10166,42 +10266,62 @@
                   "name" : "CPButtonType",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPMomentaryLightButton",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPPushOnPushOffButton",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPToggleButton",
                         "value" : "2"
                      },
                      {
+                        "comment" : "Deprecated, use CPCheckBox instead.",
+                        "deprecated" : "Deprecated, use CPCheckBox instead.",
                         "name" : "CPSwitchButton",
                         "value" : "3"
                      },
                      {
+                        "comment" : "Deprecated, use CPRadio instead.",
+                        "deprecated" : "Deprecated, use CPRadio instead.",
                         "name" : "CPRadioButton",
                         "value" : "4"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPMomentaryChangeButton",
                         "value" : "5"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPOnOffButton",
                         "value" : "6"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPMomentaryPushInButton",
                         "value" : "7"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPMomentaryPushButton",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPMomentaryLight",
                         "value" : "7"
                      }
@@ -10890,6 +11010,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPSound",
@@ -10931,7 +11052,7 @@
                   "declaration" : "var CPSoundDelegate_sound_didFinishPlaying_ = 1 << 1",
                   "kind" : "global_variable",
                   "name" : "CPSoundDelegate_sound_didFinishPlaying_",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -11137,6 +11258,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPStepper",
@@ -11402,6 +11524,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPText",
@@ -11488,42 +11611,62 @@
                   "name" : "CPTextMovement",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPIllegalTextMovement",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPOtherTextMovement",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPReturnTextMovement",
                         "value" : "16"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTabTextMovement",
                         "value" : "17"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPBacktabTextMovement",
                         "value" : "18"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPLeftTextMovement",
                         "value" : "19"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPRightTextMovement",
                         "value" : "20"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPUpTextMovement",
                         "value" : "21"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPDownTextMovement",
                         "value" : "22"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPCancelTextMovement",
                         "value" : "23"
                      }
@@ -11535,14 +11678,20 @@
                   "name" : "CPWritingDirection",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPWritingDirectionNatural",
                         "value" : "-1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPWritingDirectionLeftToRight",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPWritingDirectionRightToLeft",
                         "value" : "1"
                      }
@@ -11554,22 +11703,32 @@
                   "name" : "CPTextAlignment",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPLeftTextAlignment",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPRightTextAlignment",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPCenterTextAlignment",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPJustifiedTextAlignment",
                         "value" : "3"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPNaturalTextAlignment",
                         "value" : "4"
                      }
@@ -11581,42 +11740,62 @@
                   "name" : "CPUnderlineStyle",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPUnderlineStyleNone",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPUnderlineStyleSingle",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPUnderlineStyleThick",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPUnderlineStyleDouble",
                         "value" : "3"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPUnderlineStylePatternSolid",
                         "value" : "4"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPUnderlineStylePatternDot",
                         "value" : "5"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPUnderlineStylePatternDash",
                         "value" : "6"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPUnderlineStylePatternDashDot",
                         "value" : "7"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPUnderlineStylePatternDashDotDot",
                         "value" : "8"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPUnderlineStyleByWord",
                         "value" : "9"
                      }
@@ -11997,6 +12176,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPTabViewItem",
@@ -12230,6 +12410,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPPopUpListDataSource",
@@ -12350,6 +12531,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPTabView",
@@ -12371,30 +12553,44 @@
                   "name" : "CPTabViewType",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTopTabsBezelBorder",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPLeftTabsBezelBorder",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPBottomTabsBezelBorder",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPRightTabsBezelBorder",
                         "value" : "3"
                      },
                      {
+                        "comment" : "Displays no tabs and has a bezeled border.",
+                        "deprecated" : null,
                         "name" : "CPNoTabsBezelBorder",
                         "value" : "4"
                      },
                      {
+                        "comment" : "Has no tabs and displays a line border.",
+                        "deprecated" : null,
                         "name" : "CPNoTabsLineBorder",
                         "value" : "5"
                      },
                      {
+                        "comment" : "Displays no tabs and no border.",
+                        "deprecated" : null,
                         "name" : "CPNoTabsNoBorder",
                         "value" : "6"
                      }
@@ -12901,7 +13097,7 @@
                   "declaration" : "var _CPTabViewContentBinderNull = @\"NO CONTENT\"",
                   "kind" : "global_variable",
                   "name" : "_CPTabViewContentBinderNull",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (void)setPlaceholderValue:(id)aValue withMarker:(CPString)aMarker forBinding:(CPString)aBinding",
@@ -13114,6 +13310,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPPopUpButton",
@@ -13983,6 +14180,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPAnimation",
@@ -14060,18 +14258,26 @@
                   "name" : "CPAnimationCurve",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPAnimationEaseInOut",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPAnimationEaseIn",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPAnimationEaseOut",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPAnimationLinear",
                         "value" : "3"
                      }
@@ -14265,6 +14471,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPShadow",
@@ -14325,6 +14532,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPWindowController",
@@ -14708,6 +14916,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPThemeBlend",
@@ -14786,6 +14995,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPTokenField",
@@ -15657,6 +15867,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPLevelIndicator",
@@ -15678,18 +15889,26 @@
                   "name" : "CPLevelIndicatorStyle",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPRelevancyLevelIndicatorStyle",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPContinuousCapacityLevelIndicatorStyle",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPDiscreteCapacityLevelIndicatorStyle",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPRatingLevelIndicatorStyle",
                         "value" : "3"
                      }
@@ -15913,6 +16132,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPTheme",
@@ -16158,7 +16378,7 @@
                   "declaration" : "var _savedThemesByName = { }",
                   "kind" : "global_variable",
                   "name" : "_savedThemesByName",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "CSS Theming"
@@ -16217,25 +16437,25 @@
                   "discussion" : "ThemeStates directly but should instead use the CPThemeState function.",
                   "kind" : "global_variable",
                   "name" : "stateNameKeys",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var stateNameLength = stateNameKeys.length",
                   "kind" : "global_variable",
                   "name" : "stateNameLength",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var newStates = {}",
                   "kind" : "global_variable",
                   "name" : "newStates",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var themeState = CPThemeStates[String(aState)]",
                   "kind" : "global_variable",
                   "name" : "themeState",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "abstract" : "This method can be called in multiple ways:",
@@ -16243,13 +16463,13 @@
                   "discussion" : "   CPThemeState('state1') - creates a new CPThemeState that corresponds to the string 'state1'\n   CPThemeState('state1', 'state2') - creates a new composite CPThemeState made up of both 'state1' or 'state2'\n   CPThemeState('state1+state2') - The same as CPThemeState('state1', 'state2')\n   CPThemeState(state1, state2) - creates a new composite CPThemeState made up of state1 and state2\n                                  where state1 and state2 are not strings but are themselves CPThemeStates.",
                   "kind" : "global_variable",
                   "name" : "stateNames",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var allNames = arguments[argIndex].split('+')",
                   "kind" : "global_variable",
                   "name" : "allNames",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (id)initForReadingWithData:(CPData)data bundle:(CPBundle)aBundle",
@@ -16428,7 +16648,7 @@
                   "declaration" : "var ParentAttributeForCoder = nil",
                   "kind" : "global_variable",
                   "name" : "ParentAttributeForCoder",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "CSSTheming"
@@ -16465,25 +16685,25 @@
                   "declaration" : "var state = [values allKeys][0]",
                   "kind" : "global_variable",
                   "name" : "state",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var key = \"$a\" + attribute._name",
                   "kind" : "global_variable",
                   "name" : "key",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var decodedAttribute = [aCoder decodeObjectForKey:key]",
                   "kind" : "global_variable",
                   "name" : "decodedAttribute",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var count = 0",
                   "kind" : "global_variable",
                   "name" : "count",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "CPCoding"
@@ -16492,6 +16712,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPApplication",
@@ -17357,7 +17578,7 @@
                   "discussion" : "    called from the \\c main() function of your program.\n    @class CPApplication\n    @return void",
                   "kind" : "global_variable",
                   "name" : "_CPAppBootstrapperActions",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (CPArray)actions",
@@ -17467,6 +17688,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPDocument",
@@ -17486,7 +17708,7 @@
                   "declaration" : "var CPDocumentUntitledCount = 0",
                   "kind" : "global_variable",
                   "name" : "CPDocumentUntitledCount",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "abstract" : "    Initializes an empty document.",
@@ -18204,6 +18426,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPProgressIndicator",
@@ -18679,6 +18902,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPScreen",
@@ -18710,6 +18934,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPTreeController",
@@ -19340,6 +19565,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPTableRowView",
@@ -22278,6 +22504,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPColor",
@@ -23046,7 +23273,7 @@
                   "declaration" : "var hexCharacters = \"0123456789ABCDEF\"",
                   "kind" : "global_variable",
                   "name" : "hexCharacters",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "abstract" : "    To create a simple color with a pattern image:",
@@ -23054,37 +23281,37 @@
                   "discussion" : "        CPColorWithImages(name, width, height{, bundle})\n\n    To create a color with a three-part/nine-part image using a pattern string:\n        CPColorWithImages(pattern, attributes{, bundle})\n\n    <pattern> must have one or more placeholders. There are there possible\n    placeholders available that together can be used to build a filename:\n\n    style     A top-level style, for example normal (empty) and \"default\".\n    state     The state of a view, for example \"highlighted\" and \"disabled\".\n    position  The position of an image within a 3-part or 9-part image.\n              This must be provided.\n\n    Each placeholder is filled with the values you pass in a the attributes object.\n    Neither style nor state are necessary, if you omit them the next level of the\n    hierarchy is the top level.\n\n    Attributes\n    ----------\n    styles: [...]\n    An array of style names. For example, if you want to generate the filenames\n    \"button-bezel\" and \"default-button-bezel\", you would use [\"\", \"default\"]\n    for the styles.\n\n    states: [...]\n    An array of state names.\n\n    positions: <spec>\n    Specifies the naming convention for the slices of the image. For 3-part images,\n    <spec> may be one of:\n\n        \"@\"     Equivalent to [\"left\", \"center\", \"right\"] for horizontal\n                images, [\"top\", \"center\", \"bottom\"] for vertical images\n        \"#\"     Equivalent to [\"0\", \"1\", \"2\"]\n        [...]   An array of any three literal strings\n\n    For 9-part images, <spec> may be one of:\n\n        \"@\" | \"abbrev\"  Equivalent to [\"top-left\", \"top\", \"top-right\",\n                                       \"left\", \"center\", \"right\",\n                                       \"bottom-left\", \"bottom\", \"bottom-right\"]\n        \"full\"          Equivalent to [\"top-left\", \"top-center\", \"top-right\",\n                                       \"center-left\", \"center-center\", \"center-right\",\n                                       \"bottom-left\", \"bottom-center\", \"bottom-right\"]\n        \"#\"              Equivalent to [\"0\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\"]\n        [...]           An array of any nine literal strings\n\n    width: <number>\n    The width of the left image for horizontal 3-part images, the top image for\n    vertical 3-part images, or the top left corner for 9-part images.\n\n    height: <number>\n    The height of the left image for horizontal 3-part images, the top image for\n    vertical 3-part images, or the top left corner for 9-part images.\n\n    centerWidth: <number>\n    For a horizontal 3-part image that has a center slice width that is not 1.0,\n    set this for the width of the center slice. If omitted, it defaults\n    to 1.0. Not used for 9-part images.\n\n    rightWidth: <number>\n    For a horizontal 3-part image that has different left/right slice widths,\n    or a 9-part image that has different left/right corner slice widths,\n    set this for the width of the right slice. If omitted, the \"width\"\n    value is used for left and right widths.\n\n    centerHeight: <number>\n    For a vertical 3-part image that has a center slice height that is not 1.0,\n    set this for the height of the center slice. If omitted, it defaults\n    to 1.0. Not used for 9-part images.\n\n    bottomHeight: <number>\n    For a vertical image that has different top/bottom slice heights,\n    or a 9-part image that has different top/bottom corner slice heights,\n    set this for the height of the bottom slice. If omitted, the \"height\"\n    value is used for top and bottom heights.\n\n    centerIsNil: <BOOL>\n    For 9-part images, if the center image is nil, set this to YES.\n    If omitted or set to NO, a center image must be provided.\n\n    separator: <string>\n    The separator to use between components of the pattern.\n    If it is omitted, it defaults to \"-\".\n\n    orientation: PatternIsHorizontal | PatternIsVertical\n    The orientation of the image. This must be specified for 3-part images,\n    it should NOT be specified for 9-part images.\n\n    Using a pattern, all of this:\n\n    bezelColor = PatternColor(\n        [\n            [\"button-bezel-left.png\", 4.0, 24.0],\n            [\"button-bezel-center.png\", 1.0, 24.0],\n            [\"button-bezel-right.png\", 4.0, 24.0]\n        ],\n        PatternIsHorizontal),\n\n    highlightedBezelColor = PatternColor(\n        [\n            [\"button-bezel-highlighted-left.png\", 4.0, 24.0],\n            [\"button-bezel-highlighted-center.png\", 1.0, 24.0],\n            [\"button-bezel-highlighted-right.png\", 4.0, 24.0]\n        ],\n        PatternIsHorizontal),\n\n    disabledBezelColor = PatternColor(\n        [\n            [\"button-bezel-disabled-left.png\", 4.0, 24.0],\n            [\"button-bezel-disabled-center.png\", 1.0, 24.0],\n            [\"button-bezel-disabled-right.png\", 4.0, 24.0]\n        ],\n        PatternIsHorizontal),\n\n    defaultBezelColor = PatternColor(\n        [\n            [\"default-button-bezel-left.png\", 4.0, 24.0],\n            [\"default-button-bezel-center.png\", 1.0, 24.0],\n            [\"default-button-bezel-right.png\", 4.0, 24.0]\n        ],\n        PatternIsHorizontal),\n\n    defaultHighlightedBezelColor = PatternColor(\n        [\n            [\"default-button-bezel-highlighted-left.png\", 4.0, 24.0],\n            [\"default-button-bezel-highlighted-center.png\", 1.0, 24.0],\n            [\"default-button-bezel-highlighted-right.png\", 4.0, 24.0]\n        ],\n        PatternIsHorizontal),\n\n    defaultDisabledBezelColor = PatternColor(\n        [\n            [\"default-button-bezel-disabled-left.png\", 4.0, 24.0],\n            [\"default-button-bezel-disabled-center.png\", 1.0, 24.0],\n            [\"default-button-bezel-disabled-right.png\", 4.0, 24.0]\n        ],\n        PatternIsHorizontal)\n\n    can be replaced with this:\n\n    bezelColors = PatternColor(\n        \"{style}button-bezel{state}{position}.png\",\n        {\n            styles: [\"\", \"default\"],\n            states: [\"\", \"highlighted\", \"disabled\"],\n            positions: \"@\",\n            width: 4.0,\n            height: 24.0,\n            orientation: PatternIsHorizontal\n        })\n\n    Which would effectively create the following object:\n\n    {\n        \"@\":\n        {\n            \"@\": <ThreePartImage>:\n            [\n                [\"button-bezel-left.png\", 4.0, 24.0],\n                [\"button-bezel-center.png\", 1.0, 24.0],\n                [\"button-bezel-right.png\", 4.0, 24.0]\n            ],\n            \"highlighted\": <ThreePartImage>:\n            [\n                [\"button-bezel-highlighted-left.png\", 4.0, 24.0],\n                [\"button-bezel-highlighted-center.png\", 1.0, 24.0],\n                [\"button-bezel-highlighted-right.png\", 4.0, 24.0]\n            ],\n            \"disabled\": <ThreePartImage>:\n            [\n                [\"button-bezel-disabled-left.png\", 4.0, 24.0],\n                [\"button-bezel-disabled-center.png\", 1.0, 24.0],\n                [\"button-bezel-disabled-right.png\", 4.0, 24.0]\n            ]\n        },\n\n        \"default\":\n        {\n            \"@\": <ThreePartImage>:\n            [\n                [\"default-button-bezel-left.png\", 4.0, 24.0],\n                [\"default-button-bezel-center.png\", 1.0, 24.0],\n                [\"default-button-bezel-right.png\", 4.0, 24.0]\n            ],\n            \"highlighted\": <ThreePartImage>:\n            [\n                [\"default-button-bezel-highlighted-left.png\", 4.0, 24.0],\n                [\"default-button-bezel-highlighted-center.png\", 1.0, 24.0],\n                [\"default-button-bezel-highlighted-right.png\", 4.0, 24.0]\n            ],\n            \"disabled\": <ThreePartImage>:\n            [\n                [\"default-button-bezel-disabled-left.png\", 4.0, 24.0],\n                [\"button-bezel-disabled-center.png\", 1.0, 24.0],\n                [\"default-button-bezel-disabled-right.png\", 4.0, 24.0]\n            ]\n        }\n    }\n\n    To reference empty names in the pattern color, use the key \"@\".\n    So, for example, to reference the \"default\" style, \"disabled\" state,\n    you would use the following expression:\n\n    bezelColors[\"@\"][\"disabled\"]\n\n    To create a color with a three-part pattern image explicitly:\n        CPColorWithImages(slices, orientation)\n\n    where slices is an array of three [name, width, height{, bundle}] arrays,\n    and orientation is CPColorPatternIsVertical or CPColorPatternIsHorizontal.\n\n    To create a color with a nine-part pattern image explicitly:\n        CPColorWithImages(slices);\n\n    where slices is an array of nine [name, width, height{, bundle}] arrays.",
                   "kind" : "global_variable",
                   "name" : "imageSlices",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var slice = slices[i]",
                   "kind" : "global_variable",
                   "name" : "slice",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var state = states[i]",
                   "kind" : "global_variable",
                   "name" : "state",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var styleObject = {}",
                   "kind" : "global_variable",
                   "name" : "styleObject",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var style = styles[i]",
                   "kind" : "global_variable",
                   "name" : "style",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var clone = {}",
                   "kind" : "global_variable",
                   "name" : "clone",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "CPCoding"
@@ -23093,6 +23320,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPTableColumn",
@@ -23588,6 +23816,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPTreeNode",
@@ -23805,6 +24034,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPToolbar",
@@ -23831,14 +24061,20 @@
                   "name" : "CPToolbarSizeMode",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPToolbarSizeModeDefault",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPToolbarSizeModeRegular",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPToolbarSizeModeSmall",
                         "value" : "2"
                      }
@@ -24242,7 +24478,7 @@
                   "declaration" : "var LABEL_MARGIN = 2.0",
                   "kind" : "global_variable",
                   "name" : "LABEL_MARGIN",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (BOOL)acceptsFirstResponder",
@@ -24404,6 +24640,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPImageView",
@@ -24425,38 +24662,56 @@
                   "name" : "CPImageAlignment",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageAlignCenter",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageAlignTop",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageAlignTopLeft",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageAlignTopRight",
                         "value" : "3"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageAlignLeft",
                         "value" : "4"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageAlignBottom",
                         "value" : "5"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageAlignBottomLeft",
                         "value" : "6"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageAlignBottomRight",
                         "value" : "7"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageAlignRight",
                         "value" : "8"
                      }
@@ -24466,7 +24721,7 @@
                   "declaration" : "var CPImageViewEmptyPlaceholderImage = nil",
                   "kind" : "global_variable",
                   "name" : "CPImageViewEmptyPlaceholderImage",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (void)initialize",
@@ -24785,6 +25040,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPPopover",
@@ -25096,6 +25352,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPBox",
@@ -25117,22 +25374,32 @@
                   "name" : "CPBoxType",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPBoxPrimary",
                         "value" : "0"
                      },
                      {
+                        "comment" : "Deprecated",
+                        "deprecated" : "Deprecated",
                         "name" : "CPBoxSecondary",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPBoxSeparator",
                         "value" : "2"
                      },
                      {
+                        "comment" : "Deprecated",
+                        "deprecated" : "Deprecated",
                         "name" : "CPBoxOldStyle",
                         "value" : "3"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPBoxCustom",
                         "value" : "4"
                      }
@@ -25144,18 +25411,26 @@
                   "name" : "CPBorderType",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPNoBorder",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPLineBorder",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPBezelBorder",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPGrooveBorder",
                         "value" : "3"
                      }
@@ -25167,30 +25442,44 @@
                   "name" : "CPTitlePosition",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPNoTitle",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPAboveTop",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPAtTop",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPBelowTop",
                         "value" : "3"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPAboveBottom",
                         "value" : "4"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPAtBottom",
                         "value" : "5"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPBelowBottom",
                         "value" : "6"
                      }
@@ -25665,6 +25954,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPClipView",
@@ -25813,7 +26103,7 @@
                   "declaration" : "var CPClipViewDocumentViewKey = @\"CPScrollViewDocumentView\"",
                   "kind" : "global_variable",
                   "name" : "CPClipViewDocumentViewKey",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -25853,6 +26143,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPDocumentController",
@@ -25872,7 +26163,7 @@
                   "declaration" : "var CPSharedDocumentController = nil",
                   "kind" : "global_variable",
                   "name" : "CPSharedDocumentController",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "abstract" : "    Returns the singleton instance of the application's document controller. If it has not",
@@ -26294,6 +26585,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPPopUpPanel",
@@ -26315,14 +26607,14 @@
                   "discussion" : "\n\n    Notification sent when the list is about to be dismissed. \\c object is the _CPPopUpList.\n\n\n    Notification sent when the list is dismissed. \\c object is the _CPPopUpList.\n\n\n    Notification sent by when an item is selected. \\c object is the _CPPopUpList.\n    When this is received the list has already been dismissed and the dismiss notification has been sent.\n\n\n    @ignore\n\n    The minimum number of items that must be visible below the related field.\n    If less than this number would be completely visible, and there is room for this many complete items\n    above the field, the list is displayed above.",
                   "kind" : "global_variable",
                   "name" : "ListMinimumItems",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "abstract" : " @ignore",
                   "declaration" : "var ListColumnIdentifier = @\"1\"",
                   "kind" : "global_variable",
                   "name" : "ListColumnIdentifier",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (id)initWithContentRect:(CGRect)aContentRect styleMask:(unsigned)aStyleMask",
@@ -26983,6 +27275,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPVisualEffectView",
@@ -27004,18 +27297,26 @@
                   "name" : "CPVisualEffectMaterial",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPVisualEffectMaterialAppearanceBased",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPVisualEffectMaterialLight",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPVisualEffectMaterialDark",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPVisualEffectMaterialTitlebar",
                         "value" : "3"
                      }
@@ -27027,10 +27328,14 @@
                   "name" : "CPVisualEffectBlendingMode",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPVisualEffectBlendingModeBehindWindow",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPVisualEffectBlendingModeWithinWindow",
                         "value" : "1"
                      }
@@ -27042,14 +27347,20 @@
                   "name" : "CPVisualEffectState",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPVisualEffectStateFollowsWindowActiveState",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPVisualEffectStateActive",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPVisualEffectStateInactive",
                         "value" : "2"
                      }
@@ -27158,6 +27469,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPBinder",
@@ -27179,6 +27491,8 @@
                   "name" : "CPBindingOperationKind",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPBindingOperationOr",
                         "value" : "1"
                      }
@@ -27965,6 +28279,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPColorPicker",
@@ -28349,6 +28664,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPView",
@@ -28373,13 +28689,13 @@
                   "declaration" : "var CachedNotificationCenter = nil",
                   "kind" : "global_variable",
                   "name" : "CachedNotificationCenter",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var CPViewHighDPIDrawingEnabled = YES",
                   "kind" : "global_variable",
                   "name" : "CPViewHighDPIDrawingEnabled",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (void)initialize",
@@ -30351,25 +30667,25 @@
                   "declaration" : "var CPAppearanceAqua = [CPAppearance appearanceNamed:CPAppearanceNameAqua]",
                   "kind" : "global_variable",
                   "name" : "CPAppearanceAqua",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var CPAppearanceLightContent = [CPAppearance appearanceNamed:CPAppearanceNameLightContent]",
                   "kind" : "global_variable",
                   "name" : "CPAppearanceLightContent",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var CPAppearanceVibrantLight = [CPAppearance appearanceNamed:CPAppearanceNameVibrantLight]",
                   "kind" : "global_variable",
                   "name" : "CPAppearanceVibrantLight",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var CPAppearanceVibrantDark = [CPAppearance appearanceNamed:CPAppearanceNameVibrantDark]",
                   "kind" : "global_variable",
                   "name" : "CPAppearanceVibrantDark",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "Appearance"
@@ -30450,61 +30766,61 @@
                   "declaration" : "var superview = aView._superview",
                   "kind" : "global_variable",
                   "name" : "superview",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var view = fromView",
                   "kind" : "global_variable",
                   "name" : "view",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var frame = view._frame",
                   "kind" : "global_variable",
                   "name" : "frame",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var affineZoom = CGAffineTransformMakeScale(view._scaleSize.width, view._scaleSize.height)",
                   "kind" : "global_variable",
                   "name" : "affineZoom",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var inverseBoundsTransform = CGAffineTransformMakeCopy(view._boundsTransform)",
                   "kind" : "global_variable",
                   "name" : "inverseBoundsTransform",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var affineZoom = CGAffineTransformMakeScale(view._scaleSize.width, view._scaleSize.height)",
                   "kind" : "global_variable",
                   "name" : "affineZoom",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var frame = CGRectMakeCopy(view._frame)",
                   "kind" : "global_variable",
                   "name" : "frame",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var inverseBoundsTransform = CGAffineTransformMakeIdentity()",
                   "kind" : "global_variable",
                   "name" : "inverseBoundsTransform",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var index = views.length",
                   "kind" : "global_variable",
                   "name" : "index",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var frame = views[index]._frame",
                   "kind" : "global_variable",
                   "name" : "frame",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "CPCoding"
@@ -30513,6 +30829,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPToolTip",
@@ -30638,6 +30955,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPSplitView",
@@ -30862,14 +31180,20 @@
                   "name" : "CPSplitViewDividerStyle",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPSplitViewDividerStyleThick",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPSplitViewDividerStyleThin",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPSplitViewDividerStylePaneSplitter",
                         "value" : "3"
                      }
@@ -31477,6 +31801,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPKeyBinding",
@@ -31496,7 +31821,7 @@
                   "declaration" : "var CPKeyBindingCache = {}",
                   "kind" : "global_variable",
                   "name" : "CPKeyBindingCache",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (void)initialize",
@@ -31651,6 +31976,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPScroller",
@@ -31672,30 +31998,44 @@
                   "name" : "CPScrollerPart",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPScrollerNoPart",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPScrollerDecrementPage",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPScrollerKnob",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPScrollerIncrementPage",
                         "value" : "3"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPScrollerDecrementLine",
                         "value" : "4"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPScrollerIncrementLine",
                         "value" : "5"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPScrollerKnobSlot",
                         "value" : "6"
                      }
@@ -31707,14 +32047,20 @@
                   "name" : "CPUsableScrollerParts",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPNoScrollerParts",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPOnlyScrollerArrows",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPAllScrollerParts",
                         "value" : "2"
                      }
@@ -31724,7 +32070,7 @@
                   "declaration" : "var _CACHED_THEME_SCROLLER = nil",
                   "kind" : "global_variable",
                   "name" : "_CACHED_THEME_SCROLLER",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "@typedef CPScrollerStyle\nCPScrollerStyleLegacy           = 0;\nCPScrollerStyleOverlay          = 1;",
@@ -31732,10 +32078,14 @@
                   "name" : "CPScrollerStyle",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPScrollerStyleLegacy",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPScrollerStyleOverlay",
                         "value" : "1"
                      }
@@ -32243,6 +32593,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPControl",
@@ -32350,18 +32701,26 @@
                   "name" : "CPControlSize",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPRegularControlSize",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPSmallControlSize",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPMiniControlSize",
                         "value" : "2"
                      },
                      {
+                        "comment" : "Since MacOS 11, there's a new control size \"Large\"",
+                        "deprecated" : null,
                         "name" : "CPLargeControlSize",
                         "value" : "3"
                      }
@@ -32373,26 +32732,38 @@
                   "name" : "CPLineBreakMode",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPLineBreakByWordWrapping",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPLineBreakByCharWrapping",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPLineBreakByClipping",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPLineBreakByTruncatingHead",
                         "value" : "3"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPLineBreakByTruncatingTail",
                         "value" : "4"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPLineBreakByTruncatingMiddle",
                         "value" : "5"
                      }
@@ -32404,14 +32775,20 @@
                   "name" : "CPVerticalTextAlignment",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTopVerticalTextAlignment",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPCenterVerticalTextAlignment",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPBottomVerticalTextAlignment",
                         "value" : "3"
                      }
@@ -32423,14 +32800,20 @@
                   "name" : "CPImageScaling",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPScaleProportionally",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPScaleToFit",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPScaleNone",
                         "value" : "2"
                      }
@@ -32442,30 +32825,44 @@
                   "name" : "CPCellImagePosition",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPNoImage",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageOnly",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageLeft",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageRight",
                         "value" : "3"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageBelow",
                         "value" : "4"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageAbove",
                         "value" : "5"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPImageOverlaps",
                         "value" : "6"
                      }
@@ -32475,7 +32872,7 @@
                   "declaration" : "var CPControlBlackColor = [CPColor blackColor]",
                   "kind" : "global_variable",
                   "name" : "CPControlBlackColor",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (CPDictionary)themeAttributes",
@@ -33415,19 +33812,19 @@
                   "declaration" : "var color = _CPControlCachedColorWithPatternImages[identifier]",
                   "kind" : "global_variable",
                   "name" : "color",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var bundle = [CPBundle bundleForClass:[CPControl class]]",
                   "kind" : "global_variable",
                   "name" : "bundle",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var color = _CPControlCachedThreePartImagePattern[identifier]",
                   "kind" : "global_variable",
                   "name" : "color",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "CPCoding"
@@ -33436,6 +33833,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPSavePanel",
@@ -33499,6 +33897,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPAppearance",
@@ -33684,6 +34083,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPOutlineView",
@@ -35708,6 +36108,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPDraggingInfo",
@@ -35727,7 +36128,7 @@
                   "declaration" : "var CPSharedDragServer = nil",
                   "kind" : "global_variable",
                   "name" : "CPSharedDragServer",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (CPPasteboard)draggingPasteboard",
@@ -36033,6 +36434,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPSliderColorPicker",
@@ -36211,6 +36613,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPAutocompleteMenu",
@@ -36230,7 +36633,7 @@
                   "declaration" : "var _CPAutocompleteMenuMaximumHeight = 307",
                   "kind" : "global_variable",
                   "name" : "_CPAutocompleteMenuMaximumHeight",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (id)initWithTextField:(CPTextField)aTextField",
@@ -36406,6 +36809,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPColorSpace",
@@ -36425,7 +36829,7 @@
                   "declaration" : "var sRGBColorSpace = nil",
                   "kind" : "global_variable",
                   "name" : "sRGBColorSpace",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "abstract" : "    Return an object representing the standard sRGB color space.",
@@ -36463,6 +36867,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPTextField",
@@ -36484,10 +36889,14 @@
                   "name" : "CPTextFieldBezelStyle",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTextFieldSquareBezel",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTextFieldRoundedBezel",
                         "value" : "1"
                      }
@@ -36497,13 +36906,13 @@
                   "declaration" : "var CPSecureTextFieldCharacter = \"\\u2022\"",
                   "kind" : "global_variable",
                   "name" : "CPSecureTextFieldCharacter",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var ownerWindow = [owner window]",
                   "kind" : "global_variable",
                   "name" : "ownerWindow",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -37723,6 +38132,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPCheckBox",
@@ -37894,6 +38304,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPSearchField",
@@ -37913,7 +38324,7 @@
                   "declaration" : "var CPAutosavedRecentsChangedNotification = @\"CPAutosavedRecentsChangedNotification\"",
                   "kind" : "global_variable",
                   "name" : "CPAutosavedRecentsChangedNotification",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (CPString)defaultThemeClass",
@@ -38505,6 +38916,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPPopoverWindow",
@@ -38832,6 +39244,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPWorkspace",
@@ -38851,7 +39264,7 @@
                   "declaration" : "var SharedWorkspace = nil",
                   "kind" : "global_variable",
                   "name" : "SharedWorkspace",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (CPWorkspace)sharedWorkspace",
@@ -38893,6 +39306,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPToolbarSpaceItem",
@@ -38954,6 +39368,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPOpenPanel",
@@ -38997,6 +39412,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPGradient",
@@ -39126,6 +39542,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPComboBox",
@@ -40303,6 +40720,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPController",
@@ -40322,7 +40740,7 @@
                   "declaration" : "var CPControllerDeclaredKeysKey = @\"CPControllerDeclaredKeysKey\"",
                   "kind" : "global_variable",
                   "name" : "CPControllerDeclaredKeysKey",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (id)init",
@@ -40411,6 +40829,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPRadio",
@@ -40592,7 +41011,7 @@
                   "declaration" : "var CPRadioRadioGroupKey = @\"CPRadioRadioGroupKey\"",
                   "kind" : "global_variable",
                   "name" : "CPRadioRadioGroupKey",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "Private methods"
@@ -40899,6 +41318,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPBezierPath",
@@ -40918,7 +41338,7 @@
                   "declaration" : "var DefaultLineWidth = 1.0",
                   "kind" : "global_variable",
                   "name" : "DefaultLineWidth",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "abstract" : "    Create a new CPBezierPath object.",
@@ -41412,6 +41832,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPPanel",
@@ -41549,6 +41970,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPShadowView",
@@ -41570,10 +41992,14 @@
                   "name" : "CPShadowWeight",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPLightShadow",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPHeavyShadow",
                         "value" : "1"
                      }
@@ -41748,6 +42174,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPPasteboard",
@@ -41772,7 +42199,7 @@
                   "declaration" : "var CPPasteboards = nil",
                   "kind" : "global_variable",
                   "name" : "CPPasteboards",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (void)initialize",
@@ -41979,7 +42406,7 @@
                   "declaration" : "var DOMDataTransferPasteboard = nil",
                   "kind" : "global_variable",
                   "name" : "DOMDataTransferPasteboard",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (_CPDOMDataTransferPasteboard)DOMDataTransferPasteboard",
@@ -42028,6 +42455,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPFont",
@@ -42407,13 +42835,13 @@
                   "declaration" : "var properties = (isItalic ? \"italic \" : \"\") + (isBold ? \"bold \" : \"\") + _CPRealFontSize(aSize) + \"px \"",
                   "kind" : "global_variable",
                   "name" : "properties",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var names = aName.split(\",\")",
                   "kind" : "global_variable",
                   "name" : "names",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "CPCoding"
@@ -42422,6 +42850,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPImage",
@@ -43257,7 +43686,7 @@
                   "declaration" : "var CPNinePartImageImageSlicesKey = @\"CPNinePartImageImageSlicesKey\"",
                   "kind" : "global_variable",
                   "name" : "CPNinePartImageImageSlicesKey",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "CPCoding"
@@ -43309,6 +43738,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPResponder",
@@ -43786,6 +44216,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPToolbarFlexibleSpaceItem",
@@ -43847,6 +44278,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPSegmentedControl",
@@ -43868,14 +44300,20 @@
                   "name" : "CPSegmentSwitchTracking",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPSegmentSwitchTrackingSelectOne",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPSegmentSwitchTrackingSelectAny",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPSegmentSwitchTrackingMomentary",
                         "value" : "2"
                      }
@@ -44585,7 +45023,7 @@
                   "declaration" : "var CPSegmentedControlNoSelectionPlaceholder = \"CPSegmentedControlNoSelectionPlaceholder\"",
                   "kind" : "global_variable",
                   "name" : "CPSegmentedControlNoSelectionPlaceholder",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (void)setPlaceholderValue:(id)aValue withMarker:(CPString)aMarker forBinding:(CPString)aBinding",
@@ -44683,6 +45121,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPTrackingArea",
@@ -44704,42 +45143,62 @@
                   "name" : "CPTrackingAreaOptions",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTrackingMouseEnteredAndExited",
                         "value" : "1 << 1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTrackingMouseMoved",
                         "value" : "1 << 2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTrackingCursorUpdate",
                         "value" : "1 << 3"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTrackingActiveWhenFirstResponder",
                         "value" : "1 << 4"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTrackingActiveInKeyWindow",
                         "value" : "1 << 5"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTrackingActiveInActiveApp",
                         "value" : "1 << 6"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTrackingActiveAlways",
                         "value" : "1 << 7"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTrackingAssumeInside",
                         "value" : "1 << 8"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTrackingInVisibleRect",
                         "value" : "1 << 9"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPTrackingEnabledDuringMouseDrag",
                         "value" : "1 << 10"
                      }
@@ -44815,6 +45274,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPSecureTextField",
@@ -44844,6 +45304,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPImageAndTextView",
@@ -45249,6 +45710,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPViewController",
@@ -45485,6 +45947,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPUserDefaultsController",
@@ -45504,7 +45967,7 @@
                   "declaration" : "var SharedUserDefaultsController = nil",
                   "kind" : "global_variable",
                   "name" : "SharedUserDefaultsController",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (id)sharedUserDefaultsController",
@@ -45587,7 +46050,7 @@
                   "declaration" : "var CPUserDefaultsControllerSharedKey = \"CPUserDefaultsControllerSharedKey\"",
                   "kind" : "global_variable",
                   "name" : "CPUserDefaultsControllerSharedKey",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -45718,6 +46181,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPFontManager",
@@ -46021,7 +46485,7 @@
                   "declaration" : "var _CPFontDetectCache = {}",
                   "kind" : "global_variable",
                   "name" : "_CPFontDetectCache",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -46030,6 +46494,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPObjectController",
@@ -46919,6 +47384,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPColorWell",
@@ -46938,7 +47404,7 @@
                   "declaration" : "var _CPColorWellDidBecomeExclusiveNotification = @\"_CPColorWellDidBecomeExclusiveNotification\"",
                   "kind" : "global_variable",
                   "name" : "_CPColorWellDidBecomeExclusiveNotification",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (CPString)defaultThemeClass",
@@ -47388,6 +47854,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPAlertThemeView",
@@ -47412,7 +47879,7 @@
                   "declaration" : "var bottomHeight = 71",
                   "kind" : "global_variable",
                   "name" : "bottomHeight",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (BOOL)alertShowHelp:(CPAlert)alert",
@@ -47838,6 +48305,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPCollectionViewItem",
@@ -47913,6 +48381,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPToolbarItem",
@@ -48344,6 +48813,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPCursor",
@@ -48365,18 +48835,26 @@
                   "name" : "CPCursorPlatform",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPCursorPlatformNone",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPCursorPlatformMac",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPCursorPlatformWindows",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPCursorPlatformBoth",
                         "value" : "3"
                      }
@@ -48756,6 +49234,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPCookie",
@@ -48840,6 +49319,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPGraphicsContext",
@@ -48963,6 +49443,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPToolbarSeparatorItem",
@@ -49024,6 +49505,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPViewAnimation",
@@ -49110,6 +49592,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPTextStorage",
@@ -49418,6 +49901,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_RTFAttribute",
@@ -49437,7 +49921,7 @@
                   "declaration" : "var hexTable = []",
                   "kind" : "global_variable",
                   "name" : "hexTable",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (id)init",
@@ -49567,6 +50051,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPRTFProducer",
@@ -49737,6 +50222,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPTextContainer",
@@ -49919,6 +50405,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPLayoutManager",
@@ -50547,7 +51034,7 @@
                   "declaration" : "var CPLayoutManagerTextStorageKey = @\"CPLayoutManagerTextStorageKey\"",
                   "kind" : "global_variable",
                   "name" : "CPLayoutManagerTextStorageKey",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "Text containes method"
@@ -50589,7 +51076,7 @@
                   "declaration" : "var index = [aList _indexOfObject:aLocation sortedByFunction:_sortRange context:nil]",
                   "kind" : "global_variable",
                   "name" : "index",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "SortedSearching"
@@ -50797,6 +51284,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPTextView",
@@ -50947,13 +51435,13 @@
                   "declaration" : "var tripletRange = _MakeRangeFromAbs(MAX(0, index - 1), MIN(string.length, index + 2))",
                   "kind" : "global_variable",
                   "name" : "tripletRange",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var triplet = _characterTripletFromStringAtIndex(string, index)",
                   "kind" : "global_variable",
                   "name" : "triplet",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "@typedef CPSelectionGranularity\nCPSelectByCharacter = 0;\nCPSelectByWord      = 1;\nCPSelectByParagraph = 2;",
@@ -50961,14 +51449,20 @@
                   "name" : "CPSelectionGranularity",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPSelectByCharacter",
                         "value" : "0"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPSelectByWord",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "CPSelectByParagraph",
                         "value" : "2"
                      }
@@ -52785,7 +53279,7 @@
                   "declaration" : "var _CPCopyPlaceholder = '-'",
                   "kind" : "global_variable",
                   "name" : "_CPCopyPlaceholder",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (void)isDeadKey:(CPEvent)event",
@@ -52885,6 +53379,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPFontDescriptor",
@@ -53032,7 +53527,7 @@
                   "declaration" : "var CPFontDescriptorAttributesKey = @\"CPFontDescriptorAttributesKey\"",
                   "kind" : "global_variable",
                   "name" : "CPFontDescriptorAttributesKey",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -53073,7 +53568,7 @@
                   "declaration" : "var _wrapNameRegEx = new RegExp(/(\\w+\\s+\\w+)(,*)/g)",
                   "kind" : "global_variable",
                   "name" : "_wrapNameRegEx",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "CPCoding"
@@ -53129,6 +53624,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPFontPanel",
@@ -53505,6 +54001,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPParagraphStyle",
@@ -53658,6 +54155,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPTypesetter",
@@ -53814,6 +54312,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPDatePickerCalendar",
@@ -53929,6 +54428,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPDatePickerElementTextField",
@@ -54120,6 +54620,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPDatePickerElementView",
@@ -54344,6 +54845,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPDatePickerDayViewTextField",
@@ -54380,6 +54882,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPDatePickerBox",
@@ -54448,6 +54951,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPDatePickerTextField",
@@ -54733,6 +55237,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPDatePickerClock",
@@ -54752,7 +55257,7 @@
                   "declaration" : "var RADIANS = Math.PI / 180",
                   "kind" : "global_variable",
                   "name" : "RADIANS",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "@typedef _CPDatePickerClockHand\n_CPDatePickerClockHours   = 1;\n_CPDatePickerClockMinutes = 2;\n_CPDatePickerClockSeconds = 3;",
@@ -54760,14 +55265,20 @@
                   "name" : "_CPDatePickerClockHand",
                   "values" : [
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "_CPDatePickerClockHours",
                         "value" : "1"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "_CPDatePickerClockMinutes",
                         "value" : "2"
                      },
                      {
+                        "comment" : "",
+                        "deprecated" : null,
                         "name" : "_CPDatePickerClockSeconds",
                         "value" : "3"
                      }
@@ -54921,6 +55432,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPDatePickerMonthView",
@@ -55141,6 +55653,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPDatePickerDayView",
@@ -55324,6 +55837,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPDatePickerHeaderView",
@@ -55417,6 +55931,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPDatePicker",
@@ -55436,7 +55951,7 @@
                   "declaration" : "var CPDatePicker_validateProposedDateValue_timeInterval = 1 << 1",
                   "kind" : "global_variable",
                   "name" : "CPDatePicker_validateProposedDateValue_timeInterval",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -55908,6 +56423,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPMenuWindow",
@@ -56380,6 +56896,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPMenu",
@@ -57370,6 +57887,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPMenuManager",
@@ -57683,6 +58201,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPMenuBarWindow",
@@ -58033,6 +58552,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPTexturedWindowHeadView",
@@ -58052,7 +58572,7 @@
                   "declaration" : "var _CPStandardWindowViewDividerViewHeight = 1.0",
                   "kind" : "global_variable",
                   "name" : "_CPStandardWindowViewDividerViewHeight",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (CPString)defaultThemeClass",
@@ -58255,6 +58775,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPShadowWindowView",
@@ -58305,6 +58826,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPToolTipWindowView",
@@ -58392,6 +58914,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPBorderlessWindowView",
@@ -58408,6 +58931,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPBorderlessBridgeWindowView",
@@ -58494,6 +59018,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPDocModalWindowView",
@@ -58600,6 +59125,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPModalWindowView",
@@ -58636,6 +59162,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPPopoverWindowView",
@@ -58655,7 +59182,7 @@
                   "declaration" : "var _CPPopoverWindowViewDefaultCursorSize = CGSizeMake(16, 10)",
                   "kind" : "global_variable",
                   "name" : "_CPPopoverWindowViewDefaultCursorSize",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (CPString)defaultThemeClass",
@@ -58756,6 +59283,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPWindowView",
@@ -59184,6 +59712,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPTitleableWindowView",
@@ -59290,6 +59819,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPWindow",
@@ -61392,6 +61922,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPHUDWindowView",
@@ -61526,6 +62057,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPRuleEditorViewSliceRow",
@@ -61670,6 +62202,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPPredicateEditor",
@@ -61801,7 +62334,7 @@
                   "declaration" : "var CPPredicateTemplatesKey = @\"CPPredicateTemplates\"",
                   "kind" : "global_variable",
                   "name" : "CPPredicateTemplatesKey",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "RuleEditor delegate methods"
@@ -61879,6 +62412,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPRuleEditor",
@@ -62003,7 +62537,7 @@
                   "declaration" : "var CPRuleEditorDelegate_ruleEditor_predicatePartsForCriterion_withDisplayValue_inRow_ = 1 << 1",
                   "kind" : "global_variable",
                   "name" : "CPRuleEditorDelegate_ruleEditor_predicatePartsForCriterion_withDisplayValue_inRow_",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "abstract" : " @cond",
@@ -63004,7 +63538,7 @@
                   "declaration" : "var CPBoundArrayKey = @\"CPBoundArray\"",
                   "kind" : "global_variable",
                   "name" : "CPBoundArrayKey",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (id)init",
@@ -63056,7 +63590,7 @@
                   "declaration" : "var dropSeparatorColor = [CPColor colorWithHexString:@\"4886ca\"]",
                   "kind" : "global_variable",
                   "name" : "dropSeparatorColor",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (void)drawRect:(CGRect)rect",
@@ -63090,6 +63624,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPRuleEditorLocalizer",
@@ -63109,7 +63644,7 @@
                   "declaration" : "var LocalizerStringsRegex = new RegExp(\"\\\"(.+)\\\"\\\\s*=\\\\s*\\\"(.+)\\\"\\\\s*",
                   "kind" : "global_variable",
                   "name" : "LocalizerStringsRegex",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (void)loadContentOfURL:(CPURL)aURL",
@@ -63181,6 +63716,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPPredicateEditorRowTemplate",
@@ -63479,6 +64015,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPRuleEditorViewSlice",
@@ -63630,6 +64167,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPPredicateEditorRowNode",
@@ -63741,6 +64279,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPPredicateEditorTree",
@@ -63777,6 +64316,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPBasePlatform",
@@ -63880,6 +64420,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPBasePlatformString",
@@ -63964,6 +64505,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPPlatformWindow",
@@ -63988,7 +64530,7 @@
                   "declaration" : "var PrimaryPlatformWindow = NULL",
                   "kind" : "global_variable",
                   "name" : "PrimaryPlatformWindow",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (CPSet)visiblePlatformWindows",
@@ -64245,6 +64787,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPPlatform",
@@ -64369,6 +64912,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPPlatformString",
@@ -64474,6 +65018,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPPlatformPasteboard",
@@ -64493,13 +65038,13 @@
                   "declaration" : "var target = aDOMEvent.target || aDOMEvent.srcElement",
                   "kind" : "global_variable",
                   "name" : "target",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var nodeName = target.nodeName.toUpperCase()",
                   "kind" : "global_variable",
                   "name" : "nodeName",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (id)init",
@@ -64654,6 +65199,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPDOMWindowLayer",
@@ -64767,6 +65313,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPCibCustomObject",
@@ -64786,7 +65333,7 @@
                   "declaration" : "var _CPCibCustomObjectClassName = @\"_CPCibCustomObjectClassName\"",
                   "kind" : "global_variable",
                   "name" : "_CPCibCustomObjectClassName",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (CPString)customClassName",
@@ -64853,6 +65400,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPCibCustomView",
@@ -64892,7 +65440,7 @@
                   "declaration" : "var _CPCibCustomViewClassNameKey = @\"_CPCibCustomViewClassNameKey\"",
                   "kind" : "global_variable",
                   "name" : "_CPCibCustomViewClassNameKey",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -64939,6 +65487,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPCib",
@@ -64958,7 +65507,7 @@
                   "declaration" : "var CPCibObjectDataKey = @\"CPCibObjectDataKey\"",
                   "kind" : "global_variable",
                   "name" : "CPCibObjectDataKey",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (id)initWithContentsOfURL:(CPURL)aURL",
@@ -65148,6 +65697,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPLocalizableString",
@@ -65196,6 +65746,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPCibConnector",
@@ -65279,6 +65830,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPCibHelpConnector",
@@ -65334,6 +65886,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPCibCustomResource",
@@ -65581,6 +66134,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPCibProxyObject",
@@ -65600,7 +66154,7 @@
                   "declaration" : "var _CPCibProxyObjectIdentifierKey = @\"CPIdentifier\"",
                   "kind" : "global_variable",
                   "name" : "_CPCibProxyObjectIdentifierKey",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -65640,6 +66194,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPCibObjectData",
@@ -65758,6 +66313,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPCibLoadDelegate",
@@ -65945,6 +66501,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPCibWindowTemplate",
@@ -66032,6 +66589,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPCibRuntimeAttributesConnector",
@@ -66087,6 +66645,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPCibClassSwapper",
@@ -66139,6 +66698,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPCibControlConnector",
@@ -66168,6 +66728,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPCibOutletConnector",
@@ -66197,6 +66758,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPCibKeyedUnarchiver",
@@ -66308,6 +66870,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPCibBindingConnector",
@@ -66363,6 +66926,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPMenuItem",
@@ -67118,6 +67682,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPMenuItemView",
@@ -67427,6 +67992,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPMenuItemStandardView",
@@ -67608,6 +68174,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPMenuItemSeparatorView",
@@ -67663,6 +68230,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPMenuItemMenuBarView",
@@ -67833,6 +68401,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "AristoThemeDescriptor",
@@ -67852,7 +68421,7 @@
                   "declaration" : "var themedCalendarViewValues = nil",
                   "kind" : "global_variable",
                   "name" : "themedCalendarViewValues",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (CPCalendarView)makeCalendarView",
@@ -68514,6 +69083,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "BKShowcaseController",
@@ -68533,7 +69103,7 @@
                   "declaration" : "var LEFT_PANEL_WIDTH = 176.0",
                   "kind" : "global_variable",
                   "name" : "LEFT_PANEL_WIDTH",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "- (void)applicationDidFinishLaunching:(CPNotification)aNotification",
@@ -68677,7 +69247,7 @@
                   "declaration" : "var SelectionColor = nil",
                   "kind" : "global_variable",
                   "name" : "SelectionColor",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (CPImage)selectionColor",
@@ -68798,6 +69368,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "BKThemeTemplate",
@@ -68846,6 +69417,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "BKThemedObjectTemplate",
@@ -68894,6 +69466,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "BKThemeDescriptor",
@@ -69106,7 +69679,7 @@
                   "declaration" : "var args = Array.prototype.slice.apply(arguments)",
                   "kind" : "global_variable",
                   "name" : "args",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -69115,6 +69688,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "Aristo3ThemeDescriptor",
@@ -69134,7 +69708,7 @@
                   "declaration" : "var svgArrowDown = \"url('data:image/svg+xml",
                   "kind" : "global_variable",
                   "name" : "svgArrowDown",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (CPString)themeName",
@@ -69740,6 +70314,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "Aristo3ThemeDescriptor",
@@ -70359,6 +70934,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "Aristo2ThemeDescriptor",
@@ -70996,6 +71572,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "AppController",
@@ -71058,6 +71635,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CAAnimationGroup",
@@ -71135,6 +71713,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "_CPObjectAnimator",
@@ -71154,7 +71733,7 @@
                   "declaration" : "var _supportsCSSAnimations = null",
                   "kind" : "global_variable",
                   "name" : "_supportsCSSAnimations",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (id)defaultAnimationForKey:(CPString)key",
@@ -71332,6 +71911,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CAAnimation",
@@ -71483,6 +72063,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPViewAnimator",
@@ -71660,13 +72241,13 @@
                   "declaration" : "var affine = CGAffineTransformMakeTranslation(current.x - start.x, current.y - start.y)",
                   "kind" : "global_variable",
                   "name" : "affine",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var affine = CGAffineTransformMakeTranslation(current.origin.x - start.origin.x, current.origin.y - start.origin.y)",
                   "kind" : "global_variable",
                   "name" : "affine",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -71762,19 +72343,19 @@
                   "declaration" : "var frameUpdater = this",
                   "kind" : "global_variable",
                   "name" : "frameUpdater",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var callback = createUpdateFrame(target, keyPath)",
                   "kind" : "global_variable",
                   "name" : "callback",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var matrix_value = style[transformProperty]",
                   "kind" : "global_variable",
                   "name" : "matrix_value",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "Additions"
@@ -71783,6 +72364,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CALayer",
@@ -71802,13 +72384,13 @@
                   "declaration" : "var USE_BUFFER = NO",
                   "kind" : "global_variable",
                   "name" : "USE_BUFFER",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var CALayerRegisteredRunLoopUpdates = nil",
                   "kind" : "global_variable",
                   "name" : "CALayerRegisteredRunLoopUpdates",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "abstract" : "    Returns a new animation layer.",
@@ -72515,49 +73097,49 @@
                   "declaration" : "var DOMElementStyle = aLayer._DOMElement.style",
                   "kind" : "global_variable",
                   "name" : "DOMElementStyle",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var frame = aLayer._backingStoreFrame",
                   "kind" : "global_variable",
                   "name" : "frame",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var backingStoreFrame = CGRectMakeCopy(aLayer._standardBackingStoreFrame)",
                   "kind" : "global_variable",
                   "name" : "backingStoreFrame",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var transform = CGAffineTransformMakeIdentity()",
                   "kind" : "global_variable",
                   "name" : "transform",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var layer = fromLayer",
                   "kind" : "global_variable",
                   "name" : "layer",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var transformFromLayer = layer._transformFromLayer",
                   "kind" : "global_variable",
                   "name" : "transformFromLayer",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var index = layers.length",
                   "kind" : "global_variable",
                   "name" : "index",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var transformToLayer = layers[index]._transformToLayer",
                   "kind" : "global_variable",
                   "name" : "transformToLayer",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "General"
@@ -72566,6 +73148,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CAKeyframeAnimation",
@@ -72595,6 +73178,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CABasicAnimation",
@@ -72693,6 +73277,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CAMediaTimingFunction",
@@ -72712,7 +73297,7 @@
                   "declaration" : "var CAMediaNamedTimingFunctions = nil",
                   "kind" : "global_variable",
                   "name" : "CAMediaNamedTimingFunctions",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "+ (id)functionWithName:(CPString)aName",
@@ -72777,6 +73362,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CAPropertyAnimation",
@@ -72893,6 +73479,7 @@
    },
    {
       "metadata" : {
+         "deprecated" : null,
          "framework" : "Cappuccino",
          "module" : "AppKit",
          "navigatorTitle" : "CPAnimationContext",
@@ -73112,13 +73699,13 @@
                   "declaration" : "var COMPLETION_AGENT_ID = 0",
                   "kind" : "global_variable",
                   "name" : "COMPLETION_AGENT_ID",
-                  "type" : "float"
+                  "type" : "id"
                },
                {
                   "declaration" : "var context = [_CPAnimationContextStack lastObject]",
                   "kind" : "global_variable",
                   "name" : "context",
-                  "type" : "float"
+                  "type" : "id"
                }
             ],
             "title" : "Additions"

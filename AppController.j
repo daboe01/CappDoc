@@ -452,7 +452,42 @@
 
 - (id)outlineView:(CPOutlineView)anOutlineView objectValueForTableColumn:(CPTableColumn)tableColumn byItem:(id)anItem
 {
-    return [anItem title];
+    var type = [anItem type];
+    var title = [anItem title];
+    var data = [anItem data];
+    var icon = "⚪ "; // Default indicator
+    var isDep = NO;
+
+    if (type === "class") {
+        icon = ""; // Class
+        if (data && data.metadata && data.metadata.deprecated) {
+            isDep = YES;
+        }
+    } else if (type === "topic") {
+        icon = "🟢 "; // Topic
+    } else if (type === "symbol") {
+        if (data) {
+            if (data.deprecated) {
+                isDep = YES;
+            }
+            if (data.kind === "method") {
+                if (data.scope === "class") {
+                    icon = "🟠 "; // Class Method
+                } else {
+                    icon = "🔴 "; // Instance Method
+                }
+            } else if (data.kind === "global_variable") {
+                icon = "🟡 "; // Global Variable
+            } else if (data.kind === "typedef") {
+                icon = "🟤 "; // Typedef
+            }
+        }
+    }
+
+    if (isDep) {
+        return icon + title + " (⚠️ Deprecated)";
+    }
+    return icon + title;
 }
 
 - (void)outlineViewSelectionDidChange:(CPNotification)notification
@@ -493,8 +528,15 @@
         // CLASS RENDERER
         // -----------------------------------------------------------
         if (type === "class") {
+            // Deprecation Warning
+            var classDep = (data.metadata && data.metadata.deprecated) ? data.metadata.deprecated : nil;
+            if (classDep) {
+                html += "<div class='deprecation-warning'><strong>⚠️ Class Deprecated:</strong> " + [self escapeHTML:classDep] + "</div>";
+            }
+
+            var titleStyle = classDep ? " class='deprecated-item'" : "";
             html += "<span class='badge'>" + ((data.metadata && data.metadata.role) ? [self escapeHTML:data.metadata.role].toUpperCase() : "CLASS") + "</span>";
-            html += "<h1>" + [self escapeHTML:[node title]] + "</h1>";
+            html += "<h1" + titleStyle + ">" + [self escapeHTML:[node title]] + "</h1>";
             
             if (data.metadata) {
                 html += "<div class='meta'>Inherits from: " + [self escapeHTML:(data.metadata.superclass || "CPObject")] + " &nbsp;|&nbsp; Framework: " + [self escapeHTML:(data.metadata.framework || "Unknown")] + "</div>";
@@ -532,9 +574,21 @@
                 html += "<h2>General Symbols</h2><ul>";
                 for (var i = 0; i < generalSyms.length; i++) {
                     var sym = generalSyms[i];
-                    var badge = ([sym data].kind || "Symbol").toUpperCase();
-                    html += "<li><span style='font-size:11px; color:#86868b; margin-right:5px;'>[" + [self escapeHTML:badge] + "]</span> <strong>" + [self escapeHTML:[sym title]] + "</strong>";
-                    if ([sym data].abstract) html += " - " + [self cleanText:[sym data].abstract];
+                    var sData = [sym data];
+                    
+                    var badge = (sData.kind || "Symbol").toUpperCase();
+                    if (sData.kind === "method" && sData.scope) {
+                        badge = (sData.scope === "class" ? "CLASS " : "INSTANCE ") + badge;
+                    }
+                    
+                    var isSymDep = sData.deprecated;
+                    var itemClass = isSymDep ? " class='deprecated-item'" : "";
+                    
+                    html += "<li" + itemClass + "><span style='font-size:11px; color:#86868b; margin-right:5px;'>[" + [self escapeHTML:badge] + "]</span> <strong>" + [self escapeHTML:[sym title]] + "</strong>";
+                    if (isSymDep) {
+                        html += " <span class='deprecation-inline-badge'>Deprecated</span>";
+                    }
+                    if (sData.abstract) html += " - " + [self cleanText:sData.abstract];
                     html += "</li>";
                 }
                 html += "</ul>";
@@ -554,9 +608,21 @@
             var kids = [node children];
             for (var i = 0; i < [kids count]; i++) {
                 var sym = kids[i];
-                var badge = ([sym data].kind || "Symbol").toUpperCase();
-                html += "<li><span style='font-size:11px; color:#86868b; margin-right:5px;'>[" + [self escapeHTML:badge] + "]</span> <strong>" + [self escapeHTML:[sym title]] + "</strong>";
-                if ([sym data].abstract) html += " - " + [self cleanText:[sym data].abstract];
+                var sData = [sym data];
+                
+                var badge = (sData.kind || "Symbol").toUpperCase();
+                if (sData.kind === "method" && sData.scope) {
+                    badge = (sData.scope === "class" ? "CLASS " : "INSTANCE ") + badge;
+                }
+                
+                var isSymDep = sData.deprecated;
+                var itemClass = isSymDep ? " class='deprecated-item'" : "";
+                
+                html += "<li" + itemClass + "><span style='font-size:11px; color:#86868b; margin-right:5px;'>[" + [self escapeHTML:badge] + "]</span> <strong>" + [self escapeHTML:[sym title]] + "</strong>";
+                if (isSymDep) {
+                    html += " <span class='deprecation-inline-badge'>Deprecated</span>";
+                }
+                if (sData.abstract) html += " - " + [self cleanText:sData.abstract];
                 html += "</li>";
             }
             html += "</ul>";
@@ -566,8 +632,20 @@
         // SYMBOL RENDERER (Methoden, Global Variables, Typedefs etc.)
         // -----------------------------------------------------------
         else if (type === "symbol") {
-            html += "<span class='badge'>" + [self escapeHTML:(data.kind || "Symbol").toUpperCase()] + "</span>";
-            html += "<h1>" + [self escapeHTML:[node title]] + "</h1>";
+            var isDep = data.deprecated;
+            if (isDep) {
+                html += "<div class='deprecation-warning'><strong>⚠️ Deprecated:</strong> " + [self escapeHTML:data.deprecated] + "</div>";
+            }
+
+            var badgeText = (data.kind || "Symbol").toUpperCase();
+            if (data.kind === "method" && data.scope) {
+                badgeText = (data.scope === "class" ? "CLASS " : "INSTANCE ") + badgeText;
+            }
+            
+            html += "<span class='badge'>" + [self escapeHTML:badgeText] + "</span>";
+            
+            var titleStyle = isDep ? " class='deprecated-item'" : "";
+            html += "<h1" + titleStyle + ">" + [self escapeHTML:[node title]] + "</h1>";
             
             if (data.declaration) {
                 html += "<h2>Declaration</h2><pre>" + [self escapeHTML:data.declaration] + "</pre>";
@@ -602,7 +680,17 @@
                 html += "<h2>Values</h2><ul>";
                 for (var v = 0; v < data.values.length; v++) {
                     var val = data.values[v];
-                    html += "<li><code>" + [self escapeHTML:val.name] + "</code> = " + [self escapeHTML:val.value] + "</li>";
+                    var valIsDep = val.deprecated;
+                    var valStyle = valIsDep ? " class='deprecated-item'" : "";
+                    
+                    html += "<li" + valStyle + "><code>" + [self escapeHTML:val.name] + "</code> = " + [self escapeHTML:val.value];
+                    if (val.comment) {
+                        html += " <span class='comment-text'>// " + [self escapeHTML:val.comment] + "</span>";
+                    }
+                    if (valIsDep) {
+                        html += " <span class='deprecation-inline-badge'>Deprecated</span>";
+                    }
+                    html += "</li>";
                 }
                 html += "</ul>";
             }
@@ -624,7 +712,7 @@
     
     try {
         var cleaned = str.replace(/^[ \t]+/gm, '');
-        cleaned = cleaned.replace(/@(class|ingroup|brief|details)\s+[^\n]*\n?/gi, '');
+        cleaned = cleaned.replace(/@(class|ingroup|brief|details|deprecated)\s+[^\n]*\n?/gi, '');
         
         // Unbedingt sofort escapen, bevor wir unsere eigenen HTML-Tags injizieren!
         cleaned = cleaned.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -678,6 +766,11 @@
            @"p { font-size: 15px; margin-bottom: 10px; }" +
            @"ul { padding-left: 20px; margin-top: 10px; }" +
            @"li { margin-bottom: 6px; font-size: 15px; }" +
+           @".deprecation-warning { background: #fff3cd; border-left: 4px solid #ffc107; color: #664d03; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; }" +
+           @".deprecation-warning strong { color: #2b2000; }" +
+           @".deprecated-item { text-decoration: line-through; color: #86868b !important; }" +
+           @".deprecation-inline-badge { background-color: #f8d7da; color: #842029; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: 8px; display: inline-block; vertical-align: middle; }" +
+           @".comment-text { color: #86868b; font-size: 13px; font-family: 'SF Mono', Consolas, monospace; }" +
            @"</style></head><body>";
 }
 
