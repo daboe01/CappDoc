@@ -388,7 +388,7 @@ sub parse_file {
     return {
         metadata => {
             module         => $module,
-            framework      => "Cappuccino",
+            framework      => $module, # Changed from "Cappuccino" to AppKit/Foundation dynamically
             role           => "class",
             title          => $class_name,
             superclass     => $superclass,

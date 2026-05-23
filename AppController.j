@@ -476,7 +476,18 @@
     var isDep = NO;
 
     if (type === "class") {
-        icon = "🔵 "; // Class
+        // Fallback checks for class framework identification
+        var isFoundation = YES;
+        if (data && data.metadata && data.metadata.framework) {
+            isFoundation = (data.metadata.framework === "Foundation");
+        } else if (title === "CPObject") {
+            isFoundation = YES;
+        } else {
+            isFoundation = NO;
+        }
+
+        icon = isFoundation ? "🔘 " : "🔵 "; // Foundation: Gray, AppKit: Blue
+
         if (data && data.metadata && data.metadata.deprecated) {
             isDep = YES;
         }
@@ -551,12 +562,27 @@
                 html += "<div class='deprecation-warning'><strong>⚠️ Class Deprecated:</strong> " + [self escapeHTML:classDep] + "</div>";
             }
 
+            var title = [node title];
+            var isFoundation = YES;
+            if (data.metadata && data.metadata.framework) {
+                isFoundation = (data.metadata.framework === "Foundation");
+            } else if (title === "CPObject") {
+                isFoundation = YES;
+            } else {
+                isFoundation = NO;
+            }
+
+            var badgeClass = isFoundation ? "badge-foundation" : "badge-class";
             var titleStyle = classDep ? " class='deprecated-item'" : "";
-            html += "<span class='badge badge-class'>" + ((data.metadata && data.metadata.role) ? [self escapeHTML:data.metadata.role].toUpperCase() : "CLASS") + "</span>";
-            html += "<h1" + titleStyle + ">" + [self escapeHTML:[node title]] + "</h1>";
+            html += "<span class='badge " + badgeClass + "'>" + ((data.metadata && data.metadata.role) ? [self escapeHTML:data.metadata.role].toUpperCase() : "CLASS") + "</span>";
+            html += "<h1" + titleStyle + ">" + [self escapeHTML:title] + "</h1>";
             
             if (data.metadata) {
-                html += "<div class='meta'>Inherits from: " + [self escapeHTML:(data.metadata.superclass || "CPObject")] + " &nbsp;|&nbsp; Framework: " + [self escapeHTML:(data.metadata.framework || "Unknown")] + "</div>";
+                var frameworkVal = data.metadata.framework;
+                if (!frameworkVal && title === "CPObject") {
+                    frameworkVal = "Foundation";
+                }
+                html += "<div class='meta'>Inherits from: " + [self escapeHTML:(data.metadata.superclass || "CPObject")] + " &nbsp;|&nbsp; Framework: " + [self escapeHTML:(frameworkVal || "Unknown")] + "</div>";
             }
             if (data.primaryContent && data.primaryContent.declaration) {
                 html += "<h2>Declaration</h2><pre>" + [self escapeHTML:data.primaryContent.declaration] + "</pre>";
@@ -812,6 +838,7 @@
            @".badge { display: inline-block; color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; margin-bottom: 10px; letter-spacing: 0.5px; }" +
            @".badge-inline { display: inline-block; color: white; padding: 2px 6px; border-radius: 6px; font-size: 10px; font-weight: bold; margin-right: 5px; letter-spacing: 0.5px; vertical-align: middle; }" +
            @".badge-class { background: #0071e3; }" +
+           @".badge-foundation { background: #8e8e93; }" +
            @".badge-instance-method { background: #ff3b30; }" +
            @".badge-class-method { background: #ff9500; }" +
            @".badge-global { background: #ffcc00; color: #1d1d1f; }" +
