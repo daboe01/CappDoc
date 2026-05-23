@@ -28,7 +28,7 @@ Using CappDoc consists of two steps: running the static code parser on your fram
 Run the provided Perl script, passing the paths to your Objective-J source folders. Redirect the stdout stream to a file named `documentation.json` in your CappDoc workspace folder.
 
 ```bash
-perl /Users/daboe01/src/CappDoc/generate_docs.pl /Users/daboe01/src/cappuccino/AppKit > documentation.json
+perl ./generate_docs.pl /Users/daboe01/src/cappuccino/AppKit > documentation.json
 ```
 
 *Note: You can pass multiple directory paths separated by spaces if you want to index both AppKit and Foundation concurrently.*
