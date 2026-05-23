@@ -55,6 +55,10 @@
 - (void)applicationDidFinishLaunching:(CPNotification)aNotification
 {
     theWindow = [[CPWindow alloc] initWithContentRect:CGRectMakeZero() styleMask:CPBorderlessBridgeWindowMask];
+    
+    // 1. Order the window front first so it scales to the browser viewport
+    [theWindow orderFront:self];
+    
     var contentView = [theWindow contentView];
     var bounds = [contentView bounds];
 
@@ -64,7 +68,7 @@
     _matchedNodes = [];
     _currentMatchIndex = -1;
 
-    // 1. Top Bar für die Suche & Filter
+    // 2. Top Bar für die Suche & Filter
     var topBarHeight = 50.0;
     var topBar = [[CPView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(bounds), topBarHeight)];
     [topBar setAutoresizingMask:CPViewWidthSizable | CPViewMaxYMargin];
@@ -110,7 +114,7 @@
     
     [contentView addSubview:topBar];
 
-    // 2. Main Split View (Links: Outline, Rechts: WebView)
+    // 3. Main Split View (Links: Outline, Rechts: WebView)
     var splitView = [[CPSplitView alloc] initWithFrame:CGRectMake(0, topBarHeight, CGRectGetWidth(bounds), CGRectGetHeight(bounds) - topBarHeight)];
     [splitView setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
     [splitView setVertical:YES];
@@ -141,11 +145,11 @@
     [rightView addSubview:docWebView];
     
     [splitView addSubview:rightView];
+    [splitView adjustSubviews]; // Force the layout engine to arrange both panes cleanly
+    
     [contentView addSubview:splitView];
 
-    [theWindow orderFront:self];
-
-    // 3. Daten laden
+    // Daten laden
     _allRoots = [[CPMutableArray alloc] init];
     [self loadDocumentationData];
 }

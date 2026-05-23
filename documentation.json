@@ -10,9 +10,9 @@
          "title" : "CPWebView"
       },
       "primaryContent" : {
-         "abstract" : "    Automatically choose between AppKit (Cappuccino style) scrollbars and",
+         "abstract" : "    @ingroup appkit",
          "declaration" : "@implementation CPWebView : CPView",
-         "discussion" : "    native scrollbars. In this mode AppKit scrollbars are always used except\n    when the web view is loaded with a URL which does not appear to pass the\n    same origin policy.\n\n\n    Always use AppKit scrollbars. If a URL is loaded whcih does not appear to\n    pass the same origin policy, native scrollbars will be used but a warnning\n    will be logged.\n\n\n    Always use native (platform dependent) scrollbars.\n\n\n    Never display scrollbars.\n\n\n    How frequently the size of the document will be checked at page load time\n    when AppKit scrollbars are used.\n\n\n    How many times the size of the size of the document will be checked at\n    page load time when AppKit scrollbars are used.\n\n    AppKit scrollbars must check the size of the document to display the\n    correct size of scrollbars. To improve performance the checks are only\n    performed a limited number of times per reload.\n\n\n    @ingroup appkit\n\n    @class CPWebView\n\n    CPWebView allows you to display arbitrary HTML or embed a\n    webpage inside your application.\n\n    It's important to note that the same origin policy applies to this view.\n    That is, if the web page being displayed is not located in the same origin\n    (protocol, domain, and port) as the application, you will have limited\n    control over the view and no access to its contents. Furthermore,\n    Cappuccino style scrollbars can't be used to scroll it."
+         "discussion" : "\n    @class CPWebView\n\n    CPWebView allows you to display arbitrary HTML or embed a\n    webpage inside your application.\n\n    It's important to note that the same origin policy applies to this view.\n    That is, if the web page being displayed is not located in the same origin\n    (protocol, domain, and port) as the application, you will have limited\n    control over the view and no access to its contents. Furthermore,\n    Cappuccino style scrollbars can't be used to scroll it."
       },
       "topics" : [
          {
@@ -513,9 +513,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @class CPWebScriptObject",
+                  "abstract" : "    Initializes the scripting object with the scripting Window object.",
                   "declaration" : "- (id)initWithWindow:(Window)aWindow",
-                  "discussion" : "\n    A CPWebScriptObject is an Objective-J wrapper around a scripting object.\n\n\n    Initializes the scripting object with the scripting Window object.",
                   "kind" : "method",
                   "name" : "initWithWindow:",
                   "parameters" : [
@@ -650,9 +649,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "  @ingroup appkit",
+                  "abstract" : "    Initializes the receiver for usage with the specified bounding rectangle",
                   "declaration" : "- (id)initWithFrame:(CGRect)aFrame",
-                  "discussion" : "  @class CPAccordionView\n\n  <p>CPAccordionView provides a container for CPAccordionViewItem objects and manages layout state\n  for all sub-layout items.</p>\n\n  <strong>Example</strong><br />\n  <pre>\nvar myAccordionView = [[CPAccordionView alloc] initWithFrame:CGRectMakeZero()];\nvar firstItem = [[CPAccordionViewItem alloc] initWithIdentifier:@\"firstSection\"]];\n[firstItem setView:[[CPView alloc] initWithFrame:CGRectMakeZero()]];\nvar secondItem = [[CPAccordionViewItem alloc] initWithIdentifier:@\"secondSection\"]];\n[secondItem setView:[[CPView alloc] initWithFrame:CGRectMakeZero()]];\n[myAccordionView addItem:firstItem];\n[myAccordionView addItem:secondItem];\n[myAccordionView setAutoresizingMask: CPViewWidthSizable | CPViewHeightSizable];\n  </pre>\n\n\n    Initializes the receiver for usage with the specified bounding rectangle\n    @return the initialized view",
+                  "discussion" : "    @return the initialized view",
                   "kind" : "method",
                   "name" : "initWithFrame:",
                   "parameters" : [
@@ -1420,9 +1419,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Returns the content array of the controller.",
                   "declaration" : "- (id)contentArray",
-                  "discussion" : "\n\n    @ignore\n\n\n    Returns the content array of the controller.\n    @return id the content array of the receiver",
+                  "discussion" : "    @return id the content array of the receiver",
                   "kind" : "method",
                   "name" : "contentArray",
                   "returnType" : "id",
@@ -1461,9 +1460,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Returns an array of the controller's objects sorted and filtered.",
                   "declaration" : "- (id)arrangedObjects",
-                  "discussion" : "\n\n    Returns an array of the controller's objects sorted and filtered.\n    @return - array of objects",
+                  "discussion" : "    @return - array of objects",
                   "kind" : "method",
                   "name" : "arrangedObjects",
                   "returnType" : "id",
@@ -1801,9 +1800,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Returns a BOOL indicating whether an object can be inserted into the controller's collection.",
                   "declaration" : "- (BOOL)canInsert",
-                  "discussion" : "\n\n    Returns a BOOL indicating whether an object can be inserted into the controller's collection.\n    @return BOOL - YES if an object can be inserted, otherwise NO.",
+                  "discussion" : "    @return BOOL - YES if an object can be inserted, otherwise NO.",
                   "kind" : "method",
                   "name" : "canInsert",
                   "returnType" : "BOOL",
@@ -5230,9 +5229,8 @@
          {
             "symbols" : [
                {
-                  "abstract" : " @ignore",
+                  "abstract" : "    Lays out the scroll view's components.",
                   "declaration" : "- (void)tile",
-                  "discussion" : "\n    Lays out the scroll view's components.",
                   "kind" : "method",
                   "name" : "tile",
                   "returnType" : "void",
@@ -5990,9 +5988,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    Return YES if this event is a part of processing a browser controlled cut or paste event",
+                  "abstract" : "    Generates periodic events every \\c aPeriod seconds.",
                   "declaration" : "+ (void)startPeriodicEventsAfterDelay:(CPTimeInterval)aDelay withPeriod:(CPTimeInterval)aPeriod",
-                  "discussion" : "    where the browser will go ahead and do the work of cutting or pasting within the input\n    element after processing of this event. The implication is that it should not be done by\n    the CPTextField (or whatever else is controlling the input) since this would result in\n    nothing being cut (because the field already cut the text out), or a double paste\n    (because the field pasted as well as the browser).\n\n\n    Generates periodic events every \\c aPeriod seconds.\n\n    @param aDelay the number of seconds before the first event\n    @param aPeriod the length of time in seconds between successive events",
+                  "discussion" : "\n    @param aDelay the number of seconds before the first event\n    @param aPeriod the length of time in seconds between successive events",
                   "kind" : "method",
                   "name" : "startPeriodicEventsAfterDelay:withPeriod:",
                   "parameters" : [
@@ -8021,7 +8019,7 @@
                {
                   "abstract" : "    @ignore",
                   "declaration" : "- (BOOL)canDragRowsWithIndexes:(CPIndexSet)rowIndexes inColumn:(CPInteger)columnIndex withEvent:(CPEvent)dragEvent",
-                  "discussion" : "    Call delegate rootItemForBrowser:\n\n\n    @ignore\n    Call delegate browser:didChangeLastColumn:toColumn:\n\n\n    @ignore\n    Call delegate browser:didResizeColumn:\n\n\n    @ignore\n    Call delegate browserSelectionIsChanging:\n\n\n    @ignore\n    Call delegate browser:shouldSelectRowIndexes:inColumn:\n\n\n    @ignore\n    Call delegate browser:selectionIndexesForProposedSelection:inColumn:\n\n\n    @ignore\n    Call delegate browserSelectionDidChange",
+                  "discussion" : "    Call delegate browserSelectionDidChange",
                   "kind" : "method",
                   "name" : "canDragRowsWithIndexes:inColumn:withEvent:",
                   "parameters" : [
@@ -8229,9 +8227,8 @@
                   ]
                },
                {
-                  "abstract" : " Ticked sliders specific states",
+                  "abstract" : " Tick mark affinity distance",
                   "declaration" : "var AFFINITY = 5",
-                  "discussion" : " Tick mark affinity distance",
                   "kind" : "global_variable",
                   "name" : "AFFINITY",
                   "type" : "id"
@@ -11145,9 +11142,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : " @ignore",
+                  "abstract" : "    Play the sound.",
                   "declaration" : "- (BOOL)play",
-                  "discussion" : "\n @ignore\n\n @ignore\n\n\n    Play the sound.\n\n    @return YES when the receiver is playing its audio data, NO otherwise.",
+                  "discussion" : "\n    @return YES when the receiver is playing its audio data, NO otherwise.",
                   "kind" : "method",
                   "name" : "play",
                   "returnType" : "BOOL",
@@ -11438,9 +11435,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : " @ignore",
+                  "abstract" : "    Perform a programatic click on up button.",
                   "declaration" : "- (IBAction)performClickUp:(id)aSender",
-                  "discussion" : "\n    Perform a programatic click on up button.\n    @param aSender sender of the action",
+                  "discussion" : "    @param aSender sender of the action",
                   "kind" : "method",
                   "name" : "performClickUp:",
                   "parameters" : [
@@ -12358,9 +12355,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Sets the specified view controller for the tab view item.",
                   "declaration" : "- (void)setViewController:(CPViewController)aViewController",
-                  "discussion" : "\n\n    Sets the specified view controller for the tab view item.\n    @param aViewController an instance of CPViewController.",
+                  "discussion" : "    @param aViewController an instance of CPViewController.",
                   "kind" : "method",
                   "name" : "setViewController:",
                   "parameters" : [
@@ -15536,9 +15533,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : "    Private API to get the delegate tokenField:completionsForSubstring:indexOfToken:indexOfSelectedItem: result.",
+                  "abstract" : "    Private API to get the delegate tokenField:representedObjectForEditingString: result.",
                   "declaration" : "- (void)setButtonType:(int)aButtonType",
-                  "discussion" : "\n    The delegate method should return an array of strings matching the provided substring for autocompletion.\n    tokenIndex is the index of the token being completed. selectedIndex allows the selected autocompletion option\n    to be indicated by reference.\n\n    @ignore\n\n\n    Private API used by the _CPAutocompleteMenu to determine where to place the menu in local coordinates.\n\n\n    Private API to get the delegate tokenField:displayStringForRepresentedObject: result.\n\n    The delegate method should return a string to be displayed for the given represtented object.\n    If this delegate method is not implemented, the representedObject is displayed as a string.\n\n    @ignore\n\n\n    Private API to get the delegate tokenField:shouldAddObjects:atIndex: result.\n\n    The delegate should return an array of represented objects which should be added based on the\n    suggested tokens to add and the insertion position specified by index. To add no tokens,\n    return an empty array. Returning nil is an error.\n\n    @ignore\n\n\n    Private API to get the delegate tokenField:representedObjectForEditingString: result.\n\n    The delegate method should return a represented object for the provided string which\n    may have been typed by the user or selected from the completion menu. If the method is\n    not implemented, or returns nil, the string is assumed to be the represented object.\n\n    @ignore",
+                  "discussion" : "\n    The delegate method should return a represented object for the provided string which\n    may have been typed by the user or selected from the completion menu. If the method is\n    not implemented, or returns nil, the string is assumed to be the represented object.\n\n    @ignore",
                   "kind" : "method",
                   "name" : "setButtonType:",
                   "parameters" : [
@@ -17332,9 +17329,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    Finds an action-target for a specified window.",
+                  "abstract" : "    Looks for a target that can handle the specified action.",
                   "declaration" : "- (id)targetForAction:(SEL)anAction",
-                  "discussion" : "    It finds a matching target in the following order:\n    <ol>\n        <li>the window's first responder</li>\n        <li>all the next responders after first responder</li>\n        <li>the window</li>\n        <li>the window's delegate</li>\n        <li>the window's controller</li>\n        <li>the window's associated document</li>\n    </ol>\n    @param aWindow the window to search for a target\n    @param anAction the action to find a responder to\n    @return the object that responds to the action, or \\c nil\n    if no matching target was found\n    @ignore\n\n\n    Looks for a target that can handle the specified action.\n    Checks for a target in the following order:\n    <ol>\n        <li>a responder from the key window</li>\n        <li>a responder from the main window</li>\n        <li>the CPApplication instance</li>\n        <li>the application delegate</li>\n        <li>the document controller</li>\n    </ol>\n    @param anAction the action to handle\n    @return a target that can respond, or \\c nil\n    if no match could be found",
+                  "discussion" : "    Checks for a target in the following order:\n    <ol>\n        <li>a responder from the key window</li>\n        <li>a responder from the main window</li>\n        <li>the CPApplication instance</li>\n        <li>the application delegate</li>\n        <li>the document controller</li>\n    </ol>\n    @param anAction the action to handle\n    @return a target that can respond, or \\c nil\n    if no match could be found",
                   "kind" : "method",
                   "name" : "targetForAction:",
                   "parameters" : [
@@ -20298,9 +20295,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ingroup appkit",
+                  "abstract" : "    @ignore",
                   "declaration" : "+ (CPString)defaultThemeClass",
-                  "discussion" : "    @class CPTableView\n\n    A table view control displays record-oriented data in a table and\n    allows the user to edit values and resize and rearrange columns.\n    A CPTableView requires you to either set a data source which implements\n    @ref numberofrows \"numberOfRowsInTableView:\" and @ref objectValueForTable \"tableView:objectValueForTableColumn:row:\",\n    or alternatively to provide data through Key Value Bindings.\n\n    To use a table view with Key Value Bindings, bind each column's\n    \\c CPValueBinding to an \\c array.field path - typically this would be to a path\n    in an array controller like \\c arrangedObjects.X, where \\c X is the name of a\n    field. Optionally also bind the table's \\c selectionIndexes and\n    \\c sortDescriptors to the array controller.\n\n    All delegate and data source methods are documented in the @ref setdatasource \"setDataSource:\" and @ref setdelegate \"setDelegate:\" methods.\n\n    If you want to display something other than just text in the table you should call @link CPTableColumn::setDataView: setDataView:@endlink on a CPTableColumn object. More documentation in that class including theme states.\n\n    @note CPTableView does not contain its own scrollview. You should be sure you place the tableview in a CPScrollView on your own.\n\n\n\n    @ignore",
                   "kind" : "method",
                   "name" : "defaultThemeClass",
                   "returnType" : "CPString",
@@ -20815,9 +20811,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Moves the column and heading at a given index to a new given index.",
                   "declaration" : "- (void)moveColumn:(CPInteger)theColumnIndex toColumn:(CPInteger)theToIndex",
-                  "discussion" : "    Internally used to set a column that will be dragged\n\n\n    Moves the column and heading at a given index to a new given index.\n    @param theColumnIndex The current index of the column to move.\n    @param theToIndex The new index for the moved column.",
+                  "discussion" : "    @param theColumnIndex The current index of the column to move.\n    @param theToIndex The new index for the moved column.",
                   "kind" : "method",
                   "name" : "moveColumn:toColumn:",
                   "parameters" : [
@@ -20834,9 +20830,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Returns an array of CPTableColumns of all the receiver's columns.",
                   "declaration" : "- (CPArray)tableColumns",
-                  "discussion" : "    Called when a table column changes visibility\n\n\n    Returns an array of CPTableColumns of all the receiver's columns.",
                   "kind" : "method",
                   "name" : "tableColumns",
                   "returnType" : "CPArray",
@@ -20873,9 +20868,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Sets the column selection using indexes.",
                   "declaration" : "- (void)selectColumnIndexes:(CPIndexSet)columns byExtendingSelection:(BOOL)shouldExtendSelection",
-                  "discussion" : "\n\n    Sets the column selection using indexes.\n\n    @param columns a CPIndexSet of columns to select\n    @param aFlag should extend the selection thereby retaining the previous selection",
+                  "discussion" : "\n    @param columns a CPIndexSet of columns to select\n    @param aFlag should extend the selection thereby retaining the previous selection",
                   "kind" : "method",
                   "name" : "selectColumnIndexes:byExtendingSelection:",
                   "parameters" : [
@@ -20892,9 +20887,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Sets the row selection using indexes.",
                   "declaration" : "- (void)selectRowIndexes:(CPIndexSet)rows byExtendingSelection:(BOOL)shouldExtendSelection",
-                  "discussion" : "\n\n    Sets the row selection using indexes.\n\n    @param rows a CPIndexSet of rows to select\n    @param aFlag should extend the selection thereby retaining the previous selection",
+                  "discussion" : "\n    @param rows a CPIndexSet of rows to select\n    @param aFlag should extend the selection thereby retaining the previous selection",
                   "kind" : "method",
                   "name" : "selectRowIndexes:byExtendingSelection:",
                   "parameters" : [
@@ -20911,9 +20906,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Returns the index of the last selected column.",
                   "declaration" : "- (int)selectedColumn",
-                  "discussion" : "    cleanup a an indexset from the indexes that cannot be selected\n    according to the table view delegate.\n\n\n    @ignore\n\n\n    @ignore\n\n\n    Returns the index of the last selected column.",
                   "kind" : "method",
                   "name" : "selectedColumn",
                   "returnType" : "int",
@@ -21116,9 +21110,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Returns a CGRect with the location and size of the column",
                   "declaration" : "- (CGRect)rectOfColumn:(CPInteger)aColumnIndex",
-                  "discussion" : "\n\n    Returns a CGRect with the location and size of the column\n    If aColumnIndex lies outside the range of the table columns a CGZeroRect is returned\n\n    @param aColumnIndex the index of the column to return the rect of",
+                  "discussion" : "    If aColumnIndex lies outside the range of the table columns a CGZeroRect is returned\n\n    @param aColumnIndex the index of the column to return the rect of",
                   "kind" : "method",
                   "name" : "rectOfColumn:",
                   "parameters" : [
@@ -21131,9 +21125,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Returns a CGRect with the location and size of the row. CGRectZero is returned if aRowIndex doesn't exist.",
                   "declaration" : "- (CGRect)rectOfRow:(CPInteger)aRowIndex",
-                  "discussion" : "    Returns a CGRect with the location and size of the row\n\n    @param aRowIndex the index of the row to return the rect of\n    @param checkRange if YES this method will return a zero rect if aRowIndex is outside of the range of valid indices\n\n\n    Returns a CGRect with the location and size of the row. CGRectZero is returned if aRowIndex doesn't exist.\n\n    @param aRowIndex the index of the row you want the rect of",
+                  "discussion" : "\n    @param aRowIndex the index of the row you want the rect of",
                   "kind" : "method",
                   "name" : "rectOfRow:",
                   "parameters" : [
@@ -21291,9 +21285,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Sets the column autoresizing style of the receiver to a given style.",
                   "declaration" : "- (void)setColumnAutoresizingStyle:(unsigned)style",
-                  "discussion" : "\n\n    @ignore\n    FIX ME: this can be a lot faster\n\n\n    Sets the column autoresizing style of the receiver to a given style.\n\n    @param aStyle the column autoresizing style for the receiver. Valid values are:\n<pre>\n        CPTableViewNoColumnAutoresizing\n        CPTableViewUniformColumnAutoresizingStyle\n        CPTableViewLastColumnOnlyAutoresizingStyle\n        CPTableViewFirstColumnOnlyAutoresizingStyle\n</pre>",
+                  "discussion" : "\n    @param aStyle the column autoresizing style for the receiver. Valid values are:\n<pre>\n        CPTableViewNoColumnAutoresizing\n        CPTableViewUniformColumnAutoresizingStyle\n        CPTableViewLastColumnOnlyAutoresizingStyle\n        CPTableViewFirstColumnOnlyAutoresizingStyle\n</pre>",
                   "kind" : "method",
                   "name" : "setColumnAutoresizingStyle:",
                   "parameters" : [
@@ -21332,7 +21326,7 @@
                {
                   "abstract" : "    Informs the receiver that the rows specified in indexSet have changed height.",
                   "declaration" : "- (void)noteHeightOfRowsWithIndexesChanged:(CPIndexSet)anIndexSet",
-                  "discussion" : "\n    @param anIndexSet an index set containing the indexes of the rows which changed height\n\n\n    Informs the receiver that the rows specified in indexSet have changed height.\n\n    @param anIndexSet an index set containing the indexes of the rows which changed height",
+                  "discussion" : "\n    @param anIndexSet an index set containing the indexes of the rows which changed height",
                   "kind" : "method",
                   "name" : "noteHeightOfRowsWithIndexesChanged:",
                   "parameters" : [
@@ -21429,9 +21423,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "@anchor setdelegate",
                   "declaration" : "- (void)setDelegate:(id <CPTableViewDelegate>)aDelegate",
-                  "discussion" : "\n\n    @ignore\n\n\n    @ignore\n    Stores the tablecolumn setup in user defaults.\n    I believe Apple stores the entire encoded table column,\n    in our case that seems overkill since we need to store everything in a cookie.\n\n\n    @ignore\n\n\n@anchor setdelegate\n    Sets the delegate of the receiver.\n    @param aDelegate the delegate object for the tableview.\n\n    The delegate can provide notification for user interaction, display behaviour, contextual menus, and more.\n\n\n@section Providing Views for Rows and Columns:\n\nReturns the view used to display the specified row and column.\n@code\n- (CPView)tableView:(CPTableView)tableView viewForTableColumn:(CPTableColumn)tableColumn row:(CPInteger)row\n@endcode\n\n@param\nThe view to display the specified column and row. Returning nil is acceptable, and a view will not be shown at that location.\n\n@discussion\nThis method is required if you wish to use a view-based table view in Interface builder or cell-based table views without using CPTableColumn's setDataView: method.\n\nIt is recommended that the implementation of this method first call the CPTableView method makeViewWithIdentifier:owner: passing, respectively, the tableColumn parameterâs identifier and self as the owner to attempt to reuse a view that is no longer visible. The frame of the view returned by this method is not important, and it will be automatically set by the table.\n\nThe view's properties should be properly set up before returning the result. The delegate do not need to implement tableview:objectValueforTableColumn:row:.\n\nWhen using bindings, this method is optional if at least one identifier has been associated with the table view at design time. If this method is not implemented, the table will automatically call the CPTableView method makeViewWithIdentifier:owner: with the tableColumn parameterâs identifier and the table viewâs delegate respectively as parameters, to attempt to reuse a previous view, or automatically unarchive a prototype associated with the table view.\n\nThe autoresizingMask of the returned view will automatically be set to CPViewNotSizable if the data view was created in Interface builder in a table column. Otherwise, for example if the view is created manually in code, this method expects the data view to have a CPViewNotSizable mask.\n\n\n@section displayingcells Displaying Cells:\n\nCalled when the tableview is about to display a dataview\n@code\n- (void)tableView:(CPTableView)aTableView willDisplayView:(id)aView forTableColumn:(CPTableColumn)aTableColumn row:(CPInteger)rowIndex;\n@endcode\n\nGroup rows are a way to separate a groups of data in a tableview. Return YES if the given row is a group row, otherwise NO.\n@code\n- (BOOL)tableView:(CPTableView)tableView isGroupRow:(CPInteger)row;\n@endcode\n\n\n@section editingcells Editing Cells:\n\nReturn YES if the dataview at a given index and column should be edited, otherwise NO.\n@code\n- (BOOL)tableView:(CPTableView)aTableView shouldEditTableColumn:(CPTableColumn)aTableColumn row:(CPInteger)rowIndex;\n@endcode\n\n\n@section sizes Setting Row and Column Size:\n\nReturn the height of the row at a given index. Only implement this if you want variable row heights. Otherwise use setRowHeight: on the tableview.\n@code\n- (float)tableView:(CPTableView)tableView heightOfRow:(CPInteger)row;\n@endcode\n\n\n@section selection Selecting in the TableView:\n@note These methods are only called when the user does something.@endnote\n\nReturn YES if the selection of the tableview should change, otherwise NO to keep the current selection.\n@code\n- (BOOL)selectionShouldChangeInTableView:(CPTableView)aTableView;\n@endcode\n\nReturn YES if the row at a given index should be selected, other NO to deny the selection.\n@code\n- (BOOL)tableView:(CPTableView)aTableView shouldSelectRow:(CPInteger)rowIndex;\n@endcode\n\nReturn YES if the table column given should be selected, otherwise NO to deny the selection.\n@code\n- (BOOL)tableView:(CPTableView)aTableView shouldSelectTableColumn:(CPTableColumn)aTableColumn;\n@endcode\n\nInforms the delegate that the tableview is in the process of changing the selection.\nThis usually happens when the user is dragging their mouse across rows.\n@code\n- (void)tableViewSelectionIsChanging:(CPNotification)aNotification\n@endcode\n\nInforms the delegate that the tableview selection has changed.\n@code\n- (void)tableViewSelectionDidChange:(CPNotification)aNotification;\n@endcode\n\n\n@section movingandresizingcolumns Moving and Resizing Columns:\n\nReturn YES if the column at a given index should move to a new column index, otherwise NO.\nWhen a column is initially dragged by the user, the delegate is first called with a newColumnIndex value of -1\n\n@code\n- (BOOL)tableView:(CPTableView)tableView shouldReorderColumn:(CPInteger)columnIndex toColumn:(CPInteger)newColumnIndex;\n@endcode\n\n\nNotifies the delegate that the tableview drag occurred. This is sent on mouse up.\n@code\n- (void)tableView:(CPTableView)tableView didDragTableColumn:(CPTableColumn)tableColumn;\n@endcode\n\n\nNotifies the delegate that a table column was moved by the user.\n@code\n- (void)tableViewColumnDidMove:(CPNotification)aNotification;\n@endcode\n\nNotifies the delegate that the user resized the table column\n@code\n- (void)tableViewColumnDidResize:(CPNotification)aNotification;\n@endcode\n\n\n@section mousevents Responding to Mouse Events:\n\nSent when the user clicks a table column but doesn't drag.\n@code\n- (void)tableView:(CPTableView)tableView didClickTableColumn:(CPTableColumn)tableColumn;\n@endcode\n\n\nNotify the delegate that the user has clicked the table header of a column.\n@code\n- (void)tableView:(CPTableView)tableView mouseDownInHeaderOfTableColumn:(CPTableColumn)tableColumn;\n@endcode\n\n\n@section contextualmenus Contextual Menus:\n\nCalled when the user right-clicks on the tableview. -1 is passed for the row or column if the user doesn't right click on a real row or column\nReturn a CPMenu that should be displayed if the user right-clicks. If you do not implement this the tableview will call super on menuForEvent\n@code\n- (CPMenu)tableView:(CPTableView)aTableView menuForTableColumn:(CPTableColumn)aColumn row:(CPInteger)aRow;\n@endcode\n\n\n@section deletekey Delete Key\nCalled when the user presses the delete key. Many times you will want to delete data (or prompt for deletion) when the user presses the delete key.\nYour delegate can implement this method to avoid subclassing the tableview to add this behaviour.\n\n@code\n- (void)tableViewDeleteKeyPressed:(CPTableView)aTableView;\n@endcode",
+                  "discussion" : "    Sets the delegate of the receiver.\n    @param aDelegate the delegate object for the tableview.\n\n    The delegate can provide notification for user interaction, display behaviour, contextual menus, and more.\n\n\n@section Providing Views for Rows and Columns:\n\nReturns the view used to display the specified row and column.\n@code\n- (CPView)tableView:(CPTableView)tableView viewForTableColumn:(CPTableColumn)tableColumn row:(CPInteger)row\n@endcode\n\n@param\nThe view to display the specified column and row. Returning nil is acceptable, and a view will not be shown at that location.\n\n@discussion\nThis method is required if you wish to use a view-based table view in Interface builder or cell-based table views without using CPTableColumn's setDataView: method.\n\nIt is recommended that the implementation of this method first call the CPTableView method makeViewWithIdentifier:owner: passing, respectively, the tableColumn parameterâs identifier and self as the owner to attempt to reuse a view that is no longer visible. The frame of the view returned by this method is not important, and it will be automatically set by the table.\n\nThe view's properties should be properly set up before returning the result. The delegate do not need to implement tableview:objectValueforTableColumn:row:.\n\nWhen using bindings, this method is optional if at least one identifier has been associated with the table view at design time. If this method is not implemented, the table will automatically call the CPTableView method makeViewWithIdentifier:owner: with the tableColumn parameterâs identifier and the table viewâs delegate respectively as parameters, to attempt to reuse a previous view, or automatically unarchive a prototype associated with the table view.\n\nThe autoresizingMask of the returned view will automatically be set to CPViewNotSizable if the data view was created in Interface builder in a table column. Otherwise, for example if the view is created manually in code, this method expects the data view to have a CPViewNotSizable mask.\n\n\n@section displayingcells Displaying Cells:\n\nCalled when the tableview is about to display a dataview\n@code\n- (void)tableView:(CPTableView)aTableView willDisplayView:(id)aView forTableColumn:(CPTableColumn)aTableColumn row:(CPInteger)rowIndex;\n@endcode\n\nGroup rows are a way to separate a groups of data in a tableview. Return YES if the given row is a group row, otherwise NO.\n@code\n- (BOOL)tableView:(CPTableView)tableView isGroupRow:(CPInteger)row;\n@endcode\n\n\n@section editingcells Editing Cells:\n\nReturn YES if the dataview at a given index and column should be edited, otherwise NO.\n@code\n- (BOOL)tableView:(CPTableView)aTableView shouldEditTableColumn:(CPTableColumn)aTableColumn row:(CPInteger)rowIndex;\n@endcode\n\n\n@section sizes Setting Row and Column Size:\n\nReturn the height of the row at a given index. Only implement this if you want variable row heights. Otherwise use setRowHeight: on the tableview.\n@code\n- (float)tableView:(CPTableView)tableView heightOfRow:(CPInteger)row;\n@endcode\n\n\n@section selection Selecting in the TableView:\n@note These methods are only called when the user does something.@endnote\n\nReturn YES if the selection of the tableview should change, otherwise NO to keep the current selection.\n@code\n- (BOOL)selectionShouldChangeInTableView:(CPTableView)aTableView;\n@endcode\n\nReturn YES if the row at a given index should be selected, other NO to deny the selection.\n@code\n- (BOOL)tableView:(CPTableView)aTableView shouldSelectRow:(CPInteger)rowIndex;\n@endcode\n\nReturn YES if the table column given should be selected, otherwise NO to deny the selection.\n@code\n- (BOOL)tableView:(CPTableView)aTableView shouldSelectTableColumn:(CPTableColumn)aTableColumn;\n@endcode\n\nInforms the delegate that the tableview is in the process of changing the selection.\nThis usually happens when the user is dragging their mouse across rows.\n@code\n- (void)tableViewSelectionIsChanging:(CPNotification)aNotification\n@endcode\n\nInforms the delegate that the tableview selection has changed.\n@code\n- (void)tableViewSelectionDidChange:(CPNotification)aNotification;\n@endcode\n\n\n@section movingandresizingcolumns Moving and Resizing Columns:\n\nReturn YES if the column at a given index should move to a new column index, otherwise NO.\nWhen a column is initially dragged by the user, the delegate is first called with a newColumnIndex value of -1\n\n@code\n- (BOOL)tableView:(CPTableView)tableView shouldReorderColumn:(CPInteger)columnIndex toColumn:(CPInteger)newColumnIndex;\n@endcode\n\n\nNotifies the delegate that the tableview drag occurred. This is sent on mouse up.\n@code\n- (void)tableView:(CPTableView)tableView didDragTableColumn:(CPTableColumn)tableColumn;\n@endcode\n\n\nNotifies the delegate that a table column was moved by the user.\n@code\n- (void)tableViewColumnDidMove:(CPNotification)aNotification;\n@endcode\n\nNotifies the delegate that the user resized the table column\n@code\n- (void)tableViewColumnDidResize:(CPNotification)aNotification;\n@endcode\n\n\n@section mousevents Responding to Mouse Events:\n\nSent when the user clicks a table column but doesn't drag.\n@code\n- (void)tableView:(CPTableView)tableView didClickTableColumn:(CPTableColumn)tableColumn;\n@endcode\n\n\nNotify the delegate that the user has clicked the table header of a column.\n@code\n- (void)tableView:(CPTableView)tableView mouseDownInHeaderOfTableColumn:(CPTableColumn)tableColumn;\n@endcode\n\n\n@section contextualmenus Contextual Menus:\n\nCalled when the user right-clicks on the tableview. -1 is passed for the row or column if the user doesn't right click on a real row or column\nReturn a CPMenu that should be displayed if the user right-clicks. If you do not implement this the tableview will call super on menuForEvent\n@code\n- (CPMenu)tableView:(CPTableView)aTableView menuForTableColumn:(CPTableColumn)aColumn row:(CPInteger)aRow;\n@endcode\n\n\n@section deletekey Delete Key\nCalled when the user presses the delete key. Many times you will want to delete data (or prompt for deletion) when the user presses the delete key.\nYour delegate can implement this method to avoid subclassing the tableview to add this behaviour.\n\n@code\n- (void)tableViewDeleteKeyPressed:(CPTableView)aTableView;\n@endcode",
                   "kind" : "method",
                   "name" : "setDelegate:",
                   "parameters" : [
@@ -21452,9 +21446,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Sets the indicator image of aTableColumn to anImage.",
                   "declaration" : "- (void)setIndicatorImage:(CPImage)anImage inTableColumn:(CPTableColumn)aTableColumn",
-                  "discussion" : "\n\n    @ignore\n\n\n    Sets the indicator image of aTableColumn to anImage.\n    The tableview will set the sort indicator images automatically; if you want\n    a different image you can supply it here.\n\n    @param anImage the image for the column\n    @param aTableColumn the table column object for which to set the image",
+                  "discussion" : "    The tableview will set the sort indicator images automatically; if you want\n    a different image you can supply it here.\n\n    @param anImage the image for the column\n    @param aTableColumn the table column object for which to set the image",
                   "kind" : "method",
                   "name" : "setIndicatorImage:inTableColumn:",
                   "parameters" : [
@@ -21471,9 +21465,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Returns the CPTableColumn object of the highlighted table column.",
                   "declaration" : "- (CPTableColumn)highlightedTableColumn",
-                  "discussion" : "\n\n    @ignore\n\n\n    Returns the CPTableColumn object of the highlighted table column.",
                   "kind" : "method",
                   "name" : "highlightedTableColumn",
                   "returnType" : "CPTableColumn",
@@ -21675,9 +21668,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Returns a CGRect of the exposed area of the tableview.",
                   "declaration" : "- (CGRect)exposedRect",
-                  "discussion" : "\n\n    Returns a CGRect of the exposed area of the tableview.",
                   "kind" : "method",
                   "name" : "exposedRect",
                   "returnType" : "CGRect",
@@ -21694,7 +21686,6 @@
                {
                   "abstract" : "    @ignore",
                   "declaration" : "- (CPView)preparedViewAtColumn:(CPInteger)column row:(CPInteger)row",
-                  "discussion" : "\n\n    @ignore",
                   "kind" : "method",
                   "name" : "preparedViewAtColumn:row:",
                   "parameters" : [
@@ -21713,7 +21704,6 @@
                {
                   "abstract" : "    @ignore",
                   "declaration" : "- (id)makeViewWithIdentifier:(CPString)anIdentifier owner:(id)anOwner",
-                  "discussion" : "\n\n    @ignore",
                   "kind" : "method",
                   "name" : "makeViewWithIdentifier:owner:",
                   "parameters" : [
@@ -21753,9 +21743,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Allows the enumeration of all the table views that are known to the table view.",
                   "declaration" : "- (void)enumerateAvailableViewsUsingBlock:(Function/*CPView *dataView, CPInteger row, CPInteger column*, @ref stop*/)handler",
-                  "discussion" : "\n\n    Allows the enumeration of all the table views that are known to the table view.\n\n    @param handler The function to apply to elements in the set.\n\n    The function takes three arguments:\n\n    @param dataView\n    The view for the column and row.\n    @param column\n    The column index of the view.\n    @param row\n    The row index of the view.",
+                  "discussion" : "\n    @param handler The function to apply to elements in the set.\n\n    The function takes three arguments:\n\n    @param dataView\n    The view for the column and row.\n    @param column\n    The column index of the view.\n    @param row\n    The row index of the view.",
                   "kind" : "method",
                   "name" : "enumerateAvailableViewsUsingBlock:",
                   "parameters" : [
@@ -21770,7 +21760,7 @@
                {
                   "abstract" : "    @ignore",
                   "declaration" : "- (void)setFrameSize:(CGSize)aSize",
-                  "discussion" : "\n\n    @ignore\n\n\n    @ignore\n    // we override here because we have to adjust the header",
+                  "discussion" : "    // we override here because we have to adjust the header",
                   "kind" : "method",
                   "name" : "setFrameSize:",
                   "parameters" : [
@@ -21847,9 +21837,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Draws the background in a given clip rect.",
                   "declaration" : "- (void)drawBackgroundInClipRect:(CGRect)aRect",
-                  "discussion" : "\n\n    @ignore\n\n\n    Draws the background in a given clip rect.\n    Deprecated: Handled by _CPTableRowView",
+                  "discussion" : "    Deprecated: Handled by _CPTableRowView",
                   "kind" : "method",
                   "name" : "drawBackgroundInClipRect:",
                   "parameters" : [
@@ -21892,9 +21882,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    While this method doesn't do anything in Cappuccino, subclasses can override it to customize the",
                   "declaration" : "- (void)drawRow:(CPInteger)row clipRect:(CGRect)rect",
-                  "discussion" : "    Draws the group rows\n    FIX ME: this should be themed...\n\n\n    @ignore\n\n\n    While this method doesn't do anything in Cappuccino, subclasses can override it to customize the\n    appearance of a row.\n\n    @note \\c tableView:willDisplayView:forTableColumn:row is sent to the delegate before drawing",
+                  "discussion" : "    appearance of a row.\n\n    @note \\c tableView:willDisplayView:forTableColumn:row is sent to the delegate before drawing",
                   "kind" : "method",
                   "name" : "drawRow:clipRect:",
                   "parameters" : [
@@ -22096,7 +22086,6 @@
                {
                   "abstract" : "    @ignore",
                   "declaration" : "- (CPDragOperation)draggingUpdated:(id)sender",
-                  "discussion" : "\n\n    @ignore\n\n\n    @ignore",
                   "kind" : "method",
                   "name" : "draggingUpdated:",
                   "parameters" : [
@@ -22171,7 +22160,6 @@
                {
                   "abstract" : "    @ignore",
                   "declaration" : "- (void)becomeKeyWindow",
-                  "discussion" : "\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore",
                   "kind" : "method",
                   "name" : "becomeKeyWindow",
                   "returnType" : "void",
@@ -22231,9 +22219,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Edits the dataview at a given row and column. This method is usually invoked automatically and should rarely be invoked directly",
                   "declaration" : "- (void)editColumn:(CPInteger)columnIndex row:(CPInteger)rowIndex withEvent:(CPEvent)theEvent select:(BOOL)flag",
-                  "discussion" : "    The action for any dataview that supports editing. This will only be called when the value was changed.\n    The table view becomes the first responder after user is done editing a dataview.\n\n\n    Edits the dataview at a given row and column. This method is usually invoked automatically and should rarely be invoked directly\n    The row at supplied rowIndex must be selected otherwise an exception is thrown.\n\n    @param columnIndex the index of the column to edit\n    @param rowIndex the index of the row to edit\n    @param theEvent the mouse event which triggers the edit, you can pass nil\n    @param flag YES if the dataview text should be selected, otherwise NO. (NOT YET IMPLEMENTED)",
+                  "discussion" : "    The row at supplied rowIndex must be selected otherwise an exception is thrown.\n\n    @param columnIndex the index of the column to edit\n    @param rowIndex the index of the row to edit\n    @param theEvent the mouse event which triggers the edit, you can pass nil\n    @param flag YES if the dataview text should be selected, otherwise NO. (NOT YET IMPLEMENTED)",
                   "kind" : "method",
                   "name" : "editColumn:row:withEvent:select:",
                   "parameters" : [
@@ -22320,7 +22308,7 @@
                {
                   "abstract" : "    @ignore",
                   "declaration" : "- (void)draggedImage:(CPImage)anImage endedAt:(CGPoint)aLocation operation:(CPDragOperation)anOperation",
-                  "discussion" : "    Return YES if the dataSource implements tableView:objectValueForTableColumn:row\n\n\n    @ignore\n    Return YES if the dataSource implements tableView:writeRowsWithIndexes:toPasteboard:\n\n\n    @ignore\n    Return YES if the dataSource implements tableView:setObjectValue:forTableColumn:row:\n\n\n    @ignore\n    Return YES if the dataSource implements tableView:validateDrop:proposedRow:proposedDropOperation:;\n\n\n    @ignore\n    Return YES if the dataSource implements numberOfRowsInTableView\n\n\n    @ignore\n    Return the number of rows of the tableView\n    By default return 0.\n\n\n    @ignore\n    Return the objectValue for the given column and row.\n    By default return nil.\n\n\n    @ignore\n    Call the method tableView:setObjectValue:ForTableColum:row: of the dataSource\n\n\n    @ignore\n    Call the method tableView:sortDescriptorsDidChange: of the dataSource\n\n\n    @ignore\n    Return if the drop is accepted or not for the given dropOperation, info and row. By default return NO.\n\n\n    @ignore\n    Return the dragOperation for the given row and dropOperation. By default return CPDragOperationNone.\n\n\n    @ignore\n    Return a boolean for writeRowsWithIndexes:toPasteroard for the given pasteboard and row. By default return NO",
+                  "discussion" : "    Return a boolean for writeRowsWithIndexes:toPasteroard for the given pasteboard and row. By default return NO",
                   "kind" : "method",
                   "name" : "draggedImage:endedAt:operation:",
                   "parameters" : [
@@ -22348,7 +22336,6 @@
                {
                   "abstract" : "    @ignore",
                   "declaration" : "- (void)bind:(CPString)aBinding toObject:(id)anObject withKeyPath:(CPString)aKeyPath options:(CPDictionary)options",
-                  "discussion" : "\n\n    @ignore",
                   "kind" : "method",
                   "name" : "bind:toObject:withKeyPath:options:",
                   "parameters" : [
@@ -22513,9 +22500,9 @@
          "title" : "CPColor"
       },
       "primaryContent" : {
-         "abstract" : "    Orientation to use with \\c CPColorPattern for vertical patterns.",
+         "abstract" : "    @ingroup appkit",
          "declaration" : "@implementation CPColor : CPObject <CPTheme>",
-         "discussion" : "\n\n    Orientation to use with \\c CPColorPattern for horizontal patterns.\n\n\n    @ingroup appkit\n\n    \\c CPColor can be used to represent color\n    in an RGB or HSB model with an optional transparency value.</p>\n\n    <p>It also provides some class helper methods that\n    returns instances of commonly used colors.</p>"
+         "discussion" : "\n    \\c CPColor can be used to represent color\n    in an RGB or HSB model with an optional transparency value.</p>\n\n    <p>It also provides some class helper methods that\n    returns instances of commonly used colors.</p>"
       },
       "topics" : [
          {
@@ -23381,9 +23368,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Set the width of the column",
                   "declaration" : "- (void)setWidth:(float)aWidth",
-                  "discussion" : "    this method tries to resize a column called via the tableview via autoresizing\n    it returns the delta from the actual resize and the proposed resize\n\n    for example if the column should have been resized 50px but the maxWidth was hit only\n    after 25px then the return value would be 25px;\n\n    if no edge has been hit zero will be returned\n\n\n    Set the width of the column\n    Default value is: 100\n\n    If the value is greater than the maxWidth the maxWidth will be reset with the supplied width here\n    If the value is less than the minWidth the minWidth will be reset with the supplied width.",
+                  "discussion" : "    Default value is: 100\n\n    If the value is greater than the maxWidth the maxWidth will be reset with the supplied width here\n    If the value is less than the minWidth the minWidth will be reset with the supplied width.",
                   "kind" : "method",
                   "name" : "setWidth:",
                   "parameters" : [
@@ -23540,9 +23527,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Sets the receiver identifier to anIdentifier.",
                   "declaration" : "- (void)setIdentifier:(id)anIdentifier",
-                  "discussion" : "\n\n    Sets the receiver identifier to anIdentifier.",
                   "kind" : "method",
                   "name" : "setIdentifier:",
                   "parameters" : [
@@ -25282,9 +25268,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : "    Closes the popover",
+                  "abstract" : "    Close the popover",
                   "declaration" : "- (IBAction)performClose:(id)sender",
-                  "discussion" : "\n\n    Close the popover\n\n    @param sender the sender of the action",
+                  "discussion" : "\n    @param sender the sender of the action",
                   "kind" : "method",
                   "name" : "performClose:",
                   "parameters" : [
@@ -26602,9 +26588,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : "    Notification sent when the list is about to pop up. \\c object is the _CPPopUpList.",
+                  "abstract" : "    @ignore",
                   "declaration" : "var ListMinimumItems = 3",
-                  "discussion" : "\n\n    Notification sent when the list is about to be dismissed. \\c object is the _CPPopUpList.\n\n\n    Notification sent when the list is dismissed. \\c object is the _CPPopUpList.\n\n\n    Notification sent by when an item is selected. \\c object is the _CPPopUpList.\n    When this is received the list has already been dismissed and the dismiss notification has been sent.\n\n\n    @ignore\n\n    The minimum number of items that must be visible below the related field.\n    If less than this number would be completely visible, and there is room for this many complete items\n    above the field, the list is displayed above.",
+                  "discussion" : "\n    The minimum number of items that must be visible below the related field.\n    If less than this number would be completely visible, and there is room for this many complete items\n    above the field, the list is displayed above.",
                   "kind" : "global_variable",
                   "name" : "ListMinimumItems",
                   "type" : "id"
@@ -26723,9 +26709,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : "    This class is a controller for a panel that can pop up and display a scrollable list of items in a CPTableView.",
+                  "abstract" : "    Creates a pop up list of choices that will display in a scrollable CPTableView.",
                   "declaration" : "- (id)initWithDataSource:(_CPPopUpListDataSource)aDataSource",
-                  "discussion" : "    It is used by CPComboBox to display the list of choices.\n\n    This class requires a data source which must conform to the interface of _CPPopUpListDataSource.\n\n    Objects of this class send the following notifications:\n\n    _CPPopUpListWillPopUpNotification\n    _CPPopUpListWillDismissNotification\n    _CPPopUpListDidDismissNotification\n    _CPPopUpListItemWasClickedNotification\n\n\n    Creates a pop up list of choices that will display in a scrollable CPTableView.\n\n    @param aDataSource    A subclass of _CPPopUpListDataSource",
+                  "discussion" : "\n    @param aDataSource    A subclass of _CPPopUpListDataSource",
                   "kind" : "method",
                   "name" : "initWithDataSource:",
                   "parameters" : [
@@ -28801,9 +28787,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " @ignore",
+                  "abstract" : "    Returns the container view of the receiver",
                   "declaration" : "- (CPView)superview",
-                  "discussion" : "\n    Install the handlers for the tooltip\n\n @ignore\n\n    Uninstall the handlers for the tooltip\n\n\n    Returns the container view of the receiver\n    @return the receiver's containing view",
+                  "discussion" : "    @return the receiver's containing view",
                   "kind" : "method",
                   "name" : "superview",
                   "returnType" : "CPView",
@@ -29140,9 +29126,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    This method is used to set the width and height of the _DOMElement. It cares about the scale of the view.",
+                  "abstract" : "    Sets the receiver's bounds. The bounds define the size and location of the receiver inside it's frame. Posts a",
                   "declaration" : "- (void)setBounds:(CGRect)bounds",
-                  "discussion" : "    When scaling, for instance with a size (0.5, 0.5), the bounds of the view will be multiply by 2. It's why we multiply by the inverse of the scaling.\n    The view will finally keep the same proportion for the user on the screen.\n\n\n    Sets the receiver's bounds. The bounds define the size and location of the receiver inside it's frame. Posts a\n    CPViewBoundsDidChangeNotification to the default notification center if the receiver is configured to do so.\n    @param bounds the new bounds",
+                  "discussion" : "    CPViewBoundsDidChangeNotification to the default notification center if the receiver is configured to do so.\n    @param bounds the new bounds",
                   "kind" : "method",
                   "name" : "setBounds:",
                   "parameters" : [
@@ -29419,9 +29405,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    Returns YES if the view is not hidden, has no hidden ancestor and doesn't belong to a hidden window.",
+                  "abstract" : "    Called when the return value of isHiddenOrHasHiddenAncestor becomes YES,",
                   "declaration" : "- (void)viewDidHide",
-                  "discussion" : "\n\n    Called when the return value of isHiddenOrHasHiddenAncestor becomes YES,\n    e.g. when this view becomes hidden due to a setHidden:YES message to\n    itself or to one of its superviews.\n\n    Note: in the current implementation, viewDidHide may be called multiple\n    times if additional superviews are hidden, even if\n    isHiddenOrHasHiddenAncestor was already YES.",
+                  "discussion" : "    e.g. when this view becomes hidden due to a setHidden:YES message to\n    itself or to one of its superviews.\n\n    Note: in the current implementation, viewDidHide may be called multiple\n    times if additional superviews are hidden, even if\n    isHiddenOrHasHiddenAncestor was already YES.",
                   "kind" : "method",
                   "name" : "viewDidHide",
                   "returnType" : "void",
@@ -29931,9 +29917,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Marks the entire view as dirty, and needing a redraw.",
                   "declaration" : "- (void)setNeedsDisplay:(BOOL)aFlag",
-                  "discussion" : "    Set the _hierarchyScaleSize and call all of the subviews to set their _hierarchyScaleSize\n\n\n    Return the _hierarchyScaleSize, this is a CGSize with the real zoom of the view (depending with his parents)\n\n\n    Make a zoom in css\n\n\n    Marks the entire view as dirty, and needing a redraw.",
                   "kind" : "method",
                   "name" : "setNeedsDisplay:",
                   "parameters" : [
@@ -30913,9 +30898,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : "    Override default windowView class loader.",
+                  "abstract" : "    Returns an initialized _CPToolTip with string.",
                   "declaration" : "- (id)initWithString:(CPString)aString styleMask:(unsigned)aStyleMask toolTipWindow:(CPWindow)aWindow",
-                  "discussion" : "\n    @param aStyleMask the window mask\n    @return the windowView class\n\n\n    Returns an initialized _CPToolTip with string.\n\n    @param aString the content of the tooltip\n    @param aStyleMask the tooltip's style mask",
+                  "discussion" : "\n    @param aString the content of the tooltip\n    @param aStyleMask the tooltip's style mask",
                   "kind" : "method",
                   "name" : "initWithString:styleMask:toolTipWindow:",
                   "parameters" : [
@@ -32244,7 +32229,6 @@
                {
                   "abstract" : " @ignore",
                   "declaration" : "- (CGRect)rectForPart:(CPScrollerPart)aPart",
-                  "discussion" : " @ignore",
                   "kind" : "method",
                   "name" : "rectForPart:",
                   "parameters" : [
@@ -32931,9 +32915,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    Gets the current theme state according to the current controlSize.",
+                  "abstract" : "    Sets the receiver's target action.",
                   "declaration" : "- (void)setAction:(SEL)anAction",
-                  "discussion" : "    @return a CPThemeState\n\n\n    @ignore\n    Change frame size according to the theme control size theme constraints\n    Basically for height to min-size.\n\n\n    Sets the receiver's target action.\n\n    @param anAction Sets the action message that gets sent to the target.",
+                  "discussion" : "\n    @param anAction Sets the action message that gets sent to the target.",
                   "kind" : "method",
                   "name" : "setAction:",
                   "parameters" : [
@@ -33463,9 +33447,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Sets the text alignment of the control.",
                   "declaration" : "- (void)setAlignment:(CPTextAlignment)alignment",
-                  "discussion" : "    Return the currentTextMovement needed by the delegate textDidEndEditing\n    This is going to check the currentEvent of the CPApp\n\n\n    Sets the text alignment of the control.\n\n    <pre>\n    CPLeftTextAlignment\n    CPCenterTextAlignment\n    CPRightTextAlignment\n    CPJustifiedTextAlignment\n    CPNaturalTextAlignment\n    </pre>",
+                  "discussion" : "\n    <pre>\n    CPLeftTextAlignment\n    CPCenterTextAlignment\n    CPRightTextAlignment\n    CPJustifiedTextAlignment\n    CPNaturalTextAlignment\n    </pre>",
                   "kind" : "method",
                   "name" : "setAlignment:",
                   "parameters" : [
@@ -35036,9 +35020,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Expands a given item.",
                   "declaration" : "- (void)expandItem:(id)anItem",
-                  "discussion" : "    Return the itemInfos for the given item.\n    The method returns only itemInfo for displayed items\n\n\n    @ignore\n    Return a boolean to know if one parent of the given item is collapsed or not\n\n\n    Expands a given item.\n\n    @param anItem - the item to expand.",
+                  "discussion" : "\n    @param anItem - the item to expand.",
                   "kind" : "method",
                   "name" : "expandItem:",
                   "parameters" : [
@@ -35219,9 +35203,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Returns the frame of the disclosure button for the outline column. If the",
                   "declaration" : "- (CGRect)frameOfOutlineDisclosureControlAtRow:(CPInteger)aRow",
-                  "discussion" : "\n    Returns the frame of the dataview at the row given for the outline column.\n\n\n    Returns the frame of the disclosure button for the outline column. If the\n    item is not expandable a CGZeroRect is returned. Subclasses can return a\n    CGZeroRect to prevent the disclosure control from being displayed.\n\n    @param aRow - The row of the receiver\n    @return CGRect - The rect of the disclosure button at aRow.",
+                  "discussion" : "    item is not expandable a CGZeroRect is returned. Subclasses can return a\n    CGZeroRect to prevent the disclosure control from being displayed.\n\n    @param aRow - The row of the receiver\n    @return CGRect - The rect of the disclosure button at aRow.",
                   "kind" : "method",
                   "name" : "frameOfOutlineDisclosureControlAtRow:",
                   "parameters" : [
@@ -35234,9 +35218,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Sets the delegate for the outlineview.",
                   "declaration" : "- (void)setDelegate:(id <CPOutlineViewDelegate>)aDelegate",
-                  "discussion" : "    Select or deselect rows, this is overridden because we need to change the color of the outline control.\n\n\n\n    Sets the delegate for the outlineview.\n\n    The following methods can be implemented:\n    @param aDelegate - the delegate object you wish to set for the receiver.\n\n    @section notifications User Interaction Notifications:\n\n    Called when the user moves a column in the outlineview.\n    @code - (void)outlineViewColumnDidMove:(CPNotification)notification; @endcode\n\n    Called when the user resizes a column in the outlineview.\n    @code - (void)outlineViewColumnDidResize:(CPNotification)notification; @endcode\n\n    Called when the user collapses an item in the outlineview.\n    @code - (void)outlineViewItemDidCollapse:(CPNotification)notification; @endcode\n\n    Called when the user expands an item in the outlineview.\n    @code - (void)outlineViewItemDidExpand:(CPNotification)notification; @endcode\n\n    Called when the user collapses an item in the outlineview, but before the item is actually collapsed.\n    @code - (void)outlineViewItemWillCollapse:(CPNotification)notification; @endcode\n\n    Called when the used expands an item, but before the item is actually expanded.\n    @code - (void)outlineViewItemWillExpand:(CPNotification)notification; @endcode\n\n    Called when the user changes the selection of the outlineview.\n    @code - (void)outlineViewSelectionDidChange:(CPNotification)notification; @endcode\n\n    Called when the user changes the selection of the outlineview, but before the change is made.\n    @code - (void)outlineViewSelectionIsChanging:(CPNotification)notification; @endcode\n\n    @section expandingandcollapsing Expanding and collapsing items:\n\n    Return YES if the item should be given permission to expand, otherwise NO.\n    @code - (BOOL)outlineView:(CPOutlineView)outlineView shouldExpandItem:(id)item; @endcode\n\n    Return YES if the item should be given permission to collapse, otherwise NO.\n    @code - (BOOL)outlineView:(CPOutlineView)outlineView shouldCollapseItem:(id)item; @endcode\n\n    @section selection Selection:\n    Return YES to allow the selection of tableColumn, otherwise NO.\n    @code- (BOOL)outlineView:(CPOutlineView)outlineView shouldSelectTableColumn:(CPTableColumn)tableColumn; @endcode\n\n    Return YES to allow the selection of an item, otherwise NO.\n    @code- (BOOL)outlineView:(CPOutlineView)outlineView shouldSelectItem:(id)item; @endcode\n\n    Return YES to allow the selection of the outlineview to be changed, otherwise NO.\n    @code - (BOOL)selectionShouldChangeInOutlineView:(CPOutlineView)outlineView; @endcode\n\n    @section dataviews Displaying DataViews:\n\n    Called when a dataView is about to be displayed. This gives you the ability to alter the dataView if needed.\n    @code - (void)outlineView:(CPOutlineView)outlineView willDisplayView:(id)dataView forTableColumn:(CPTableColumn)tableColumn item:(id)item; @endcode\n\n    @section editin Editing:\n\n    Return YES to allow for editing of a dataview at given item and tableColumn, otherwise NO to prevent the edit.\n    @code - (BOOL)outlineView:(CPOutlineView)outlineView shouldEditTableColumn:(CPTableColumn)tableColumn item:(id)item; @endcode\n\n    @section groups Group Items:\n\n    Implement this to indicate whether a given item should be rendered using the group item style.\n    Return YES if the item is a group item, otherwise NO.\n    @code - (BOOL)outlineView:(CPOutlineView)outlineView isGroupItem:(id)item; @endcode\n\n\n    @section variableitems Variable Item Heights\n\n    Implement this method to get custom heights of rows based on the item.\n    This delegate method will be passed your 'item' object and expects you to return an integer height.\n    @note This should only be implemented if rows will be different heights, if you want to set a height for ALL of your rows see -setRowHeight:@endnote\n    @code - (int)outlineView:(CPOutlineView)outlineView heightOfRowByItem:(id)anItem; @endcode",
+                  "discussion" : "\n    The following methods can be implemented:\n    @param aDelegate - the delegate object you wish to set for the receiver.\n\n    @section notifications User Interaction Notifications:\n\n    Called when the user moves a column in the outlineview.\n    @code - (void)outlineViewColumnDidMove:(CPNotification)notification; @endcode\n\n    Called when the user resizes a column in the outlineview.\n    @code - (void)outlineViewColumnDidResize:(CPNotification)notification; @endcode\n\n    Called when the user collapses an item in the outlineview.\n    @code - (void)outlineViewItemDidCollapse:(CPNotification)notification; @endcode\n\n    Called when the user expands an item in the outlineview.\n    @code - (void)outlineViewItemDidExpand:(CPNotification)notification; @endcode\n\n    Called when the user collapses an item in the outlineview, but before the item is actually collapsed.\n    @code - (void)outlineViewItemWillCollapse:(CPNotification)notification; @endcode\n\n    Called when the used expands an item, but before the item is actually expanded.\n    @code - (void)outlineViewItemWillExpand:(CPNotification)notification; @endcode\n\n    Called when the user changes the selection of the outlineview.\n    @code - (void)outlineViewSelectionDidChange:(CPNotification)notification; @endcode\n\n    Called when the user changes the selection of the outlineview, but before the change is made.\n    @code - (void)outlineViewSelectionIsChanging:(CPNotification)notification; @endcode\n\n    @section expandingandcollapsing Expanding and collapsing items:\n\n    Return YES if the item should be given permission to expand, otherwise NO.\n    @code - (BOOL)outlineView:(CPOutlineView)outlineView shouldExpandItem:(id)item; @endcode\n\n    Return YES if the item should be given permission to collapse, otherwise NO.\n    @code - (BOOL)outlineView:(CPOutlineView)outlineView shouldCollapseItem:(id)item; @endcode\n\n    @section selection Selection:\n    Return YES to allow the selection of tableColumn, otherwise NO.\n    @code- (BOOL)outlineView:(CPOutlineView)outlineView shouldSelectTableColumn:(CPTableColumn)tableColumn; @endcode\n\n    Return YES to allow the selection of an item, otherwise NO.\n    @code- (BOOL)outlineView:(CPOutlineView)outlineView shouldSelectItem:(id)item; @endcode\n\n    Return YES to allow the selection of the outlineview to be changed, otherwise NO.\n    @code - (BOOL)selectionShouldChangeInOutlineView:(CPOutlineView)outlineView; @endcode\n\n    @section dataviews Displaying DataViews:\n\n    Called when a dataView is about to be displayed. This gives you the ability to alter the dataView if needed.\n    @code - (void)outlineView:(CPOutlineView)outlineView willDisplayView:(id)dataView forTableColumn:(CPTableColumn)tableColumn item:(id)item; @endcode\n\n    @section editin Editing:\n\n    Return YES to allow for editing of a dataview at given item and tableColumn, otherwise NO to prevent the edit.\n    @code - (BOOL)outlineView:(CPOutlineView)outlineView shouldEditTableColumn:(CPTableColumn)tableColumn item:(id)item; @endcode\n\n    @section groups Group Items:\n\n    Implement this to indicate whether a given item should be rendered using the group item style.\n    Return YES if the item is a group item, otherwise NO.\n    @code - (BOOL)outlineView:(CPOutlineView)outlineView isGroupItem:(id)item; @endcode\n\n\n    @section variableitems Variable Item Heights\n\n    Implement this method to get custom heights of rows based on the item.\n    This delegate method will be passed your 'item' object and expects you to return an integer height.\n    @note This should only be implemented if rows will be different heights, if you want to set a height for ALL of your rows see -setRowHeight:@endnote\n    @code - (int)outlineView:(CPOutlineView)outlineView heightOfRowByItem:(id)anItem; @endcode",
                   "kind" : "method",
                   "name" : "setDelegate:",
                   "parameters" : [
@@ -35272,9 +35256,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    Reloads all the data of the outlineview.",
+                  "abstract" : "    Adds a new table column to the receiver. If this is the first column added",
                   "declaration" : "- (void)addTableColumn:(CPTableColumn)aTableColumn",
-                  "discussion" : "\n\n    Adds a new table column to the receiver. If this is the first column added\n    it will automatically be set to the outline column.\n\n    Also see -setOutlineTableColumn:.\n\n    @note This behavior deviates from cocoa slightly.\n\n    @param CPTableColumn aTableColumn - The table column to add.",
+                  "discussion" : "    it will automatically be set to the outline column.\n\n    Also see -setOutlineTableColumn:.\n\n    @note This behavior deviates from cocoa slightly.\n\n    @param CPTableColumn aTableColumn - The table column to add.",
                   "kind" : "method",
                   "name" : "addTableColumn:",
                   "parameters" : [
@@ -35341,7 +35325,6 @@
                {
                   "abstract" : "    @ignore",
                   "declaration" : "- (void)keyDown:(CPEvent)anEvent",
-                  "discussion" : "\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore\n    We need to move the disclosure control too.\n\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore",
                   "kind" : "method",
                   "name" : "keyDown:",
                   "parameters" : [
@@ -35356,7 +35339,7 @@
                {
                   "abstract" : "    @ignore",
                   "declaration" : "- (CPInteger)numberOfRowsInTableView:(CPTableView)anOutlineView",
-                  "discussion" : "    Return YES if the delegate implements outlineView:selectionIndexesForProposedSelection\n\n\n    @ignore\n    Return YES if the delegate implements outlineView:shouldSelectItem:",
+                  "discussion" : "    Return YES if the delegate implements outlineView:shouldSelectItem:",
                   "kind" : "method",
                   "name" : "numberOfRowsInTableView:",
                   "parameters" : [
@@ -37301,7 +37284,6 @@
                {
                   "abstract" : " @ignore",
                   "declaration" : "- (BOOL)acceptsFirstResponder",
-                  "discussion" : " @ignore\n @ignore\n @ignore",
                   "kind" : "method",
                   "name" : "acceptsFirstResponder",
                   "returnType" : "BOOL",
@@ -37316,9 +37298,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    Set the selection css style for the DOM element of the textField",
+                  "abstract" : " @ignore",
                   "declaration" : "- (BOOL)resignFirstResponder",
-                  "discussion" : "    @ignore\n\n\n    Set the css style for the input element of the textField\n    @ignore\n\n @ignore",
                   "kind" : "method",
                   "name" : "resignFirstResponder",
                   "returnType" : "BOOL",
@@ -38933,9 +38914,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : "    Overrides the default windowView class loader.",
+                  "abstract" : "    Create and init a _CPPopoverWindow with given the given frame.",
                   "declaration" : "- (id)initWithContentRect:(CGRect)aFrame",
-                  "discussion" : "\n    @param aStyleMask the window mask\n    @return the windowView class\n\n\n    Create and init a _CPPopoverWindow with given the given frame.\n\n    @param aFrame the frame of the popover window\n    @return ready to use _CPPopoverWindow",
+                  "discussion" : "\n    @param aFrame the frame of the popover window\n    @return ready to use _CPPopoverWindow",
                   "kind" : "method",
                   "name" : "initWithContentRect:",
                   "parameters" : [
@@ -39016,9 +38997,8 @@
          {
             "symbols" : [
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Update the _CPPopoverWindow frame if a resize event is observed.",
                   "declaration" : "- (void)observeValueForKeyPath:(CPString)aPath ofObject:(id)anObject change:(CPDictionary)theChange context:(void)aContext",
-                  "discussion" : "    Adds self as frame observer if not already observing it\n\n\n    @ignore\n    Removes self as frame observer if already observing it\n\n\n    Update the _CPPopoverWindow frame if a resize event is observed.",
                   "kind" : "method",
                   "name" : "observeValueForKeyPath:ofObject:change:context:",
                   "parameters" : [
@@ -42464,9 +42444,9 @@
          "title" : "CPFont"
       },
       "primaryContent" : {
-         "abstract" : "    To create a font of a size that will dynamically reflect the current",
+         "abstract" : "@ingroup appkit",
          "declaration" : "@implementation CPFont : CPObject <CPTheme>",
-         "discussion" : "    system font size, use this for the size argument.\n\n\n@ingroup appkit\n@class CPFont\n\nThe CPFont class allows control of the fonts used for displaying text anywhere on the screen.\nThe primary method for getting a particular font is through one of the class methods that take\na name and/or size as arguments, and return the appropriate CPFont.\n\n### System fonts\nWhen you create a font using \\c -systemFontOfSize: or \\c -boldSystemFontOfSize:, a proxy font is\ncreated that always refers to the current system font face and size. By default the system\nfont face/size is Arial 12px, with a fallback to sans-serif 12px. You may configure this at\nruntime in two ways:\n\n- By sending [CPFont setSystemFontFace:<face>] and/or [CPFont setSystemFontSize:<size>].\n  Note that if you change the system font face or size during runtime, the next time\n  any view using a system font is redrawn, it will show the new font.\n- By configuring Info.plist for your application or for AppKit. You can set the font face\n  by adding a CPSystemFontFace string item to the Info.plist, and you can set the font size\n  by adding a CPSystemFontSize integer item to the Info.plist.\n\nNote that in either case, you can specify a comma-delimited list of fonts as the font face.\nDo not quote enclose font faces that contain spaces, that is done automatically when a CSS\nrepresentation of a font is requested.\n\nThe browser will use the first available font in the list you supply. CPFont always ensures\nthat Arial and sans-serif are in the CSS representation of a font as a fallback, so there is\nno need to add them to the end of your font list.\n\n### nib2cib conversion\nFonts are converted by nib2cib according to the following algorithm:\n\n- If the font family is Lucida Grande, then a system font will be created.\n- If the font is Lucida Grande 13 (plain), the \"default\" font will be used at runtime.\n  The default font is taken from the \"font\" theme attribute if one exists,\n  otherwise from the current system font face and size.\n- Lucida Grande of any size other than 13 will retain its size.\n- Fonts using any family other than Lucida Grande will be used as is, including the size.\n\n### Using custom web fonts\nThe configurability of CPFont makes it easy to use a custom web font as the system font.\nFor example, if you want to use the google font Asap as the system font, you would do the\nfollowing:\n\n- Add a <link> to the <head> of index-debug.html and index.html:\n@code\n<link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'>\n@endcode\n- Specify Asap as the system font in Info.plist by adding the following item:\n@code\n<key>CPSystemFontFace</key>\n<string>Asap</string>\n@endcode"
+         "discussion" : "@class CPFont\n\nThe CPFont class allows control of the fonts used for displaying text anywhere on the screen.\nThe primary method for getting a particular font is through one of the class methods that take\na name and/or size as arguments, and return the appropriate CPFont.\n\n### System fonts\nWhen you create a font using \\c -systemFontOfSize: or \\c -boldSystemFontOfSize:, a proxy font is\ncreated that always refers to the current system font face and size. By default the system\nfont face/size is Arial 12px, with a fallback to sans-serif 12px. You may configure this at\nruntime in two ways:\n\n- By sending [CPFont setSystemFontFace:<face>] and/or [CPFont setSystemFontSize:<size>].\n  Note that if you change the system font face or size during runtime, the next time\n  any view using a system font is redrawn, it will show the new font.\n- By configuring Info.plist for your application or for AppKit. You can set the font face\n  by adding a CPSystemFontFace string item to the Info.plist, and you can set the font size\n  by adding a CPSystemFontSize integer item to the Info.plist.\n\nNote that in either case, you can specify a comma-delimited list of fonts as the font face.\nDo not quote enclose font faces that contain spaces, that is done automatically when a CSS\nrepresentation of a font is requested.\n\nThe browser will use the first available font in the list you supply. CPFont always ensures\nthat Arial and sans-serif are in the CSS representation of a font as a fallback, so there is\nno need to add them to the end of your font list.\n\n### nib2cib conversion\nFonts are converted by nib2cib according to the following algorithm:\n\n- If the font family is Lucida Grande, then a system font will be created.\n- If the font is Lucida Grande 13 (plain), the \"default\" font will be used at runtime.\n  The default font is taken from the \"font\" theme attribute if one exists,\n  otherwise from the current system font face and size.\n- Lucida Grande of any size other than 13 will retain its size.\n- Fonts using any family other than Lucida Grande will be used as is, including the size.\n\n### Using custom web fonts\nThe configurability of CPFont makes it easy to use a custom web font as the system font.\nFor example, if you want to use the google font Asap as the system font, you would do the\nfollowing:\n\n- Add a <link> to the <head> of index-debug.html and index.html:\n@code\n<link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'>\n@endcode\n- Specify Asap as the system font in Info.plist by adding the following item:\n@code\n<key>CPSystemFontFace</key>\n<string>Asap</string>\n@endcode"
       },
       "topics" : [
          {
@@ -42647,9 +42627,9 @@
                   "scope" : "class"
                },
                {
-                  "abstract" : "    Internal font getter like fontWithName:size:italic: with a bold selector.",
+                  "abstract" : "    Returns the system font scaled to the specified size",
                   "declaration" : "+ (CPFont)systemFontOfSize:(CGSize)aSize",
-                  "discussion" : "\n\n    Returns the system font scaled to the specified size\n    @param aSize the size of the font (in px). 0 creates a static font\n           in the current system font size. Negative creates a font\n           that dynamically tracks the current system font size.\n    @return the requested system font",
+                  "discussion" : "    @param aSize the size of the font (in px). 0 creates a static font\n           in the current system font size. Negative creates a font\n           that dynamically tracks the current system font size.\n    @return the requested system font",
                   "kind" : "method",
                   "name" : "systemFontOfSize:",
                   "parameters" : [
@@ -42859,9 +42839,9 @@
          "title" : "CPImage"
       },
       "primaryContent" : {
-         "abstract" : "    Returns a resource image with a relative path and size",
+         "abstract" : "    @ingroup appkit",
          "declaration" : "@implementation CPImage : CPObject",
-         "discussion" : "    in a bundle.\n\n    @param filename A filename or relative path to a resource image.\n    @param width    Width of the image. May be omitted.\n    @param height   Height of the image. May be omitted if width is omitted.\n    @param size     Instead of passing width/height, a CGSize may be passed.\n    @param bundle   Bundle in which the image resource can be found.\n                    If omitted, defaults to the main bundle.\n    @return CPImage\n\n\n    @ingroup appkit\n    @class CPImage\n\n    CPImage is used to represent images in the Cappuccino framework. It supports loading\n    all image types supported by the browser.\n\n    @par Delegate Methods\n\n    @delegate -(void)imageDidLoad:(CPImage)image;\n    Called when the specified image has finished loading.\n    @param image the image that loaded\n\n    @delegate -(void)imageDidError:(CPImage)image;\n    Called when the specified image had an error loading.\n    @param image the image with the loading error\n\n    @delegate -(void)imageDidAbort:(CPImage)image;\n    Called when the image loading was aborted.\n    @param image the image that was aborted"
+         "discussion" : "    @class CPImage\n\n    CPImage is used to represent images in the Cappuccino framework. It supports loading\n    all image types supported by the browser.\n\n    @par Delegate Methods\n\n    @delegate -(void)imageDidLoad:(CPImage)image;\n    Called when the specified image has finished loading.\n    @param image the image that loaded\n\n    @delegate -(void)imageDidError:(CPImage)image;\n    Called when the specified image had an error loading.\n    @param image the image with the loading error\n\n    @delegate -(void)imageDidAbort:(CPImage)image;\n    Called when the image loading was aborted.\n    @param image the image that was aborted"
       },
       "topics" : [
          {
@@ -46606,9 +46586,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Sets whether the controller automatically creates and inserts new content objects automatically when loading from a cib file.",
                   "declaration" : "- (void)setAutomaticallyPreparesContent:(BOOL)shouldAutomaticallyPrepareContent",
-                  "discussion" : "\n\n    @ignore\n\n\n    Sets whether the controller automatically creates and inserts new content objects automatically when loading from a cib file.\n    If you pass YES and the controller uses prepareContent to create the content object.\n    The default is NO.\n\n    @param BOOL shouldAutomaticallyPrepareContent - YES if the content should be prepared, otherwise NO.",
+                  "discussion" : "    If you pass YES and the controller uses prepareContent to create the content object.\n    The default is NO.\n\n    @param BOOL shouldAutomaticallyPrepareContent - YES if the content should be prepared, otherwise NO.",
                   "kind" : "method",
                   "name" : "setAutomaticallyPreparesContent:",
                   "parameters" : [
@@ -46710,9 +46690,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Creates and returns a new object of the appropriate class.",
                   "declaration" : "- (id)newObject",
-                  "discussion" : "\n\n    Creates and returns a new object of the appropriate class.\n    @return id - The object created.",
+                  "discussion" : "    @return id - The object created.",
                   "kind" : "method",
                   "name" : "newObject",
                   "returnType" : "id",
@@ -46834,9 +46814,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    @return id - Returns the keys which are being observed.",
                   "declaration" : "- (id)observedKeys",
-                  "discussion" : "\n\n    @ignore\n\n\n    @ignore\n    These two private methods map CPTextField notifications to the CPEditorRegistration protocol\n    This should be generalized in the future:\n\n    The CPEditorRegistrationProtocol can be implemented in all controls that support editing, not just CPTextField.\n    In CPArrayController there are other cases than selection change when we need to review all editor pending changes. They should be covered, including the selection change, by the wider concept described by the methods commitEditing: (forces to end editing) and discardEditing: (pending changes are lost).\n\n\n    @ignore\n\n\n    @return id - Returns the keys which are being observed.",
                   "kind" : "method",
                   "name" : "observedKeys",
                   "returnType" : "id",
@@ -47931,9 +47910,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : "    @ingroup appkit",
+                  "abstract" : "    Returns a CPAlert object with the provided info",
                   "declaration" : "+ (CPAlert)alertWithMessageText:(CPString)aMessage defaultButton:(CPString)defaultButtonTitle alternateButton:(CPString)alternateButtonTitle otherButton:(CPString)otherButtonTitle informativeTextWithFormat:(CPString)informativeText",
-                  "discussion" : "\n    CPAlert is an alert panel that can be displayed modally to present the\n    user with a message and one or more options.\n\n    It can be used to display an information message \\c CPInformationalAlertStyle,\n    a warning message \\c CPWarningAlertStyle (the default), or a critical\n    alert \\c CPCriticalAlertStyle. In each case the user can be presented with one\n    or more options by adding buttons using the \\c -addButtonWithTitle: method.\n\n    The panel is displayed modally by calling \\c -runModal and once the user has\n    dismissed the panel, a message will be sent to the panel's delegate (if set), informing\n    it which button was clicked (see delegate methods).\n\n    @delegate -(void)alertDidEnd:(CPAlert)theAlert returnCode:(int)returnCode;\n    Called when the user dismisses the alert by clicking one of the buttons.\n    @param theAlert the alert panel that the user dismissed\n    @param returnCode the index of the button that the user clicked (starting from 0,\n           representing the first button added to the alert which appears on the\n           right, 1 representing the next button to the left and so on)\n\n\n    Returns a CPAlert object with the provided info\n\n    @param aMessage the main body text of the alert\n    @param defaultButton the title of the default button\n    @param alternateButton if not nil, the title of a second button\n    @param otherButton if not nil, the title of the third button\n    @param informativeText if not nil the informative text of the alert\n    @return fully initialized CPAlert",
+                  "discussion" : "\n    @param aMessage the main body text of the alert\n    @param defaultButton the title of the default button\n    @param alternateButton if not nil, the title of a second button\n    @param otherButton if not nil, the title of the third button\n    @param informativeText if not nil the informative text of the alert\n    @return fully initialized CPAlert",
                   "kind" : "method",
                   "name" : "alertWithMessageText:defaultButton:alternateButton:otherButton:informativeTextWithFormat:",
                   "parameters" : [
@@ -48212,7 +48191,6 @@
                {
                   "abstract" : "    @ignore",
                   "declaration" : "- (void)layout",
-                  "discussion" : "\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore\n\n\n    @ignore",
                   "kind" : "method",
                   "name" : "layout",
                   "returnType" : "void",
@@ -54496,9 +54474,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Return the maxNumber of the textField depending of the maxDate",
+                  "abstract" : " Set the stringValue of the textField. This is going to check if there is 2 or 4 letters. If not it adds a space. Check also the maxDate",
                   "declaration" : "- (void)setValueForKeyEvent:(CPEvent)anEvent",
-                  "discussion" : "\n Set the stringValue of the textField. This is going to check if there is 2 or 4 letters. If not it adds a space. Check also the maxDate\n    It's called when the user is editing with the keyboard\n    @param aStringValue a CPString",
+                  "discussion" : "    It's called when the user is editing with the keyboard\n    @param aStringValue a CPString",
                   "kind" : "method",
                   "name" : "setValueForKeyEvent:",
                   "parameters" : [
@@ -54511,9 +54489,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    End of the timer",
+                  "abstract" : " Set the stringValue of the TextField. Add some zeros of there isn't 2/4 letters in the value. It's called at the end of the editing process",
                   "declaration" : "- (void)setStringValue:(CPString)aStringValue",
-                  "discussion" : "\n\n    We force to end the timer\n\n\n    We force to end the timer and to update the objectValue of the datePicker\n\n Set the stringValue of the TextField. Add some zeros of there isn't 2/4 letters in the value. It's called at the end of the editing process\n    @param aStringValue a CPString",
+                  "discussion" : "    @param aStringValue a CPString",
                   "kind" : "method",
                   "name" : "setStringValue:",
                   "parameters" : [
@@ -55097,9 +55075,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : " This is called to when the user just changed the selected textField",
+                  "abstract" : "    PerformKeyEquivalent event",
                   "declaration" : "- (BOOL)performKeyEquivalent:(CPEvent)anEvent",
-                  "discussion" : "    @param aNotification\n\n Select a textField\n    @param aDatePickerElementTextField the textField\n\n Called when the user click on the stepper\n\n\n    PerformKeyEquivalent event\n    We need to override that to handle the tab key",
+                  "discussion" : "    We need to override that to handle the tab key",
                   "kind" : "method",
                   "name" : "performKeyEquivalent:",
                   "parameters" : [
@@ -55569,9 +55547,8 @@
          {
             "symbols" : [
                {
-                  "abstract" : " Select one date or several date depending of the giving interval",
+                  "abstract" : " Tile the view",
                   "declaration" : "- (void)tile",
-                  "discussion" : "    @param aStartDate\n    @param anInterval;\n\n Tile the view",
                   "kind" : "method",
                   "name" : "tile",
                   "returnType" : "void",
@@ -55882,9 +55859,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : " Return the day names depending on the CPLocale of the datePicker",
+                  "abstract" : " Set the monthDate of the header",
                   "declaration" : "- (void)setMonthForDate:(CPDate)aMonthDate",
-                  "discussion" : "    @return an array\n\n Return the month names depending on the CPLocale of the datePicker\n    @return an array\n\n Set the monthDate of the header\n    @aMonthDate the new monthDate",
+                  "discussion" : "    @aMonthDate the new monthDate",
                   "kind" : "method",
                   "name" : "setMonthForDate:",
                   "parameters" : [
@@ -56083,9 +56060,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Set the dateValue and the timeInterval. This method checks the min and max date of the datePicker also. It will call the delegate if possible.",
+                  "abstract" : " Set the minDate of the datePicker",
                   "declaration" : "- (void)setMinDate:(CPDate)aMinDate",
-                  "discussion" : "    @param aDateValue the dateValue\n    @param aTimeInterval the timeInterval\n\n Set the minDate of the datePicker\n    @param aMinDate the minDate",
+                  "discussion" : "    @param aMinDate the minDate",
                   "kind" : "method",
                   "name" : "setMinDate:",
                   "parameters" : [
@@ -56371,9 +56348,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : " Check if we are in the american format or not. Depending on the locale",
+                  "abstract" : " Key down event",
                   "declaration" : "- (void)keyDown:(CPEvent)anEvent",
-                  "discussion" : "\n Key down event\n    @param anEvent",
+                  "discussion" : "    @param anEvent",
                   "kind" : "method",
                   "name" : "keyDown:",
                   "parameters" : [
@@ -60548,9 +60525,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " @ignore",
+                  "abstract" : "    Sets the window's maximum size. If the provided",
                   "declaration" : "- (void)setMaxSize:(CGSize)aSize",
-                  "discussion" : "\n    Sets the window's maximum size. If the provided\n    size is the same as the current maximum size,\n    the method simply returns.\n    @param aSize the new maximum size",
+                  "discussion" : "    size is the same as the current maximum size,\n    the method simply returns.\n    @param aSize the new maximum size",
                   "kind" : "method",
                   "name" : "setMaxSize:",
                   "parameters" : [
@@ -61659,9 +61636,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " @ignore",
+                  "abstract" : "    Converts aPoint from the global coordinate system to the window coordinate system.",
                   "declaration" : "- (CGPoint)convertGlobalToBase:(CGPoint)aPoint",
-                  "discussion" : " get the scroll offset (if any) from native scroll bars (can happen when the platform window shrinks below minSize)\n\n\n    Converts aPoint from the global coordinate system to the window coordinate system.",
                   "kind" : "method",
                   "name" : "convertGlobalToBase:",
                   "parameters" : [
@@ -62219,9 +62195,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : "    @ingroup appkit",
+                  "abstract" : "    @brief Returns the row templates for the receiver.",
                   "declaration" : "- (CPArray)rowTemplates",
-                  "discussion" : "    @class CPPredicateEditor\n\n    @brief CPPredicateEditor is a subclass of CPRuleEditor that is specialized for editing CPPredicate objects.\n\n    CPPredicateEditor provides a CPPredicate propertyâobjectValue (inherited from CPControl)âthat you can get and set directly, and that you can bind using bindings (you typically configure a predicate editor in Interface Builder). CPPredicateEditor depends on another class, CPPredicateEditorRowTemplate, that describes the available predicates and how to display them.\n\n    Unlike CPRuleEditor, CPPredicateEditor does not depend on its delegate to populate its rows (and does not call the populating delegate methods). Instead, its rows are populated from its objectValue property (an instance of CPPredicate). CPPredicateEditor relies on instances CPPredicateEditorRowTemplate, which are responsible for mapping back and forth between the displayed view values and various predicates.\n\n    CPPredicateEditor exposes one property, rowTemplates, which is an array of CPPredicateEditorRowTemplate objects.\n\n\n    @brief Returns the row templates for the receiver.\n    @return The row templates for the receiver.\n    @discussion Until otherwise set, this contains a single compound CPPredicateEditorRowTemplate object.\n    @see setRowTemplates:",
+                  "discussion" : "    @return The row templates for the receiver.\n    @discussion Until otherwise set, this contains a single compound CPPredicateEditorRowTemplate object.\n    @see setRowTemplates:",
                   "kind" : "method",
                   "name" : "rowTemplates",
                   "returnType" : "CPArray",
@@ -62568,9 +62544,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " @endcond",
+                  "abstract" : "    @brief Returns the receiverâs delegate.",
                   "declaration" : "- (id)delegate",
-                  "discussion" : "\n    @name Configuring a Rule Editor\n\n\n    @brief Returns the receiverâs delegate.\n    @return The receiverâs delegate.\n    @see setDelegate:",
+                  "discussion" : "    @return The receiverâs delegate.\n    @see setDelegate:",
                   "kind" : "method",
                   "name" : "delegate",
                   "returnType" : "id",
@@ -62712,9 +62688,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @name Working with Formatting",
+                  "abstract" : "    @brief Returns the formatting dictionary for the receiver.",
                   "declaration" : "- (CPDictionary)formattingDictionary",
-                  "discussion" : "\n\n    @brief Returns the formatting dictionary for the receiver.\n    @return The formatting dictionary for the receiver.\n    @see setFormattingDictionary:\n    @see setFormattingStringsFilename:",
+                  "discussion" : "    @return The formatting dictionary for the receiver.\n    @see setFormattingDictionary:\n    @see setFormattingStringsFilename:",
                   "kind" : "method",
                   "name" : "formattingDictionary",
                   "returnType" : "CPDictionary",
@@ -62760,9 +62736,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @name Providing Data",
+                  "abstract" : "    @brief Instructs the receiver to refetch criteria from its delegate.",
                   "declaration" : "- (void)reloadCriteria",
-                  "discussion" : "\n\n    @brief Instructs the receiver to refetch criteria from its delegate.\n    @discussion You can use this method to indicate that the available criteria may have changed and should be refetched from the delegate and the popups recalculated.",
+                  "discussion" : "    @discussion You can use this method to indicate that the available criteria may have changed and should be refetched from the delegate and the popups recalculated.",
                   "kind" : "method",
                   "name" : "reloadCriteria",
                   "returnType" : "void",
@@ -62807,9 +62783,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @name Working with the Selection",
+                  "abstract" : "    @brief Returns the chosen values for a given row.",
                   "declaration" : "- (CPMutableArray)displayValuesForRow:(CPInteger)row",
-                  "discussion" : "\n\n    @brief Returns the chosen values for a given row.\n    @param row The index of a row in the receiver.\n    @return The chosen values (strings, views, or menu items) for row row.\n    @discussion The values returned are the same as those returned from the delegate method -#ruleEditor:displayValueForCriterion:inRow:",
+                  "discussion" : "    @param row The index of a row in the receiver.\n    @return The chosen values (strings, views, or menu items) for row row.\n    @discussion The values returned are the same as those returned from the delegate method -#ruleEditor:displayValueForCriterion:inRow:",
                   "kind" : "method",
                   "name" : "displayValuesForRow:",
                   "parameters" : [
@@ -62906,9 +62882,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @name Manipulating Rows",
+                  "abstract" : "    @brief Adds a row to the receiver.",
                   "declaration" : "- (void)addRow:(id)sender",
-                  "discussion" : "\n\n    @brief Adds a row to the receiver.\n    @param sender Typically the object that sent the message.\n    @see insertRowAtIndex:withType:asSubrowOfRow:animate:",
+                  "discussion" : "    @param sender Typically the object that sent the message.\n    @see insertRowAtIndex:withType:asSubrowOfRow:animate:",
                   "kind" : "method",
                   "name" : "addRow:",
                   "parameters" : [
@@ -62982,9 +62958,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @name Working with Predicates",
+                  "abstract" : "    @brief Returns the predicate for the receiver.",
                   "declaration" : "- (CPPredicate)predicate",
-                  "discussion" : "\n\n    @brief Returns the predicate for the receiver.\n    @return If the delegate implements -#ruleEditor:predicatePartsForCriterion:withDisplayValue:inRow:, the predicate for the receiver. If not, or if the delegate does not return enough parts to construct a full predicate, returns @c nil.\n    @see predicateForRow:",
+                  "discussion" : "    @return If the delegate implements -#ruleEditor:predicatePartsForCriterion:withDisplayValue:inRow:, the predicate for the receiver. If not, or if the delegate does not return enough parts to construct a full predicate, returns @c nil.\n    @see predicateForRow:",
                   "kind" : "method",
                   "name" : "predicate",
                   "returnType" : "CPPredicate",
@@ -63015,9 +62991,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @name Supporting Bindings",
+                  "abstract" : "    @brief Returns the class used to create a new row in the ârowsâ binding.",
                   "declaration" : "- (Class)rowClass",
-                  "discussion" : "\n\n    @brief Returns the class used to create a new row in the ârowsâ binding.\n    @return The class used to create a new row in the \"rows\" binding.\n    @see setRowClass:",
+                  "discussion" : "    @return The class used to create a new row in the \"rows\" binding.\n    @see setRowClass:",
                   "kind" : "method",
                   "name" : "rowClass",
                   "returnType" : "Class",
@@ -63135,9 +63111,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @name Configuring Rows Animation",
+                  "abstract" : "    @brief Returns the current animation for the receiver.",
                   "declaration" : "- (id)animation",
-                  "discussion" : "\n\n    @brief Returns the current animation for the receiver.\n    @return The current animation for the receiver.\n    @see setAnimation:",
+                  "discussion" : "    @return The current animation for the receiver.\n    @see setAnimation:",
                   "kind" : "method",
                   "name" : "animation",
                   "returnType" : "id",
@@ -63159,9 +63135,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @name Delegate Methods",
+                  "abstract" : " @cond",
                   "declaration" : "- (BOOL)acceptsFirstResponder",
-                  "discussion" : "\n\n    @param editor The rule editor that sent the message.\n    @param index The index of the requested child criterion. This value must be in the range from 0 up to (but not including) the number of children, as reported by the delegate in ruleEditor:numberOfChildrenForCriterion:withRowType:.\n    @param criterion The parent of the requested child, or nil if the rule editor is requesting a root criterion.\n    @param rowType The type of the row.\n    @return An object representing the requested child (or root) criterion. This object is used by the delegate to represent that position in the tree, and is passed as a parameter in subsequent calls to the delegate.\n    @discussion This method is required.\n\n    - (id)ruleEditor:(CPRuleEditor)editor child:(CPInteger)index forCriterion:(id)criterion withRowType:(CPRuleEditorRowType)rowType\n\n\n    @param editor The rule editor that sent the message.\n    @param criterion The criterion for which the value is required.\n    @param row The row number of criterion.\n    @return The value for criterion.\n    @discussion The value should be an instance of CPString, CPView, or CPMenuItem. If the value is a CPView or CPMenuItem, you must ensure it is unique for every invocation of this method; that is, do not return a particular instance of CPView or CPMenuItem more than once.\n\n    - (id)ruleEditor:(CPRuleEditor)editor displayValueForCriterion:(id)criterion inRow:(CPInteger)row\n\n\n    @param editor The rule editor that sent the message.\n    @param criterion The criterion for which the number of children is required.\n    @param rowType The type of row of criterion.\n    @return The number of child items of criterion. If criterion is nil, return the number of root criteria for the row type rowType.\n\n    - (CPInteger)ruleEditor:(CPRuleEditor)editor numberOfChildrenForCriterion:(id)criterion withRowType:(CPRuleEditorRowType)rowType\n\n\n    @param editor The rule editor that sent the message.\n    @param criterion The criterion for which the predicate parts are required.\n    @param value The display value.\n    @param row The row number of criterion.\n    @return A dictionary representing the parts of the predicate determined by the given criterion and value. The keys of the dictionary should be the string constants specified in Predicate Part Keys with corresponding appropriate values.\n\n    - (CPDictionary)ruleEditor:(CPRuleEditor)editor predicatePartsForCriterion:(id)criterion withDisplayValue:(id)value inRow:(CPInteger)row\n\n @cond",
                   "kind" : "method",
                   "name" : "acceptsFirstResponder",
                   "returnType" : "BOOL",
@@ -63733,9 +63708,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : "    @ingroup appkit",
+                  "abstract" : "    @brief Initializes and returns a âpop-up-pop-up-pop-upâ-style row template.",
                   "declaration" : "- (id)initWithLeftExpressions:(CPArray)leftExpressions rightExpressions:(CPArray)rightExpressions modifier:(int)modifier operators:(CPArray)operators options:(int)options",
-                  "discussion" : "    @class CPPredicateEditorRowTemplate\n\n    @brief CPPredicateEditorRowTemplate describes available predicates and how to display them.\n\n    You can create instances of CPPredicateEditorRowTemplate programmatically or in Interface Builder. By default, a non-compound row template has three views: a popup (or static text field) on the left, a popup or static text field for operators, and either a popup or other view on the right.  You can subclass CPPredicateEditorRowTemplate to create a row template with different numbers or types of views.\n\n    CPPredicateEditorRowTemplate is a concrete class, but it has five primitive methods which are called by CPPredicateEditor: -#templateViews, -#matchForPredicate:, -#setPredicate:, -#displayableSubpredicatesOfPredicate:, and -#predicateWithSubpredicates:. CPPredicateEditorRowTemplate implements all of them, but you can override them for custom templates. The primitive methods are used by an instance of CPPredicateEditor as follows.\n\n    First, an instance of CPPredicateEditor is created, and some row templates are set on itâeither through a nib file or programmatically. The first thing predicate editor does is ask each of the templates for their views, using templateViews.\n\n    After setting up the predicate editor, you typically send it a  CPPredicateEditor#setObjectValue: message to restore a saved predicate. CPPredicateEditor needs to determine which of its templates should display each predicate in the predicate tree. It does this by sending each of its row templates a matchForPredicate: message and choosing the one that returns the highest value.\n\n    After finding the best match for a predicate, CPPredicateEditor copies that template to get fresh views, inserts them into the proper row, and then sets the predicate on the template using setPredicate:. Within that method, the CPPredicateEditorRowTemplate object must set its views' values to represent that predicate.\n\n    CPPredicateEditorRowTemplate next asks the template for the âdisplayable sub-predicatesâ of the predicate by sending a -#displayableSubpredicatesOfPredicate: message. If a template represents a predicate in its entirety, or if the predicate has no subpredicates, it can return nil for this.  Otherwise, it should return a list of predicates to be made into sub-rows of that template's row. The whole process repeats for each sub-predicate.\n\n    At this point, the user sees the predicate that was saved.  If the user then makes some changes to the views of the templates, this causes CPPredicateEditor to recompute its predicate by asking each of the templates to return the predicate represented by the new view values, passing in the subpredicates represented by the sub-rows (an empty array if there are none, or nil if they aren't supported by that predicate type).\n\n\n    @name Initializing a Template\n\n\n    @brief Initializes and returns a âpop-up-pop-up-pop-upâ-style row template.\n    @param leftExpressions An array of CPExpression objects that represent the left hand side of a predicate.\n    @param rightExpressions An array of CPExpression objects that represent the right hand side of a predicate.\n    @param modifier A modifier for the predicate (see @c CPComparisonPredicateModifier for possible values).\n    @param operators An array of CPNumber objects specifying the operator type (see @c CPPredicateOperatorType for possible values).\n    @param options Options for the predicate (see @c CPComparisonPredicateOptions for possible values).\n    @return A row template of the âpop-up-pop-up-pop-upâ-form, with the left and right popups representing the left and right expression arrays -#leftExpressions and -#rightExpressions, and the center popup representing the operators.",
+                  "discussion" : "    @param leftExpressions An array of CPExpression objects that represent the left hand side of a predicate.\n    @param rightExpressions An array of CPExpression objects that represent the right hand side of a predicate.\n    @param modifier A modifier for the predicate (see @c CPComparisonPredicateModifier for possible values).\n    @param operators An array of CPNumber objects specifying the operator type (see @c CPPredicateOperatorType for possible values).\n    @param options Options for the predicate (see @c CPComparisonPredicateOptions for possible values).\n    @return A row template of the âpop-up-pop-up-pop-upâ-form, with the left and right popups representing the left and right expression arrays -#leftExpressions and -#rightExpressions, and the center popup representing the operators.",
                   "kind" : "method",
                   "name" : "initWithLeftExpressions:rightExpressions:modifier:operators:options:",
                   "parameters" : [
@@ -63810,9 +63785,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @name Primitive Methods",
+                  "abstract" : "    @brief Returns a positive number if the receiver can represent a given predicate, and 0 if it cannot.",
                   "declaration" : "- (double)matchForPredicate:(CPPredicate)predicate",
-                  "discussion" : "\n\n    @brief Returns a positive number if the receiver can represent a given predicate, and 0 if it cannot.\n    @return A positive number if the template can represent predicate, and @c 0 if it cannot.\n    @discussion By default, returns values in the range @c 0 to @c 1.\n    The highest match among all the templates determines which template is responsible for displaying the predicate. You can override this to determine which predicates your custom template handles.",
+                  "discussion" : "    @return A positive number if the template can represent predicate, and @c 0 if it cannot.\n    @discussion By default, returns values in the range @c 0 to @c 1.\n    The highest match among all the templates determines which template is responsible for displaying the predicate. You can override this to determine which predicates your custom template handles.",
                   "kind" : "method",
                   "name" : "matchForPredicate:",
                   "parameters" : [
@@ -63879,9 +63854,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @name Information About a Row Template",
+                  "abstract" : "    @brief Returns the left hand expressions for the receiver.",
                   "declaration" : "- (CPArray)leftExpressions",
-                  "discussion" : "\n\n    @brief Returns the left hand expressions for the receiver.\n    @return The left hand expressions for the receiver.",
+                  "discussion" : "    @return The left hand expressions for the receiver.",
                   "kind" : "method",
                   "name" : "leftExpressions",
                   "returnType" : "CPArray",
@@ -73189,7 +73164,7 @@
       "primaryContent" : {
          "abstract" : "    A CABasicAnimation is a simple animation that moves a",
          "declaration" : "@implementation CABasicAnimation : CAPropertyAnimation",
-         "discussion" : "    CALayer from one point to another over a specified\n    period of time.\n\n\n    A CABasicAnimation is a simple animation that moves a\n    CALayer from one point to another over a specified\n    period of time."
+         "discussion" : "    CALayer from one point to another over a specified\n    period of time."
       },
       "topics" : [
          {
@@ -74930,9 +74905,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @class CPDecimalNumber",
+                  "abstract" : "    Create a new CPDecimalNumber object uninitialised.",
                   "declaration" : "+ (id)alloc",
-                  "discussion" : "    @ingroup foundation\n    @brief Decimal floating point number\n\n    This class represents a decimal floating point number and the relevant\n    mathematical operations to go with it. It guarantees accuracy up to 38\n    digits in the mantissa/coefficient and can handle numbers in the range:\n        +/- 99999999999999999999999999999999999999 x 10^(127/-128)\n    Methods are available for: Addition, Subtraction, Multiplication, Division,\n    Powers and Rounding.\n    Exceptions can be thrown on: Overflow, Underflow, Loss of Precision\n    (rounding) and Divide by zero, the behaviour of which is controlled via the\n    CPDecimalNumberHandler class.\n\n    Note: The aim here is to try to produce the exact same output as Cocoa.\n    However, this is effectively not possible but to get as close as possible\n    we must perform our calculations in a way such that we even get the same\n    rounding errors building up, say when computing large powers which require\n    many multiplications. The code here almost matches the results of Cocoa but\n    there are some small differences as outlined below:\n\n    An example where a small rounding error difference creeps in:\n    For the calculation (0.875 ^ 101) the result becomes:\n        In Cocoa:  0.00000(13893554059925661274821814636807535200)1\n                the 38 digits are bracketed, the extra 39th digit in Cocoa\n                is explained below.\n        In Cappuccino: 0.00000(13893554059925661274821814636807535204)\n        Difference: 4e-41\n\n    Since, in Cocoa, NSDecimalNumber uses a binary internal format for\n    the mantissa (coefficient) the maximum it can store before truly\n    losing precision is actually 2^128, which is a 39 digit number. After this\n    rounding and exponent changes occur. In our implementation each digit is\n    stored separately hence the mantissa maximum value is the maximum possible\n    38 digit number. Obviously Apple can only say precision is guaranteed to\n    38 digits cause at some point in the 39 digits numbers rounding starts.\n    Hence there will be inherent differences between Cocoa and Cappuccino\n    answers if rounding occurs (see above example). They both still provide\n    the same 38 digit guarantee however.\n\n    So the actual range of NSDecimal is\n    +/- 340282366920938463463374607431768211455 x 10^(127/-128)\n    (Notice this is 39 digits)\n    Compared to in Cappuccino:\n    +/- 99999999999999999999999999999999999999 x 10^(127/-128)\n\n\n    Create a new CPDecimalNumber object uninitialised.\n    Note: even though CPDecimalNumber inherits from CPNumber it is not toll free\n    bridged to a JS type as CPNumber is.\n    @return a new CPDecimalNumber instance",
+                  "discussion" : "    Note: even though CPDecimalNumber inherits from CPNumber it is not toll free\n    bridged to a JS type as CPNumber is.\n    @return a new CPDecimalNumber instance",
                   "kind" : "method",
                   "name" : "alloc",
                   "returnType" : "id",
@@ -81463,9 +81438,8 @@
          {
             "symbols" : [
                {
-                  "abstract" : " Private init",
+                  "abstract" : " Return symbols for the given language code",
                   "declaration" : "- (CPDictionary)symbolsForLanguageCode:(CPString)languageCode",
-                  "discussion" : "\n Return symbols for the given language code",
                   "kind" : "method",
                   "name" : "symbolsForLanguageCode:",
                   "parameters" : [
@@ -81992,9 +81966,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : " Return a string representation of the given date and format",
+                  "abstract" : " Return a date of the given string",
                   "declaration" : "- (CPDate)dateFromString:(CPString)aString",
-                  "discussion" : "    @patam aDate\n    @param aFormat\n    @return a string\n\n Return a string representation of the given token and date\n    @param aToken\n    @param aDate\n    @return a string\n\n Return a date of the given string\n    This method returns (if possible) a representation of the given string with the dateFormat of the CPDateFormatter, otherwise it takes the dateStyle and timeStyle\n    @param aString\n    @return CPDate the date",
+                  "discussion" : "    This method returns (if possible) a representation of the given string with the dateFormat of the CPDateFormatter, otherwise it takes the dateStyle and timeStyle\n    @param aString\n    @return CPDate the date",
                   "kind" : "method",
                   "name" : "dateFromString:",
                   "parameters" : [
@@ -82793,9 +82767,9 @@
          "title" : "CPUserNotification"
       },
       "primaryContent" : {
-         "abstract" : "    @global CPUserNotificationActivationType",
+         "abstract" : "    @class CPUserNotification",
          "declaration" : "@implementation CPUserNotification : CPObject",
-         "discussion" : "    @group CPUserNotificationActivationType\n    The user did not interact with the notification alert.\n\n\n    @global CPUserNotificationActivationType\n    @group CPUserNotificationActivationType\n    The user clicked on the contents of the notification alert.\n\n\n    @global CPUserNotificationActivationType\n    @group CPUserNotificationActivationType\n    The user clicked on the action button of the notification alert.\n\n\n    @global CPUserNotificationActivationType\n    @group CPUserNotificationActivationType\n    The user replied to the notification.\n\n\n    @global CPUserNotificationActivationType\n    @group CPUserNotificationActivationType\n    The user clicked on the additional action button of the notification alert.\n\n\n    @class CPUserNotification\n    @ingroup foundation\n\n    @brief The CPUserNotification class is used to configure a notification that is scheduled for display by the UserNotificationCenter class."
+         "discussion" : "    @ingroup foundation\n\n    @brief The CPUserNotification class is used to configure a notification that is scheduled for display by the UserNotificationCenter class."
       },
       "topics" : [
          {
@@ -83749,9 +83723,9 @@
          "title" : "CPString"
       },
       "primaryContent" : {
-         "abstract" : "    A case insensitive search",
+         "abstract" : "    @class CPString",
          "declaration" : "@implementation CPString : CPObject",
-         "discussion" : "    @global\n    @class CPString\n\n\n    Exact character match\n    @global\n    @class CPString\n\n\n    Start searching from the end of the string\n    @global\n    @class CPString\n\n\n    @global\n    @class CPString\n\n\n    Numbers in the string are compared as numbers instead of strings\n    @global\n    @class CPString\n\n\n    Search ignores diacritic marks.\n    @global\n    @class CPString\n\n\n    @class CPString\n    @ingroup foundation\n    @brief An immutable string (collection of characters).\n\n    CPString is an object that allows management of strings. Because CPString is\n    based on the JavaScript \\c String object, CPStrings are immutable, although the\n    class does have methods that create new CPStrings generated from modifications to the\n    receiving instance.\n\n    A handy feature of CPString instances is that they can be used wherever a JavaScript is\n    required, and vice versa."
+         "discussion" : "    @ingroup foundation\n    @brief An immutable string (collection of characters).\n\n    CPString is an object that allows management of strings. Because CPString is\n    based on the JavaScript \\c String object, CPStrings are immutable, although the\n    class does have methods that create new CPStrings generated from modifications to the\n    receiving instance.\n\n    A handy feature of CPString instances is that they can be used wherever a JavaScript is\n    required, and vice versa."
       },
       "topics" : [
          {
@@ -88600,9 +88574,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @ignore",
+                  "abstract" : "    Unregisters the specified observer from all notifications.",
                   "declaration" : "- (void)removeObserver:(id)anObserver",
-                  "discussion" : "\n\n    Unregisters the specified observer from all notifications.\n    @param anObserver the observer to unregister",
+                  "discussion" : "    @param anObserver the observer to unregister",
                   "kind" : "method",
                   "name" : "removeObserver:",
                   "parameters" : [
@@ -90145,9 +90119,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @class CPUndoManager",
+                  "abstract" : "    Initializes the undo manager",
                   "declaration" : "- (id)init",
-                  "discussion" : "    @ingroup foundation\n    @brief A general mechanism for user action \"undo\".\n\n    CPUndoManager provides a general mechanism supporting implementation of user\n    action \"undo\" in applications. Essentially, it allows you to store sequences\n    of messages and receivers that need to be invoked to undo or redo an action.\n    The various methods in this class provide for grouping of sets of actions,\n    execution of undo or redo actions, and tuning behavior parameters such as\n    the size of the undo stack. Each application entity with its own editing\n    history (e.g., a document) should have its own undo manager instance.\n    Obtain an instance through a simple \\c [[CPUndoManager \\c alloc] \\c init]\n     message.\n\n\n    Initializes the undo manager\n    @return the initialized undo manager",
+                  "discussion" : "    @return the initialized undo manager",
                   "kind" : "method",
                   "name" : "init",
                   "returnType" : "id",
@@ -90192,9 +90166,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    Records the specified invocation as an undo operation. Sets the",
+                  "abstract" : "    Returns \\c YES if the user can perform a redo operation.",
                   "declaration" : "- (BOOL)canRedo",
-                  "discussion" : "    target on the invocation, and adds it to the current grouping.\n    @param anInvocation the message to record\n\n\n    Returns \\c YES if the user can perform a redo operation.",
                   "kind" : "method",
                   "name" : "canRedo",
                   "returnType" : "BOOL",
@@ -91089,9 +91062,8 @@
          {
             "symbols" : [
                {
-                  "abstract" : " @ignore",
+                  "abstract" : " Return the timeZoneDataVersion (not yet implemented)",
                   "declaration" : "+ (CPString)timeZoneDataVersion",
-                  "discussion" : "\n @ignore\n\n Return the timeZoneDataVersion (not yet implemented)",
                   "kind" : "method",
                   "name" : "timeZoneDataVersion",
                   "returnType" : "CPString",
@@ -91182,9 +91154,9 @@
          {
             "symbols" : [
                {
-                  "abstract" : " Init a new time zone with the given time zone name and abbreviation",
+                  "abstract" : " Init a new time zone from the given timeZone name",
                   "declaration" : "- (id)initWithName:(CPString)tzName",
-                  "discussion" : "    Returns nil if tzName doesn't match with any timeZoneNames or if abbreviation is nil\n    Raises an exception if tzName is nil\n    @param tzName the timeZone name\n    @param abbreviation the abbreviation\n    @return a new timeZone\n\n Init a new time zone from the given timeZone name\n    Returns nil if the given timeZone name doesn't match with any abbreviations\n    Raises an exception if tzName is nil\n    @param tzName the timeZone name\n    @return a new instance of CPTimeZone",
+                  "discussion" : "    Returns nil if the given timeZone name doesn't match with any abbreviations\n    Raises an exception if tzName is nil\n    @param tzName the timeZone name\n    @return a new instance of CPTimeZone",
                   "kind" : "method",
                   "name" : "initWithName:",
                   "parameters" : [
@@ -92037,9 +92009,9 @@
          "title" : "CPOperation"
       },
       "primaryContent" : {
-         "abstract" : "    Operations receive very low priority for execution.",
+         "abstract" : "    @class CPOperation",
          "declaration" : "@implementation CPOperation : CPObject",
-         "discussion" : "    @global\n    @group CPOperationQueuePriority\n\n\n    Operations receive low priority for execution.\n    @global\n    @group CPOperationQueuePriority\n\n\n    Operations receive normal priority for execution.\n    @global\n    @group CPOperationQueuePriority\n\n\n    Operations receive high priority for execution.\n    @global\n    @group CPOperationQueuePriority\n\n\n    Operations receive very high priority for execution.\n    @global\n    @group CPOperationQueuePriority\n\n\n    @class CPOperation\n    @brief Represents an operation that can be run in an CPOperationQueue\n\n    It should be subclassed an the subclass should implement its own main method to do the actual work."
+         "discussion" : "    @brief Represents an operation that can be run in an CPOperationQueue\n\n    It should be subclassed an the subclass should implement its own main method to do the actual work."
       },
       "topics" : [
          {
@@ -92715,9 +92687,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "    @class CPMutableAttributedString",
+                  "abstract" : "    Replaces all occurrences of the target string in a given range with a replacement string. Returns the number of replacements.",
                   "declaration" : "- (CPUInteger)replaceOccurrencesOfString:(CPString)target withString:(CPString)replacement options:(CPStringCompareOptions)options range:(CSRange)searchRange",
-                  "discussion" : "    @ingroup compatibility\n\n    This class is just an empty subclass of CPAttributedString.\n    CPAttributedString already implements mutable methods and\n    this class only exists for source compatibility.\n\n\n    Replaces all occurrences of the target string in a given range with a replacement string. Returns the number of replacements.",
                   "kind" : "method",
                   "name" : "replaceOccurrencesOfString:withString:options:range:",
                   "parameters" : [
@@ -95061,9 +95032,9 @@
          "title" : "CPExpression"
       },
       "primaryContent" : {
-         "abstract" : "    An expression that always returns the same value.",
+         "abstract" : "    @ingroup foundation",
          "declaration" : "@implementation CPExpression : CPObject",
-         "discussion" : "\n\n    An expression that always returns the parameter object itself.\n\n\n    An expression that always returns whatever value is associated with the key specified by âvariableâ in the bindings dictionary.\n\n\n    An expression that returns something that can be used as a key path.\n\n\n    An expression that returns the result of evaluating a function.\n\n\n    An expression that defines an aggregate of CPExpression objects.\n\n\n    An expression that filters a collection using a subpredicate.\n\n\n    An expression that creates a union of the results of two nested expressions.\n\n\n    An expression that creates an intersection of the results of two nested expressions.\n\n\n    An expression that combines two nested expression results by set subtraction.\n\n\n    An expression that returns the result of evaluating a block.\n\n\n    An expression that returns an expression that depends on the evaluation of a predicate.\n\n\n    @ingroup foundation\n    @class CPExpression\n    @brief CPExpression is used to represent expressions in a predicate.\n\n    Comparison operations in an CPPredicate are based on two expressions, as represented by instances of the CPExpression class.\n    Expressions are created for constant values, key paths, and so on.\n\n    Generally, anywhere in the CPExpression class hierarchy where there is composite API and subtypes\n    that may only reasonably respond to a subset of that API, invoking a method that does not make sense\n    for that subtype will cause an exception to be thrown."
+         "discussion" : "    @class CPExpression\n    @brief CPExpression is used to represent expressions in a predicate.\n\n    Comparison operations in an CPPredicate are based on two expressions, as represented by instances of the CPExpression class.\n    Expressions are created for constant values, key paths, and so on.\n\n    Generally, anywhere in the CPExpression class hierarchy where there is composite API and subtypes\n    that may only reasonably respond to a subset of that API, invoking a method that does not make sense\n    for that subtype will cause an exception to be thrown."
       },
       "topics" : [
          {
@@ -96469,9 +96440,9 @@
                   "scope" : "class"
                },
                {
-                  "abstract" : "    Returns a set filtered using a given predicate.",
+                  "abstract" : "    Removes an object from the set.",
                   "declaration" : "- (void)removeObject:(id)anObject",
-                  "discussion" : "    @prarm aPredicate a CPPredicate object used to filter the objects in the set.\n\n\n    Removes an object from the set.\n    @param anObject the object to remove from the set. If the object is not in the set, the method will not modify the set.",
+                  "discussion" : "    @param anObject the object to remove from the set. If the object is not in the set, the method will not modify the set.",
                   "kind" : "method",
                   "name" : "removeObject:",
                   "parameters" : [
@@ -97513,9 +97484,9 @@
                   "scope" : "class"
                },
                {
-                  "abstract" : "    Initializes an array able to store at least \\c aCapacity items. Because CPArray",
+                  "abstract" : "    Adds \\c anObject to the end of the array.",
                   "declaration" : "- (void)addObject:(id)anObject",
-                  "discussion" : "    is backed by JavaScript arrays, this method ends up simply returning a regular array.\n\n\n    Adds \\c anObject to the end of the array.\n    @param anObject the object to add to the array",
+                  "discussion" : "    @param anObject the object to add to the array",
                   "kind" : "method",
                   "name" : "addObject:",
                   "parameters" : [

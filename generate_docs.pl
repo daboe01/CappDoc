@@ -263,6 +263,7 @@ sub parse_file {
         
         # 1. Detect DocBlock Starts
         if ($line =~ m{/\*\!(.*)}) {
+            @doc_buffer = (); # Clear stale, unconsumed docs to prevent them from bleeding into the class block
             my $rest = $1;
             if ($rest =~ m{(.*?)\*/}) {
                 push @doc_buffer, $1;
@@ -272,7 +273,7 @@ sub parse_file {
             }
             next;
         }
-        
+
         # 2. Pragma Marks
         if ($line =~ /^\s*\#pragma\s+mark\s+-(?:\s*$)/) {
             next; # Ignore blank separators
