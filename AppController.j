@@ -73,7 +73,6 @@
     [topBar setAutoresizingMask:CPViewWidthSizable | CPViewMaxYMargin];
     [topBar setBackgroundColor:[CPColor colorWithHexString:@"ececec"]];
     
-    // --- SEARCH FIELD ---
     var searchFieldWidth = 250;
     searchField = [[CPSearchField alloc] initWithFrame:CGRectMake(20, 10, searchFieldWidth, 30)];
     [searchField setPlaceholderString:@"Search full text..."];
@@ -81,7 +80,6 @@
     [searchField setAction:@selector(searchAction:)];
     [topBar addSubview:searchField];
     
-    // --- CHECKBOXES (Placed directly next to search field) ---
     searchTitlesOnlyCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(285, 15, 150, 20)];
     [searchTitlesOnlyCheckbox setTitle:@"Search titles only"];
     [searchTitlesOnlyCheckbox setState:CPOffState];
@@ -89,30 +87,33 @@
     [searchTitlesOnlyCheckbox setAction:@selector(toggleSearchTitlesOnlyAction:)];
     [topBar addSubview:searchTitlesOnlyCheckbox];
 
-    showPrivateCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(445, 15, 160, 20)];
-    [showPrivateCheckbox setTitle:@"Show private classes"];
-    [showPrivateCheckbox setState:CPOffState];
-    [showPrivateCheckbox setTarget:self];
-    [showPrivateCheckbox setAction:@selector(togglePrivateAction:)];
-    [topBar addSubview:showPrivateCheckbox];
-
-    // --- SEARCH NAVIGATION (Placed directly to the right of checkboxes) ---
-    var prevBtn = [[CPButton alloc] initWithFrame:CGRectMake(620, 13, 30, 24)];
+    var prevBtn = [[CPButton alloc] initWithFrame:CGRectMake(450, 13, 30, 24)];
     [prevBtn setTitle:@"<"];
     [prevBtn setTarget:self];
     [prevBtn setAction:@selector(prevMatch:)];
     [topBar addSubview:prevBtn];
 
-    var nextBtn = [[CPButton alloc] initWithFrame:CGRectMake(655, 13, 30, 24)];
+    var nextBtn = [[CPButton alloc] initWithFrame:CGRectMake(485, 13, 30, 24)];
     [nextBtn setTitle:@">"];
     [nextBtn setTarget:self];
     [nextBtn setAction:@selector(nextMatch:)];
     [topBar addSubview:nextBtn];
     
-    _searchStatusLabel = [[CPTextField alloc] initWithFrame:CGRectMake(695, 15, 100, 20)];
+    _searchStatusLabel = [[CPTextField alloc] initWithFrame:CGRectMake(525, 15, 100, 20)];
     [_searchStatusLabel setStringValue:@""];
-    [_searchStatusLabel setAlignment:CPLeftTextAlignment]; // Left alignment prevents text from overdrawing onto buttons
+    [_searchStatusLabel setAlignment:CPLeftTextAlignment];
     [topBar addSubview:_searchStatusLabel];
+
+    var privateCheckboxWidth = 180;
+    var privateCheckboxX = CGRectGetWidth(bounds) - privateCheckboxWidth - 20; // 20px Abstand vom rechten Rand
+    
+    showPrivateCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(privateCheckboxX, 15, privateCheckboxWidth, 20)];
+    [showPrivateCheckbox setTitle:@"Show private classes"];
+    [showPrivateCheckbox setState:CPOffState];
+    [showPrivateCheckbox setTarget:self];
+    [showPrivateCheckbox setAction:@selector(togglePrivateAction:)];
+    [showPrivateCheckbox setAutoresizingMask:CPViewMinXMargin]; // Hält das Element rechts beim Skalieren
+    [topBar addSubview:showPrivateCheckbox];
     
     [contentView addSubview:topBar];
 
