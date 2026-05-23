@@ -840,21 +840,33 @@
         cleaned = cleaned.replace(/@par\s+([^\n]+)/g, "<h3 class='doc-par'>$1</h3>");
 
         // --- Paragraph processing & Silly newline cleanup ---
-        // Isolates structural blocks so we don't accidentally wrap pre, lists, or headers inside <p> tags
         var parts = cleaned.split(/(<(?:pre|ul|ol|h1|h2|h3|div)[\b>][\s\S]*?<\/\1>)/i);
         for (var i = 0; i < parts.length; i++) {
             if (i % 2 === 0) { // Plain text content blocks
                 var text = parts[i];
                 text = text.replace(/\r\n/g, '\n');
-                text = text.replace(/\n{3,}/g, '\n\n'); // normalize multiple newlines
+                text = text.replace(/\n{3,}/g, '\n\n');
                 
                 var paragraphs = text.split('\n\n');
                 for (var p = 0; p < paragraphs.length; p++) {
                     var pText = paragraphs[p].trim();
                     if (pText.length > 0) {
-                        pText = pText.replace(/\n/g, ' '); // Convert single newlines to spaces to collapse hard wraps
+                        pText = pText.replace(/\n/g, ' '); // Collapse single newlines
                         
-                        // Parse and format @note tags into elegant callouts
+                        // Parse plain text URLs to beautiful clickable links
+                        pText = pText.replace(/<a\s+[^>]*>[\s\S]*?<\/a>|<[^>]+>|(https?:\/\/[^\s<]+)/gi, function(match, url) {
+                            if (url) {
+                                var trailingPunctuation = "";
+                                var cleanedUrl = url.replace(/([.,;:?!\)]+)$/, function(punc) {
+                                    trailingPunctuation = punc;
+                                    return "";
+                                });
+                                return "<a href='" + cleanedUrl + "' target='_blank'>" + cleanedUrl + "</a>" + trailingPunctuation;
+                            }
+                            return match;
+                        });
+                        
+                        // Parse and format @note tags
                         if (/^@note/i.test(pText)) {
                             pText = pText.replace(/^@note\s+/i, "");
                             paragraphs[p] = "<div class='doc-note'><strong>Note:</strong> " + pText + "</div>";
@@ -885,6 +897,8 @@
            @"h2 { font-size: 22px; border-bottom: 1px solid #d2d2d7; padding-bottom: 8px; margin-top: 35px; font-weight: 600; }" +
            @"pre { background: #f5f5f7; padding: 15px; border-radius: 8px; overflow-x: auto; font-family: 'SF Mono', Consolas, monospace; font-size: 14px; border: 1px solid #d2d2d7; }" +
            @"code { font-family: 'SF Mono', Consolas, monospace; font-size: 13.5px; background: #f0f0f2; padding: 2px 5px; border-radius: 4px; color: #d63384; }" +
+           @"a { color: #0071e3; text-decoration: none; }" +
+           @"a:hover { text-decoration: underline; }" +
            @".badge { display: inline-block; color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; margin-bottom: 10px; letter-spacing: 0.5px; }" +
            @".badge-inline { display: inline-block; color: white; padding: 2px 6px; border-radius: 6px; font-size: 10px; font-weight: bold; margin-right: 5px; letter-spacing: 0.5px; vertical-align: middle; }" +
            @".badge-class { background: #0071e3; }" +
