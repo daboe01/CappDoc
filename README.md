@@ -2,6 +2,8 @@
 
 An interactive, desktop-class documentation browser designed for the Cappuccino (Objective-J) framework. It includes a Perl-based static analysis parser to extract Doxygen-compatible comment blocks, method signatures, variables, and deprecations, paired with a web-based Objective-J viewer application.
 
+<img width="1260" height="758" alt="Bildschirmfoto 2026-05-23 um 08 29 23" src="https://github.com/user-attachments/assets/87b40922-7b4a-432a-a41d-8fc4f05677da" />
+
 ## Features
 
 * **Visual Type Indicators**: Color-coded circles in the class tree align with document badges for easy identification of node types:
