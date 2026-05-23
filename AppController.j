@@ -68,12 +68,12 @@
     _matchedNodes = [];
     _currentMatchIndex = -1;
 
-    // 2. Top Bar für die Suche & Filter
     var topBarHeight = 50.0;
     var topBar = [[CPView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(bounds), topBarHeight)];
     [topBar setAutoresizingMask:CPViewWidthSizable | CPViewMaxYMargin];
     [topBar setBackgroundColor:[CPColor colorWithHexString:@"ececec"]];
     
+    // --- SEARCH FIELD ---
     var searchFieldWidth = 250;
     searchField = [[CPSearchField alloc] initWithFrame:CGRectMake(20, 10, searchFieldWidth, 30)];
     [searchField setPlaceholderString:@"Search full text..."];
@@ -81,36 +81,38 @@
     [searchField setAction:@selector(searchAction:)];
     [topBar addSubview:searchField];
     
-    _searchStatusLabel = [[CPTextField alloc] initWithFrame:CGRectMake(20 + searchFieldWidth + 10, 15, 80, 20)];
-    [_searchStatusLabel setStringValue:@""];
-    [_searchStatusLabel setAlignment:CPRightTextAlignment];
-    [topBar addSubview:_searchStatusLabel];
+    // --- CHECKBOXES (Placed directly next to search field) ---
+    searchTitlesOnlyCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(285, 15, 150, 20)];
+    [searchTitlesOnlyCheckbox setTitle:@"Search titles only"];
+    [searchTitlesOnlyCheckbox setState:CPOffState];
+    [searchTitlesOnlyCheckbox setTarget:self];
+    [searchTitlesOnlyCheckbox setAction:@selector(toggleSearchTitlesOnlyAction:)];
+    [topBar addSubview:searchTitlesOnlyCheckbox];
 
-    var prevBtn = [[CPButton alloc] initWithFrame:CGRectMake(20 + searchFieldWidth + 10 , 13, 30, 24)];
-    [prevBtn setTitle:@"<"];
-    [prevBtn setTarget:self];
-    [prevBtn setAction:@selector(prevMatch:)];
-    [topBar addSubview:prevBtn];
-
-    var nextBtn = [[CPButton alloc] initWithFrame:CGRectMake(20 + searchFieldWidth + 45, 13, 30, 24)];
-    [nextBtn setTitle:@">"];
-    [nextBtn setTarget:self];
-    [nextBtn setAction:@selector(nextMatch:)];
-    [topBar addSubview:nextBtn];
-    
-    showPrivateCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(20 + searchFieldWidth + 300, 15, 200, 20)];
+    showPrivateCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(445, 15, 160, 20)];
     [showPrivateCheckbox setTitle:@"Show private classes"];
     [showPrivateCheckbox setState:CPOffState];
     [showPrivateCheckbox setTarget:self];
     [showPrivateCheckbox setAction:@selector(togglePrivateAction:)];
     [topBar addSubview:showPrivateCheckbox];
 
-    searchTitlesOnlyCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(20 + searchFieldWidth + 90, 15, 180, 20)];
-    [searchTitlesOnlyCheckbox setTitle:@"Search titles only"];
-    [searchTitlesOnlyCheckbox setState:CPOffState];
-    [searchTitlesOnlyCheckbox setTarget:self];
-    [searchTitlesOnlyCheckbox setAction:@selector(toggleSearchTitlesOnlyAction:)];
-    [topBar addSubview:searchTitlesOnlyCheckbox];
+    // --- SEARCH NAVIGATION (Placed directly to the right of checkboxes) ---
+    var prevBtn = [[CPButton alloc] initWithFrame:CGRectMake(620, 13, 30, 24)];
+    [prevBtn setTitle:@"<"];
+    [prevBtn setTarget:self];
+    [prevBtn setAction:@selector(prevMatch:)];
+    [topBar addSubview:prevBtn];
+
+    var nextBtn = [[CPButton alloc] initWithFrame:CGRectMake(655, 13, 30, 24)];
+    [nextBtn setTitle:@">"];
+    [nextBtn setTarget:self];
+    [nextBtn setAction:@selector(nextMatch:)];
+    [topBar addSubview:nextBtn];
+    
+    _searchStatusLabel = [[CPTextField alloc] initWithFrame:CGRectMake(695, 15, 100, 20)];
+    [_searchStatusLabel setStringValue:@""];
+    [_searchStatusLabel setAlignment:CPLeftTextAlignment]; // Left alignment prevents text from overdrawing onto buttons
+    [topBar addSubview:_searchStatusLabel];
     
     [contentView addSubview:topBar];
 
@@ -785,7 +787,6 @@
     }
 }
 
-// Wandelt Doxygen-Tags & Plain-Text in wunderschönes, formatiertes HTML um
 - (CPString)cleanText:(CPString)str
 {
     if (!str || typeof str !== 'string') return "";
@@ -802,9 +803,22 @@
             return "<" + p1.replace(/&quot;/g, '"').replace(/&amp;/g, '&') + ">";
         });
 
+        // Support für @code ... @endcode blocks
+        cleaned = cleaned.replace(/@code\s*([\s\S]*?)\s*@endcode/gi, "<pre><code>$1</code></pre>");
+
         // Inline-Code Formatierung (\c syntax)
         cleaned = cleaned.replace(/\\c\s+([^\s,.;:]+)/g, "<code>$1</code>");
         
+        // Support für Markdown Headings (e.g. ### Title)
+        cleaned = cleaned.replace(/^###\s+([^\n]+)/gm, "<h3>$1</h3>");
+        cleaned = cleaned.replace(/^##\s+([^\n]+)/gm, "<h2>$1</h2>");
+        cleaned = cleaned.replace(/^#\s+([^\n]+)/gm, "<h1>$1</h1>");
+
+        // Support für Markdown Lists (- or *)
+        cleaned = cleaned.replace(/^[-*]\s+([^\n]+)/gm, "<li>$1</li>");
+        // Consecutive <li> blocks in <ul> wrap
+        cleaned = cleaned.replace(/((?:<li>[^\n]+<\/li>\s*)+)/g, "<ul>$1</ul>");
+
         // @param name description
         cleaned = cleaned.replace(/@param\s+([a-zA-Z0-9_]+)\s+([\s\S]*?)(?=\s*@\w+|$)/g, 
             "<div class='doc-tag'><span class='tag-label'>Parameter <code>$1</code>:</span> <span class='tag-desc'>$2</span></div>");
@@ -823,6 +837,37 @@
 
         // @par title
         cleaned = cleaned.replace(/@par\s+([^\n]+)/g, "<h3 class='doc-par'>$1</h3>");
+
+        // --- Paragraph processing & Silly newline cleanup ---
+        // Isolates structural blocks so we don't accidentally wrap pre, lists, or headers inside <p> tags
+        var parts = cleaned.split(/(<(?:pre|ul|ol|h1|h2|h3|div)[\b>][\s\S]*?<\/\1>)/i);
+        for (var i = 0; i < parts.length; i++) {
+            if (i % 2 === 0) { // Plain text content blocks
+                var text = parts[i];
+                text = text.replace(/\r\n/g, '\n');
+                text = text.replace(/\n{3,}/g, '\n\n'); // normalize multiple newlines
+                
+                var paragraphs = text.split('\n\n');
+                for (var p = 0; p < paragraphs.length; p++) {
+                    var pText = paragraphs[p].trim();
+                    if (pText.length > 0) {
+                        pText = pText.replace(/\n/g, ' '); // Convert single newlines to spaces to collapse hard wraps
+                        
+                        // Parse and format @note tags into elegant callouts
+                        if (/^@note/i.test(pText)) {
+                            pText = pText.replace(/^@note\s+/i, "");
+                            paragraphs[p] = "<div class='doc-note'><strong>Note:</strong> " + pText + "</div>";
+                        } else {
+                            paragraphs[p] = "<p>" + pText + "</p>";
+                        }
+                    } else {
+                        paragraphs[p] = "";
+                    }
+                }
+                parts[i] = paragraphs.join("");
+            }
+        }
+        cleaned = parts.join("");
         
         return cleaned.trim();
     } catch (e) {
@@ -849,7 +894,11 @@
            @".badge-typedef { background: #a2845e; }" +
            @".badge-default { background: #8e8e93; }" +
            @".meta { color: #86868b; font-size: 14px; margin-bottom: 20px; }" +
-           @".discussion { white-space: pre-wrap; font-size: 15px; line-height: 1.6; color: #333336; }" +
+           @".discussion { font-size: 15px; line-height: 1.65; color: #333336; }" +
+           @".discussion p { margin-top: 0; margin-bottom: 16px; }" +
+           @".discussion p:last-child { margin-bottom: 0; }" +
+           @".doc-note { background: #f5f5f7; border-left: 4px solid #8e8e93; color: #1d1d1f; padding: 12px 16px; border-radius: 8px; margin: 18px 0; font-size: 14.5px; line-height: 1.6; }" +
+           @".doc-note strong { color: #1d1d1f; font-weight: 600; }" +
            @".doc-tag { background: #f5f5f7; padding: 12px 16px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #0071e3; white-space: normal; }" +
            @".delegate-tag { border-left-color: #34c759; }" +
            @".tag-label { font-weight: 600; color: #1d1d1f; display: block; margin-bottom: 6px; font-size: 14px; }" +
