@@ -56,6 +56,13 @@
 {
     theWindow = [[CPWindow alloc] initWithContentRect:CGRectMakeZero() styleMask:CPBorderlessBridgeWindowMask];
     
+    // Set up global callback for handling hypertext clicks inside CPWebView
+    window.appControllerInstance = self;
+    window.selectNodeInCappuccino = function(nodeTitle) {
+        [window.appControllerInstance selectNodeWithTitle:nodeTitle];
+        [[CPRunLoop currentRunLoop] limitDateForMode:CPDefaultRunLoopMode];
+    };
+
     // 1. Order the window front first so it scales to the browser viewport
     [theWindow orderFront:self];
     
@@ -443,6 +450,48 @@
     if ([_currentSearchTerm length] > 0) [self searchAction:searchField];
 }
 
+// Interne Selektionsnavigation
+- (void)selectNodeWithTitle:(CPString)aTitle
+{
+    var matchedNode = [self findNodeWithTitle:aTitle inNodes:_allRoots];
+    if (matchedNode) {
+        var p = [matchedNode parent];
+        var pathToExpand = [];
+        while (p) {
+            pathToExpand.push(p);
+            p = [p parent];
+        }
+        for (var i = pathToExpand.length - 1; i >= 0; i--) {
+            [outlineView expandItem:pathToExpand[i]];
+        }
+        
+        var row = [outlineView rowForItem:matchedNode];
+        if (row >= 0) {
+            [outlineView selectRowIndexes:[CPIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+            [outlineView scrollRowToVisible:row];
+        }
+    }
+}
+
+- (DocNode)findNodeWithTitle:(CPString)aTitle inNodes:(CPArray)nodes
+{
+    for (var i = 0; i < [nodes count]; i++) {
+        var node = nodes[i];
+        if ([node title] === aTitle) {
+            return node;
+        }
+        var found = [self findNodeWithTitle:aTitle inNodes:[node children]];
+        if (found) return found;
+    }
+    return nil;
+}
+
+// Hilfsmethode, um Strings sicher über Javascript-URLs zu injizieren
+- (CPString)safeJSString:(CPString)str
+{
+    if (!str) return @"";
+    return encodeURIComponent(str).replace(/'/g, "%27");
+}
 
 // ==============================================================================
 // CPOutlineView Data Source & Delegate (dynamischer Filter für Private)
@@ -589,7 +638,9 @@
                 if (!frameworkVal && title === "CPObject") {
                     frameworkVal = "Foundation";
                 }
-                html += "<div class='meta'>Inherits from: " + [self escapeHTML:(data.metadata.superclass || "CPObject")] + " &nbsp;|&nbsp; Framework: " + [self escapeHTML:(frameworkVal || "Unknown")] + "</div>";
+                var superclassVal = (data.metadata.superclass || "CPObject");
+                var safeSuperclass = [self safeJSString:superclassVal];
+                html += "<div class='meta'>Inherits from: <a href=\"javascript:window.parent.selectNodeInCappuccino(decodeURIComponent('" + safeSuperclass + "'))\">" + [self escapeHTML:superclassVal] + "</a> &nbsp;|&nbsp; Framework: " + [self escapeHTML:(frameworkVal || "Unknown")] + "</div>";
             }
             if (data.primaryContent && data.primaryContent.declaration) {
                 html += "<h2>Declaration</h2><pre>" + [self escapeHTML:data.primaryContent.declaration] + "</pre>";
@@ -616,7 +667,9 @@
             if (topics.length > 0) {
                 html += "<h2>Topics</h2><ul>";
                 for (var i = 0; i < topics.length; i++) {
-                    html += "<li><strong>" + [self escapeHTML:[topics[i] title]] + "</strong></li>";
+                    var topicTitle = [topics[i] title];
+                    var safeTopic = [self safeJSString:topicTitle];
+                    html += "<li><strong><a href=\"javascript:window.parent.selectNodeInCappuccino(decodeURIComponent('" + safeTopic + "'))\">" + [self escapeHTML:topicTitle] + "</a></strong></li>";
                 }
                 html += "</ul>";
             }
@@ -644,8 +697,10 @@
                     
                     var isSymDep = sData.deprecated;
                     var itemClass = isSymDep ? " class='deprecated-item'" : "";
+                    var symTitle = [sym title];
+                    var safeSym = [self safeJSString:symTitle];
                     
-                    html += "<li" + itemClass + "><span class='badge-inline " + badgeClass + "'>" + [self escapeHTML:badge] + "</span> <strong>" + [self escapeHTML:[sym title]] + "</strong>";
+                    html += "<li" + itemClass + "><span class='badge-inline " + badgeClass + "'>" + [self escapeHTML:badge] + "</span> <strong><a href=\"javascript:window.parent.selectNodeInCappuccino(decodeURIComponent('" + safeSym + "'))\">" + [self escapeHTML:symTitle] + "</a></strong>";
                     if (isSymDep) {
                         html += " <span class='deprecation-inline-badge'>Deprecated</span>";
                     }
@@ -689,8 +744,10 @@
                 
                 var isSymDep = sData.deprecated;
                 var itemClass = isSymDep ? " class='deprecated-item'" : "";
+                var symTitle = [sym title];
+                var safeSym = [self safeJSString:symTitle];
                 
-                html += "<li" + itemClass + "><span class='badge-inline " + badgeClass + "'>" + [self escapeHTML:badge] + "</span> <strong>" + [self escapeHTML:[sym title]] + "</strong>";
+                html += "<li" + itemClass + "><span class='badge-inline " + badgeClass + "'>" + [self escapeHTML:badge] + "</span> <strong><a href=\"javascript:window.parent.selectNodeInCappuccino(decodeURIComponent('" + safeSym + "'))\">" + [self escapeHTML:symTitle] + "</a></strong>";
                 if (isSymDep) {
                     html += " <span class='deprecation-inline-badge'>Deprecated</span>";
                 }
@@ -891,7 +948,8 @@
 
 - (CPString)htmlHeader
 {
-    return @"<html><head><style>" +
+    // Added '<meta charset="utf-8">' to correctly decode and render the curly apostrophe (’)
+    return @"<!DOCTYPE html><html><head><meta charset='utf-8'><style>" +
            @"body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; padding: 30px; color: #1d1d1f; line-height: 1.5; }" +
            @"h1 { font-size: 32px; margin-bottom: 5px; font-weight: 600; }" +
            @"h2 { font-size: 22px; border-bottom: 1px solid #d2d2d7; padding-bottom: 8px; margin-top: 35px; font-weight: 600; }" +
