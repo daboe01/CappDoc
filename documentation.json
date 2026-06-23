@@ -5229,6 +5229,111 @@
          {
             "symbols" : [
                {
+                  "declaration" : "- (BOOL)hasHorizontalRuler",
+                  "kind" : "method",
+                  "name" : "hasHorizontalRuler",
+                  "returnType" : "BOOL",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setHasHorizontalRuler:(BOOL)shouldHaveHorizontalRuler",
+                  "kind" : "method",
+                  "name" : "setHasHorizontalRuler:",
+                  "parameters" : [
+                     {
+                        "name" : "shouldHaveHorizontalRuler",
+                        "type" : "BOOL"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (BOOL)hasVerticalRuler",
+                  "kind" : "method",
+                  "name" : "hasVerticalRuler",
+                  "returnType" : "BOOL",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setHasVerticalRuler:(BOOL)shouldHaveVerticalRuler",
+                  "kind" : "method",
+                  "name" : "setHasVerticalRuler:",
+                  "parameters" : [
+                     {
+                        "name" : "shouldHaveVerticalRuler",
+                        "type" : "BOOL"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (BOOL)rulersVisible",
+                  "kind" : "method",
+                  "name" : "rulersVisible",
+                  "returnType" : "BOOL",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setRulersVisible:(BOOL)areRulersVisible",
+                  "kind" : "method",
+                  "name" : "setRulersVisible:",
+                  "parameters" : [
+                     {
+                        "name" : "areRulersVisible",
+                        "type" : "BOOL"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (CPRulerView)horizontalRulerView",
+                  "kind" : "method",
+                  "name" : "horizontalRulerView",
+                  "returnType" : "CPRulerView",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setHorizontalRulerView:(CPRulerView)aRulerView",
+                  "kind" : "method",
+                  "name" : "setHorizontalRulerView:",
+                  "parameters" : [
+                     {
+                        "name" : "aRulerView",
+                        "type" : "CPRulerView"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (CPRulerView)verticalRulerView",
+                  "kind" : "method",
+                  "name" : "verticalRulerView",
+                  "returnType" : "CPRulerView",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setVerticalRulerView:(CPRulerView)aRulerView",
+                  "kind" : "method",
+                  "name" : "setVerticalRulerView:",
+                  "parameters" : [
+                     {
+                        "name" : "aRulerView",
+                        "type" : "CPRulerView"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               }
+            ],
+            "title" : "Rulers"
+         },
+         {
+            "symbols" : [
+               {
                   "abstract" : "    Lays out the scroll view's components.",
                   "declaration" : "- (void)tile",
                   "kind" : "method",
@@ -37795,6 +37900,26 @@
                   "name" : "layoutSubviews",
                   "returnType" : "void",
                   "scope" : "instance"
+               }
+            ],
+            "title" : "Setting the Delegate"
+         },
+         {
+            "symbols" : [
+               {
+                  "abstract" : "    Sets the font of the receiver.",
+                  "declaration" : "- (void)setFont:(CPFont)aFont",
+                  "discussion" : "\n    @param aFont - A CPFont object.",
+                  "kind" : "method",
+                  "name" : "setFont:",
+                  "parameters" : [
+                     {
+                        "name" : "aFont",
+                        "type" : "CPFont"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
                },
                {
                   "declaration" : "- (void)takeValueFromKeyPath:(CPString)aKeyPath ofObjects:(CPArray)objects",
@@ -37814,7 +37939,7 @@
                   "scope" : "instance"
                }
             ],
-            "title" : "Setting the Delegate"
+            "title" : "Overrides"
          },
          {
             "symbols" : [
@@ -42688,6 +42813,22 @@
                   "kind" : "method",
                   "name" : "size",
                   "returnType" : "float",
+                  "scope" : "instance"
+               },
+               {
+                  "abstract" : "    Returns the font size. Cocoa/AppKit compatibility alias for -size.",
+                  "declaration" : "- (float)pointSize",
+                  "kind" : "method",
+                  "name" : "pointSize",
+                  "returnType" : "float",
+                  "scope" : "instance"
+               },
+               {
+                  "abstract" : "    Returns the font name. Cocoa/AppKit compatibility alias for -familyName.",
+                  "declaration" : "- (CPString)fontName",
+                  "kind" : "method",
+                  "name" : "fontName",
+                  "returnType" : "CPString",
                   "scope" : "instance"
                },
                {
@@ -50021,6 +50162,138 @@
                   ],
                   "returnType" : "CPAttributedString",
                   "scope" : "instance"
+               },
+               {
+                  "declaration" : "+ (CPAttributedString)attributedStringFromMarkdown:(CPString)markdown",
+                  "kind" : "method",
+                  "name" : "attributedStringFromMarkdown:",
+                  "parameters" : [
+                     {
+                        "name" : "markdown",
+                        "type" : "CPString"
+                     }
+                  ],
+                  "returnType" : "CPAttributedString",
+                  "scope" : "class"
+               },
+               {
+                  "declaration" : "+ (CPAttributedString)parseTableCellMarkdown:(CPString)cellText isHeader:(BOOL)isHeader",
+                  "kind" : "method",
+                  "name" : "parseTableCellMarkdown:isHeader:",
+                  "parameters" : [
+                     {
+                        "name" : "cellText",
+                        "type" : "CPString"
+                     },
+                     {
+                        "name" : "isHeader",
+                        "type" : "BOOL"
+                     }
+                  ],
+                  "returnType" : "CPAttributedString",
+                  "scope" : "class"
+               },
+               {
+                  "declaration" : "+ (BOOL)isTableHeaderLine:(CPString)line",
+                  "kind" : "method",
+                  "name" : "isTableHeaderLine:",
+                  "parameters" : [
+                     {
+                        "name" : "line",
+                        "type" : "CPString"
+                     }
+                  ],
+                  "returnType" : "BOOL",
+                  "scope" : "class"
+               },
+               {
+                  "declaration" : "+ (BOOL)isTableSeparatorLine:(CPString)line",
+                  "kind" : "method",
+                  "name" : "isTableSeparatorLine:",
+                  "parameters" : [
+                     {
+                        "name" : "line",
+                        "type" : "CPString"
+                     }
+                  ],
+                  "returnType" : "BOOL",
+                  "scope" : "class"
+               },
+               {
+                  "declaration" : "+ (BOOL)isTableRowLine:(CPString)line",
+                  "kind" : "method",
+                  "name" : "isTableRowLine:",
+                  "parameters" : [
+                     {
+                        "name" : "line",
+                        "type" : "CPString"
+                     }
+                  ],
+                  "returnType" : "BOOL",
+                  "scope" : "class"
+               },
+               {
+                  "declaration" : "+ (CPArray)parseTableCells:(CPString)line",
+                  "kind" : "method",
+                  "name" : "parseTableCells:",
+                  "parameters" : [
+                     {
+                        "name" : "line",
+                        "type" : "CPString"
+                     }
+                  ],
+                  "returnType" : "CPArray",
+                  "scope" : "class"
+               },
+               {
+                  "declaration" : "+ (CPAttributedString)parseInlineMarkdown:(CPString)text isHeader:(BOOL)isHeader headerLevel:(int)level",
+                  "kind" : "method",
+                  "name" : "parseInlineMarkdown:isHeader:headerLevel:",
+                  "parameters" : [
+                     {
+                        "name" : "text",
+                        "type" : "CPString"
+                     },
+                     {
+                        "name" : "isHeader",
+                        "type" : "BOOL"
+                     },
+                     {
+                        "name" : "level",
+                        "type" : "int"
+                     }
+                  ],
+                  "returnType" : "CPAttributedString",
+                  "scope" : "class"
+               },
+               {
+                  "declaration" : "+ (CPAttributedString)attributedStringWithText:(CPString)text font:(CPFont)baseFont bold:(BOOL)b italic:(BOOL)it code:(BOOL)c",
+                  "kind" : "method",
+                  "name" : "attributedStringWithText:font:bold:italic:code:",
+                  "parameters" : [
+                     {
+                        "name" : "text",
+                        "type" : "CPString"
+                     },
+                     {
+                        "name" : "baseFont",
+                        "type" : "CPFont"
+                     },
+                     {
+                        "name" : "b",
+                        "type" : "BOOL"
+                     },
+                     {
+                        "name" : "it",
+                        "type" : "BOOL"
+                     },
+                     {
+                        "name" : "c",
+                        "type" : "BOOL"
+                     }
+                  ],
+                  "returnType" : "CPAttributedString",
+                  "scope" : "class"
                }
             ],
             "title" : "General"
@@ -50265,6 +50538,26 @@
                   "declaration" : "- (void)setWidthTracksTextView:(BOOL)flag",
                   "kind" : "method",
                   "name" : "setWidthTracksTextView:",
+                  "parameters" : [
+                     {
+                        "name" : "flag",
+                        "type" : "BOOL"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (BOOL)heightTracksTextView",
+                  "kind" : "method",
+                  "name" : "heightTracksTextView",
+                  "returnType" : "BOOL",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setHeightTracksTextView:(BOOL)flag",
+                  "kind" : "method",
+                  "name" : "setHeightTracksTextView:",
                   "parameters" : [
                      {
                         "name" : "flag",
@@ -53010,6 +53303,19 @@
                   "scope" : "instance"
                },
                {
+                  "declaration" : "- (void)setBoundsSize:(CGSize)aSize",
+                  "kind" : "method",
+                  "name" : "setBoundsSize:",
+                  "parameters" : [
+                     {
+                        "name" : "aSize",
+                        "type" : "CGSize"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
                   "declaration" : "- (void)setFrameSize:(CGSize)aSize",
                   "kind" : "method",
                   "name" : "setFrameSize:",
@@ -53119,6 +53425,90 @@
                }
             ],
             "title" : "Dragging operation"
+         },
+         {
+            "symbols" : [
+               {
+                  "declaration" : "- (void)updateRuler",
+                  "kind" : "method",
+                  "name" : "updateRuler",
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)rulerView:(CPRulerView)rulerView didAddMarker:(CPRulerMarker)marker",
+                  "kind" : "method",
+                  "name" : "rulerView:didAddMarker:",
+                  "parameters" : [
+                     {
+                        "name" : "rulerView",
+                        "type" : "CPRulerView"
+                     },
+                     {
+                        "name" : "marker",
+                        "type" : "CPRulerMarker"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)rulerView:(CPRulerView)rulerView didMoveMarker:(CPRulerMarker)marker",
+                  "kind" : "method",
+                  "name" : "rulerView:didMoveMarker:",
+                  "parameters" : [
+                     {
+                        "name" : "rulerView",
+                        "type" : "CPRulerView"
+                     },
+                     {
+                        "name" : "marker",
+                        "type" : "CPRulerMarker"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)rulerView:(CPRulerView)rulerView didRemoveMarker:(CPRulerMarker)marker",
+                  "kind" : "method",
+                  "name" : "rulerView:didRemoveMarker:",
+                  "parameters" : [
+                     {
+                        "name" : "rulerView",
+                        "type" : "CPRulerView"
+                     },
+                     {
+                        "name" : "marker",
+                        "type" : "CPRulerMarker"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)rulerView:(CPRulerView)rulerView didUpdateMarker:(CPRulerMarker)marker oldTab:(id)oldTab",
+                  "kind" : "method",
+                  "name" : "rulerView:didUpdateMarker:oldTab:",
+                  "parameters" : [
+                     {
+                        "name" : "rulerView",
+                        "type" : "CPRulerView"
+                     },
+                     {
+                        "name" : "marker",
+                        "type" : "CPRulerMarker"
+                     },
+                     {
+                        "name" : "oldTab",
+                        "type" : "id"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               }
+            ],
+            "title" : "CPRulerSupport"
          },
          {
             "symbols" : [
@@ -53982,104 +54372,48 @@
          "deprecated" : null,
          "framework" : "AppKit",
          "module" : "AppKit",
-         "navigatorTitle" : "CPParagraphStyle",
+         "navigatorTitle" : "CPTextTab",
          "role" : "class",
          "superclass" : "CPObject",
-         "title" : "CPParagraphStyle"
+         "title" : "CPTextTab"
       },
       "primaryContent" : {
          "abstract" : "",
-         "declaration" : "@implementation CPParagraphStyle : CPObject",
+         "declaration" : "@implementation CPTextTab : CPObject",
          "discussion" : ""
       },
       "topics" : [
          {
             "symbols" : [
                {
-                  "declaration" : "+ (CPParagraphStyle)defaultParagraphStyle",
-                  "kind" : "method",
-                  "name" : "defaultParagraphStyle",
-                  "returnType" : "CPParagraphStyle",
-                  "scope" : "class"
-               }
-            ],
-            "title" : "Class methods"
-         },
-         {
-            "symbols" : [
-               {
-                  "declaration" : "- (id)init",
-                  "kind" : "method",
-                  "name" : "init",
-                  "returnType" : "id",
-                  "scope" : "instance"
+                  "declaration" : "var kDefaultTabInterval = 28.0",
+                  "kind" : "global_variable",
+                  "name" : "kDefaultTabInterval",
+                  "type" : "id"
                },
                {
-                  "declaration" : "- (CPParagraphStyle)initWithParagraphStyle:(CPParagraphStyle)other",
+                  "declaration" : "- (id)initWithTextAlignment:(CPTextAlignment)anAlignment location:(float)aLocation options:(CPDictionary)options",
                   "kind" : "method",
-                  "name" : "initWithParagraphStyle:",
+                  "name" : "initWithTextAlignment:location:options:",
                   "parameters" : [
                      {
-                        "name" : "other",
-                        "type" : "CPParagraphStyle"
-                     }
-                  ],
-                  "returnType" : "CPParagraphStyle",
-                  "scope" : "instance"
-               },
-               {
-                  "declaration" : "- (void)addTabStop:(CPTextTab)aStop",
-                  "kind" : "method",
-                  "name" : "addTabStop:",
-                  "parameters" : [
+                        "name" : "anAlignment",
+                        "type" : "CPTextAlignment"
+                     },
                      {
-                        "name" : "aStop",
-                        "type" : "CPTextTab"
-                     }
-                  ],
-                  "returnType" : "void",
-                  "scope" : "instance"
-               },
-               {
-                  "declaration" : "- (id)copy",
-                  "kind" : "method",
-                  "name" : "copy",
-                  "returnType" : "id",
-                  "scope" : "instance"
-               }
-            ],
-            "title" : "Init methods"
-         },
-         {
-            "symbols" : [
-               {
-                  "declaration" : "- (id)initWithCoder:(id)aCoder",
-                  "kind" : "method",
-                  "name" : "initWithCoder:",
-                  "parameters" : [
+                        "name" : "aLocation",
+                        "type" : "float"
+                     },
                      {
-                        "name" : "aCoder",
-                        "type" : "id"
+                        "name" : "options",
+                        "type" : "CPDictionary"
                      }
                   ],
                   "returnType" : "id",
                   "scope" : "instance"
                },
                {
-                  "declaration" : "- (void)encodeWithCoder:(id)aCoder",
-                  "kind" : "method",
-                  "name" : "encodeWithCoder:",
-                  "parameters" : [
-                     {
-                        "name" : "aCoder",
-                        "type" : "id"
-                     }
-                  ],
-                  "returnType" : "void",
-                  "scope" : "instance"
-               },
-               {
-                  "declaration" : "- (id)initWithType:(CPTabStopType) aType location:(double) aLocation",
+                  "declaration" : "- (id)initWithType:(CPTabStopType)aType location:(float)aLocation",
                   "kind" : "method",
                   "name" : "initWithType:location:",
                   "parameters" : [
@@ -54089,45 +54423,413 @@
                      },
                      {
                         "name" : "aLocation",
-                        "type" : "double"
-                     }
-                  ],
-                  "returnType" : "id",
-                  "scope" : "instance"
-               }
-            ],
-            "title" : "CPCoding"
-         },
-         {
-            "symbols" : [
-               {
-                  "declaration" : "- (id)initWithCoder:(id)aCoder",
-                  "kind" : "method",
-                  "name" : "initWithCoder:",
-                  "parameters" : [
-                     {
-                        "name" : "aCoder",
-                        "type" : "id"
+                        "type" : "float"
                      }
                   ],
                   "returnType" : "id",
                   "scope" : "instance"
                },
                {
-                  "declaration" : "- (void)encodeWithCoder:(id)aCoder",
+                  "declaration" : "- (CPTabStopType)tabStopType",
+                  "kind" : "method",
+                  "name" : "tabStopType",
+                  "returnType" : "CPTabStopType",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (BOOL)isEqual:(id)other",
+                  "kind" : "method",
+                  "name" : "isEqual:",
+                  "parameters" : [
+                     {
+                        "name" : "other",
+                        "type" : "id"
+                     }
+                  ],
+                  "returnType" : "BOOL",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (id)copy",
+                  "kind" : "method",
+                  "name" : "copy",
+                  "returnType" : "id",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (id)initWithCoder:(CPCoder)aCoder",
+                  "kind" : "method",
+                  "name" : "initWithCoder:",
+                  "parameters" : [
+                     {
+                        "name" : "aCoder",
+                        "type" : "CPCoder"
+                     }
+                  ],
+                  "returnType" : "id",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)encodeWithCoder:(CPCoder)aCoder",
                   "kind" : "method",
                   "name" : "encodeWithCoder:",
                   "parameters" : [
                      {
                         "name" : "aCoder",
-                        "type" : "id"
+                        "type" : "CPCoder"
                      }
                   ],
                   "returnType" : "void",
                   "scope" : "instance"
+               },
+               {
+                  "declaration" : "var _sharedDefaultParagraphStyle = nil",
+                  "kind" : "global_variable",
+                  "name" : "_sharedDefaultParagraphStyle",
+                  "type" : "id"
+               },
+               {
+                  "declaration" : "+ (CPParagraphStyle)defaultParagraphStyle",
+                  "kind" : "method",
+                  "name" : "defaultParagraphStyle",
+                  "returnType" : "CPParagraphStyle",
+                  "scope" : "class"
+               },
+               {
+                  "declaration" : "+ (CPWritingDirection)defaultWritingDirectionForLanguage:(CPString)languageName",
+                  "kind" : "method",
+                  "name" : "defaultWritingDirectionForLanguage:",
+                  "parameters" : [
+                     {
+                        "name" : "languageName",
+                        "type" : "CPString"
+                     }
+                  ],
+                  "returnType" : "CPWritingDirection",
+                  "scope" : "class"
+               },
+               {
+                  "declaration" : "- (id)init",
+                  "kind" : "method",
+                  "name" : "init",
+                  "returnType" : "id",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (id)initWithParagraphStyle:(CPParagraphStyle)other",
+                  "kind" : "method",
+                  "name" : "initWithParagraphStyle:",
+                  "parameters" : [
+                     {
+                        "name" : "other",
+                        "type" : "CPParagraphStyle"
+                     }
+                  ],
+                  "returnType" : "id",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (id)copy",
+                  "kind" : "method",
+                  "name" : "copy",
+                  "returnType" : "id",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (id)mutableCopy",
+                  "kind" : "method",
+                  "name" : "mutableCopy",
+                  "returnType" : "id",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (id)initWithCoder:(CPCoder)aCoder",
+                  "kind" : "method",
+                  "name" : "initWithCoder:",
+                  "parameters" : [
+                     {
+                        "name" : "aCoder",
+                        "type" : "CPCoder"
+                     }
+                  ],
+                  "returnType" : "id",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)encodeWithCoder:(CPCoder)aCoder",
+                  "kind" : "method",
+                  "name" : "encodeWithCoder:",
+                  "parameters" : [
+                     {
+                        "name" : "aCoder",
+                        "type" : "CPCoder"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (BOOL)isEqual:(id)other",
+                  "kind" : "method",
+                  "name" : "isEqual:",
+                  "parameters" : [
+                     {
+                        "name" : "other",
+                        "type" : "id"
+                     }
+                  ],
+                  "returnType" : "BOOL",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (id)initWithParagraphStyle:(CPParagraphStyle)other",
+                  "kind" : "method",
+                  "name" : "initWithParagraphStyle:",
+                  "parameters" : [
+                     {
+                        "name" : "other",
+                        "type" : "CPParagraphStyle"
+                     }
+                  ],
+                  "returnType" : "id",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (id)initWithCoder:(CPCoder)aCoder",
+                  "kind" : "method",
+                  "name" : "initWithCoder:",
+                  "parameters" : [
+                     {
+                        "name" : "aCoder",
+                        "type" : "CPCoder"
+                     }
+                  ],
+                  "returnType" : "id",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setLineSpacing:(float)aLineSpacing",
+                  "kind" : "method",
+                  "name" : "setLineSpacing:",
+                  "parameters" : [
+                     {
+                        "name" : "aLineSpacing",
+                        "type" : "float"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setParagraphSpacing:(float)aParagraphSpacing",
+                  "kind" : "method",
+                  "name" : "setParagraphSpacing:",
+                  "parameters" : [
+                     {
+                        "name" : "aParagraphSpacing",
+                        "type" : "float"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setAlignment:(CPTextAlignment)anAlignment",
+                  "kind" : "method",
+                  "name" : "setAlignment:",
+                  "parameters" : [
+                     {
+                        "name" : "anAlignment",
+                        "type" : "CPTextAlignment"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setHeadIndent:(float)aHeadIndent",
+                  "kind" : "method",
+                  "name" : "setHeadIndent:",
+                  "parameters" : [
+                     {
+                        "name" : "aHeadIndent",
+                        "type" : "float"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setTailIndent:(float)aTailIndent",
+                  "kind" : "method",
+                  "name" : "setTailIndent:",
+                  "parameters" : [
+                     {
+                        "name" : "aTailIndent",
+                        "type" : "float"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setFirstLineHeadIndent:(float)aFirstLineHeadIndent",
+                  "kind" : "method",
+                  "name" : "setFirstLineHeadIndent:",
+                  "parameters" : [
+                     {
+                        "name" : "aFirstLineHeadIndent",
+                        "type" : "float"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setMinimumLineHeight:(float)aMinimumLineHeight",
+                  "kind" : "method",
+                  "name" : "setMinimumLineHeight:",
+                  "parameters" : [
+                     {
+                        "name" : "aMinimumLineHeight",
+                        "type" : "float"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setMaximumLineHeight:(float)aMaximumLineHeight",
+                  "kind" : "method",
+                  "name" : "setMaximumLineHeight:",
+                  "parameters" : [
+                     {
+                        "name" : "aMaximumLineHeight",
+                        "type" : "float"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setLineBreakMode:(CPLineBreakMode)aLineBreakMode",
+                  "kind" : "method",
+                  "name" : "setLineBreakMode:",
+                  "parameters" : [
+                     {
+                        "name" : "aLineBreakMode",
+                        "type" : "CPLineBreakMode"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setBaseWritingDirection:(CPWritingDirection)aBaseWritingDirection",
+                  "kind" : "method",
+                  "name" : "setBaseWritingDirection:",
+                  "parameters" : [
+                     {
+                        "name" : "aBaseWritingDirection",
+                        "type" : "CPWritingDirection"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setLineHeightMultiple:(float)aLineHeightMultiple",
+                  "kind" : "method",
+                  "name" : "setLineHeightMultiple:",
+                  "parameters" : [
+                     {
+                        "name" : "aLineHeightMultiple",
+                        "type" : "float"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setParagraphSpacingBefore:(float)aParagraphSpacingBefore",
+                  "kind" : "method",
+                  "name" : "setParagraphSpacingBefore:",
+                  "parameters" : [
+                     {
+                        "name" : "aParagraphSpacingBefore",
+                        "type" : "float"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setDefaultTabInterval:(float)aDefaultTabInterval",
+                  "kind" : "method",
+                  "name" : "setDefaultTabInterval:",
+                  "parameters" : [
+                     {
+                        "name" : "aDefaultTabInterval",
+                        "type" : "float"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)addTabStop:(CPTextTab)aTabStop",
+                  "kind" : "method",
+                  "name" : "addTabStop:",
+                  "parameters" : [
+                     {
+                        "name" : "aTabStop",
+                        "type" : "CPTextTab"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)removeTabStop:(CPTextTab)aTabStop",
+                  "kind" : "method",
+                  "name" : "removeTabStop:",
+                  "parameters" : [
+                     {
+                        "name" : "aTabStop",
+                        "type" : "CPTextTab"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setTabStops:(CPArray)newTabStops",
+                  "kind" : "method",
+                  "name" : "setTabStops:",
+                  "parameters" : [
+                     {
+                        "name" : "newTabStops",
+                        "type" : "CPArray"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (id)copyWithZone:(CPZone)aZone",
+                  "kind" : "method",
+                  "name" : "copyWithZone:",
+                  "parameters" : [
+                     {
+                        "name" : "aZone",
+                        "type" : "CPZone"
+                     }
+                  ],
+                  "returnType" : "id",
+                  "scope" : "instance"
                }
             ],
-            "title" : "CPCoding"
+            "title" : "General"
          }
       ]
    },
@@ -54285,6 +54987,466 @@
                }
             ],
             "title" : "Class methods"
+         }
+      ]
+   },
+   {
+      "metadata" : {
+         "deprecated" : null,
+         "framework" : "AppKit",
+         "module" : "AppKit",
+         "navigatorTitle" : "CPRulerMarker",
+         "role" : "class",
+         "superclass" : "CPView",
+         "title" : "CPRulerMarker"
+      },
+      "primaryContent" : {
+         "abstract" : "",
+         "declaration" : "@implementation CPRulerMarker : CPView",
+         "discussion" : ""
+      },
+      "topics" : [
+         {
+            "symbols" : [
+               {
+                  "declaration" : "- (id)initWithRulerView:(CPRulerView)aRulerView markerLocation:(float)aLocation imageValue:(float)anImageValue representedObject:(id)anObject",
+                  "kind" : "method",
+                  "name" : "initWithRulerView:markerLocation:imageValue:representedObject:",
+                  "parameters" : [
+                     {
+                        "name" : "aRulerView",
+                        "type" : "CPRulerView"
+                     },
+                     {
+                        "name" : "aLocation",
+                        "type" : "float"
+                     },
+                     {
+                        "name" : "anImageValue",
+                        "type" : "float"
+                     },
+                     {
+                        "name" : "anObject",
+                        "type" : "id"
+                     }
+                  ],
+                  "returnType" : "id",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (CPTextField)label",
+                  "kind" : "method",
+                  "name" : "label",
+                  "returnType" : "CPTextField",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setRepresentedObject:(id)anObject",
+                  "kind" : "method",
+                  "name" : "setRepresentedObject:",
+                  "parameters" : [
+                     {
+                        "name" : "anObject",
+                        "type" : "id"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setFrame:(CGRect)aFrame",
+                  "kind" : "method",
+                  "name" : "setFrame:",
+                  "parameters" : [
+                     {
+                        "name" : "aFrame",
+                        "type" : "CGRect"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)updateMarkerIcon",
+                  "kind" : "method",
+                  "name" : "updateMarkerIcon",
+                  "returnType" : "void",
+                  "scope" : "instance"
+               }
+            ],
+            "title" : "General"
+         },
+         {
+            "symbols" : [
+               {
+                  "declaration" : "- (CPMenu)menuForEvent:(CPEvent)anEvent",
+                  "kind" : "method",
+                  "name" : "menuForEvent:",
+                  "parameters" : [
+                     {
+                        "name" : "anEvent",
+                        "type" : "CPEvent"
+                     }
+                  ],
+                  "returnType" : "CPMenu",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)changeTypeToLeft:(id)sender",
+                  "kind" : "method",
+                  "name" : "changeTypeToLeft:",
+                  "parameters" : [
+                     {
+                        "name" : "sender",
+                        "type" : "id"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)changeTypeToCenter:(id)sender",
+                  "kind" : "method",
+                  "name" : "changeTypeToCenter:",
+                  "parameters" : [
+                     {
+                        "name" : "sender",
+                        "type" : "id"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)changeTypeToRight:(id)sender",
+                  "kind" : "method",
+                  "name" : "changeTypeToRight:",
+                  "parameters" : [
+                     {
+                        "name" : "sender",
+                        "type" : "id"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)deleteMarker:(id)sender",
+                  "kind" : "method",
+                  "name" : "deleteMarker:",
+                  "parameters" : [
+                     {
+                        "name" : "sender",
+                        "type" : "id"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (id)initWithScrollView:(CPScrollView)aScrollView orientation:(CPRulerOrientation)anOrientation",
+                  "kind" : "method",
+                  "name" : "initWithScrollView:orientation:",
+                  "parameters" : [
+                     {
+                        "name" : "aScrollView",
+                        "type" : "CPScrollView"
+                     },
+                     {
+                        "name" : "anOrientation",
+                        "type" : "CPRulerOrientation"
+                     }
+                  ],
+                  "returnType" : "id",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setFrame:(CGRect)aFrame",
+                  "kind" : "method",
+                  "name" : "setFrame:",
+                  "parameters" : [
+                     {
+                        "name" : "aFrame",
+                        "type" : "CGRect"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)addMarker:(CPRulerMarker)aMarker",
+                  "kind" : "method",
+                  "name" : "addMarker:",
+                  "parameters" : [
+                     {
+                        "name" : "aMarker",
+                        "type" : "CPRulerMarker"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)removeMarker:(CPRulerMarker)aMarker",
+                  "kind" : "method",
+                  "name" : "removeMarker:",
+                  "parameters" : [
+                     {
+                        "name" : "aMarker",
+                        "type" : "CPRulerMarker"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setMarkers:(CPArray)newMarkers",
+                  "kind" : "method",
+                  "name" : "setMarkers:",
+                  "parameters" : [
+                     {
+                        "name" : "newMarkers",
+                        "type" : "CPArray"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               }
+            ],
+            "title" : "Context Menu Support"
+         },
+         {
+            "symbols" : [
+               {
+                  "declaration" : "- (void)mouseDown:(CPEvent)anEvent",
+                  "kind" : "method",
+                  "name" : "mouseDown:",
+                  "parameters" : [
+                     {
+                        "name" : "anEvent",
+                        "type" : "CPEvent"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)mouseDragged:(CPEvent)anEvent",
+                  "kind" : "method",
+                  "name" : "mouseDragged:",
+                  "parameters" : [
+                     {
+                        "name" : "anEvent",
+                        "type" : "CPEvent"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)mouseUp:(CPEvent)anEvent",
+                  "kind" : "method",
+                  "name" : "mouseUp:",
+                  "parameters" : [
+                     {
+                        "name" : "anEvent",
+                        "type" : "CPEvent"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               }
+            ],
+            "title" : "Interaction Handlers"
+         },
+         {
+            "symbols" : [
+               {
+                  "declaration" : "- (void)updateRuler",
+                  "kind" : "method",
+                  "name" : "updateRuler",
+                  "returnType" : "void",
+                  "scope" : "instance"
+               }
+            ],
+            "title" : "DOM Layout Builder"
+         }
+      ]
+   },
+   {
+      "metadata" : {
+         "deprecated" : null,
+         "framework" : "AppKit",
+         "module" : "AppKit",
+         "navigatorTitle" : "_CPTableTextAttachment",
+         "role" : "class",
+         "superclass" : "CPView",
+         "title" : "_CPTableTextAttachment"
+      },
+      "primaryContent" : {
+         "abstract" : "",
+         "declaration" : "@implementation _CPTableTextAttachment : CPView",
+         "discussion" : ""
+      },
+      "topics" : [
+         {
+            "symbols" : [
+               {
+                  "declaration" : "- (id)initWithHeaders:(CPArray)headers rows:(CPArray)rows",
+                  "kind" : "method",
+                  "name" : "initWithHeaders:rows:",
+                  "parameters" : [
+                     {
+                        "name" : "headers",
+                        "type" : "CPArray"
+                     },
+                     {
+                        "name" : "rows",
+                        "type" : "CPArray"
+                     }
+                  ],
+                  "returnType" : "id",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (id)initWithHeaders:(CPArray)headers rows:(CPArray)rows width:(float)totalWidth",
+                  "kind" : "method",
+                  "name" : "initWithHeaders:rows:width:",
+                  "parameters" : [
+                     {
+                        "name" : "headers",
+                        "type" : "CPArray"
+                     },
+                     {
+                        "name" : "rows",
+                        "type" : "CPArray"
+                     },
+                     {
+                        "name" : "totalWidth",
+                        "type" : "float"
+                     }
+                  ],
+                  "returnType" : "id",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (id)initWithHeaders:(CPArray)headers rows:(CPArray)rows width:(float)totalWidth isEditable:(BOOL)isEditable acceptsRichText:(BOOL)acceptsRichText",
+                  "kind" : "method",
+                  "name" : "initWithHeaders:rows:width:isEditable:acceptsRichText:",
+                  "parameters" : [
+                     {
+                        "name" : "headers",
+                        "type" : "CPArray"
+                     },
+                     {
+                        "name" : "rows",
+                        "type" : "CPArray"
+                     },
+                     {
+                        "name" : "totalWidth",
+                        "type" : "float"
+                     },
+                     {
+                        "name" : "isEditable",
+                        "type" : "BOOL"
+                     },
+                     {
+                        "name" : "acceptsRichText",
+                        "type" : "BOOL"
+                     }
+                  ],
+                  "returnType" : "id",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (CPArray)headers",
+                  "kind" : "method",
+                  "name" : "headers",
+                  "returnType" : "CPArray",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (CPArray)rows",
+                  "kind" : "method",
+                  "name" : "rows",
+                  "returnType" : "CPArray",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (CPView)viewForWidth:(float)width",
+                  "kind" : "method",
+                  "name" : "viewForWidth:",
+                  "parameters" : [
+                     {
+                        "name" : "width",
+                        "type" : "float"
+                     }
+                  ],
+                  "returnType" : "CPView",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (CPView)createCellWithText:(id)text frame:(CGRect)frame isHeader:(BOOL)isHeader",
+                  "kind" : "method",
+                  "name" : "createCellWithText:frame:isHeader:",
+                  "parameters" : [
+                     {
+                        "name" : "text",
+                        "type" : "id"
+                     },
+                     {
+                        "name" : "frame",
+                        "type" : "CGRect"
+                     },
+                     {
+                        "name" : "isHeader",
+                        "type" : "BOOL"
+                     }
+                  ],
+                  "returnType" : "CPView",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)textDidChange:(CPNotification)aNotification",
+                  "kind" : "method",
+                  "name" : "textDidChange:",
+                  "parameters" : [
+                     {
+                        "name" : "aNotification",
+                        "type" : "CPNotification"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (CPTextView)getTextViewFromCell:(CPView)cellView",
+                  "kind" : "method",
+                  "name" : "getTextViewFromCell:",
+                  "parameters" : [
+                     {
+                        "name" : "cellView",
+                        "type" : "CPView"
+                     }
+                  ],
+                  "returnType" : "CPTextView",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)resizeToWidth:(float)newWidth",
+                  "kind" : "method",
+                  "name" : "resizeToWidth:",
+                  "parameters" : [
+                     {
+                        "name" : "newWidth",
+                        "type" : "float"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               }
+            ],
+            "title" : "General"
          }
       ]
    },
@@ -62399,7 +63561,7 @@
       "primaryContent" : {
          "abstract" : "    @ingroup appkit",
          "declaration" : "@implementation CPRuleEditor : CPControl",
-         "discussion" : "    @class CPRuleEditor\n\n    @brief A view for creating and configuring criteria.\n\n    A CPRuleEditor object is a view that allows the user to visually create and configure a list of options which are expressed by the rule editor as a predicate (see Predicate documentation). The view has a delegate which offers a tree of choices to the view. The choices are presented by the view to the user as a row of popup buttons, static text fields, and custom views. Each row in the list represents a particular path down the tree of choices.\n\n    CPRuleEditor exposes one binding, rows. You can bind rows to an ordered collection (such as an instance of CPMutableArray). Each object in the collection should have the following properties:\n    @n @n\n    @c @@\"rowType\"\n    @n      An integer representing the type of the row (CPRuleEditorRowType).\n    @n@n @c @@\"subrows\"\n    @n      An ordered to-many relation (such as an instance of CPMutableArray) containing the directly nested subrows for the given row.\n    @n@n @c @@\"displayValues\"\n    @n      An ordered to-many relation containing the display values for the row.\n    @n@n @c @@\"criteria\"\n    @n      An ordered to-many relation containing the criteria for the row."
+         "discussion" : "    @class CPRuleEditor\n\n    @brief A view for creating and configuring criteria.\n\n    A CPRuleEditor object is a view that allows the user to visually create and configure a list of options which are expressed by the rule editor as a predicate (see Predicate documentation). The view has a delegate which offers a tree of choices to the view. The choices are presented by the view to the user as a row of popup buttons, static text fields, and custom views. Each row in the list represents a particular path down the tree of choices.\n\n    CPRuleEditor exposes one binding, rows. You can bind rows to an ordered collection (such as an instance of CPMutableArray). Each object in the collection should have the following properties:\n    @n @n\n    @c @@\"rowType\"\n    @n      An integer representing the type of the row (CPRuleEditorRowType).\n    @n@n @c @@\"subrows\"\n    @n      An ordered to-many relation (such as an instance of CPMutableArray) containing the directly nested subrows for the given row.\n    @n@n @c @@\"displayValues\"\n    @n      An ordered to-many relation containing the display values for the row.\n    @n@n @c @@\"criteria\"\n    @n      An ordered to-many relation containing the criteria for the row.\n    @n@n\n    Localization & Positional Reordering\n    @n\n    CPRuleEditor supports complete localization of menu items and grammatical positional reordering (sentence structure layout adjustment) via strings resource files (.strings) or custom programmatic CPDictionary tables.\n    @n@n\n    Since sentence structures vary significantly across languages, the editor can dynamically reposition views (such as popups, static labels, and text fields) from left to right to form grammatically correct sentences.\n    @n@n\n    Formatting Keys (English representation):\n    @n @c %[%]@@\n    @n      Represents a popup button displaying its selected value (e.g. @c %[firstName]@@).\n    @n @c %@@\n    @n      Represents an editable text input field.\n    @n Static text represents a literal label placed directly inside the formatting key.\n    @n@n\n    Example English format key:\n    @n @c \"%[firstName]@ %[is equal to]@ %@\"\n    @n@n\n    Translation Patterns (Target language):\n    @n Positional specifiers such as @c %1$@@, @c %2$@@, @c %3$@@ dictate the visual order of views from left to right.\n    @n Bracketed values inside positional specifiers (e.g. @c %1$[Nombre]@@) define the localized title for popup selection items.\n    @n Literal text outside the specifiers (such as @c \"y\" or @c \"und\") is automatically instantiated as static text labels positioned between controls.\n    @n@n\n    Example translations:\n    @n@n\n    Spanish (Reorders to: [1: Name] y [3: Value] [2: are equal]):\n    @n @c \"%[firstName]@ %[is equal to]@ %@\" = \"%1$[Nombre]@ y %3$@ %2$[son iguales]@\";\n    @n@n\n    German (Reorders to: [1: First Name] und [3: Value] [2: are equal]):\n    @n @c \"%[firstName]@ %[is equal to]@ %@\" = \"%1$[Vorname]@ und %3$@ %2$[sind gleich]@\";"
       },
       "topics" : [
          {
@@ -62730,6 +63892,26 @@
                      {
                         "name" : "stringsFilename",
                         "type" : "CPString"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (_CPRuleEditorLocalizer)standardLocalizer",
+                  "kind" : "method",
+                  "name" : "standardLocalizer",
+                  "returnType" : "_CPRuleEditorLocalizer",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)setStandardLocalizer:(_CPRuleEditorLocalizer)aLocalizer",
+                  "kind" : "method",
+                  "name" : "setStandardLocalizer:",
+                  "parameters" : [
+                     {
+                        "name" : "aLocalizer",
+                        "type" : "_CPRuleEditorLocalizer"
                      }
                   ],
                   "returnType" : "void",
@@ -63686,6 +64868,50 @@
                }
             ],
             "title" : "General"
+         },
+         {
+            "symbols" : [
+               {
+                  "declaration" : "- (CPString)formattingKeyForViews:(CPArray)views",
+                  "kind" : "method",
+                  "name" : "formattingKeyForViews:",
+                  "parameters" : [
+                     {
+                        "name" : "views",
+                        "type" : "CPArray"
+                     }
+                  ],
+                  "returnType" : "CPString",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (void)localizeMenuItemsForViews:(CPArray)views",
+                  "kind" : "method",
+                  "name" : "localizeMenuItemsForViews:",
+                  "parameters" : [
+                     {
+                        "name" : "views",
+                        "type" : "CPArray"
+                     }
+                  ],
+                  "returnType" : "void",
+                  "scope" : "instance"
+               },
+               {
+                  "declaration" : "- (CPArray)localizeAndReorderViews:(CPArray)views",
+                  "kind" : "method",
+                  "name" : "localizeAndReorderViews:",
+                  "parameters" : [
+                     {
+                        "name" : "views",
+                        "type" : "CPArray"
+                     }
+                  ],
+                  "returnType" : "CPArray",
+                  "scope" : "instance"
+               }
+            ],
+            "title" : "Formatting & Reordering Helpers"
          }
       ]
    },
