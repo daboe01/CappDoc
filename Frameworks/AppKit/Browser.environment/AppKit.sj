@@ -54663,23 +54663,41 @@ class_addMethods(meta_class, [new objj_method(sel_getUid("group"), function $CAA
 
 ,["id"])]);
 }
-p;16;CABackingStore.jt;650;@STATIC;1.0;i;12;CGGeometry.jt;615;objj_executeFile("CGGeometry.j", YES);CABackingStoreGetContext = function(aBackingStore)
+p;16;CABackingStore.jt;1095;@STATIC;1.0;i;12;CGGeometry.ji;17;CPCompatibility.jt;1037;objj_executeFile("CGGeometry.j", YES);objj_executeFile("CPCompatibility.j", YES);CABackingStoreGetContext = function(aBackingStore)
 {
     return aBackingStore.context;
 }
-CABackingStoreCreate = function()
+;
+if (CPFeatureIsCompatible(CPHTMLCanvasFeature))
 {
-    const DOMElement = document.createElement("canvas");
-    DOMElement.style.position = "absolute";
-    return {context: DOMElement.getContext("2d"), buffer: DOMElement, _image: DOMElement};
+    CABackingStoreCreate =     function()
+    {
+        var DOMElement = document.createElement("canvas");
+        DOMElement.style.position = "absolute";
+        return {context: DOMElement.getContext("2d"), buffer: DOMElement, _image: DOMElement};
+    };
+    CABackingStoreSetSize =     function(aBackingStore, aSize)
+    {
+        var buffer = aBackingStore.buffer;
+        buffer.width = aSize.width;
+        buffer.height = aSize.height;
+        buffer.style.width = aSize.width + "px";
+;
+        buffer.style.height = aSize.height + "px";
+;
+    };
 }
-CABackingStoreSetSize = function(aBackingStore, aSize)
+else
 {
-    const buffer = aBackingStore.buffer;
-    buffer.width = aSize.width;
-    buffer.height = aSize.height;
-    buffer.style.width = aSize.width + "px";
-    buffer.style.height = aSize.height + "px";
+    CABackingStoreCreate =     function()
+    {
+        var context = CGBitmapGraphicsContextCreate();
+        context.buffer = "";
+        return {context: context};
+    };
+    CABackingStoreSetSize =     function(aBackingStore, aSize)
+    {
+    };
 }
 p;18;CABasicAnimation.jt;1629;@STATIC;1.0;I;21;Foundation/CPObject.ji;21;CAPropertyAnimation.jt;1558;objj_executeFile("Foundation/CPObject.j", NO);objj_executeFile("CAPropertyAnimation.j", YES);
 {var the_class = objj_allocateClassPair(CAPropertyAnimation, "CABasicAnimation"),
@@ -54839,7 +54857,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("values"), function $CAK
 
 ,["id"])]);
 }
-p;9;CALayer.jt;45542;@STATIC;1.0;I;21;Foundation/CPObject.jI;22;Foundation/CPRunLoop.ji;16;CABackingStore.ji;11;CGContext.ji;12;CGGeometry.ji;9;CPColor.ji;8;CPView.ji;23;CAMediaTimingFunction.jt;45362;objj_executeFile("Foundation/CPObject.j", NO);objj_executeFile("Foundation/CPRunLoop.j", NO);objj_executeFile("CABackingStore.j", YES);objj_executeFile("CGContext.j", YES);objj_executeFile("CGGeometry.j", YES);objj_executeFile("CPColor.j", YES);objj_executeFile("CPView.j", YES);objj_executeFile("CAMediaTimingFunction.j", YES);var CALayerGeometryBoundsMask = 1,
+p;9;CALayer.jt;45526;@STATIC;1.0;I;21;Foundation/CPObject.jI;22;Foundation/CPRunLoop.ji;16;CABackingStore.ji;11;CGContext.ji;12;CGGeometry.ji;9;CPColor.ji;8;CPView.ji;23;CAMediaTimingFunction.jt;45346;objj_executeFile("Foundation/CPObject.j", NO);objj_executeFile("Foundation/CPRunLoop.j", NO);objj_executeFile("CABackingStore.j", YES);objj_executeFile("CGContext.j", YES);objj_executeFile("CGGeometry.j", YES);objj_executeFile("CPColor.j", YES);objj_executeFile("CPView.j", YES);objj_executeFile("CAMediaTimingFunction.j", YES);var CALayerGeometryBoundsMask = 1,
     CALayerGeometryPositionMask = 2,
     CALayerGeometryAnchorPointMask = 4,
     CALayerGeometryAffineTransformMask = 8,
@@ -55208,6 +55226,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CALay
         (aLayer == null ? aLayer : (aLayer.isa.method_msgSend["removeFromSuperlayer"] || _objj_forward)(aLayer, "removeFromSuperlayer"));
     if (self._DOMContentsElement && aLayer._zPosition > self._DOMContentsElement.style.zIndex)
         self._DOMContentsElement.style.zIndex -= 100.0;
+;
     ((___r1 = self._sublayers), ___r1 == null ? ___r1 : (___r1.isa.method_msgSend["insertObject:atIndex:"] || _objj_forward)(___r1, "insertObject:atIndex:", aLayer, anIndex));
     if (anIndex >= self._sublayers.length - 1)
         self._DOMElement.appendChild(aLayer._DOMElement);
@@ -55246,8 +55265,9 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CALay
     }
     if (self._DOMContentsElement && aLayer._zPosition > self._DOMContentsElement.style.zIndex)
         self._DOMContentsElement.style.zIndex -= 100.0;
+;
     ((___r1 = self._sublayers), ___r1 == null ? ___r1 : (___r1.isa.method_msgSend["replaceObjectAtIndex:withObject:"] || _objj_forward)(___r1, "replaceObjectAtIndex:withObject:", ((___r2 = self._sublayers), ___r2 == null ? ___r2 : (___r2.isa.method_msgSend["indexOfObjectIdenticalTo:"] || _objj_forward)(___r2, "indexOfObjectIdenticalTo:", aSublayer)), aLayer));
-    self._DOMElement.replaceChild(aLayer._DOMElement, aSublayer._DOMElement);
+    self._DOMElement.replaceChild(aSublayer._DOMElement, aLayer._DOMElement);
     var ___r1, ___r2;
 }
 
@@ -55623,8 +55643,8 @@ _CALayerRecalculateGeometry = function(aLayer, aGeometryChange)
     aLayer._standardBackingStoreFrame = (aLayer == null ? aLayer : (aLayer.isa.method_msgSend["convertRect:toLayer:"] || _objj_forward)(aLayer, "convertRect:toLayer:", bounds, nil));
     if (superlayer)
     {
-        var superlayerBounds = (superlayer == null ? superlayer : (superlayer.isa.method_msgSend["bounds"] || _objj_forward)(superlayer, "bounds")),
-            frame = (superlayer == null ? superlayer : (superlayer.isa.method_msgSend["convertRect:toLayer:"] || _objj_forward)(superlayer, "convertRect:toLayer:", superlayerBounds, nil));
+        var bounds = (superlayer == null ? superlayer : (superlayer.isa.method_msgSend["bounds"] || _objj_forward)(superlayer, "bounds")),
+            frame = (superlayer == null ? superlayer : (superlayer.isa.method_msgSend["convertRect:toLayer:"] || _objj_forward)(superlayer, "convertRect:toLayer:", bounds, nil));
         aLayer._standardBackingStoreFrame.origin.x -= CGRectGetMinX(frame);
         aLayer._standardBackingStoreFrame.origin.y -= CGRectGetMinY(frame);
     }
@@ -85661,14 +85681,14 @@ class_addMethods(the_class, [new objj_method(sel_getUid("initWithLevel:"), funct
 
 ,["void","CPWindow"])]);
 }
-p;22;CPPlatformPasteboard.jt;24307;@STATIC;1.0;I;21;Foundation/CPObject.jI;22;Foundation/CPRunLoop.ji;17;CPCompatibility.ji;9;CPEvent.ji;14;CPPasteboard.ji;12;CPPlatform.ji;26;CPPlatformWindow+DOMKeys.jt;24132;objj_executeFile("Foundation/CPObject.j", NO);objj_executeFile("Foundation/CPRunLoop.j", NO);objj_executeFile("CPCompatibility.j", YES);objj_executeFile("CPEvent.j", YES);objj_executeFile("CPPasteboard.j", YES);objj_executeFile("CPPlatform.j", YES);objj_executeFile("CPPlatformWindow+DOMKeys.j", YES);var hasEditableTarget = function(aDOMEvent)
+p;22;CPPlatformPasteboard.jt;24508;@STATIC;1.0;I;21;Foundation/CPObject.jI;22;Foundation/CPRunLoop.ji;17;CPCompatibility.ji;9;CPEvent.ji;14;CPPasteboard.ji;12;CPPlatform.ji;26;CPPlatformWindow+DOMKeys.jt;24333;objj_executeFile("Foundation/CPObject.j", NO);objj_executeFile("Foundation/CPRunLoop.j", NO);objj_executeFile("CPCompatibility.j", YES);objj_executeFile("CPEvent.j", YES);objj_executeFile("CPPasteboard.j", YES);objj_executeFile("CPPlatform.j", YES);objj_executeFile("CPPlatformWindow+DOMKeys.j", YES);var hasEditableTarget = function(aDOMEvent)
 {
-    let target = aDOMEvent.target;
+    var target = aDOMEvent.target || aDOMEvent.srcElement;
     if (!target)
         return NO;
     if (target.contentEditable == "true")
         return YES;
-    let nodeName = target.nodeName.toUpperCase();
+    var nodeName = target.nodeName.toUpperCase();
     return nodeName === "INPUT" || nodeName == "TEXTAREA";
 };
 
@@ -85698,7 +85718,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CPPla
 
 ,["void","DOMWindow"]), new objj_method(sel_getUid("createDOMElements"), function $CPPlatformPasteboard__createDOMElements(self, _cmd)
 {
-    const theDocument = self._DOMWindow.document,
+    var theDocument = self._DOMWindow.document,
         _DOMBodyElement = theDocument.getElementById("cappuccino-body") || theDocument.body;
     self._DOMPasteboardElement = theDocument.createElement("textarea");
     self._DOMPasteboardElement.style.position = "absolute";
@@ -85707,7 +85727,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CPPla
     self._DOMPasteboardElement.className = "cpdontremove";
     _DOMBodyElement.appendChild(self._DOMPasteboardElement);
     self._DOMPasteboardElement.blur();
-    const copyEventCallback =     function(anEvent)
+    var copyEventCallback =     function(anEvent)
     {
         return (self.isa.method_msgSend["beforeCopyEvent:"] || _objj_forward)(self, "beforeCopyEvent:", anEvent);
     },
@@ -85727,44 +85747,50 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CPPla
     {
         return (self.isa.method_msgSend["nativePasteEvent:"] || _objj_forward)(self, "nativePasteEvent:", anEvent);
     };
-    if (self.supportsNativeCopyAndPaste)
-    {
-        self._DOMWindow.addEventListener("beforecopy", nativeBeforeClipboardEventCallback, NO);
-        self._DOMWindow.addEventListener("beforecut", nativeBeforeClipboardEventCallback, NO);
-        self._DOMWindow.addEventListener("beforepaste", nativeBeforeClipboardEventCallback, NO);
-        self._DOMWindow.addEventListener("copy", nativeCopyOrCutEventCallback, NO);
-        self._DOMWindow.addEventListener("cut", nativeCopyOrCutEventCallback, NO);
-        self._DOMWindow.addEventListener("paste", nativePasteEventCallback, NO);
-    }
-    else
-    {
-        theDocument.addEventListener("beforepaste", pasteEventCallback, NO);
-        theDocument.addEventListener("beforecopy", copyEventCallback, NO);
-        theDocument.addEventListener("beforecut", copyEventCallback, NO);
-    }
-    self._DOMWindow.addEventListener("unload",     function()
+    if (theDocument.addEventListener)
     {
         if (self.supportsNativeCopyAndPaste)
         {
-            self._DOMWindow.removeEventListener("beforecopy", nativeBeforeClipboardEventCallback, NO);
-            self._DOMWindow.removeEventListener("beforecut", nativeBeforeClipboardEventCallback, NO);
-            self._DOMWindow.removeEventListener("beforepaste", nativeBeforeClipboardEventCallback, NO);
-            self._DOMWindow.removeEventListener("copy", nativeCopyOrCutEventCallback, NO);
-            self._DOMWindow.removeEventListener("cut", nativeCopyOrCutEventCallback, NO);
-            self._DOMWindow.removeEventListener("paste", nativePasteEventCallback, NO);
+            self._DOMWindow.addEventListener("beforecopy", nativeBeforeClipboardEventCallback, NO);
+            self._DOMWindow.addEventListener("beforecut", nativeBeforeClipboardEventCallback, NO);
+            self._DOMWindow.addEventListener("beforepaste", nativeBeforeClipboardEventCallback, NO);
+            self._DOMWindow.addEventListener("copy", nativeCopyOrCutEventCallback, NO);
+            self._DOMWindow.addEventListener("cut", nativeCopyOrCutEventCallback, NO);
+            self._DOMWindow.addEventListener("paste", nativePasteEventCallback, NO);
         }
         else
         {
-            theDocument.removeEventListener("beforepaste", pasteEventCallback, NO);
-            theDocument.removeEventListener("beforecopy", copyEventCallback, NO);
-            theDocument.removeEventListener("beforecut", copyEventCallback, NO);
+            theDocument.addEventListener("beforepaste", pasteEventCallback, NO);
+            theDocument.addEventListener("beforecopy", copyEventCallback, NO);
+            theDocument.addEventListener("beforecut", copyEventCallback, NO);
         }
-    }, NO);
+        self._DOMWindow.addEventListener("unload",         function()
+        {
+            if (self.supportsNativeCopyAndPaste)
+            {
+                self._DOMWindow.removeEventListener("beforecopy", nativeBeforeClipboardEventCallback, NO);
+                self._DOMWindow.removeEventListener("beforecut", nativeBeforeClipboardEventCallback, NO);
+                self._DOMWindow.removeEventListener("beforepaste", nativeBeforeClipboardEventCallback, NO);
+                self._DOMWindow.removeEventListener("copy", nativeCopyOrCutEventCallback, NO);
+                self._DOMWindow.removeEventListener("cut", nativeCopyOrCutEventCallback, NO);
+                self._DOMWindow.removeEventListener("paste", nativePasteEventCallback, NO);
+            }
+            else
+            {
+                theDocument.removeEventListener("beforepaste", pasteEventCallback, NO);
+                theDocument.removeEventListener("beforecopy", copyEventCallback, NO);
+                theDocument.removeEventListener("beforecut", copyEventCallback, NO);
+            }
+        }, NO);
+    }
+    else
+    {
+    }
 }
 
 ,["void"]), new objj_method(sel_getUid("destroyDOMElements"), function $CPPlatformPasteboard__destroyDOMElements(self, _cmd)
 {
-    const theDocument = self._DOMWindow.document,
+    var theDocument = self._DOMWindow.document,
         _DOMBodyElement = theDocument.getElementById("cappuccino-body") || theDocument.body;
     _DOMBodyElement.removeChild(self._DOMPasteboardElement);
     self._DOMPasteboardElement = nil;
@@ -85785,10 +85811,10 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CPPla
         self._ignoreNativeCopyOrCutEvent = NO;
         return;
     }
-    const modifierFlags = (anEvent == null ? anEvent : (anEvent.isa.method_msgSend["modifierFlags"] || _objj_forward)(anEvent, "modifierFlags"));
+    var modifierFlags = (anEvent == null ? anEvent : (anEvent.isa.method_msgSend["modifierFlags"] || _objj_forward)(anEvent, "modifierFlags"));
     if (!(modifierFlags & (CPControlKeyMask | CPCommandKeyMask)))
         return;
-    const aDOMEvent = anEvent._DOMEvent,
+    var aDOMEvent = anEvent._DOMEvent,
         characters = (anEvent == null ? anEvent : (anEvent.isa.method_msgSend["characters"] || _objj_forward)(anEvent, "characters")),
         mayRequireDOMPasteboardElement = (self.isa.method_msgSend["_mayRequireDOMPasteboardElementHack:flags:"] || _objj_forward)(self, "_mayRequireDOMPasteboardElementHack:flags:", aDOMEvent, modifierFlags);
     if (characters === "v" && mayRequireDOMPasteboardElement)
@@ -85857,7 +85883,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CPPla
 
 ,["BOOL"]), new objj_method(sel_getUid("_fakeClipboardEvent:type:"), function $CPPlatformPasteboard___fakeClipboardEvent_type_(self, _cmd, aDOMEvent, aType)
 {
-    const keyCode = aType === "x" ? CPKeyCodes.X : aType === "c" ? CPKeyCodes.C : CPKeyCodes.V,
+    var keyCode = aType === "x" ? CPKeyCodes.X : aType === "c" ? CPKeyCodes.C : CPKeyCodes.V,
         characters = aType,
         timestamp = (CPEvent.isa.method_msgSend["currentTimestamp"] || _objj_forward)(CPEvent, "currentTimestamp"),
         windowNumber = ((___r1 = (CPApp == null ? CPApp : (CPApp.isa.method_msgSend["keyWindow"] || _objj_forward)(CPApp, "keyWindow"))), ___r1 == null ? ___r1 : (___r1.isa.method_msgSend["windowNumber"] || _objj_forward)(___r1, "windowNumber")),
@@ -85874,7 +85900,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CPPla
 {
     if ((self.isa.method_msgSend["_mayRequireDOMPasteboardElementHack:flags:"] || _objj_forward)(self, "_mayRequireDOMPasteboardElementHack:flags:", aDOMEvent, CPPlatformActionKeyMask) && !self._ignoreNativeCopyOrCutEvent)
     {
-        const anEvent = (self.isa.method_msgSend["_fakeClipboardEvent:type:"] || _objj_forward)(self, "_fakeClipboardEvent:type:", aDOMEvent, aDOMEvent.type === "beforecut" ? "x" : "c");
+        var anEvent = (self.isa.method_msgSend["_fakeClipboardEvent:type:"] || _objj_forward)(self, "_fakeClipboardEvent:type:", aDOMEvent, aDOMEvent.type === "beforecut" ? "x" : "c");
         (CPApp == null ? CPApp : (CPApp.isa.method_msgSend["sendEvent:"] || _objj_forward)(CPApp, "sendEvent:", anEvent));
         (self.isa.method_msgSend["_primeDOMPasteboardElement"] || _objj_forward)(self, "_primeDOMPasteboardElement");
         self._ignoreNativeCopyOrCutEvent = YES;
@@ -85903,7 +85929,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CPPla
 
 ,["BOOL","DOMEvent","unsigned"]), new objj_method(sel_getUid("_primeDOMPasteboardElement"), function $CPPlatformPasteboard___primeDOMPasteboardElement(self, _cmd)
 {
-    const pasteboard = (CPPasteboard.isa.method_msgSend["generalPasteboard"] || _objj_forward)(CPPasteboard, "generalPasteboard"),
+    var pasteboard = (CPPasteboard.isa.method_msgSend["generalPasteboard"] || _objj_forward)(CPPasteboard, "generalPasteboard"),
         types = (pasteboard == null ? pasteboard : (pasteboard.isa.method_msgSend["types"] || _objj_forward)(pasteboard, "types"));
     if (types.length)
     {
@@ -85927,10 +85953,10 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CPPla
         (self.isa.method_msgSend["_clearDOMPasteboardElement"] || _objj_forward)(self, "_clearDOMPasteboardElement");
         return;
     }
-    const value = self._DOMPasteboardElement.value;
+    var value = self._DOMPasteboardElement.value;
     if ((value == null ? value : (value.isa.method_msgSend["length"] || _objj_forward)(value, "length")))
     {
-        const pasteboard = (CPPasteboard.isa.method_msgSend["generalPasteboard"] || _objj_forward)(CPPasteboard, "generalPasteboard"),
+        var pasteboard = (CPPasteboard.isa.method_msgSend["generalPasteboard"] || _objj_forward)(CPPasteboard, "generalPasteboard"),
             cappString = (pasteboard == null ? pasteboard : (pasteboard.isa.method_msgSend["stringForType:"] || _objj_forward)(pasteboard, "stringForType:", CPStringPboardType));
         if (cappString != value)
         {
@@ -85954,7 +85980,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CPPla
 {
     if (hasEditableTarget(aDOMEvent))
         return true;
-    let returnValue = YES;
+    var returnValue = YES;
     switch(aDOMEvent.type) {
         case "beforecopy":
             returnValue = !(CPApp == null ? CPApp : (CPApp.isa.method_msgSend["targetForAction:"] || _objj_forward)(CPApp, "targetForAction:", sel_getUid("copy:")));
@@ -85975,14 +86001,14 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CPPla
 {
     if (!self.supportsNativeCopyAndPaste)
         return;
-    let value;
+    var value;
     if (aDOMEvent.clipboardData && aDOMEvent.clipboardData.setData)
         value = aDOMEvent.clipboardData.getData('text/plain');
     else
         value = self._DOMWindow.clipboardData.getData("Text");
     if ((value == null ? value : (value.isa.method_msgSend["length"] || _objj_forward)(value, "length")))
     {
-        const pasteboard = (CPPasteboard.isa.method_msgSend["generalPasteboard"] || _objj_forward)(CPPasteboard, "generalPasteboard"),
+        var pasteboard = (CPPasteboard.isa.method_msgSend["generalPasteboard"] || _objj_forward)(CPPasteboard, "generalPasteboard"),
             cappString = (pasteboard == null ? pasteboard : (pasteboard.isa.method_msgSend["stringForType:"] || _objj_forward)(pasteboard, "stringForType:", CPStringPboardType));
         if (cappString != value)
         {
@@ -85990,7 +86016,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CPPla
             (pasteboard == null ? pasteboard : (pasteboard.isa.method_msgSend["setString:forType:"] || _objj_forward)(pasteboard, "setString:forType:", value, CPStringPboardType));
         }
     }
-    const anEvent = (self.isa.method_msgSend["_fakeClipboardEvent:type:"] || _objj_forward)(self, "_fakeClipboardEvent:type:", aDOMEvent, "v"),
+    var anEvent = (self.isa.method_msgSend["_fakeClipboardEvent:type:"] || _objj_forward)(self, "_fakeClipboardEvent:type:", aDOMEvent, "v"),
         platformWindow = ((___r1 = (anEvent == null ? anEvent : (anEvent.isa.method_msgSend["window"] || _objj_forward)(anEvent, "window"))), ___r1 == null ? ___r1 : (___r1.isa.method_msgSend["platformWindow"] || _objj_forward)(___r1, "platformWindow"));
     anEvent._suppressCappuccinoPaste = YES;
     (platformWindow == null ? platformWindow : (platformWindow.isa.method_msgSend["_propagateCurrentDOMEvent:"] || _objj_forward)(platformWindow, "_propagateCurrentDOMEvent:", NO));
@@ -86006,7 +86032,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CPPla
 {
     if (!self.supportsNativeCopyAndPaste)
         return;
-    const anEvent = (self.isa.method_msgSend["_fakeClipboardEvent:type:"] || _objj_forward)(self, "_fakeClipboardEvent:type:", aDOMEvent, aDOMEvent.type.indexOf("cut") != CPNotFound ? "x" : "c"),
+    var anEvent = (self.isa.method_msgSend["_fakeClipboardEvent:type:"] || _objj_forward)(self, "_fakeClipboardEvent:type:", aDOMEvent, aDOMEvent.type.indexOf("cut") != CPNotFound ? "x" : "c"),
         platformWindow = ((___r1 = (anEvent == null ? anEvent : (anEvent.isa.method_msgSend["window"] || _objj_forward)(anEvent, "window"))), ___r1 == null ? ___r1 : (___r1.isa.method_msgSend["platformWindow"] || _objj_forward)(___r1, "platformWindow"));
     anEvent._suppressCappuccinoCut = YES;
     (platformWindow == null ? platformWindow : (platformWindow.isa.method_msgSend["_propagateCurrentDOMEvent:"] || _objj_forward)(platformWindow, "_propagateCurrentDOMEvent:", NO));
@@ -86015,10 +86041,10 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CPPla
     if (!(platformWindow == null ? platformWindow : (platformWindow.isa.method_msgSend["_willPropagateCurrentDOMEvent"] || _objj_forward)(platformWindow, "_willPropagateCurrentDOMEvent")))
     {
         _CPDOMEventStop(aDOMEvent, self);
-        const pasteboard = (CPPasteboard.isa.method_msgSend["generalPasteboard"] || _objj_forward)(CPPasteboard, "generalPasteboard");
+        var pasteboard = (CPPasteboard.isa.method_msgSend["generalPasteboard"] || _objj_forward)(CPPasteboard, "generalPasteboard");
         if (((___r1 = (pasteboard == null ? pasteboard : (pasteboard.isa.method_msgSend["types"] || _objj_forward)(pasteboard, "types"))), ___r1 == null ? ___r1 : (___r1.isa.method_msgSend["containsObject:"] || _objj_forward)(___r1, "containsObject:", CPStringPboardType)))
         {
-            const stringValue = (pasteboard == null ? pasteboard : (pasteboard.isa.method_msgSend["stringForType:"] || _objj_forward)(pasteboard, "stringForType:", CPStringPboardType));
+            var stringValue = (pasteboard == null ? pasteboard : (pasteboard.isa.method_msgSend["stringForType:"] || _objj_forward)(pasteboard, "stringForType:", CPStringPboardType));
             if (aDOMEvent.clipboardData && aDOMEvent.clipboardData.setData)
                 aDOMEvent.clipboardData.setData('text/plain', stringValue);
             else
@@ -86031,7 +86057,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("init"), function $CPPla
 
 ,["BOOL","DOMEvent"])]);
 }
-p;22;CPPlatformWindow+DOM.jt;86714;@STATIC;1.0;I;33;Foundation/CPNotificationCenter.jI;21;Foundation/CPObject.jI;22;Foundation/CPRunLoop.jI;18;Foundation/CPSet.jI;20;Foundation/CPTimer.ji;25;CPApplication_Constants.ji;17;CPCompatibility.ji;10;CPCursor.ji;18;CPDOMWindowLayer.ji;24;CPDragServer_Constants.ji;9;CPEvent.ji;14;CPPasteboard.ji;12;CPPlatform.ji;22;CPPlatformPasteboard.ji;26;CPPlatformWindow+DOMKeys.ji;18;CPPlatformWindow.ji;8;CPText.ji;20;CPWindow_Constants.jt;86269;objj_executeFile("Foundation/CPNotificationCenter.j", NO);objj_executeFile("Foundation/CPObject.j", NO);objj_executeFile("Foundation/CPRunLoop.j", NO);objj_executeFile("Foundation/CPSet.j", NO);objj_executeFile("Foundation/CPTimer.j", NO);objj_executeFile("CPApplication_Constants.j", YES);objj_executeFile("CPCompatibility.j", YES);objj_executeFile("CPCursor.j", YES);objj_executeFile("CPDOMWindowLayer.j", YES);objj_executeFile("CPDragServer_Constants.j", YES);objj_executeFile("CPEvent.j", YES);objj_executeFile("CPPasteboard.j", YES);objj_executeFile("CPPlatform.j", YES);objj_executeFile("CPPlatformPasteboard.j", YES);objj_executeFile("CPPlatformWindow+DOMKeys.j", YES);objj_executeFile("CPPlatformWindow.j", YES);objj_executeFile("CPText.j", YES);objj_executeFile("CPWindow_Constants.j", YES);var PlatformWindows = (CPSet.isa.method_msgSend["set"] || _objj_forward)(CPSet, "set");
+p;22;CPPlatformWindow+DOM.jt;86712;@STATIC;1.0;I;33;Foundation/CPNotificationCenter.jI;21;Foundation/CPObject.jI;22;Foundation/CPRunLoop.jI;18;Foundation/CPSet.jI;20;Foundation/CPTimer.ji;25;CPApplication_Constants.ji;17;CPCompatibility.ji;10;CPCursor.ji;18;CPDOMWindowLayer.ji;24;CPDragServer_Constants.ji;9;CPEvent.ji;14;CPPasteboard.ji;12;CPPlatform.ji;22;CPPlatformPasteboard.ji;26;CPPlatformWindow+DOMKeys.ji;18;CPPlatformWindow.ji;8;CPText.ji;20;CPWindow_Constants.jt;86267;objj_executeFile("Foundation/CPNotificationCenter.j", NO);objj_executeFile("Foundation/CPObject.j", NO);objj_executeFile("Foundation/CPRunLoop.j", NO);objj_executeFile("Foundation/CPSet.j", NO);objj_executeFile("Foundation/CPTimer.j", NO);objj_executeFile("CPApplication_Constants.j", YES);objj_executeFile("CPCompatibility.j", YES);objj_executeFile("CPCursor.j", YES);objj_executeFile("CPDOMWindowLayer.j", YES);objj_executeFile("CPDragServer_Constants.j", YES);objj_executeFile("CPEvent.j", YES);objj_executeFile("CPPasteboard.j", YES);objj_executeFile("CPPlatform.j", YES);objj_executeFile("CPPlatformPasteboard.j", YES);objj_executeFile("CPPlatformWindow+DOMKeys.j", YES);objj_executeFile("CPPlatformWindow.j", YES);objj_executeFile("CPText.j", YES);objj_executeFile("CPWindow_Constants.j", YES);var PlatformWindows = (CPSet.isa.method_msgSend["set"] || _objj_forward)(CPSet, "set");
 var CPDOMEventGetClickCount,
     StopDOMEventPropagation,
     StopContextMenuDOMEventPropagation;
@@ -86315,7 +86341,7 @@ var meta_class = the_class.isa;class_addMethods(the_class, [new objj_method(sel_
         self._DOMWindow.addEventListener("focus", onFocusEventCallback, NO);
         self._DOMWindow.addEventListener("pagehide",         function()
         {
-            self._DOMWindow.removeEventListener("pagehide", arguments.callee, NO);
+            self._DOMWindow.removeEventListener("unload", arguments.callee, NO);
             (self.isa.method_msgSend["blurEvent:"] || _objj_forward)(self, "blurEvent:", nil);
             (self.isa.method_msgSend["_notifyPlatformWindowWillClose"] || _objj_forward)(self, "_notifyPlatformWindowWillClose");
             (self.isa.method_msgSend["updateFromNativeContentRect"] || _objj_forward)(self, "updateFromNativeContentRect");
