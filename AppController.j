@@ -37,7 +37,8 @@
     CPWindow        theWindow;
     CPOutlineView   outlineView;
     CPWebView       docWebView;
-    
+    CPScrollView    leftScroll;
+
     CPSearchField   searchField;
     CPTextField     _searchStatusLabel;
     CPCheckBox      showPrivateCheckbox;
@@ -129,9 +130,9 @@
     [splitView setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
     [splitView setVertical:YES];
     
-    // --- Linke Seite: Outline View ---
-    var leftScroll = [[CPScrollView alloc] initWithFrame:CGRectMake(0, 0, 300, CGRectGetHeight([splitView bounds]))];
-    [leftScroll setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
+    var leftWidth = 300.0;
+    leftScroll = [[CPScrollView alloc] initWithFrame:CGRectMake(0, 0, leftWidth, CGRectGetHeight([splitView bounds]))];
+    [leftScroll setAutoresizingMask:CPViewHeightSizable];
     [leftScroll setAutohidesScrollers:YES];
     
     outlineView = [[CPOutlineView alloc] initWithFrame:[leftScroll bounds]];
@@ -146,17 +147,18 @@
     
     [splitView addSubview:leftScroll];
 
-    // --- Rechte Seite: Web View für formatierten Text ---
     var rightView = [[CPView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([splitView bounds]) - 300, CGRectGetHeight([splitView bounds]))];
     [rightView setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
 
     docWebView = [[CPWebView alloc] initWithFrame:[rightView bounds]];
     [docWebView setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
+    [docWebView setScrollMode:CPWebViewScrollNative];
     [rightView addSubview:docWebView];
-    
+
     [splitView addSubview:rightView];
-    [splitView adjustSubviews]; // Force the layout engine to arrange both panes cleanly
-    
+
+    [splitView adjustSubviews];
+
     [contentView addSubview:splitView];
 
     // Daten laden
@@ -164,17 +166,17 @@
     [self loadDocumentationData];
 }
 
-// Hilfsmethode, die das WebView bei jedem Klick neu aufbaut, um Browser-iFrame-Glitches zu verhindern
 - (void)updateWebViewWithHTML:(CPString)html
 {
     var parentView = [docWebView superview];
     if (parentView)
     {
-        var frame = [docWebView frame];
+        var bounds = [parentView bounds];
         [docWebView removeFromSuperview];
         
-        docWebView = [[CPWebView alloc] initWithFrame:frame];
+        docWebView = [[CPWebView alloc] initWithFrame:bounds];
         [docWebView setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
+        [docWebView setScrollMode:CPWebViewScrollNative];
         [parentView addSubview:docWebView];
     }
     
