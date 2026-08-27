@@ -5455,7 +5455,7 @@
                      },
                      {
                         "name" : "event",
-                        "type" : "CPEvent "
+                        "type" : "CPEvent"
                      }
                   ],
                   "returnType" : "BOOL",
@@ -8806,7 +8806,7 @@
                   "parameters" : [
                      {
                         "name" : "aSender",
-                        "type" : "id /*<CPDraggingInfo>*/"
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "BOOL",
@@ -8865,7 +8865,7 @@
                   "parameters" : [
                      {
                         "name" : "aSender",
-                        "type" : "id /*<CPDraggingInfo>*/"
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "BOOL",
@@ -13834,7 +13834,7 @@
                         "type" : "id"
                      }
                   ],
-                  "returnType" : "CPString ",
+                  "returnType" : "CPString",
                   "scope" : "instance"
                },
                {
@@ -20440,7 +20440,7 @@
                   "parameters" : [
                      {
                         "name" : "handler",
-                        "type" : "Function/*CPView *dataView, CPInteger row, CPInteger column*, @ref stop*/"
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "void",
@@ -33124,7 +33124,7 @@
                      },
                      {
                         "name" : "info",
-                        "type" : "id /*<CPDraggingInfo>*/"
+                        "type" : "id"
                      },
                      {
                         "name" : "anItem",
@@ -33216,7 +33216,7 @@
                      },
                      {
                         "name" : "info",
-                        "type" : "id /*<CPDraggingInfo>*/"
+                        "type" : "id"
                      },
                      {
                         "name" : "anItem",
@@ -33243,7 +33243,7 @@
                      },
                      {
                         "name" : "info",
-                        "type" : "id /*<CPDraggingInfo>*/"
+                        "type" : "id"
                      },
                      {
                         "name" : "theRow",
@@ -33888,7 +33888,7 @@
                      },
                      {
                         "name" : "theInfo",
-                        "type" : "id /*< CPDraggingInfo >*/"
+                        "type" : "id"
                      },
                      {
                         "name" : "theRow",
@@ -33913,7 +33913,7 @@
                      },
                      {
                         "name" : "theInfo",
-                        "type" : "id /*<CPDraggingInfo>*/"
+                        "type" : "id"
                      },
                      {
                         "name" : "theRow",
@@ -36230,7 +36230,7 @@
                   "parameters" : [
                      {
                         "name" : "anItem",
-                        "type" : "id /*<CPValidatedUserInterfaceItem>*/"
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "BOOL",
@@ -44088,7 +44088,13 @@
                   "declaration" : "- (void)loadViewWithCompletionHandler:(Function/*(view, error)*/)aHandler",
                   "discussion" : "\n    @param aHandler a function which will be passed the loaded view as the first\n    argument and a network error or nil as the second argument: function(view, error).\n\n    @note If the view has already been loaded, the completion handler is run immediatly\n    and the process is synchronous.",
                   "kind" : "method",
-                  "name" : "",
+                  "name" : "loadViewWithCompletionHandler:",
+                  "parameters" : [
+                     {
+                        "name" : "aHandler",
+                        "type" : "Function"
+                     }
+                  ],
                   "returnType" : "void",
                   "scope" : "instance"
                },
@@ -46447,7 +46453,13 @@
                   "declaration" : "- (void)runModalWithDidEndBlock:(Function /*(CPAlert alert, int returnCode)*/)block",
                   "discussion" : "    alert is dismissed.",
                   "kind" : "method",
-                  "name" : "",
+                  "name" : "runModalWithDidEndBlock:",
+                  "parameters" : [
+                     {
+                        "name" : "block",
+                        "type" : "Function"
+                     }
+                  ],
                   "returnType" : "void",
                   "scope" : "instance"
                },
@@ -46498,11 +46510,15 @@
                   "declaration" : "- (void)beginSheetModalForWindow:(CPWindow)aWindow didEndBlock:(Function /*(CPAlert alert, int returnCode)*/)block",
                   "discussion" : "    Executes the code in \\c block when the alert is dismissed.\n\n    @param window The parent window for the sheet.\n    @param block  Code block to execute on dismissal",
                   "kind" : "method",
-                  "name" : "beginSheetModalForWindow:",
+                  "name" : "beginSheetModalForWindow:didEndBlock:",
                   "parameters" : [
                      {
                         "name" : "aWindow",
                         "type" : "CPWindow"
+                     },
+                     {
+                        "name" : "block",
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "void",
@@ -61171,7 +61187,7 @@
                   "parameters" : [
                      {
                         "name" : "menuItem",
-                        "type" : "CPMenuItem "
+                        "type" : "CPMenuItem"
                      }
                   ],
                   "returnType" : "BOOL",
@@ -62387,7 +62403,7 @@
                   "parameters" : [
                      {
                         "name" : "sender",
-                        "type" : "id /*< CPDraggingInfo >*/"
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "CPDragOperation",
@@ -62413,7 +62429,7 @@
                   "parameters" : [
                      {
                         "name" : "sender",
-                        "type" : "id /*<CPDraggingInfo>*/"
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "CPDragOperation",
@@ -62426,7 +62442,7 @@
                   "parameters" : [
                      {
                         "name" : "sender",
-                        "type" : "id /*< CPDraggingInfo >*/"
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "BOOL",
@@ -62439,7 +62455,7 @@
                   "parameters" : [
                      {
                         "name" : "info",
-                        "type" : "id /*< CPDraggingInfo >*/"
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "BOOL",
@@ -62845,7 +62861,7 @@
                   "parameters" : [
                      {
                         "name" : "leftExpressions",
-                        "type" : "CPArray "
+                        "type" : "CPArray"
                      },
                      {
                         "name" : "attributeType",
@@ -62857,7 +62873,7 @@
                      },
                      {
                         "name" : "operators",
-                        "type" : "CPArray "
+                        "type" : "CPArray"
                      },
                      {
                         "name" : "options",
@@ -62876,7 +62892,7 @@
                   "parameters" : [
                      {
                         "name" : "compoundTypes",
-                        "type" : "CPArray "
+                        "type" : "CPArray"
                      }
                   ],
                   "returnType" : "id",
@@ -71042,7 +71058,7 @@
                      },
                      {
                         "name" : "reference",
-                        "type" : "float/*[2]*/"
+                        "type" : "float"
                      }
                   ],
                   "returnType" : "void",
@@ -71210,8 +71226,12 @@
                {
                   "declaration" : "+ (void)runAnimationGroup:(Function/*(CPAnimationContext context)*/)animationsBlock completionHandler:(Function)aCompletionHandler",
                   "kind" : "method",
-                  "name" : "completionHandler:",
+                  "name" : "runAnimationGroup:completionHandler:",
                   "parameters" : [
+                     {
+                        "name" : "animationsBlock",
+                        "type" : "Function"
+                     },
                      {
                         "name" : "aCompletionHandler",
                         "type" : "Function"
@@ -77202,18 +77222,28 @@
                {
                   "declaration" : "- (void)enumerateIndexesUsingBlock:(Function /*(int idx, @ref BOOL stop) */)aFunction",
                   "kind" : "method",
-                  "name" : "",
+                  "name" : "enumerateIndexesUsingBlock:",
+                  "parameters" : [
+                     {
+                        "name" : "aFunction",
+                        "type" : "Function"
+                     }
+                  ],
                   "returnType" : "void",
                   "scope" : "instance"
                },
                {
                   "declaration" : "- (void)enumerateIndexesWithOptions:(CPEnumerationOptions)options usingBlock:(Function /*(int idx, @ref BOOL stop)*/)aFunction",
                   "kind" : "method",
-                  "name" : "enumerateIndexesWithOptions:",
+                  "name" : "enumerateIndexesWithOptions:usingBlock:",
                   "parameters" : [
                      {
                         "name" : "options",
                         "type" : "CPEnumerationOptions"
+                     },
+                     {
+                        "name" : "aFunction",
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "void",
@@ -77222,7 +77252,7 @@
                {
                   "declaration" : "- (void)enumerateIndexesInRange:(CPRange)enumerationRange options:(CPEnumerationOptions)options usingBlock:(Function /*(int idx, @ref BOOL stop)*/)aFunction",
                   "kind" : "method",
-                  "name" : "enumerateIndexesInRange:options:",
+                  "name" : "enumerateIndexesInRange:options:usingBlock:",
                   "parameters" : [
                      {
                         "name" : "enumerationRange",
@@ -77231,6 +77261,10 @@
                      {
                         "name" : "options",
                         "type" : "CPEnumerationOptions"
+                     },
+                     {
+                        "name" : "aFunction",
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "void",
@@ -77239,25 +77273,41 @@
                {
                   "declaration" : "- (unsigned)indexPassingTest:(Function /*(int anIndex)*/)aPredicate",
                   "kind" : "method",
-                  "name" : "",
+                  "name" : "indexPassingTest:",
+                  "parameters" : [
+                     {
+                        "name" : "aPredicate",
+                        "type" : "Function"
+                     }
+                  ],
                   "returnType" : "unsigned",
                   "scope" : "instance"
                },
                {
                   "declaration" : "- (CPIndexSet)indexesPassingTest:(Function /*(int anIndex)*/)aPredicate",
                   "kind" : "method",
-                  "name" : "",
+                  "name" : "indexesPassingTest:",
+                  "parameters" : [
+                     {
+                        "name" : "aPredicate",
+                        "type" : "Function"
+                     }
+                  ],
                   "returnType" : "CPIndexSet",
                   "scope" : "instance"
                },
                {
                   "declaration" : "- (unsigned)indexWithOptions:(CPEnumerationOptions)anOptions passingTest:(Function /*(int anIndex)*/)aPredicate",
                   "kind" : "method",
-                  "name" : "indexWithOptions:",
+                  "name" : "indexWithOptions:passingTest:",
                   "parameters" : [
                      {
                         "name" : "anOptions",
                         "type" : "CPEnumerationOptions"
+                     },
+                     {
+                        "name" : "aPredicate",
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "unsigned",
@@ -77266,11 +77316,15 @@
                {
                   "declaration" : "- (CPIndexSet)indexesWithOptions:(CPEnumerationOptions)anOptions passingTest:(Function /*(int anIndex)*/)aPredicate",
                   "kind" : "method",
-                  "name" : "indexesWithOptions:",
+                  "name" : "indexesWithOptions:passingTest:",
                   "parameters" : [
                      {
                         "name" : "anOptions",
                         "type" : "CPEnumerationOptions"
+                     },
+                     {
+                        "name" : "aPredicate",
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "CPIndexSet",
@@ -77279,7 +77333,7 @@
                {
                   "declaration" : "- (unsigned)indexInRange:(CPRange)aRange options:(CPEnumerationOptions)anOptions passingTest:(Function /*(int anIndex)*/)aPredicate",
                   "kind" : "method",
-                  "name" : "indexInRange:options:",
+                  "name" : "indexInRange:options:passingTest:",
                   "parameters" : [
                      {
                         "name" : "aRange",
@@ -77288,6 +77342,10 @@
                      {
                         "name" : "anOptions",
                         "type" : "CPEnumerationOptions"
+                     },
+                     {
+                        "name" : "aPredicate",
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "unsigned",
@@ -77296,7 +77354,7 @@
                {
                   "declaration" : "- (CPIndexSet)indexesInRange:(CPRange)aRange options:(CPEnumerationOptions)anOptions passingTest:(Function /*(int anIndex)*/)aPredicate",
                   "kind" : "method",
-                  "name" : "indexesInRange:options:",
+                  "name" : "indexesInRange:options:passingTest:",
                   "parameters" : [
                      {
                         "name" : "aRange",
@@ -77305,6 +77363,10 @@
                      {
                         "name" : "anOptions",
                         "type" : "CPEnumerationOptions"
+                     },
+                     {
+                        "name" : "aPredicate",
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "CPIndexSet",
@@ -85076,18 +85138,28 @@
                {
                   "declaration" : "- (CPArray)keysOfEntriesPassingTest:(Function /*(id key, id obj, @ref BOOL stop)*/)predicate",
                   "kind" : "method",
-                  "name" : "",
+                  "name" : "keysOfEntriesPassingTest:",
+                  "parameters" : [
+                     {
+                        "name" : "predicate",
+                        "type" : "Function"
+                     }
+                  ],
                   "returnType" : "CPArray",
                   "scope" : "instance"
                },
                {
                   "declaration" : "- (CPArray)keysOfEntriesWithOptions:(CPEnumerationOptions)options passingTest:(Function /*(id key, id obj, @ref BOOL stop)*/)predicate",
                   "kind" : "method",
-                  "name" : "keysOfEntriesWithOptions:",
+                  "name" : "keysOfEntriesWithOptions:passingTest:",
                   "parameters" : [
                      {
                         "name" : "options",
                         "type" : "CPEnumerationOptions"
+                     },
+                     {
+                        "name" : "predicate",
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "CPArray",
@@ -85096,7 +85168,13 @@
                {
                   "declaration" : "- (CPArray)keysSortedByValueUsingComparator:(Function /*(id obj1, id obj2)*/)comparator",
                   "kind" : "method",
-                  "name" : "",
+                  "name" : "keysSortedByValueUsingComparator:",
+                  "parameters" : [
+                     {
+                        "name" : "comparator",
+                        "type" : "Function"
+                     }
+                  ],
                   "returnType" : "CPArray",
                   "scope" : "instance"
                },
@@ -85278,18 +85356,28 @@
                {
                   "declaration" : "- (void)enumerateKeysAndObjectsUsingBlock:(Function /*(id aKey, id anObject, @ref BOOL stop)*/)aFunction",
                   "kind" : "method",
-                  "name" : "",
+                  "name" : "enumerateKeysAndObjectsUsingBlock:",
+                  "parameters" : [
+                     {
+                        "name" : "aFunction",
+                        "type" : "Function"
+                     }
+                  ],
                   "returnType" : "void",
                   "scope" : "instance"
                },
                {
                   "declaration" : "- (void)enumerateKeysAndObjectsWithOptions:(CPEnumerationOptions)opts usingBlock:(Function /*(id aKey, id anObject, @ref BOOL stop)*/)aFunction",
                   "kind" : "method",
-                  "name" : "enumerateKeysAndObjectsWithOptions:",
+                  "name" : "enumerateKeysAndObjectsWithOptions:usingBlock:",
                   "parameters" : [
                      {
                         "name" : "opts",
                         "type" : "CPEnumerationOptions"
+                     },
+                     {
+                        "name" : "aFunction",
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "void",
@@ -94598,7 +94686,13 @@
                   "declaration" : "- (unsigned)indexOfObjectPassingTest:(Function /*(id anObject, int idx)*/)aPredicate",
                   "discussion" : "    @param predicate The function to apply to objects of the array. The function should have the signature:\n    @code function(object, index) @endcode\n    The predicate function should either return a Boolean value that indicates whether the object passed the test,\n    or nil to stop the search, which will return \\c CPNotFound to the sender.\n    @return The index of the first matching object, or \\c CPNotFound if there is no matching object.",
                   "kind" : "method",
-                  "name" : "",
+                  "name" : "indexOfObjectPassingTest:",
+                  "parameters" : [
+                     {
+                        "name" : "aPredicate",
+                        "type" : "Function"
+                     }
+                  ],
                   "returnType" : "unsigned",
                   "scope" : "instance"
                },
@@ -94607,8 +94701,12 @@
                   "declaration" : "- (unsigned)indexOfObjectPassingTest:(Function /*(id anObject, int idx, id context)*/)aPredicate context:(id)aContext",
                   "discussion" : "    @param predicate The function to apply to objects of the array. The function should have the signature:\n    @code function(object, index, context) @endcode\n    The predicate function should either return a Boolean value that indicates whether the object passed the test,\n    or nil to stop the search, which will return \\c CPNotFound to the sender.\n    @param context An object that contains context information you want passed to the predicate function.\n    @return The index of the first matching object, or \\c CPNotFound if there is no matching object.",
                   "kind" : "method",
-                  "name" : "context:",
+                  "name" : "indexOfObjectPassingTest:context:",
                   "parameters" : [
+                     {
+                        "name" : "aPredicate",
+                        "type" : "Function"
+                     },
                      {
                         "name" : "aContext",
                         "type" : "id"
@@ -94622,11 +94720,15 @@
                   "declaration" : "- (unsigned)indexOfObjectWithOptions:(CPEnumerationOptions)options passingTest:(Function /*(id anObject, int idx)*/)aPredicate",
                   "discussion" : "    @param options Specifies the direction in which the array is searched. Pass CPEnumerationNormal to search forwards\n    or CPEnumerationReverse to search in reverse.\n    @param predicate The function to apply to objects of the array. The function should have the signature:\n    @code function(object, index) @endcode\n    The predicate function should either return a Boolean value that indicates whether the object passed the test,\n    or nil to stop the search, which will return CPNotFound to the sender.\n    @return The index of the first matching object, or \\c CPNotFound if there is no matching object.",
                   "kind" : "method",
-                  "name" : "indexOfObjectWithOptions:",
+                  "name" : "indexOfObjectWithOptions:passingTest:",
                   "parameters" : [
                      {
                         "name" : "options",
                         "type" : "CPEnumerationOptions"
+                     },
+                     {
+                        "name" : "aPredicate",
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "unsigned",
@@ -94637,11 +94739,15 @@
                   "declaration" : "- (unsigned)indexOfObjectWithOptions:(CPEnumerationOptions)options passingTest:(Function /*(id anObject, int idx, id context)*/)aPredicate context:(id)aContext",
                   "discussion" : "    @param options Specifies the direction in which the array is searched. Pass CPEnumerationNormal to search forwards\n    or CPEnumerationReverse to search in reverse.\n    @param predicate The function to apply to objects of the array. The function should have the signature:\n    @code function(object, index, context) @endcode\n    The predicate function should either return a Boolean value that indicates whether the object passed the test,\n    or nil to stop the search, which will return CPNotFound to the sender.\n    @param context An object that contains context information you want passed to the predicate function.\n    @return The index of the first matching object, or \\c CPNotFound if there is no matching object.",
                   "kind" : "method",
-                  "name" : "indexOfObjectWithOptions:context:",
+                  "name" : "indexOfObjectWithOptions:passingTest:context:",
                   "parameters" : [
                      {
                         "name" : "options",
                         "type" : "CPEnumerationOptions"
+                     },
+                     {
+                        "name" : "aPredicate",
+                        "type" : "Function"
                      },
                      {
                         "name" : "aContext",
@@ -94681,7 +94787,13 @@
                   "declaration" : "- (CPIndexSet)indexesOfObjectsPassingTest:(Function /*(id anObject, int idx)*/)aPredicate",
                   "discussion" : "    @param predicate The function to apply to objects of the array. The function should have the signature:\n    @code function(object, index) @endcode\n    The predicate function should either return a Boolean value that indicates whether the object passed the test,\n    or nil to stop the search, which will return \\c CPNotFound to the sender.\n    @return A CPIndexSet of the matching object indexes.",
                   "kind" : "method",
-                  "name" : "",
+                  "name" : "indexesOfObjectsPassingTest:",
+                  "parameters" : [
+                     {
+                        "name" : "aPredicate",
+                        "type" : "Function"
+                     }
+                  ],
                   "returnType" : "CPIndexSet",
                   "scope" : "instance"
                },
@@ -94690,8 +94802,12 @@
                   "declaration" : "- (CPIndexSet)indexesOfObjectsPassingTest:(Function /*(id anObject, int idx, id context)*/)aPredicate context:(id)aContext",
                   "discussion" : "    @param predicate The function to apply to objects of the array. The function should have the signature:\n    @code function(object, index, context) @endcode\n    The predicate function should either return a Boolean value that indicates whether the object passed the test,\n    or nil to stop the search, which will return \\c CPNotFound to the sender.\n    @param context An object that contains context information you want passed to the predicate function.\n    @return A CPIndexSet of the matching object indexes.",
                   "kind" : "method",
-                  "name" : "context:",
+                  "name" : "indexesOfObjectsPassingTest:context:",
                   "parameters" : [
+                     {
+                        "name" : "aPredicate",
+                        "type" : "Function"
+                     },
                      {
                         "name" : "aContext",
                         "type" : "id"
@@ -94705,11 +94821,15 @@
                   "declaration" : "- (CPIndexSet)indexesOfObjectsWithOptions:(CPEnumerationOptions)options passingTest:(Function /*(id anObject, int idx)*/)aPredicate",
                   "discussion" : "    @param options Specifies the direction in which the array is searched. Pass CPEnumerationNormal to search forwards\n    or CPEnumerationReverse to search in reverse.\n    @param predicate The function to apply to objects of the array. The function should have the signature:\n    @code function(object, index) @endcode\n    The predicate function should either return a Boolean value that indicates whether the object passed the test,\n    or nil to stop the search, which will return CPNotFound to the sender.\n    @return A CPIndexSet of the matching object indexes.",
                   "kind" : "method",
-                  "name" : "indexesOfObjectsWithOptions:",
+                  "name" : "indexesOfObjectsWithOptions:passingTest:",
                   "parameters" : [
                      {
                         "name" : "options",
                         "type" : "CPEnumerationOptions"
+                     },
+                     {
+                        "name" : "aPredicate",
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "CPIndexSet",
@@ -94720,11 +94840,15 @@
                   "declaration" : "- (CPIndexSet)indexesOfObjectsWithOptions:(CPEnumerationOptions)options passingTest:(Function /*(id anObject, int idx, id context)*/)aPredicate context:(id)aContext",
                   "discussion" : "    @param options Specifies the direction in which the array is searched. Pass CPEnumerationNormal to search forwards\n    or CPEnumerationReverse to search in reverse.\n    @param predicate The function to apply to objects of the array. The function should have the signature:\n    @code function(object, index, context) @endcode\n    The predicate function should either return a Boolean value that indicates whether the object passed the test,\n    or nil to stop the search, which will return CPNotFound to the sender.\n    @param context An object that contains context information you want passed to the predicate function.\n    @return A CPIndexSet of the matching object indexes.",
                   "kind" : "method",
-                  "name" : "indexesOfObjectsWithOptions:context:",
+                  "name" : "indexesOfObjectsWithOptions:passingTest:context:",
                   "parameters" : [
                      {
                         "name" : "options",
                         "type" : "CPEnumerationOptions"
+                     },
+                     {
+                        "name" : "aPredicate",
+                        "type" : "Function"
                      },
                      {
                         "name" : "aContext",
@@ -94788,18 +94912,28 @@
                {
                   "declaration" : "- (void)enumerateObjectsUsingBlock:(Function /*(id anObject, int idx, @ref BOOL stop)*/)aFunction",
                   "kind" : "method",
-                  "name" : "",
+                  "name" : "enumerateObjectsUsingBlock:",
+                  "parameters" : [
+                     {
+                        "name" : "aFunction",
+                        "type" : "Function"
+                     }
+                  ],
                   "returnType" : "void",
                   "scope" : "instance"
                },
                {
                   "declaration" : "- (void)enumerateObjectsWithOptions:(CPEnumerationOptions)options usingBlock:(Function /*(id anObject, int idx, @ref BOOL stop)*/)aFunction",
                   "kind" : "method",
-                  "name" : "enumerateObjectsWithOptions:",
+                  "name" : "enumerateObjectsWithOptions:usingBlock:",
                   "parameters" : [
                      {
                         "name" : "options",
                         "type" : "CPEnumerationOptions"
+                     },
+                     {
+                        "name" : "aFunction",
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "void",
@@ -94990,7 +95124,7 @@
                   "parameters" : [
                      {
                         "name" : "aFunction",
-                        "type" : "Function/*element, index*/"
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "CPArray",
@@ -95837,7 +95971,7 @@
                   "parameters" : [
                      {
                         "name" : "aFunction",
-                        "type" : "Function/*element, index*/"
+                        "type" : "Function"
                      }
                   ],
                   "returnType" : "CPArray",

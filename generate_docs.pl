@@ -117,56 +117,66 @@ sub parse_file {
     };
     
     # Helper to parse and store method signatures
+    # Helper to parse and store method signatures
     my $process_method = sub {
         my ($str) = @_;
-        
+
         # Strip inline bodies, trailing semicolons
         $str =~ s/\{.*//;
-        $str =~ s/;\s*$//;
-        $str =~ s/\s+$//;
-        
-        # Save a cleaner declaration string
-        my $decl = $str;
-        $decl =~ s/^\s+//;
-        $decl =~ s/\s+/ /g; # compact multiple spaces purely for display
-        
-        return unless $str =~ /^\s*([-+])\s*\(([^)]+)\)\s*(.*)$/;
-        
-        my $scope = $1 eq '+' ? 'class' : 'instance';
-        my $ret   = $2;
-        my $sig   = $3;
-        
-        my $name = "";
-        my @params = ();
-        
-        if ($sig !~ /:/) {
-            $name = $sig;
-            $name =~ s/\s+//g;
-        } else {
-            # Parse parameters: Segment:(Type)argName
-            while ($sig =~ /([A-Za-z0-9_]+):\s*\(([^)]+)\)\s*([A-Za-z0-9_]+)/g) {
-                $name .= "$1:";
-                push @params, { type => $2, name => $3 };
+            $str =~ s/;\s*$//;
+            $str =~ s/\s+$//;
+
+            # Save a cleaner declaration string (preserves original comments in documentation)
+            my $decl = $str;
+            $decl =~ s/^\s+//;
+            $decl =~ s/\s+/ /g; # compact multiple spaces purely for display
+
+            # Clean inline comments on a working copy for accurate regex parsing
+            my $clean_str = $str;
+            $clean_str =~ s{/\*.*?\*/}{}g;
+
+            return unless $clean_str =~ /^\s*([-+])\s*\(([^)]+)\)\s*(.*)$/;
+
+            my $scope = $1 eq '+' ? 'class' : 'instance';
+            my $ret   = $2;
+            my $sig   = $3;
+
+            $ret =~ s/^\s+|\s+$//g;
+
+            my $name = "";
+            my @params = ();
+
+            if ($sig !~ /:/) {
+                $name = $sig;
+                $name =~ s/\s+//g;
+            } else {
+                # Parse parameters: Segment:(Type)argName
+                while ($sig =~ /([A-Za-z0-9_]+):\s*\(([^)]+)\)\s*([A-Za-z0-9_]+)/g) {
+                    $name .= "$1:";
+                    my ($p_type, $p_name) = ($2, $3);
+                    $p_type =~ s/^\s+|\s+$//g;
+                    push @params, { type => $p_type, name => $p_name };
+                }
             }
-        }
-        
-        return if $name =~ /^_/; # Skip internal / private methods
-        
-        my ($abstract, $discussion, $deprecated) = $consume_doc->();
-        my $sym = {
-            kind        => 'method',
-            scope       => $scope,
-            name        => $name,
-            declaration => $decl,
-            returnType  => $ret
+
+            return if $name =~ /^_/; # Skip internal / private methods
+
+            my ($abstract, $discussion, $deprecated) = $consume_doc->();
+            my $sym = {
+                kind        => 'method',
+                scope       => $scope,
+                name        => $name,
+                declaration => $decl,
+                returnType  => $ret
+            };
+            $sym->{parameters} = \@params if @params;
+            $sym->{abstract}   = $abstract if $abstract;
+            $sym->{discussion} = $discussion if $discussion;
+            $sym->{deprecated} = $deprecated if $deprecated;
+
+            push @{$current_topic->{symbols}}, $sym;
         };
-        $sym->{parameters} = \@params if @params;
-        $sym->{abstract}   = $abstract if $abstract;
-        $sym->{discussion} = $discussion if $discussion;
-        $sym->{deprecated} = $deprecated if $deprecated;
-        
-        push @{$current_topic->{symbols}}, $sym;
-    };
+    
 
     while (my $line = <$fh>) {
         chomp $line;
