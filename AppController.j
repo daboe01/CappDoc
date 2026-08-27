@@ -426,9 +426,17 @@
         pathToExpand.push(p);
         p = [p parent];
     }
+    
+    // Save current animation state and disable during batch expansion
+    var wasAnimates = [outlineView animates];
+    [outlineView setAnimates:NO];
+
     for (var i = pathToExpand.length - 1; i >= 0; i--) {
         [outlineView expandItem:pathToExpand[i]];
     }
+
+    // Restore animation state
+    [outlineView setAnimates:wasAnimates];
     
     var row = [outlineView rowForItem:node];
     if (row >= 0) {
@@ -461,9 +469,15 @@
             pathToExpand.push(p);
             p = [p parent];
         }
+        
+        var wasAnimates = [outlineView animates];
+        [outlineView setAnimates:NO];
+
         for (var i = pathToExpand.length - 1; i >= 0; i--) {
             [outlineView expandItem:pathToExpand[i]];
         }
+
+        [outlineView setAnimates:wasAnimates];
         
         var row = [outlineView rowForItem:matchedNode];
         if (row >= 0) {
