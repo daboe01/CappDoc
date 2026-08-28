@@ -16479,7 +16479,7 @@
                },
                {
                   "abstract" : "    Initializes the document with a specific data type.",
-                  "declaration" : "- (id)initWithType:(CPString)aType error:(/*",
+                  "declaration" : "- (id)initWithType:(CPString)aType error:(/*{*/CPError/*}*/)anError",
                   "discussion" : "    @param aType the type of document to initialize\n    @param anError not used\n    @return the initialized document",
                   "kind" : "method",
                   "name" : "initWithType:error:",
@@ -16489,7 +16489,8 @@
                         "type" : "CPString"
                      },
                      {
-                        "type" : "id"
+                        "name" : "anError",
+                        "type" : "CPError"
                      }
                   ],
                   "returnType" : "id",
@@ -16563,7 +16564,7 @@
                },
                {
                   "abstract" : "    Returns the receiver's data in a specified type. The default implementation just",
-                  "declaration" : "- (CPData)dataOfType:(CPString)aType error:(/*",
+                  "declaration" : "- (CPData)dataOfType:(CPString)aType error:(/*{*/CPError/*}*/)anError",
                   "discussion" : "    throws an exception.\n    @param aType the format of the data\n    @param anError not used\n    @throws CPUnsupportedMethodException if this method hasn't been overridden by the subclass\n    @return the document data",
                   "kind" : "method",
                   "name" : "dataOfType:error:",
@@ -16573,7 +16574,8 @@
                         "type" : "CPString"
                      },
                      {
-                        "type" : "id"
+                        "name" : "anError",
+                        "type" : "CPError"
                      }
                   ],
                   "returnType" : "CPData",
@@ -24860,7 +24862,7 @@
                },
                {
                   "abstract" : "    Creates a document of the specified type.",
-                  "declaration" : "- (CPDocument)makeUntitledDocumentOfType:(CPString)aType error:(/*",
+                  "declaration" : "- (CPDocument)makeUntitledDocumentOfType:(CPString)aType error:(/*{*/CPError/*}*/)anError",
                   "discussion" : "    @param aType the document type\n    @param anError not used\n    @return the created document",
                   "kind" : "method",
                   "name" : "makeUntitledDocumentOfType:error:",
@@ -24870,7 +24872,8 @@
                         "type" : "CPString"
                      },
                      {
-                        "type" : "id"
+                        "name" : "anError",
+                        "type" : "CPError"
                      }
                   ],
                   "returnType" : "CPDocument",
@@ -79856,7 +79859,7 @@
                   "scope" : "class"
                },
                {
-                  "declaration" : "+ (CPData)sendSynchronousRequest:(CPURLRequest)aRequest returningResponse:(/*",
+                  "declaration" : "+ (CPData)sendSynchronousRequest:(CPURLRequest)aRequest returningResponse:(/*{*/CPURLResponse/*}*/)aURLResponse",
                   "kind" : "method",
                   "name" : "sendSynchronousRequest:returningResponse:",
                   "parameters" : [
@@ -79865,7 +79868,8 @@
                         "type" : "CPURLRequest"
                      },
                      {
-                        "type" : "id"
+                        "name" : "aURLResponse",
+                        "type" : "CPURLResponse"
                      }
                   ],
                   "returnType" : "CPData",
@@ -79912,10 +79916,16 @@
                   "scope" : "instance"
                },
                {
-                  "declaration" : "+ (async JSObject /*",
+                  "declaration" : "+ (async JSObject /* { response: CPURLResponse, data: CPData, error: CPError } */)sendAsynchronousRequest:(CPURLRequest)aRequest",
                   "kind" : "method",
-                  "name" : "(asyncJSObject/*",
-                  "returnType" : "id",
+                  "name" : "sendAsynchronousRequest:",
+                  "parameters" : [
+                     {
+                        "name" : "aRequest",
+                        "type" : "CPURLRequest"
+                     }
+                  ],
+                  "returnType" : "async JSObject",
                   "scope" : "class"
                },
                {
@@ -80035,15 +80045,20 @@
          {
             "symbols" : [
                {
-                  "declaration" : "+ (CPData)sendSynchronousRequest:(CPURLRequest)aRequest returningResponse:(/*",
+                  "declaration" : "+ (CPData)sendSynchronousRequest:(CPURLRequest)aRequest returningResponse:(/*{*/CPURLResponse/*}*/)aURLResponse error:(id)anError",
                   "kind" : "method",
-                  "name" : "sendSynchronousRequest:returningResponse:",
+                  "name" : "sendSynchronousRequest:returningResponse:error:",
                   "parameters" : [
                      {
                         "name" : "aRequest",
                         "type" : "CPURLRequest"
                      },
                      {
+                        "name" : "aURLResponse",
+                        "type" : "CPURLResponse"
+                     },
+                     {
+                        "name" : "anError",
                         "type" : "id"
                      }
                   ],
@@ -83948,24 +83963,20 @@
                   "scope" : "instance"
                },
                {
-                  "declaration" : "- (BOOL)hasMemberInPlane:(int)plane // TO DO : when inverted",
+                  "declaration" : "- (BOOL)hasMemberInPlane:(int)plane // TO DO : when inverted {",
                   "kind" : "method",
-                  "name" : "hasMemberInPlane:DO:",
+                  "name" : "hasMemberInPlane:",
                   "parameters" : [
                      {
                         "name" : "plane",
                         "type" : "int"
-                     },
-                     {
-                        "name" : "when",
-                        "type" : "id"
                      }
                   ],
                   "returnType" : "BOOL",
                   "scope" : "instance"
                },
                {
-                  "declaration" : "- (void)addCharactersInRange:(CPRange)aRange // Needs _inverted support",
+                  "declaration" : "- (void)addCharactersInRange:(CPRange)aRange // Needs _inverted support {",
                   "kind" : "method",
                   "name" : "addCharactersInRange:",
                   "parameters" : [
@@ -83978,7 +83989,7 @@
                   "scope" : "instance"
                },
                {
-                  "declaration" : "- (void)addCharactersInString:(CPString)aString // Needs _inverted support",
+                  "declaration" : "- (void)addCharactersInString:(CPString)aString // Needs _inverted support {",
                   "kind" : "method",
                   "name" : "addCharactersInString:",
                   "parameters" : [
@@ -84057,7 +84068,7 @@
                   "scope" : "instance"
                },
                {
-                  "declaration" : "- (void)addCharactersInRange:(CPRange)aRange // Needs _inverted support",
+                  "declaration" : "- (void)addCharactersInRange:(CPRange)aRange // Needs _inverted support {",
                   "kind" : "method",
                   "name" : "addCharactersInRange:",
                   "parameters" : [
@@ -84076,7 +84087,7 @@
                   "type" : "id"
                },
                {
-                  "declaration" : "- (void)addCharactersInString:(CPString)aString // Needs _inverted support",
+                  "declaration" : "- (void)addCharactersInString:(CPString)aString // Needs _inverted support {",
                   "kind" : "method",
                   "name" : "addCharactersInString:",
                   "parameters" : [

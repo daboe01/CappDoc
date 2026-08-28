@@ -115,27 +115,43 @@ sub parse_file {
         my $close = () = $str =~ /\}/g;
         return $open - $close;
     };
-    
+
+    # Helper to strip comments and strings temporarily for structural checks
+    my $strip_code = sub {
+        my ($str) = @_;
+        $str =~ s{/\*.*?\*/}{}gs;       # Remove block comments
+        $str =~ s{//.*}{}g;              # Remove line comments
+        $str =~ s/"(?:[^"\\]|\\.)*"//g;  # Remove double quoted strings
+        $str =~ s/'(?:[^'\\]|\\.)*'//g;  # Remove single quoted strings
+        return $str;
+    };
+
     # Helper to parse and store method signatures
     my $process_method = sub {
         my ($str) = @_;
 
-        # Strip inline bodies, trailing semicolons
-        $str =~ s/\{.*//;
-            $str =~ s/;\s*$//;
-            $str =~ s/\s+$//;
+        # Strip method body and trailing semicolons safely (ignoring braces inside comments/strings)
+        my @masked;
+        my $masked_str = $str;
+        $masked_str =~ s{(/\*.*?\*/|//.*|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')}{
+            push @masked, $1;
+            "___TOKEN_" . $#masked . "___";
+        }gse;
 
-            # Save a cleaner declaration string
-            my $decl = $str;
+        $masked_str =~ s/\{.*//s;
+            $masked_str =~ s/;\s*$//;
+            $masked_str =~ s/\s+$//;
+
+            # Restore original comments/strings for declaration display
+            my $decl = $masked_str;
+            $decl =~ s{___TOKEN_(\d+)___}{$masked[$1]}ge;
             $decl =~ s/^\s+//;
             $decl =~ s/\s+/ /g;
 
-            # Clean inline comments on a working copy for accurate regex parsing
-            my $clean_str = $str;
-            $clean_str =~ s{/\*.*?\*/}{}g;
+            # Create a clean version without comments for regex parsing
+            my $clean_str = $strip_code->($decl);
 
-            # Return type in parentheses is optional (defaults to 'id')
-            return unless $clean_str =~ /^\s*([-+])\s*(?:\(([^)]+)\))?\s*(.*)$/;
+            return unless $clean_str =~ /^\s*([-+])\s*(?:\(([^)]+)\))?\s*(.*)$/s;
 
             my $scope = $1 eq '+' ? 'class' : 'instance';
             my $ret   = $2 // 'id';
@@ -150,19 +166,18 @@ sub parse_file {
                 $name = $sig;
                 $name =~ s/\s+//g;
             } else {
-                # Parse parameters: Segment:(optional_type)argName or Segment:argName
                 while ($sig =~ /([A-Za-z0-9_]+)\s*:\s*(?:\(([^)]+)\))?\s*([A-Za-z0-9_]+)?/g) {
-                    my $keyword = $1;
-                    my $p_type  = $2 // 'id';
-                    my $p_name  = $3 // '';
+                    my $kw     = $1;
+                    my $p_type = $2 // 'id';
+                    my $p_name = $3 // '';
 
-                    $name .= "$keyword:";
+                    $name .= "$kw:";
                     $p_type =~ s/^\s+|\s+$//g;
                     $p_name =~ s/^\s+|\s+$//g;
 
-                    my $param_info = { type => $p_type };
-                    $param_info->{name} = $p_name if length $p_name;
-                    push @params, $param_info;
+                    my $param = { type => $p_type };
+                    $param->{name} = $p_name if length $p_name;
+                    push @params, $param;
                 }
             }
 
