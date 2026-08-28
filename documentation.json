@@ -69906,7 +69906,7 @@
          "title" : "CAAnimationGroup"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "An object that allows multiple animations to be grouped and run concurrently.",
          "declaration" : "@implementation CAAnimationGroup : CAAnimation",
          "discussion" : ""
       },
@@ -69914,25 +69914,31 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Creates and returns a new <code>CAAnimationGroup</code> instance.",
                   "declaration" : "+ (id)group",
                   "kind" : "method",
                   "name" : "group",
                   "returnType" : "id",
+                  "returns" : "a new <code>CAAnimationGroup</code> instance",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Initializes a newly allocated animation group with default values.",
                   "declaration" : "- (id)init",
                   "kind" : "method",
                   "name" : "init",
                   "returnType" : "id",
+                  "returns" : "the initialized animation group instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Sets the array of <code>CAAnimation</code> objects to be grouped together.",
                   "declaration" : "- (void)setAnimations:(CPArray)anArray",
                   "kind" : "method",
                   "name" : "setAnimations:",
                   "parameters" : [
                      {
+                        "description" : "the array of animations",
                         "name" : "anArray",
                         "type" : "CPArray"
                      }
@@ -69941,26 +69947,32 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the array of <code>CAAnimation</code> objects grouped together.",
                   "declaration" : "- (CPArray)animations",
                   "kind" : "method",
                   "name" : "animations",
                   "returnType" : "CPArray",
+                  "returns" : "the array of animations",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Executes the action on the given object by recursively running all grouped animations.",
                   "declaration" : "- (void)runActionForKey:(CPString)aKey object:(id)anObject arguments:(CPDictionary)arguments",
                   "kind" : "method",
                   "name" : "runActionForKey:object:arguments:",
                   "parameters" : [
                      {
+                        "description" : "the identifier of the action",
                         "name" : "aKey",
                         "type" : "CPString"
                      },
                      {
+                        "description" : "the target object of the animation",
                         "name" : "anObject",
                         "type" : "id"
                      },
                      {
+                        "description" : "additional arguments for the action",
                         "name" : "arguments",
                         "type" : "CPDictionary"
                      }
@@ -70182,7 +70194,7 @@
          "title" : "CAAnimation"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "CAAnimation is the abstract superclass for animations in Cappuccino's Core Animation support.",
          "declaration" : "@implementation CAAnimation : CPObject",
          "discussion" : ""
       },
@@ -70190,49 +70202,53 @@
          {
             "symbols" : [
                {
-                  "abstract" : "Creates a new CAAnimation instance",
+                  "abstract" : "Creates and returns a new <code>CAAnimation</code> instance.",
                   "declaration" : "+ (id)animation",
                   "kind" : "method",
                   "name" : "animation",
                   "returnType" : "id",
-                  "returns" : "a new CAAnimation instance",
+                  "returns" : "a new <code>CAAnimation</code> instance",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Initializes a newly allocated animation instance with default values.",
                   "declaration" : "- (id)init",
                   "kind" : "method",
                   "name" : "init",
                   "returnType" : "id",
+                  "returns" : "the initialized animation instance",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns <code>YES</code>",
+                  "abstract" : "Returns whether the value for a given key should be archived.",
                   "declaration" : "- (BOOL)shouldArchiveValueForKey:(CPString)aKey",
                   "kind" : "method",
                   "name" : "shouldArchiveValueForKey:",
                   "parameters" : [
                      {
+                        "description" : "the key to check",
                         "name" : "aKey",
                         "type" : "CPString"
                      }
                   ],
                   "returnType" : "BOOL",
-                  "returns" : "<code>YES</code>",
+                  "returns" : "<code>YES</code> if the value should be archived",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns <code>nil</code>",
+                  "abstract" : "Returns the default value associated with the specified key.",
                   "declaration" : "+ (id)defaultValueForKey:(CPString)aKey",
                   "kind" : "method",
                   "name" : "defaultValueForKey:",
                   "parameters" : [
                      {
+                        "description" : "the key to inspect",
                         "name" : "aKey",
                         "type" : "CPString"
                      }
                   ],
                   "returnType" : "id",
-                  "returns" : "<code>nil</code>",
+                  "returns" : "the default value, or <code>nil</code>",
                   "scope" : "class"
                },
                {
@@ -70242,6 +70258,7 @@
                   "name" : "setRemovedOnCompletion:",
                   "parameters" : [
                      {
+                        "description" : "<code>YES</code> if the animation should be removed on completion",
                         "name" : "isRemovedOnCompletion",
                         "type" : "BOOL"
                      }
@@ -70250,32 +70267,35 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns <code>YES</code> if the animation is removed after completion",
+                  "abstract" : "Returns whether the animation is removed after completion.",
                   "declaration" : "- (BOOL)removedOnCompletion",
                   "kind" : "method",
                   "name" : "removedOnCompletion",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if the animation is removed after completion",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns <code>YES</code> if the animation is removed after completion",
+                  "abstract" : "Returns whether the animation is removed after completion.",
                   "declaration" : "- (BOOL)isRemovedOnCompletion",
                   "kind" : "method",
                   "name" : "isRemovedOnCompletion",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if the animation is removed after completion",
                   "scope" : "instance"
                },
                {
                   "abstract" : "Returns the animation's timing function.",
                   "declaration" : "- (CAMediaTimingFunction)timingFunction",
-                  "discussion" : "If <code>nil</code>, then it has a linear pacing.",
+                  "discussion" : "If <code>nil</code>, linear pacing is used.",
                   "kind" : "method",
                   "name" : "timingFunction",
                   "returnType" : "CAMediaTimingFunction",
+                  "returns" : "the timing function, or <code>nil</code>",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets the animation delegate",
+                  "abstract" : "Sets the animation's delegate.",
                   "declaration" : "- (void)setDelegate:(id)aDelegate",
                   "kind" : "method",
                   "name" : "setDelegate:",
@@ -70290,27 +70310,32 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns the animation's delegate",
+                  "abstract" : "Returns the animation's delegate.",
                   "declaration" : "- (id)delegate",
                   "kind" : "method",
                   "name" : "delegate",
                   "returnType" : "id",
+                  "returns" : "the animation's delegate",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Executes the action on the given object for the specified key.",
                   "declaration" : "- (void)runActionForKey:(CPString)aKey object:(id)anObject arguments:(CPDictionary)arguments",
                   "kind" : "method",
                   "name" : "runActionForKey:object:arguments:",
                   "parameters" : [
                      {
+                        "description" : "the identifier of the action",
                         "name" : "aKey",
                         "type" : "CPString"
                      },
                      {
+                        "description" : "the target object of the animation",
                         "name" : "anObject",
                         "type" : "id"
                      },
                      {
+                        "description" : "additional arguments for the action",
                         "name" : "arguments",
                         "type" : "CPDictionary"
                      }
@@ -70334,7 +70359,7 @@
          "title" : "CPViewAnimator"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "CPViewAnimator handles animated property changes for <code>CPView</code> instances (such as frame, alpha, and background color), translating them into CSS animations or frame update timers.",
          "declaration" : "@implementation CPViewAnimator : _CPObjectAnimator",
          "discussion" : ""
       },
@@ -70342,19 +70367,23 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Initializes a view animator with the specified target view.",
                   "declaration" : "- (id)initWithTarget:(id)aTarget",
                   "kind" : "method",
                   "name" : "initWithTarget:",
                   "parameters" : [
                      {
+                        "description" : "the view to be animated",
                         "name" : "aTarget",
                         "type" : "id"
                      }
                   ],
                   "returnType" : "id",
+                  "returns" : "the initialized animator instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Animates the target view removal from its superview using an order-out animation.",
                   "declaration" : "- (void)removeFromSuperview",
                   "kind" : "method",
                   "name" : "removeFromSuperview",
@@ -70362,11 +70391,13 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Animates the target view's hidden state.",
                   "declaration" : "- (void)setHidden:(BOOL)shouldHide",
                   "kind" : "method",
                   "name" : "setHidden:",
                   "parameters" : [
                      {
+                        "description" : "<code>YES</code> to animate out and hide the view, <code>NO</code> to show immediately",
                         "name" : "shouldHide",
                         "type" : "BOOL"
                      }
@@ -70375,11 +70406,13 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Animates the view's opacity/alpha value.",
                   "declaration" : "- (void)setAlphaValue:(float)alphaValue",
                   "kind" : "method",
                   "name" : "setAlphaValue:",
                   "parameters" : [
                      {
+                        "description" : "the target opacity (0.0 to 1.0)",
                         "name" : "alphaValue",
                         "type" : "float"
                      }
@@ -70388,11 +70421,13 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Animates the view's background color.",
                   "declaration" : "- (void)setBackgroundColor:(CPColor)aColor",
                   "kind" : "method",
                   "name" : "setBackgroundColor:",
                   "parameters" : [
                      {
+                        "description" : "the target background color",
                         "name" : "aColor",
                         "type" : "CPColor"
                      }
@@ -70401,11 +70436,13 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Animates the origin point of the view's frame rectangle.",
                   "declaration" : "- (void)setFrameOrigin:(CGPoint)aFrameOrigin",
                   "kind" : "method",
                   "name" : "setFrameOrigin:",
                   "parameters" : [
                      {
+                        "description" : "the target origin point",
                         "name" : "aFrameOrigin",
                         "type" : "CGPoint"
                      }
@@ -70414,11 +70451,13 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Animates the frame rectangle of the view.",
                   "declaration" : "- (void)setFrame:(CGRect)aFrame",
                   "kind" : "method",
                   "name" : "setFrame:",
                   "parameters" : [
                      {
+                        "description" : "the target frame rectangle",
                         "name" : "aFrame",
                         "type" : "CGRect"
                      }
@@ -70427,11 +70466,13 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Animates the size dimensions of the view's frame rectangle.",
                   "declaration" : "- (void)setFrameSize:(CGSize)aFrameSize",
                   "kind" : "method",
                   "name" : "setFrameSize:",
                   "parameters" : [
                      {
+                        "description" : "the target size",
                         "name" : "aFrameSize",
                         "type" : "CGSize"
                      }
@@ -70440,15 +70481,18 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Builds and appends CSS animation descriptors corresponding to an animation action.",
                   "declaration" : "+ (void)addAnimations:(CPArray)animations forAction:(id)anAction",
                   "kind" : "method",
                   "name" : "addAnimations:forAction:",
                   "parameters" : [
                      {
+                        "description" : "the array collecting CSS animations",
                         "name" : "animations",
                         "type" : "CPArray"
                      },
                      {
+                        "description" : "the animation action descriptor",
                         "name" : "anAction",
                         "type" : "id"
                      }
@@ -70457,15 +70501,18 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Adds periodic frame updater timers for an animation action on a view hierarchy.",
                   "declaration" : "+ (void)addFrameUpdaters:(CPArray)frameUpdaters forAction:(id)anAction",
                   "kind" : "method",
                   "name" : "addFrameUpdaters:forAction:",
                   "parameters" : [
                      {
+                        "description" : "the array of active frame updaters",
                         "name" : "frameUpdaters",
                         "type" : "CPArray"
                      },
                      {
+                        "description" : "the action to update",
                         "name" : "anAction",
                         "type" : "id"
                      }
@@ -70474,11 +70521,13 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Stops and removes the frame updater with the given identifier.",
                   "declaration" : "+ (void)stopUpdaterWithIdentifier:(CPString)anIdentifier",
                   "kind" : "method",
                   "name" : "stopUpdaterWithIdentifier:",
                   "parameters" : [
                      {
+                        "description" : "the unique identifier of the root view",
                         "name" : "anIdentifier",
                         "type" : "CPString"
                      }
@@ -70487,16 +70536,19 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Returns whether the animated property requires periodic JavaScript frame updates during animation.",
                   "declaration" : "- (BOOL)needsPeriodicFrameUpdatesForKeyPath:(CPString)aKeyPath",
                   "kind" : "method",
                   "name" : "needsPeriodicFrameUpdatesForKeyPath:",
                   "parameters" : [
                      {
+                        "description" : "the property key path",
                         "name" : "aKeyPath",
                         "type" : "CPString"
                      }
                   ],
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if periodic updates are required, otherwise <code>NO</code>",
                   "scope" : "instance"
                },
                {
@@ -70517,58 +70569,72 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Returns the animator class associated with this view class.",
                   "declaration" : "+ (Class)animatorClass",
                   "kind" : "method",
                   "name" : "animatorClass",
                   "returnType" : "Class",
+                  "returns" : "the animator <code>Class</code>",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Returns the animator proxy object for the view.",
                   "declaration" : "- (id)animator",
                   "kind" : "method",
                   "name" : "animator",
                   "returnType" : "id",
+                  "returns" : "the animator proxy instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the default animation associated with a specified key.",
                   "declaration" : "+ (CAAnimation)defaultAnimationForKey:(CPString)aKey",
                   "kind" : "method",
                   "name" : "defaultAnimationForKey:",
                   "parameters" : [
                      {
+                        "description" : "the identifier or property key path",
                         "name" : "aKey",
                         "type" : "CPString"
                      }
                   ],
                   "returnType" : "CAAnimation",
+                  "returns" : "the default <code>CAAnimation</code>, or <code>nil</code>",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Returns the animation assigned to a key path, or the default animation if none was explicitly set.",
                   "declaration" : "- (CAAnimation)animationForKey:(CPString)aKey",
                   "kind" : "method",
                   "name" : "animationForKey:",
                   "parameters" : [
                      {
+                        "description" : "the identifier or property key path",
                         "name" : "aKey",
                         "type" : "CPString"
                      }
                   ],
                   "returnType" : "CAAnimation",
+                  "returns" : "the matching <code>CAAnimation</code>, or <code>nil</code>",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the dictionary of animations explicitly set on the view.",
                   "declaration" : "- (CPDictionary)animations",
                   "kind" : "method",
                   "name" : "animations",
                   "returnType" : "CPDictionary",
+                  "returns" : "the dictionary of animations",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Sets the dictionary of animations for the view.",
                   "declaration" : "- (void)setAnimations:(CPDictionary)animationsDict",
                   "kind" : "method",
                   "name" : "setAnimations:",
                   "parameters" : [
                      {
+                        "description" : "a dictionary mapping property key paths to <code>CAAnimation</code> objects",
                         "name" : "animationsDict",
                         "type" : "CPDictionary"
                      }
@@ -70589,16 +70655,19 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Returns the first object in the array passing a predicate test function.",
                   "declaration" : "- (CPArray)objectPassingTest:(Function)aFunction",
                   "kind" : "method",
                   "name" : "objectPassingTest:",
                   "parameters" : [
                      {
+                        "description" : "the predicate function",
                         "name" : "aFunction",
                         "type" : "Function"
                      }
                   ],
                   "returnType" : "CPArray",
+                  "returns" : "the matching object, or <code>nil</code>",
                   "scope" : "instance"
                },
                {
@@ -70635,9 +70704,9 @@
          "title" : "CALayer"
       },
       "primaryContent" : {
-         "abstract" : "A CALayer is similar to a CPView, but with the ability to have a transform applied to it.",
+         "abstract" : "A CALayer is an object that manages image-based content and allows transforms, animations, and visual styling to be applied.",
          "declaration" : "@implementation CALayer : CPObject",
-         "discussion" : "If the delegate implements this method, the CALayer will\n    call this in place of its \\c -drawInContext:.\n\n    The delegate can override the layer's \\c -display method\n    by implementing this method."
+         "discussion" : "If the delegate implements this method, the CALayer will call this in place of its \\c -drawInContext:.\n\n    The delegate can override the layer's \\c -display method by implementing this method."
       },
       "topics" : [
          {
@@ -70655,23 +70724,25 @@
                   "type" : "id"
                },
                {
-                  "abstract" : "Returns a new animation layer.",
+                  "abstract" : "Creates and returns a new <code>CALayer</code> instance.",
                   "declaration" : "+ (CALayer)layer",
                   "kind" : "method",
                   "name" : "layer",
                   "returnType" : "CALayer",
+                  "returns" : "a new <code>CALayer</code> instance",
                   "scope" : "class"
                },
                {
-                  "abstract" : "Initializes the animation layer.",
+                  "abstract" : "Initializes a newly allocated layer instance with default properties.",
                   "declaration" : "- (id)init",
                   "kind" : "method",
                   "name" : "init",
                   "returnType" : "id",
+                  "returns" : "the initialized layer instance",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets the bounds (origin and size) of the rectangle.",
+                  "abstract" : "Sets the bounds rectangle of the layer in its own coordinate system.",
                   "declaration" : "- (void)setBounds:(CGRect)aBounds",
                   "kind" : "method",
                   "name" : "setBounds:",
@@ -70686,15 +70757,16 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns the layer's bound.",
+                  "abstract" : "Returns the layer's bounds rectangle in its own coordinate system.",
                   "declaration" : "- (CGRect)bounds",
                   "kind" : "method",
                   "name" : "bounds",
                   "returnType" : "CGRect",
+                  "returns" : "the bounds rectangle",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets the layer's position.",
+                  "abstract" : "Sets the position of the layer in its superlayer's coordinate space.",
                   "declaration" : "- (void)setPosition:(CGPoint)aPosition",
                   "kind" : "method",
                   "name" : "setPosition:",
@@ -70709,21 +70781,22 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns the layer's position",
+                  "abstract" : "Returns the position of the layer in its superlayer's coordinate space.",
                   "declaration" : "- (CGPoint)position",
                   "kind" : "method",
                   "name" : "position",
                   "returnType" : "CGPoint",
+                  "returns" : "the position point",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets the layer's z-ordering.",
+                  "abstract" : "Sets the layer's position on the z-axis (z-index ordering).",
                   "declaration" : "- (void)setZPosition:(int)aZPosition",
                   "kind" : "method",
                   "name" : "setZPosition:",
                   "parameters" : [
                      {
-                        "description" : "the layer's new z-ordering",
+                        "description" : "the layer's new z-position",
                         "name" : "aZPosition",
                         "type" : "int"
                      }
@@ -70732,7 +70805,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets the layer's anchor point.",
+                  "abstract" : "Sets the anchor point for the layer's bounds rectangle (normalized from 0.0 to 1.0).",
                   "declaration" : "- (void)setAnchorPoint:(CGPoint)anAnchorPoint",
                   "discussion" : "The default point is [0.5, 0.5].",
                   "kind" : "method",
@@ -70748,15 +70821,16 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns the layer's anchor point.",
+                  "abstract" : "Returns the anchor point for the layer's bounds rectangle.",
                   "declaration" : "- (CGPoint)anchorPoint",
                   "kind" : "method",
                   "name" : "anchorPoint",
                   "returnType" : "CGPoint",
+                  "returns" : "the anchor point",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets the affine transform applied to this layer.",
+                  "abstract" : "Sets the affine transform applied to this layer relative to the anchor point.",
                   "declaration" : "- (void)setAffineTransform:(CGAffineTransform)anAffineTransform",
                   "kind" : "method",
                   "name" : "setAffineTransform:",
@@ -70771,15 +70845,16 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns the layer's affine transform.",
+                  "abstract" : "Returns the affine transform applied to the layer.",
                   "declaration" : "- (CGAffineTransform)affineTransform",
                   "kind" : "method",
                   "name" : "affineTransform",
                   "returnType" : "CGAffineTransform",
+                  "returns" : "the affine transform",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets the affine transform that gets applied to all the sublayers.",
+                  "abstract" : "Sets the affine transform that gets applied to all sublayers.",
                   "declaration" : "- (void)setSublayerTransform:(CGAffineTransform)anAffineTransform",
                   "kind" : "method",
                   "name" : "setSublayerTransform:",
@@ -70799,6 +70874,7 @@
                   "kind" : "method",
                   "name" : "sublayerTransform",
                   "returnType" : "CGAffineTransform",
+                  "returns" : "the sublayer transform",
                   "scope" : "instance"
                },
                {
@@ -70809,9 +70885,8 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets the frame of the layer.",
+                  "abstract" : "Sets the frame of the layer in the superlayer's coordinate system.",
                   "declaration" : "- (void)setFrame:(CGRect)aFrame",
-                  "discussion" : "The frame defines a bounding rectangle in the superlayer's coordinate system.",
                   "kind" : "method",
                   "name" : "setFrame:",
                   "parameters" : [
@@ -70825,18 +70900,17 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns the layer's frame.",
+                  "abstract" : "Returns the layer's bounding box in the superlayer's coordinate system after transforms are applied.",
                   "declaration" : "- (CGRect)frame",
-                  "discussion" : "The frame defines the bounding box of the layer: the smallest\n    possible rectangle that could fit this layer after transform\n    properties are applied in superlayer coordinates.",
                   "kind" : "method",
                   "name" : "frame",
                   "returnType" : "CGRect",
+                  "returns" : "the frame rectangle",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "The Backing Store Frame specifies the frame of the actual backing store used to contain this layer.",
+                  "abstract" : "Returns the frame of the backing store used to contain this layer.",
                   "declaration" : "- (CGRect)backingStoreFrame",
-                  "discussion" : "Naturally, by default it is the same as the frame, however, users can specify their own custom Backing Store Frame in order to speed up certain operations, such as live transformation.",
                   "kind" : "method",
                   "name" : "backingStoreFrame",
                   "returnType" : "CGRect",
@@ -70844,13 +70918,13 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets the frame's backing store.",
+                  "abstract" : "Sets a custom frame for the layer's backing store.",
                   "declaration" : "- (void)setBackingStoreFrame:(CGRect)aFrame",
                   "kind" : "method",
                   "name" : "setBackingStoreFrame:",
                   "parameters" : [
                      {
-                        "description" : "the new backing store.",
+                        "description" : "the new backing store frame",
                         "name" : "aFrame",
                         "type" : "CGRect"
                      }
@@ -70859,12 +70933,12 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns the CGImage contents of this layer.",
+                  "abstract" : "Returns the image contents of this layer.",
                   "declaration" : "- (CGImage)contents",
-                  "discussion" : "The default contents are <code>nil</code>.",
                   "kind" : "method",
                   "name" : "contents",
                   "returnType" : "CGImage",
+                  "returns" : "the contents image, or <code>nil</code>",
                   "scope" : "instance"
                },
                {
@@ -70890,7 +70964,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Displays the contents of this layer.",
+                  "abstract" : "Displays the contents of this layer, creating contexts and requesting delegate rendering if needed.",
                   "declaration" : "- (void)display",
                   "kind" : "method",
                   "name" : "display",
@@ -70898,7 +70972,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Draws this layer's contents into the specified context.",
+                  "abstract" : "Draws the layer's contents into the specified graphics context.",
                   "declaration" : "- (void)drawInContext:(CGContext)aContext",
                   "kind" : "method",
                   "name" : "drawInContext:",
@@ -70913,12 +70987,12 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns the opacity of the layer.",
+                  "abstract" : "Returns the opacity of the layer, between <code>0</code>.0 (transparent) and <code>1</code>.0 (opaque).",
                   "declaration" : "- (float)opacity",
-                  "discussion" : "The value is between",
                   "kind" : "method",
                   "name" : "opacity",
                   "returnType" : "float",
+                  "returns" : "the opacity",
                   "scope" : "instance"
                },
                {
@@ -70928,7 +71002,7 @@
                   "name" : "setOpacity:",
                   "parameters" : [
                      {
-                        "description" : "the new opacity (between <code>0</code>.0 (transparent) and <code>1</code>.0 (opaque)).",
+                        "description" : "the new opacity (between <code>0</code>.0 (transparent) and <code>1</code>.0 (opaque))",
                         "name" : "anOpacity",
                         "type" : "float"
                      }
@@ -70943,7 +71017,7 @@
                   "name" : "setHidden:",
                   "parameters" : [
                      {
-                        "description" : "<code>YES</code> means the layer will be hidden. <code>NO</code> means the layer will be visible.",
+                        "description" : "<code>YES</code> to hide the layer, <code>NO</code> to make it visible",
                         "name" : "isHidden",
                         "type" : "BOOL"
                      }
@@ -70952,29 +71026,31 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns <code>YES</code> if the layer is hidden.",
+                  "abstract" : "Returns whether the layer is hidden.",
                   "declaration" : "- (BOOL)hidden",
                   "kind" : "method",
                   "name" : "hidden",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if the layer is hidden, otherwise <code>NO</code>",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns <code>YES</code> if the layer is hidden.",
+                  "abstract" : "Returns whether the layer is hidden.",
                   "declaration" : "- (BOOL)isHidden",
                   "kind" : "method",
                   "name" : "isHidden",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if the layer is hidden, otherwise <code>NO</code>",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets whether content that goes lies outside the bounds is hidden or visible.",
+                  "abstract" : "Sets whether sublayers and contents are clipped to the layer's bounds.",
                   "declaration" : "- (void)setMasksToBounds:(BOOL)masksToBounds",
                   "kind" : "method",
                   "name" : "setMasksToBounds:",
                   "parameters" : [
                      {
-                        "description" : "<code>YES</code> hides the excess content. <code>NO</code> makes it visible.",
+                        "description" : "<code>YES</code> to clip to bounds, <code>NO</code> to allow overflow",
                         "name" : "masksToBounds",
                         "type" : "BOOL"
                      }
@@ -71003,14 +71079,16 @@
                   "kind" : "method",
                   "name" : "backgroundColor",
                   "returnType" : "CPColor",
+                  "returns" : "the background color",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns an array of the receiver's sublayers.",
+                  "abstract" : "Returns an array containing the receiver's sublayers.",
                   "declaration" : "- (CPArray)sublayers",
                   "kind" : "method",
                   "name" : "sublayers",
                   "returnType" : "CPArray",
+                  "returns" : "the array of sublayers",
                   "scope" : "instance"
                },
                {
@@ -71019,15 +71097,17 @@
                   "kind" : "method",
                   "name" : "superlayer",
                   "returnType" : "CALayer",
+                  "returns" : "the superlayer, or <code>nil</code> if none",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Adds the specified layer as a sublayer of the receiver.",
+                  "abstract" : "Appends the specified layer to the end of the receiver's sublayers array.",
                   "declaration" : "- (void)addSublayer:(CALayer)aLayer",
                   "kind" : "method",
                   "name" : "addSublayer:",
                   "parameters" : [
                      {
+                        "description" : "the layer to add",
                         "name" : "aLayer",
                         "type" : "CALayer"
                      }
@@ -71036,7 +71116,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Removes the receiver from its superlayer.",
+                  "abstract" : "Detaches the receiver from its parent layer.",
                   "declaration" : "- (void)removeFromSuperlayer",
                   "kind" : "method",
                   "name" : "removeFromSuperlayer",
@@ -71044,7 +71124,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Inserts the specified layer as a sublayer into the specified index.",
+                  "abstract" : "Inserts the specified layer into the sublayers array at the specified index.",
                   "declaration" : "- (void)insertSublayer:(CALayer)aLayer atIndex:(CPUInteger)anIndex",
                   "kind" : "method",
                   "name" : "insertSublayer:atIndex:",
@@ -71055,7 +71135,7 @@
                         "type" : "CALayer"
                      },
                      {
-                        "description" : "the index to insert the layer at",
+                        "description" : "the index where the layer should be inserted",
                         "name" : "anIndex",
                         "type" : "CPUInteger"
                      }
@@ -71064,7 +71144,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Inserts a layer below another layer.",
+                  "abstract" : "Inserts the layer below an existing sublayer.",
                   "declaration" : "- (void)insertSublayer:(CALayer)aLayer below:(CALayer)aSublayer",
                   "kind" : "method",
                   "name" : "insertSublayer:below:",
@@ -71084,7 +71164,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Inserts a layer above another layer.",
+                  "abstract" : "Inserts the layer above an existing sublayer.",
                   "declaration" : "- (void)insertSublayer:(CALayer)aLayer above:(CALayer)aSublayer",
                   "kind" : "method",
                   "name" : "insertSublayer:above:",
@@ -71104,18 +71184,18 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Replaces a sublayer.",
+                  "abstract" : "Replaces an existing sublayer with a new layer.",
                   "declaration" : "- (void)replaceSublayer:(CALayer)aSublayer with:(CALayer)aLayer",
                   "kind" : "method",
                   "name" : "replaceSublayer:with:",
                   "parameters" : [
                      {
-                        "description" : "the layer to insert",
+                        "description" : "the existing sublayer to be replaced",
                         "name" : "aSublayer",
                         "type" : "CALayer"
                      },
                      {
-                        "description" : "the layer to replace",
+                        "description" : "the new layer to insert",
                         "name" : "aLayer",
                         "type" : "CALayer"
                      }
@@ -71151,7 +71231,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Marks the layer as needing to be redrawn.",
+                  "abstract" : "Marks the layer's contents as needing to be redrawn.",
                   "declaration" : "- (void)setNeedsDisplay",
                   "kind" : "method",
                   "name" : "setNeedsDisplay",
@@ -71159,13 +71239,13 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets whether the layer needs to be redrawn when its bounds are changed.",
+                  "abstract" : "Sets whether the layer is automatically marked as needing display when its bounds change.",
                   "declaration" : "- (void)setNeedsDisplayOnBoundsChange:(BOOL)needsDisplayOnBoundsChange",
                   "kind" : "method",
                   "name" : "setNeedsDisplayOnBoundsChange:",
                   "parameters" : [
                      {
-                        "description" : "<code>YES</code> means the display is redraw on a bounds change.",
+                        "description" : "<code>YES</code> to redraw on bounds change",
                         "name" : "needsDisplayOnBoundsChange",
                         "type" : "BOOL"
                      }
@@ -71174,21 +71254,22 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns <code>YES</code> if the display should be redrawn on a bounds change.",
+                  "abstract" : "Returns whether the layer is automatically marked as needing display when its bounds change.",
                   "declaration" : "- (BOOL)needsDisplayOnBoundsChange",
                   "kind" : "method",
                   "name" : "needsDisplayOnBoundsChange",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if redrawn on bounds change",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Marks the specified rectangle as needing to be redrawn.",
+                  "abstract" : "Marks the specified region within the layer as needing to be redrawn.",
                   "declaration" : "- (void)setNeedsDisplayInRect:(CGRect)aRect",
                   "kind" : "method",
                   "name" : "setNeedsDisplayInRect:",
                   "parameters" : [
                      {
-                        "description" : "the area that needs to be redrawn.",
+                        "description" : "the area that needs display",
                         "name" : "aRect",
                         "type" : "CGRect"
                      }
@@ -71197,7 +71278,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Converts the point from the specified layer's coordinate system into the receiver's coordinate system.",
+                  "abstract" : "Converts a point from the specified layer's coordinate system into the receiver's coordinate system.",
                   "declaration" : "- (CGPoint)convertPoint:(CGPoint)aPoint fromLayer:(CALayer)aLayer",
                   "kind" : "method",
                   "name" : "convertPoint:fromLayer:",
@@ -71218,7 +71299,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Converts the point from the receiver's coordinate system to the specified layer's coordinate system.",
+                  "abstract" : "Converts a point from the receiver's coordinate system to the specified layer's coordinate system.",
                   "declaration" : "- (CGPoint)convertPoint:(CGPoint)aPoint toLayer:(CALayer)aLayer",
                   "kind" : "method",
                   "name" : "convertPoint:toLayer:",
@@ -71239,7 +71320,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Converts the rectangle from the specified layer's coordinate system to the receiver's coordinate system.",
+                  "abstract" : "Converts a rectangle from the specified layer's coordinate system to the receiver's coordinate system.",
                   "declaration" : "- (CGRect)convertRect:(CGRect)aRect fromLayer:(CALayer)aLayer",
                   "kind" : "method",
                   "name" : "convertRect:fromLayer:",
@@ -71260,7 +71341,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Converts the rectangle from the receiver's coordinate system to the specified layer's coordinate system.",
+                  "abstract" : "Converts a rectangle from the receiver's coordinate system to the specified layer's coordinate system.",
                   "declaration" : "- (CGRect)convertRect:(CGRect)aRect toLayer:(CALayer)aLayer",
                   "kind" : "method",
                   "name" : "convertRect:toLayer:",
@@ -71281,7 +71362,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns <code>YES</code> if the layer contains the point.",
+                  "abstract" : "Returns whether the layer's bounds contain the specified point in its local coordinate system.",
                   "declaration" : "- (BOOL)containsPoint:(CGPoint)aPoint",
                   "kind" : "method",
                   "name" : "containsPoint:",
@@ -71293,32 +71374,33 @@
                      }
                   ],
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if the point is within bounds, otherwise <code>NO</code>",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns the farthest descendant of this layer that contains the specified point.",
+                  "abstract" : "Returns the farthest descendant in the layer hierarchy that contains the specified point.",
                   "declaration" : "- (CALayer)hitTest:(CGPoint)aPoint",
                   "kind" : "method",
                   "name" : "hitTest:",
                   "parameters" : [
                      {
-                        "description" : "the point to test",
+                        "description" : "the point to test in the receiver's coordinate space",
                         "name" : "aPoint",
                         "type" : "CGPoint"
                      }
                   ],
                   "returnType" : "CALayer",
-                  "returns" : "the containing layer or <code>nil</code> if there was no hit.",
+                  "returns" : "the layer containing the point, or <code>nil</code> if not found",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets the delegate for this layer.",
+                  "abstract" : "Sets the delegate for the layer.",
                   "declaration" : "- (void)setDelegate:(id)aDelegate",
                   "kind" : "method",
                   "name" : "setDelegate:",
                   "parameters" : [
                      {
-                        "description" : "the delegate",
+                        "description" : "the delegate object",
                         "name" : "aDelegate",
                         "type" : "id"
                      }
@@ -71327,23 +71409,27 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns the layer's delegate",
+                  "abstract" : "Returns the delegate of the layer.",
                   "declaration" : "- (id)delegate",
                   "kind" : "method",
                   "name" : "delegate",
                   "returnType" : "id",
+                  "returns" : "the delegate object",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Adds an animation to the layer identified by the specified key.",
                   "declaration" : "- (void)addAnimation:(CAAnimation)anim forKey:(CPString)key",
                   "kind" : "method",
                   "name" : "addAnimation:forKey:",
                   "parameters" : [
                      {
+                        "description" : "the animation object to add",
                         "name" : "anim",
                         "type" : "CAAnimation"
                      },
                      {
+                        "description" : "the string identifier for the animation",
                         "name" : "key",
                         "type" : "CPString"
                      }
@@ -71352,11 +71438,13 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Removes the animation registered with the specified key.",
                   "declaration" : "- (void)removeAnimationForKey:(CPString)key",
                   "kind" : "method",
                   "name" : "removeAnimationForKey:",
                   "parameters" : [
                      {
+                        "description" : "the string identifier for the animation",
                         "name" : "key",
                         "type" : "CPString"
                      }
@@ -71365,6 +71453,7 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Removes all animations attached to the layer.",
                   "declaration" : "- (void)removeAllAnimations",
                   "kind" : "method",
                   "name" : "removeAllAnimations",
@@ -71435,7 +71524,7 @@
          "title" : "CAKeyframeAnimation"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "An object that provides keyframe-based animation capabilities for a layer property.",
          "declaration" : "@implementation CAKeyframeAnimation : CAPropertyAnimation",
          "discussion" : ""
       },
@@ -71443,10 +71532,12 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Initializes a newly allocated keyframe animation instance with default empty arrays.",
                   "declaration" : "- (id)init",
                   "kind" : "method",
                   "name" : "init",
                   "returnType" : "id",
+                  "returns" : "the initialized keyframe animation instance",
                   "scope" : "instance"
                }
             ],
@@ -71465,7 +71556,7 @@
          "title" : "CABasicAnimation"
       },
       "primaryContent" : {
-         "abstract" : "A CABasicAnimation is a simple animation that moves a CALayer from one point to another over a specified period of time.",
+         "abstract" : "A CABasicAnimation provides basic single-keyframe interpolation for a layer property over a specified duration.",
          "declaration" : "@implementation CABasicAnimation : CAPropertyAnimation",
          "discussion" : ""
       },
@@ -71473,20 +71564,22 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Initializes a newly allocated basic animation instance with default values.",
                   "declaration" : "- (id)init",
                   "kind" : "method",
                   "name" : "init",
                   "returnType" : "id",
+                  "returns" : "the initialized animation instance",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets the starting position for the animation.",
+                  "abstract" : "Sets the starting value for the animated property.",
                   "declaration" : "- (void)setFromValue:(id)aValue",
                   "kind" : "method",
                   "name" : "setFromValue:",
                   "parameters" : [
                      {
-                        "description" : "the animation starting position",
+                        "description" : "the starting value",
                         "name" : "aValue",
                         "type" : "id"
                      }
@@ -71495,21 +71588,22 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns the animation's starting position.",
+                  "abstract" : "Returns the starting value of the animated property.",
                   "declaration" : "- (id)fromValue",
                   "kind" : "method",
                   "name" : "fromValue",
                   "returnType" : "id",
+                  "returns" : "the starting value",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets the ending position for the animation.",
+                  "abstract" : "Sets the ending value for the animated property.",
                   "declaration" : "- (void)setToValue:(id)aValue",
                   "kind" : "method",
                   "name" : "setToValue:",
                   "parameters" : [
                      {
-                        "description" : "the animation ending position",
+                        "description" : "the ending value",
                         "name" : "aValue",
                         "type" : "id"
                      }
@@ -71518,21 +71612,22 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns the animation's ending position.",
+                  "abstract" : "Returns the ending value of the animated property.",
                   "declaration" : "- (id)toValue",
                   "kind" : "method",
                   "name" : "toValue",
                   "returnType" : "id",
+                  "returns" : "the ending value",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Sets the optional byValue for animation interpolation.",
+                  "abstract" : "Sets the relative value by which the property is modified during animation.",
                   "declaration" : "- (void)setByValue:(id)aValue",
                   "kind" : "method",
                   "name" : "setByValue:",
                   "parameters" : [
                      {
-                        "description" : "the byValue",
+                        "description" : "the relative change value",
                         "name" : "aValue",
                         "type" : "id"
                      }
@@ -71541,11 +71636,12 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns the animation's byValue.",
+                  "abstract" : "Returns the relative value by which the property is modified during animation.",
                   "declaration" : "- (id)byValue",
                   "kind" : "method",
                   "name" : "byValue",
                   "returnType" : "id",
+                  "returns" : "the relative change value",
                   "scope" : "instance"
                }
             ],
@@ -71564,7 +71660,7 @@
          "title" : "CAMediaTimingFunction"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "A CAMediaTimingFunction represents the timing curve of an animation as a cubic Bézier curve.",
          "declaration" : "@implementation CAMediaTimingFunction : CPObject",
          "discussion" : ""
       },
@@ -71572,68 +71668,83 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Ease-in-ease-out pacing animation timing curve (starts slowly, speeds up in the middle, and slows down at the end).",
                   "declaration" : "var CAMediaNamedTimingFunctions = nil",
                   "kind" : "global_variable",
                   "name" : "CAMediaNamedTimingFunctions",
                   "type" : "id"
                },
                {
+                  "abstract" : "Returns a predefined media timing function matching the given name.",
                   "declaration" : "+ (id)functionWithName:(CPString)aName",
                   "kind" : "method",
                   "name" : "functionWithName:",
                   "parameters" : [
                      {
+                        "description" : "the name of the predefined timing curve (e.g. <code>kCAMediaTimingFunctionLinear</code>)",
                         "name" : "aName",
                         "type" : "CPString"
                      }
                   ],
                   "returnType" : "id",
+                  "returns" : "the predefined timing function instance",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Creates and returns a new media timing function with custom cubic Bézier control points.",
                   "declaration" : "+ (id)functionWithControlPoints:(float)c1x :(float)c1y :(float)c2x :(float)c2y",
                   "kind" : "method",
                   "name" : "functionWithControlPoints:c1y:",
                   "parameters" : [
                      {
+                        "description" : "the x-coordinate of the first control point",
                         "name" : "c1x",
                         "type" : "float"
                      },
                      {
+                        "description" : "the x-coordinate of the second control point",
                         "name" : "c2x",
                         "type" : "float"
                      }
                   ],
                   "returnType" : "id",
+                  "returns" : "a new <code>CAMediaTimingFunction</code> instance",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Initializes a newly allocated media timing function with custom cubic Bézier control points.",
                   "declaration" : "- (id)initWithControlPoints:(float)c1x :(float)c1y :(float)c2x :(float)c2y",
                   "kind" : "method",
                   "name" : "initWithControlPoints:c1y:",
                   "parameters" : [
                      {
+                        "description" : "the x-coordinate of the first control point",
                         "name" : "c1x",
                         "type" : "float"
                      },
                      {
+                        "description" : "the x-coordinate of the second control point",
                         "name" : "c2x",
                         "type" : "float"
                      }
                   ],
                   "returnType" : "id",
+                  "returns" : "the initialized <code>CAMediaTimingFunction</code> instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Retrieves the coordinates of the control point at the specified index.",
                   "declaration" : "- (void)getControlPointAtIndex:(CPUInteger)anIndex values:(float/*[2]*/)reference",
                   "kind" : "method",
                   "name" : "getControlPointAtIndex:values:",
                   "parameters" : [
                      {
+                        "description" : "the index of the control point (0, 1, 2, or 3)",
                         "name" : "anIndex",
                         "type" : "CPUInteger"
                      },
                      {
+                        "description" : "an array of two floats that will receive the (x, y) coordinates",
                         "name" : "reference",
                         "type" : "float"
                      }
@@ -71657,7 +71768,7 @@
          "title" : "CAPropertyAnimation"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "CAPropertyAnimation is an abstract subclass of CAAnimation for creating animations that manipulate the value of a target property identified by a key path.",
          "declaration" : "@implementation CAPropertyAnimation : CAAnimation",
          "discussion" : ""
       },
@@ -71665,31 +71776,38 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Initializes a newly allocated property animation instance with default values.",
                   "declaration" : "- (id)init",
                   "kind" : "method",
                   "name" : "init",
                   "returnType" : "id",
+                  "returns" : "the initialized animation instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Creates and returns a new animation instance targeting the property at the given key path.",
                   "declaration" : "+ (id)animationWithKeyPath:(CPString)aKeyPath",
                   "kind" : "method",
                   "name" : "animationWithKeyPath:",
                   "parameters" : [
                      {
+                        "description" : "the key path to animate",
                         "name" : "aKeyPath",
                         "type" : "CPString"
                      }
                   ],
                   "returnType" : "id",
+                  "returns" : "a new <code>CAPropertyAnimation</code> instance",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Sets the key path that specifies the property to be animated.",
                   "declaration" : "- (void)setKeyPath:(CPString)aKeyPath",
                   "kind" : "method",
                   "name" : "setKeyPath:",
                   "parameters" : [
                      {
+                        "description" : "the property key path",
                         "name" : "aKeyPath",
                         "type" : "CPString"
                      }
@@ -71698,18 +71816,22 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the key path of the property being animated.",
                   "declaration" : "- (CPString)keyPath",
                   "kind" : "method",
                   "name" : "keyPath",
                   "returnType" : "CPString",
+                  "returns" : "the key path string",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Sets whether the animation's value accumulates across repeat cycles.",
                   "declaration" : "- (void)setCumulative:(BOOL)isCumulative",
                   "kind" : "method",
                   "name" : "setCumulative:",
                   "parameters" : [
                      {
+                        "description" : "<code>YES</code> to accumulate values, <code>NO</code> otherwise",
                         "name" : "isCumulative",
                         "type" : "BOOL"
                      }
@@ -71718,25 +71840,31 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns whether the animation's value accumulates across repeat cycles.",
                   "declaration" : "- (BOOL)cumulative",
                   "kind" : "method",
                   "name" : "cumulative",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if cumulative, otherwise <code>NO</code>",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns whether the animation's value accumulates across repeat cycles.",
                   "declaration" : "- (BOOL)isCumulative",
                   "kind" : "method",
                   "name" : "isCumulative",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if cumulative, otherwise <code>NO</code>",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Sets whether the value produced by the animation is added to the current property value.",
                   "declaration" : "- (void)setAdditive:(BOOL)isAdditive",
                   "kind" : "method",
                   "name" : "setAdditive:",
                   "parameters" : [
                      {
+                        "description" : "<code>YES</code> to make the animation additive, <code>NO</code> otherwise",
                         "name" : "isAdditive",
                         "type" : "BOOL"
                      }
@@ -71745,17 +71873,21 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns whether the animation value is added to the current property value.",
                   "declaration" : "- (BOOL)additive",
                   "kind" : "method",
                   "name" : "additive",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if additive, otherwise <code>NO</code>",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns whether the animation value is added to the current property value.",
                   "declaration" : "- (BOOL)isAdditive",
                   "kind" : "method",
                   "name" : "isAdditive",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if additive, otherwise <code>NO</code>",
                   "scope" : "instance"
                }
             ],
@@ -71774,7 +71906,7 @@
          "title" : "CPAnimationContext"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "CPAnimationContext manages animation groupings, timing parameters, duration, and completion handlers across animated property changes.",
          "declaration" : "@implementation CPAnimationContext : CPObject",
          "discussion" : ""
       },
@@ -71787,29 +71919,36 @@
                   "name" : "Map"
                },
                {
+                  "abstract" : "Returns the current active animation context on top of the context stack, creating one if none currently exists.",
                   "declaration" : "+ (id)currentContext",
                   "kind" : "method",
                   "name" : "currentContext",
                   "returnType" : "id",
+                  "returns" : "the current active animation context",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Returns the array stack of active animation contexts.",
                   "declaration" : "+ (CPArray)contextStack",
                   "kind" : "method",
                   "name" : "contextStack",
                   "returnType" : "CPArray",
+                  "returns" : "the context stack array",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Executes a block of animations within a scoped animation grouping and invokes a completion handler when all animations finish.",
                   "declaration" : "+ (void)runAnimationGroup:(Function/*(CPAnimationContext context)*/)animationsBlock completionHandler:(Function)aCompletionHandler",
                   "kind" : "method",
                   "name" : "runAnimationGroup:completionHandler:",
                   "parameters" : [
                      {
+                        "description" : "a function taking the active <code>CPAnimationContext</code>",
                         "name" : "animationsBlock",
                         "type" : "Function"
                      },
                      {
+                        "description" : "a function to execute upon completion of all animations",
                         "name" : "aCompletionHandler",
                         "type" : "Function"
                      }
@@ -71818,13 +71957,16 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Initializes a newly allocated animation context with default duration and linear timing.",
                   "declaration" : "- (id)init",
                   "kind" : "method",
                   "name" : "init",
                   "returnType" : "id",
+                  "returns" : "the initialized animation context instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Pushes a new animation context onto the context stack, inheriting duration and timing parameters from the previous context if available.",
                   "declaration" : "+ (void)beginGrouping",
                   "kind" : "method",
                   "name" : "beginGrouping",
@@ -71832,10 +71974,12 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Flushes animations in the current context, pops it from the stack, and ends the grouping.",
                   "declaration" : "+ (BOOL)endGrouping",
                   "kind" : "method",
                   "name" : "endGrouping",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if a context was popped, <code>NO</code> if the stack was already empty",
                   "scope" : "class"
                },
                {
@@ -71881,11 +72025,13 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Sets the completion handler function for the current animation grouping.",
                   "declaration" : "- (void)setCompletionHandler:(Function)aCompletionHandler",
                   "kind" : "method",
                   "name" : "setCompletionHandler:",
                   "parameters" : [
                      {
+                        "description" : "a callback function executed once all animations in this context finish",
                         "name" : "aCompletionHandler",
                         "type" : "Function"
                      }
@@ -71894,10 +72040,12 @@
                   "scope" : "instance"
                },
                {
-                  "declaration" : "- (void)completionHandler",
+                  "abstract" : "Returns the current completion handler function.",
+                  "declaration" : "- (Function)completionHandler",
                   "kind" : "method",
                   "name" : "completionHandler",
-                  "returnType" : "void",
+                  "returnType" : "Function",
+                  "returns" : "the completion handler function, or <code>nil</code>",
                   "scope" : "instance"
                }
             ],
@@ -71906,47 +72054,58 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Calculates the frame rectangle of a given subview within a superview of the specified size.",
                   "declaration" : "- (CGRect)frameRectOfView:(CPView)aView inSuperviewSize:(CGSize)aSize",
                   "kind" : "method",
                   "name" : "frameRectOfView:inSuperviewSize:",
                   "parameters" : [
                      {
+                        "description" : "the subview to layout",
                         "name" : "aView",
                         "type" : "CPView"
                      },
                      {
+                        "description" : "the new size of the superview",
                         "name" : "aSize",
                         "type" : "CGSize"
                      }
                   ],
                   "returnType" : "CGRect",
+                  "returns" : "the adjusted frame rectangle",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Calculates the receiver's frame rectangle when resizing its superview to the specified size.",
                   "declaration" : "- (CGRect)frameWithNewSuperviewSize:(CGSize)newSize",
                   "kind" : "method",
                   "name" : "frameWithNewSuperviewSize:",
                   "parameters" : [
                      {
+                        "description" : "the new superview size",
                         "name" : "newSize",
                         "type" : "CGSize"
                      }
                   ],
                   "returnType" : "CGRect",
+                  "returns" : "the adjusted frame rectangle",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns whether the view has custom <code>drawRect:</code> implementation.",
                   "declaration" : "- (BOOL)hasCustomDrawRect",
                   "kind" : "method",
                   "name" : "hasCustomDrawRect",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if the view implements a custom <code>drawRect:</code>",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns whether the view has custom <code>layoutSubviews</code> implementation.",
                   "declaration" : "- (BOOL)hasCustomLayoutSubviews",
                   "kind" : "method",
                   "name" : "hasCustomLayoutSubviews",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if the view implements custom <code>layoutSubviews</code>",
                   "scope" : "instance"
                }
             ],
@@ -71955,10 +72114,12 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Returns the control points of the media timing function as an array.",
                   "declaration" : "- (CPArray)controlPoints",
                   "kind" : "method",
                   "name" : "controlPoints",
                   "returnType" : "CPArray",
+                  "returns" : "an array containing \\c [_c1x, _c1y, _c2x, _c2y]",
                   "scope" : "instance"
                }
             ],
@@ -71967,10 +72128,12 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Returns the control points of the animation's timing function, or linear defaults \\c [0, 0, 1, 1].",
                   "declaration" : "- (CPArray)timingFunctionControlPoints",
                   "kind" : "method",
                   "name" : "timingFunctionControlPoints",
                   "returnType" : "CPArray",
+                  "returns" : "an array containing the control points",
                   "scope" : "instance"
                }
             ],
@@ -71979,10 +72142,12 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Returns an array containing control point arrays for each timing function in the keyframe animation.",
                   "declaration" : "- (CPArray)timingFunctionsControlPoints",
                   "kind" : "method",
                   "name" : "timingFunctionsControlPoints",
                   "returnType" : "CPArray",
+                  "returns" : "an array of control point arrays",
                   "scope" : "instance"
                },
                {
