@@ -81,64 +81,140 @@ sub parse_file {
         my @raw_lines;
         my $deprecated = "";
         my $brief = "";
+        my %param_docs;
+        my $return_doc = "";
+        my $current_tag = "";
+        my $current_param_name = "";
 
         for my $l (@doc_buffer) {
             $l =~ s/^\s*\*\s?//; # Strip leading asterisks
             $l =~ s/\s+$//;      # Strip trailing spaces
 
-            # 1. Extract @deprecated directive
-            if ($l =~ /^\s*[@\\]deprecated\s*(.*)/i) {
-                $deprecated = $1;
+            # 1. Parse HeaderDoc / Doxygen directives
+            if ($l =~ /^\s*[@\\]deprecated(?:\s+(.*))?$/i) {
+                $current_tag = 'deprecated';
+                $deprecated = $1 // "";
                 next;
             }
-
-            # 2. Extract @brief / \brief directive for the abstract
-            if ($l =~ /^\s*[@\\]brief\s+(.*)/i) {
+            elsif ($l =~ /^\s*[@\\]brief\s+(.*)$/i) {
+                $current_tag = 'brief';
                 $brief = $1;
                 next;
             }
-
-            # 3. Filter out administrative directives (HeaderDoc/Doxygen)
-            if ($l =~ /^\s*[@\\](ingroup|class|category|file|module|header|framework)\b/i) {
+            elsif ($l =~ /^\s*[@\\]param\s+([A-Za-z0-9_]+)\s*(.*)$/i) {
+                $current_tag = 'param';
+                $current_param_name = $1;
+                $param_docs{$current_param_name} = $2 // "";
+                next;
+            }
+            elsif ($l =~ /^\s*[@\\](?:return|result)\s*(.*)$/i) {
+                $current_tag = 'return';
+                $return_doc = $1 // "";
+                next;
+            }
+            elsif ($l =~ /^\s*[@\\](ingroup|class|category|file|module|header|framework)\b/i) {
+                $current_tag = 'ignore';
+                next;
+            }
+            elsif ($l =~ /^\s*[@\\][a-zA-Z]/) {
+                $current_tag = 'ignore';
                 next;
             }
 
-            push @raw_lines, $l;
+            # Blank line resets tag continuation
+            if ($l =~ /^\s*$/) {
+                $current_tag = "";
+                push @raw_lines, "" unless @raw_lines && $raw_lines[-1] eq "";
+                next;
+            }
+
+            # Multi-line tag continuation
+            if ($current_tag eq 'deprecated') {
+                $deprecated .= " " . $l;
+            }
+            elsif ($current_tag eq 'brief') {
+                $brief .= " " . $l;
+            }
+            elsif ($current_tag eq 'param') {
+                $param_docs{$current_param_name} .= " " . $l;
+            }
+            elsif ($current_tag eq 'return') {
+                $return_doc .= " " . $l;
+            }
+            elsif ($current_tag eq 'ignore') {
+                next;
+            }
+            else {
+                push @raw_lines, $l;
+            }
         }
         @doc_buffer = ();
+
+        # Clean tags and format inline code
+        for my $k (keys %param_docs) {
+            $param_docs{$k} =~ s/^\s+|\s+$//g;
+            $param_docs{$k} =~ s{[@\\]c\s+([A-Za-z0-9_:.()]+)}{<code>$1</code>}g;
+            $param_docs{$k} =~ s{\\@}{@}g;
+        }
+        for my $var (\$return_doc, \$deprecated, \$brief) {
+            $$var =~ s/^\s+|\s+$//g;
+            $$var =~ s{[@\\]c\s+([A-Za-z0-9_:.()]+)}{<code>$1</code>}g;
+            $$var =~ s{\\@}{@}g;
+        }
 
         # Trim leading and trailing empty lines
         while (@raw_lines && $raw_lines[0] =~ /^\s*$/) { shift @raw_lines; }
         while (@raw_lines && $raw_lines[-1] =~ /^\s*$/) { pop @raw_lines; }
 
-        # Unescape and format inline tags (\c foo -> <code>foo</code>, \@ -> @)
         my @processed_lines;
         for my $line (@raw_lines) {
-            # Format \c identifier or @c identifier into <code>identifier</code>
             $line =~ s{[@\\]c\s+([A-Za-z0-9_:.()]+)}{<code>$1</code>}g;
-            # Unescape \@ to @
             $line =~ s{\\@}{@}g;
             push @processed_lines, $line;
         }
 
-        # Abstract resolution: Use explicit @brief if present, otherwise the first text line
+        my $full_text = join("\n", @processed_lines);
+        $full_text =~ s/^\s+|\s+$//g;
+
         my $abstract = $brief;
-        if (!$abstract && @processed_lines) {
-            $abstract = shift @processed_lines;
-        }
+        my $discussion = "";
 
         if ($abstract) {
-            $abstract =~ s{[@\\]c\s+([A-Za-z0-9_:.()]+)}{<code>$1</code>}g;
-            $abstract =~ s{\\@}{@}g;
-            $abstract =~ s/^\s+|\s+$//g;
+            $discussion = $full_text;
+        } elsif ($full_text) {
+            # Split into paragraphs by blank lines
+            my @paragraphs = split(/\n\s*\n/, $full_text);
+            my $first_p = shift @paragraphs;
+
+            # Flatten newlines within the first paragraph for sentence extraction
+            my $p_flattened = $first_p;
+            $p_flattened =~ s/\n/ /g;
+            $p_flattened =~ s/\s+/ /g;
+
+            # Match first complete sentence ending in a dot
+            if ($p_flattened =~ /^(.+?\.)(?:\s+(.*))?$/s) {
+                $abstract = $1;
+                my $rest_of_p = $2;
+                my @disc_parts;
+                push @disc_parts, $rest_of_p if defined $rest_of_p && length $rest_of_p;
+                push @disc_parts, @paragraphs if @paragraphs;
+                $discussion = join("\n\n", @disc_parts);
+            } else {
+                $abstract = $p_flattened;
+                $discussion = join("\n\n", @paragraphs);
+            }
         }
 
-        # Clean remaining discussion lines
-        while (@processed_lines && $processed_lines[0] =~ /^\s*$/) { shift @processed_lines; }
-        my $discussion = join("\n", @processed_lines);
-        $discussion =~ s/^\s+|\s+$//g;
+        $abstract =~ s/^\s+|\s+$//g if $abstract;
+        $discussion =~ s/^\s+|\s+$//g if $discussion;
 
-        return ($abstract, $discussion, $deprecated);
+        return {
+            abstract    => $abstract || "",
+            discussion  => $discussion || "",
+            deprecated  => $deprecated || "",
+            param_docs  => \%param_docs,
+            return_doc  => $return_doc || ""
+        };
     };
 
     # Helper to accurately count braces ignoring comments and strings
@@ -184,7 +260,7 @@ sub parse_file {
             $decl =~ s/^\s+//;
             $decl =~ s/\s+/ /g;
 
-            # Create a clean version without comments for regex parsing
+            # Create a clean version without comments/strings for regex parsing
             my $clean_str = $strip_code->($decl);
 
             return unless $clean_str =~ /^\s*([-+])\s*(?:\(([^)]+)\))?\s*(.*)$/s;
@@ -198,10 +274,16 @@ sub parse_file {
             my $name = "";
             my @params = ();
 
+            # Get parsed documentation from docblock
+            my $doc_data = $consume_doc->();
+            my ($abstract, $discussion, $deprecated, $param_docs, $return_doc) =
+            @{$doc_data}{qw(abstract discussion deprecated param_docs return_doc)};
+
             if ($sig !~ /:/) {
                 $name = $sig;
                 $name =~ s/\s+//g;
             } else {
+                # Parse parameters: Segment:(optional_type)argName or Segment:argName
                 while ($sig =~ /([A-Za-z0-9_]+)\s*:\s*(?:\(([^)]+)\))?\s*([A-Za-z0-9_]+)?/g) {
                     my $kw     = $1;
                     my $p_type = $2 // 'id';
@@ -213,13 +295,18 @@ sub parse_file {
 
                     my $param = { type => $p_type };
                     $param->{name} = $p_name if length $p_name;
+
+                    # Attach description if documented via @param
+                    if ($p_name && exists $param_docs->{$p_name}) {
+                        $param->{description} = $param_docs->{$p_name};
+                    }
+
                     push @params, $param;
                 }
             }
 
             return if $name =~ /^_/; # Skip internal / private methods
 
-            my ($abstract, $discussion, $deprecated) = $consume_doc->();
             my $sym = {
                 kind        => 'method',
                 scope       => $scope,
@@ -228,13 +315,14 @@ sub parse_file {
                 returnType  => $ret
             };
             $sym->{parameters} = \@params if @params;
+            $sym->{returns}    = $return_doc if $return_doc;
             $sym->{abstract}   = $abstract if $abstract;
             $sym->{discussion} = $discussion if $discussion;
             $sym->{deprecated} = $deprecated if $deprecated;
 
             push @{$current_topic->{symbols}}, $sym;
         };
-
+        
     while (my $line = <$fh>) {
         chomp $line;
         
