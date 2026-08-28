@@ -16482,11 +16482,14 @@
                   "declaration" : "- (id)initWithType:(CPString)aType error:(/*",
                   "discussion" : "    @param aType the type of document to initialize\n    @param anError not used\n    @return the initialized document",
                   "kind" : "method",
-                  "name" : "initWithType:",
+                  "name" : "initWithType:error:",
                   "parameters" : [
                      {
                         "name" : "aType",
                         "type" : "CPString"
+                     },
+                     {
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "id",
@@ -16563,11 +16566,14 @@
                   "declaration" : "- (CPData)dataOfType:(CPString)aType error:(/*",
                   "discussion" : "    throws an exception.\n    @param aType the format of the data\n    @param anError not used\n    @throws CPUnsupportedMethodException if this method hasn't been overridden by the subclass\n    @return the document data",
                   "kind" : "method",
-                  "name" : "dataOfType:",
+                  "name" : "dataOfType:error:",
                   "parameters" : [
                      {
                         "name" : "aType",
                         "type" : "CPString"
+                     },
+                     {
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "CPData",
@@ -24857,11 +24863,14 @@
                   "declaration" : "- (CPDocument)makeUntitledDocumentOfType:(CPString)aType error:(/*",
                   "discussion" : "    @param aType the document type\n    @param anError not used\n    @return the created document",
                   "kind" : "method",
-                  "name" : "makeUntitledDocumentOfType:",
+                  "name" : "makeUntitledDocumentOfType:error:",
                   "parameters" : [
                      {
                         "name" : "aType",
                         "type" : "CPString"
+                     },
+                     {
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "CPDocument",
@@ -48231,13 +48240,6 @@
                   "scope" : "instance"
                },
                {
-                  "declaration" : "- (CPString)_applyPropChange:sym parameter:param",
-                  "kind" : "method",
-                  "name" : "",
-                  "returnType" : "CPString",
-                  "scope" : "instance"
-               },
-               {
                   "declaration" : "- (CPAttributedString)parseRTF:(CPString)rtf",
                   "kind" : "method",
                   "name" : "parseRTF:",
@@ -64078,6 +64080,18 @@
          {
             "symbols" : [
                {
+                  "declaration" : "var target = aDOMEvent.target || aDOMEvent.srcElement",
+                  "kind" : "global_variable",
+                  "name" : "target",
+                  "type" : "id"
+               },
+               {
+                  "declaration" : "var nodeName = target.nodeName.toUpperCase()",
+                  "kind" : "global_variable",
+                  "name" : "nodeName",
+                  "type" : "id"
+               },
+               {
                   "declaration" : "- (id)init",
                   "kind" : "method",
                   "name" : "init",
@@ -65426,7 +65440,7 @@
                {
                   "declaration" : "+ (CPCib)loadCibFile:(CPString)anAbsolutePath externalNameTable:(CPDictionary)aNameTable loadDelegate:aDelegate",
                   "kind" : "method",
-                  "name" : "loadCibFile:externalNameTable:",
+                  "name" : "loadCibFile:externalNameTable:loadDelegate:",
                   "parameters" : [
                      {
                         "name" : "anAbsolutePath",
@@ -65435,6 +65449,10 @@
                      {
                         "name" : "aNameTable",
                         "type" : "CPDictionary"
+                     },
+                     {
+                        "name" : "aDelegate",
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "CPCib",
@@ -67395,7 +67413,12 @@
                {
                   "declaration" : "+ (CPArray)themeShowcaseExcludes If such a method exists, it should return an array of themed object names to exclude from the showcase. For example, let's say we want to exclude the themed objects that are defined by the methods themedAlert, themedCornerview and themedTableDataView. Here is what the themeShowcaseExcludes method could look like: + (CPArray)themeShowcaseExcludes",
                   "kind" : "method",
-                  "name" : "",
+                  "name" : "like:",
+                  "parameters" : [
+                     {
+                        "type" : "id"
+                     }
+                  ],
                   "returnType" : "CPArray",
                   "scope" : "class"
                },
@@ -67416,11 +67439,14 @@
                {
                   "declaration" : "+ (CPArray)defaultThemeOverridesAddedTo:(CPArray)themeValues For the example we used above, we could define such a method as follows: + (CPArray)defaultThemeOverridesAddedTo:(CPArray)themeValues",
                   "kind" : "method",
-                  "name" : "defaultThemeOverridesAddedTo:defaultThemeOverridesAddedTo:",
+                  "name" : "defaultThemeOverridesAddedTo:follows:defaultThemeOverridesAddedTo:",
                   "parameters" : [
                      {
                         "name" : "themeValues",
                         "type" : "CPArray"
+                     },
+                     {
+                        "type" : "id"
                      },
                      {
                         "name" : "themeValues",
@@ -70084,7 +70110,7 @@
       "primaryContent" : {
          "abstract" : " @class CALayer",
          "declaration" : "@implementation CALayer : CPObject",
-         "discussion" : "\n A CALayer is similar to a CPView, but with the ability\n to have a transform applied to it.\n\n @delegate -(void)drawLayer:(CALayer)layer inContext:(CGContextRef)ctx;\n If the delegate implements this method, the CALayer will\n call this in place of its \\c -drawInContext:.\n @param layer the layer to draw for\n @param ctx the context to draw on\n\n @delegate  -(void)displayLayer:(CALayer)layer;\n The delegate can override the layer's \\c -display method\n by implementing this method."
+         "discussion" : "\n    A CALayer is similar to a CPView, but with the ability\n    to have a transform applied to it.\n\n    @delegate -(void)drawLayer:(CALayer)layer inContext:(CGContextRef)ctx;\n    If the delegate implements this method, the CALayer will\n    call this in place of its \\c -drawInContext:.\n    @param layer the layer to draw for\n    @param ctx the context to draw on\n\n    @delegate  -(void)displayLayer:(CALayer)layer;\n    The delegate can override the layer's \\c -display method\n    by implementing this method."
       },
       "topics" : [
          {
@@ -70102,7 +70128,7 @@
                   "type" : "id"
                },
                {
-                  "abstract" : " Returns a new animation layer.",
+                  "abstract" : "    Returns a new animation layer.",
                   "declaration" : "+ (CALayer)layer",
                   "kind" : "method",
                   "name" : "layer",
@@ -70110,7 +70136,7 @@
                   "scope" : "class"
                },
                {
-                  "abstract" : " Initializes the animation layer.",
+                  "abstract" : "    Initializes the animation layer.",
                   "declaration" : "- (id)init",
                   "kind" : "method",
                   "name" : "init",
@@ -70118,9 +70144,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets the bounds (origin and size) of the rectangle.",
+                  "abstract" : "    Sets the bounds (origin and size) of the rectangle.",
                   "declaration" : "- (void)setBounds:(CGRect)aBounds",
-                  "discussion" : " @param aBounds the new bounds for the layer",
+                  "discussion" : "    @param aBounds the new bounds for the layer",
                   "kind" : "method",
                   "name" : "setBounds:",
                   "parameters" : [
@@ -70133,7 +70159,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns the layer's bound.",
+                  "abstract" : "    Returns the layer's bound.",
                   "declaration" : "- (CGRect)bounds",
                   "kind" : "method",
                   "name" : "bounds",
@@ -70141,9 +70167,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets the layer's position.",
+                  "abstract" : "    Sets the layer's position.",
                   "declaration" : "- (void)setPosition:(CGPoint)aPosition",
-                  "discussion" : " @param aPosition the layer's new position",
+                  "discussion" : "    @param aPosition the layer's new position",
                   "kind" : "method",
                   "name" : "setPosition:",
                   "parameters" : [
@@ -70156,7 +70182,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns the layer's position",
+                  "abstract" : "    Returns the layer's position",
                   "declaration" : "- (CGPoint)position",
                   "kind" : "method",
                   "name" : "position",
@@ -70164,9 +70190,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets the layer's z-ordering.",
+                  "abstract" : "    Sets the layer's z-ordering.",
                   "declaration" : "- (void)setZPosition:(int)aZPosition",
-                  "discussion" : " @param aZPosition the layer's new z-ordering",
+                  "discussion" : "    @param aZPosition the layer's new z-ordering",
                   "kind" : "method",
                   "name" : "setZPosition:",
                   "parameters" : [
@@ -70179,9 +70205,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets the layer's anchor point. The default point is [0.5, 0.5].",
+                  "abstract" : "    Sets the layer's anchor point. The default point is [0.5, 0.5].",
                   "declaration" : "- (void)setAnchorPoint:(CGPoint)anAnchorPoint",
-                  "discussion" : " @param anAnchorPoint the layer's new anchor point",
+                  "discussion" : "    @param anAnchorPoint the layer's new anchor point",
                   "kind" : "method",
                   "name" : "setAnchorPoint:",
                   "parameters" : [
@@ -70194,7 +70220,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns the layer's anchor point.",
+                  "abstract" : "    Returns the layer's anchor point.",
                   "declaration" : "- (CGPoint)anchorPoint",
                   "kind" : "method",
                   "name" : "anchorPoint",
@@ -70202,9 +70228,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets the affine transform applied to this layer.",
+                  "abstract" : "    Sets the affine transform applied to this layer.",
                   "declaration" : "- (void)setAffineTransform:(CGAffineTransform)anAffineTransform",
-                  "discussion" : " @param anAffineTransform the new affine transform",
+                  "discussion" : "    @param anAffineTransform the new affine transform",
                   "kind" : "method",
                   "name" : "setAffineTransform:",
                   "parameters" : [
@@ -70217,7 +70243,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns the layer's affine transform.",
+                  "abstract" : "    Returns the layer's affine transform.",
                   "declaration" : "- (CGAffineTransform)affineTransform",
                   "kind" : "method",
                   "name" : "affineTransform",
@@ -70225,9 +70251,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets the affine transform that gets applied to all the sublayers.",
+                  "abstract" : "    Sets the affine transform that gets applied to all the sublayers.",
                   "declaration" : "- (void)setSublayerTransform:(CGAffineTransform)anAffineTransform",
-                  "discussion" : " @param anAffineTransform the transform to apply to sublayers",
+                  "discussion" : "    @param anAffineTransform the transform to apply to sublayers",
                   "kind" : "method",
                   "name" : "setSublayerTransform:",
                   "parameters" : [
@@ -70240,7 +70266,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns the affine transform applied to the sublayers.",
+                  "abstract" : "    Returns the affine transform applied to the sublayers.",
                   "declaration" : "- (CGAffineTransform)sublayerTransform",
                   "kind" : "method",
                   "name" : "sublayerTransform",
@@ -70255,9 +70281,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets the frame of the layer. The frame defines a bounding",
+                  "abstract" : "    Sets the frame of the layer. The frame defines a bounding",
                   "declaration" : "- (void)setFrame:(CGRect)aFrame",
-                  "discussion" : " rectangle in the superlayer's coordinate system.\n @param aFrame the new frame rectangle",
+                  "discussion" : "    rectangle in the superlayer's coordinate system.\n    @param aFrame the new frame rectangle",
                   "kind" : "method",
                   "name" : "setFrame:",
                   "parameters" : [
@@ -70270,27 +70296,27 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns the layer's frame.",
+                  "abstract" : "    Returns the layer's frame.",
                   "declaration" : "- (CGRect)frame",
-                  "discussion" : "\n The frame defines the bounding box of the layer: the smallest\n possible rectangle that could fit this layer after transform\n properties are applied in superlayer coordinates.",
+                  "discussion" : "\n    The frame defines the bounding box of the layer: the smallest\n    possible rectangle that could fit this layer after transform\n    properties are applied in superlayer coordinates.",
                   "kind" : "method",
                   "name" : "frame",
                   "returnType" : "CGRect",
                   "scope" : "instance"
                },
                {
-                  "abstract" : " The Backing Store Frame specifies the frame of the actual backing",
+                  "abstract" : "    The Backing Store Frame specifies the frame of the actual backing",
                   "declaration" : "- (CGRect)backingStoreFrame",
-                  "discussion" : " store used to contain this layer.  Naturally, by default it is the\n same as the frame, however, users can specify their own custom\n Backing Store Frame in order to speed up certain operations, such as\n live transformation.\n @return the backing store frame",
+                  "discussion" : "    store used to contain this layer.  Naturally, by default it is the\n    same as the frame, however, users can specify their own custom\n    Backing Store Frame in order to speed up certain operations, such as\n    live transformation.\n    @return the backing store frame",
                   "kind" : "method",
                   "name" : "backingStoreFrame",
                   "returnType" : "CGRect",
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets the frame's backing store.",
+                  "abstract" : "    Sets the frame's backing store.",
                   "declaration" : "- (void)setBackingStoreFrame:(CGRect)aFrame",
-                  "discussion" : " @param aFrame the new backing store.",
+                  "discussion" : "    @param aFrame the new backing store.",
                   "kind" : "method",
                   "name" : "setBackingStoreFrame:",
                   "parameters" : [
@@ -70303,18 +70329,18 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns the CGImage contents of this layer.",
+                  "abstract" : "    Returns the CGImage contents of this layer.",
                   "declaration" : "- (CGImage)contents",
-                  "discussion" : " The default contents are \\c nil.",
+                  "discussion" : "    The default contents are \\c nil.",
                   "kind" : "method",
                   "name" : "contents",
                   "returnType" : "CGImage",
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets the image contents of this layer.",
+                  "abstract" : "    Sets the image contents of this layer.",
                   "declaration" : "- (void)setContents:(CGImage)contents",
-                  "discussion" : " @param contents the image to display",
+                  "discussion" : "    @param contents the image to display",
                   "kind" : "method",
                   "name" : "setContents:",
                   "parameters" : [
@@ -70334,7 +70360,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Displays the contents of this layer.",
+                  "abstract" : "    Displays the contents of this layer.",
                   "declaration" : "- (void)display",
                   "kind" : "method",
                   "name" : "display",
@@ -70342,9 +70368,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Draws this layer's contents into the specified context.",
+                  "abstract" : "    Draws this layer's contents into the specified context.",
                   "declaration" : "- (void)drawInContext:(CGContext)aContext",
-                  "discussion" : " @param aContext the context to draw the layer into",
+                  "discussion" : "    @param aContext the context to draw the layer into",
                   "kind" : "method",
                   "name" : "drawInContext:",
                   "parameters" : [
@@ -70357,18 +70383,18 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns the opacity of the layer. The value is between",
+                  "abstract" : "    Returns the opacity of the layer. The value is between",
                   "declaration" : "- (float)opacity",
-                  "discussion" : " \\c 0.0 (transparent) and \\c 1.0 (opaque).",
+                  "discussion" : "    \\c 0.0 (transparent) and \\c 1.0 (opaque).",
                   "kind" : "method",
                   "name" : "opacity",
                   "returnType" : "float",
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets the opacity for the layer.",
+                  "abstract" : "    Sets the opacity for the layer.",
                   "declaration" : "- (void)setOpacity:(float)anOpacity",
-                  "discussion" : " @param anOpacity the new opacity (between \\c 0.0 (transparent) and \\c 1.0 (opaque)).",
+                  "discussion" : "    @param anOpacity the new opacity (between \\c 0.0 (transparent) and \\c 1.0 (opaque)).",
                   "kind" : "method",
                   "name" : "setOpacity:",
                   "parameters" : [
@@ -70381,9 +70407,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets whether the layer is hidden.",
+                  "abstract" : "    Sets whether the layer is hidden.",
                   "declaration" : "- (void)setHidden:(BOOL)isHidden",
-                  "discussion" : " @param isHidden \\c YES means the layer will be hidden. \\c NO means the layer will be visible.",
+                  "discussion" : "    @param isHidden \\c YES means the layer will be hidden. \\c NO means the layer will be visible.",
                   "kind" : "method",
                   "name" : "setHidden:",
                   "parameters" : [
@@ -70396,7 +70422,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns \\c YES if the layer is hidden.",
+                  "abstract" : "    Returns \\c YES if the layer is hidden.",
                   "declaration" : "- (BOOL)hidden",
                   "kind" : "method",
                   "name" : "hidden",
@@ -70404,7 +70430,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns \\c YES if the layer is hidden.",
+                  "abstract" : "    Returns \\c YES if the layer is hidden.",
                   "declaration" : "- (BOOL)isHidden",
                   "kind" : "method",
                   "name" : "isHidden",
@@ -70412,9 +70438,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets whether content that goes lies outside the bounds is hidden or visible.",
+                  "abstract" : "    Sets whether content that goes lies outside the bounds is hidden or visible.",
                   "declaration" : "- (void)setMasksToBounds:(BOOL)masksToBounds",
-                  "discussion" : " @param masksToBounds \\c YES hides the excess content. \\c NO makes it visible.",
+                  "discussion" : "    @param masksToBounds \\c YES hides the excess content. \\c NO makes it visible.",
                   "kind" : "method",
                   "name" : "setMasksToBounds:",
                   "parameters" : [
@@ -70427,9 +70453,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets the layer's background color.",
+                  "abstract" : "    Sets the layer's background color.",
                   "declaration" : "- (void)setBackgroundColor:(CPColor)aColor",
-                  "discussion" : " @param aColor the new background color",
+                  "discussion" : "    @param aColor the new background color",
                   "kind" : "method",
                   "name" : "setBackgroundColor:",
                   "parameters" : [
@@ -70442,7 +70468,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns the layer's background color.",
+                  "abstract" : "    Returns the layer's background color.",
                   "declaration" : "- (CPColor)backgroundColor",
                   "kind" : "method",
                   "name" : "backgroundColor",
@@ -70450,7 +70476,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns an array of the receiver's sublayers.",
+                  "abstract" : "    Returns an array of the receiver's sublayers.",
                   "declaration" : "- (CPArray)sublayers",
                   "kind" : "method",
                   "name" : "sublayers",
@@ -70458,7 +70484,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns the receiver's superlayer.",
+                  "abstract" : "    Returns the receiver's superlayer.",
                   "declaration" : "- (CALayer)superlayer",
                   "kind" : "method",
                   "name" : "superlayer",
@@ -70466,7 +70492,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Adds the specified layer as a sublayer of the receiver.",
+                  "abstract" : "    Adds the specified layer as a sublayer of the receiver.",
                   "declaration" : "- (void)addSublayer:(CALayer)aLayer",
                   "kind" : "method",
                   "name" : "addSublayer:",
@@ -70480,7 +70506,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Removes the receiver from its superlayer.",
+                  "abstract" : "    Removes the receiver from its superlayer.",
                   "declaration" : "- (void)removeFromSuperlayer",
                   "kind" : "method",
                   "name" : "removeFromSuperlayer",
@@ -70488,9 +70514,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Inserts the specified layer as a sublayer into the specified index.",
+                  "abstract" : "    Inserts the specified layer as a sublayer into the specified index.",
                   "declaration" : "- (void)insertSublayer:(CALayer)aLayer atIndex:(CPUInteger)anIndex",
-                  "discussion" : " @param aLayer the layer to insert\n @param anIndex the index to insert the layer at",
+                  "discussion" : "    @param aLayer the layer to insert\n    @param anIndex the index to insert the layer at",
                   "kind" : "method",
                   "name" : "insertSublayer:atIndex:",
                   "parameters" : [
@@ -70507,9 +70533,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Inserts a layer below another layer.",
+                  "abstract" : "    Inserts a layer below another layer.",
                   "declaration" : "- (void)insertSublayer:(CALayer)aLayer below:(CALayer)aSublayer",
-                  "discussion" : " @param aLayer the layer to insert\n @param aSublayer the layer to insert below\n @throws CALayerNotFoundException if \\c aSublayer is not in the array of sublayers",
+                  "discussion" : "    @param aLayer the layer to insert\n    @param aSublayer the layer to insert below\n    @throws CALayerNotFoundException if \\c aSublayer is not in the array of sublayers",
                   "kind" : "method",
                   "name" : "insertSublayer:below:",
                   "parameters" : [
@@ -70526,9 +70552,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Inserts a layer above another layer.",
+                  "abstract" : "    Inserts a layer above another layer.",
                   "declaration" : "- (void)insertSublayer:(CALayer)aLayer above:(CALayer)aSublayer",
-                  "discussion" : " @param aLayer the layer to insert\n @param aSublayer the layer to insert above\n @throws CALayerNotFoundException if \\c aSublayer is not in the array of sublayers",
+                  "discussion" : "    @param aLayer the layer to insert\n    @param aSublayer the layer to insert above\n    @throws CALayerNotFoundException if \\c aSublayer is not in the array of sublayers",
                   "kind" : "method",
                   "name" : "insertSublayer:above:",
                   "parameters" : [
@@ -70545,9 +70571,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Replaces a sublayer.",
+                  "abstract" : "    Replaces a sublayer.",
                   "declaration" : "- (void)replaceSublayer:(CALayer)aSublayer with:(CALayer)aLayer",
-                  "discussion" : " @param aSublayer the layer to insert\n @param aLayer the layer to replace",
+                  "discussion" : "    @param aSublayer the layer to insert\n    @param aLayer the layer to replace",
                   "kind" : "method",
                   "name" : "replaceSublayer:with:",
                   "parameters" : [
@@ -70591,7 +70617,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Marks the layer as needing to be redrawn.",
+                  "abstract" : "    Marks the layer as needing to be redrawn.",
                   "declaration" : "- (void)setNeedsDisplay",
                   "kind" : "method",
                   "name" : "setNeedsDisplay",
@@ -70599,9 +70625,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets whether the layer needs to be redrawn when its bounds are changed.",
+                  "abstract" : "    Sets whether the layer needs to be redrawn when its bounds are changed.",
                   "declaration" : "- (void)setNeedsDisplayOnBoundsChange:(BOOL)needsDisplayOnBoundsChange",
-                  "discussion" : " @param needsDisplayOnBoundsChange \\c YES means the display is redraw on a bounds change.",
+                  "discussion" : "    @param needsDisplayOnBoundsChange \\c YES means the display is redraw on a bounds change.",
                   "kind" : "method",
                   "name" : "setNeedsDisplayOnBoundsChange:",
                   "parameters" : [
@@ -70614,7 +70640,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns \\c YES if the display should be redrawn on a bounds change.",
+                  "abstract" : "    Returns \\c YES if the display should be redrawn on a bounds change.",
                   "declaration" : "- (BOOL)needsDisplayOnBoundsChange",
                   "kind" : "method",
                   "name" : "needsDisplayOnBoundsChange",
@@ -70622,9 +70648,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Marks the specified rectangle as needing to be redrawn.",
+                  "abstract" : "    Marks the specified rectangle as needing to be redrawn.",
                   "declaration" : "- (void)setNeedsDisplayInRect:(CGRect)aRect",
-                  "discussion" : " @param aRect the area that needs to be redrawn.",
+                  "discussion" : "    @param aRect the area that needs to be redrawn.",
                   "kind" : "method",
                   "name" : "setNeedsDisplayInRect:",
                   "parameters" : [
@@ -70637,9 +70663,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Converts the point from the specified layer's coordinate system into the receiver's coordinate system.",
+                  "abstract" : "    Converts the point from the specified layer's coordinate system into the receiver's coordinate system.",
                   "declaration" : "- (CGPoint)convertPoint:(CGPoint)aPoint fromLayer:(CALayer)aLayer",
-                  "discussion" : " @param aPoint the point to convert\n @param aLayer the layer coordinate system to convert from\n @return the converted point",
+                  "discussion" : "    @param aPoint the point to convert\n    @param aLayer the layer coordinate system to convert from\n    @return the converted point",
                   "kind" : "method",
                   "name" : "convertPoint:fromLayer:",
                   "parameters" : [
@@ -70656,9 +70682,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Converts the point from the receiver's coordinate system to the specified layer's coordinate system.",
+                  "abstract" : "    Converts the point from the receiver's coordinate system to the specified layer's coordinate system.",
                   "declaration" : "- (CGPoint)convertPoint:(CGPoint)aPoint toLayer:(CALayer)aLayer",
-                  "discussion" : " @param aPoint the point to convert\n @param aLayer the layer coordinate system to convert to\n @return the converted point",
+                  "discussion" : "    @param aPoint the point to convert\n    @param aLayer the layer coordinate system to convert to\n    @return the converted point",
                   "kind" : "method",
                   "name" : "convertPoint:toLayer:",
                   "parameters" : [
@@ -70675,9 +70701,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Converts the rectangle from the specified layer's coordinate system to the receiver's coordinate system.",
+                  "abstract" : "    Converts the rectangle from the specified layer's coordinate system to the receiver's coordinate system.",
                   "declaration" : "- (CGRect)convertRect:(CGRect)aRect fromLayer:(CALayer)aLayer",
-                  "discussion" : " @param aRect the rectangle to convert\n @param aLayer the layer coordinate system to convert from\n @return the converted rectangle",
+                  "discussion" : "    @param aRect the rectangle to convert\n    @param aLayer the layer coordinate system to convert from\n    @return the converted rectangle",
                   "kind" : "method",
                   "name" : "convertRect:fromLayer:",
                   "parameters" : [
@@ -70694,9 +70720,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Converts the rectangle from the receiver's coordinate system to the specified layer's coordinate system.",
+                  "abstract" : "    Converts the rectangle from the receiver's coordinate system to the specified layer's coordinate system.",
                   "declaration" : "- (CGRect)convertRect:(CGRect)aRect toLayer:(CALayer)aLayer",
-                  "discussion" : " @param aRect the rectangle to convert\n @param aLayer the layer coordinate system to convert to\n @return the converted rectangle",
+                  "discussion" : "    @param aRect the rectangle to convert\n    @param aLayer the layer coordinate system to convert to\n    @return the converted rectangle",
                   "kind" : "method",
                   "name" : "convertRect:toLayer:",
                   "parameters" : [
@@ -70713,9 +70739,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns \\c YES if the layer contains the point.",
+                  "abstract" : "    Returns \\c YES if the layer contains the point.",
                   "declaration" : "- (BOOL)containsPoint:(CGPoint)aPoint",
-                  "discussion" : " @param aPoint the point to test",
+                  "discussion" : "    @param aPoint the point to test",
                   "kind" : "method",
                   "name" : "containsPoint:",
                   "parameters" : [
@@ -70728,9 +70754,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns the farthest descendant of this layer that contains the specified point.",
+                  "abstract" : "    Returns the farthest descendant of this layer that contains the specified point.",
                   "declaration" : "- (CALayer)hitTest:(CGPoint)aPoint",
-                  "discussion" : " @param aPoint the point to test\n @return the containing layer or \\c nil if there was no hit.",
+                  "discussion" : "    @param aPoint the point to test\n    @return the containing layer or \\c nil if there was no hit.",
                   "kind" : "method",
                   "name" : "hitTest:",
                   "parameters" : [
@@ -70743,9 +70769,9 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Sets the delegate for this layer.",
+                  "abstract" : "    Sets the delegate for this layer.",
                   "declaration" : "- (void)setDelegate:(id)aDelegate",
-                  "discussion" : " @param aDelegate the delegate",
+                  "discussion" : "    @param aDelegate the delegate",
                   "kind" : "method",
                   "name" : "setDelegate:",
                   "parameters" : [
@@ -70758,7 +70784,7 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : " Returns the layer's delegate",
+                  "abstract" : "    Returns the layer's delegate",
                   "declaration" : "- (id)delegate",
                   "kind" : "method",
                   "name" : "delegate",
@@ -71024,10 +71050,14 @@
                {
                   "declaration" : "+ (id)functionWithControlPoints:(float)c1x :(float)c1y :(float)c2x :(float)c2y",
                   "kind" : "method",
-                  "name" : "functionWithControlPoints:",
+                  "name" : "functionWithControlPoints:c1y:",
                   "parameters" : [
                      {
                         "name" : "c1x",
+                        "type" : "float"
+                     },
+                     {
+                        "name" : "c2x",
                         "type" : "float"
                      }
                   ],
@@ -71037,10 +71067,14 @@
                {
                   "declaration" : "- (id)initWithControlPoints:(float)c1x :(float)c1y :(float)c2x :(float)c2y",
                   "kind" : "method",
-                  "name" : "initWithControlPoints:",
+                  "name" : "initWithControlPoints:c1y:",
                   "parameters" : [
                      {
                         "name" : "c1x",
+                        "type" : "float"
+                     },
+                     {
+                        "name" : "c2x",
                         "type" : "float"
                      }
                   ],
@@ -73675,13 +73709,6 @@
                         "type" : "unsigned short"
                      }
                   ],
-                  "returnType" : "id",
-                  "scope" : "instance"
-               },
-               {
-                  "declaration" : "- (id)_initWithJSNumber:value",
-                  "kind" : "method",
-                  "name" : "",
                   "returnType" : "id",
                   "scope" : "instance"
                }
@@ -77731,10 +77758,14 @@
                {
                   "declaration" : "- (id)initWithPlistObject:(id)aPlistObject format:aFormat",
                   "kind" : "method",
-                  "name" : "initWithPlistObject:",
+                  "name" : "initWithPlistObject:format:",
                   "parameters" : [
                      {
                         "name" : "aPlistObject",
+                        "type" : "id"
+                     },
+                     {
+                        "name" : "aFormat",
                         "type" : "id"
                      }
                   ],
@@ -79827,11 +79858,14 @@
                {
                   "declaration" : "+ (CPData)sendSynchronousRequest:(CPURLRequest)aRequest returningResponse:(/*",
                   "kind" : "method",
-                  "name" : "sendSynchronousRequest:",
+                  "name" : "sendSynchronousRequest:returningResponse:",
                   "parameters" : [
                      {
                         "name" : "aRequest",
                         "type" : "CPURLRequest"
+                     },
+                     {
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "CPData",
@@ -79876,6 +79910,13 @@
                   ],
                   "returnType" : "async @action",
                   "scope" : "instance"
+               },
+               {
+                  "declaration" : "+ (async JSObject /*",
+                  "kind" : "method",
+                  "name" : "(asyncJSObject/*",
+                  "returnType" : "id",
+                  "scope" : "class"
                },
                {
                   "declaration" : "+ (CPURLConnection)connectionWithRequest:(CPURLRequest)aRequest delegate:(id)aDelegate",
@@ -79996,11 +80037,14 @@
                {
                   "declaration" : "+ (CPData)sendSynchronousRequest:(CPURLRequest)aRequest returningResponse:(/*",
                   "kind" : "method",
-                  "name" : "sendSynchronousRequest:",
+                  "name" : "sendSynchronousRequest:returningResponse:",
                   "parameters" : [
                      {
                         "name" : "aRequest",
                         "type" : "CPURLRequest"
+                     },
+                     {
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "CPData",
@@ -83814,13 +83858,6 @@
                   "scope" : "class"
                },
                {
-                  "declaration" : "- (void)_setInverted:flag",
-                  "kind" : "method",
-                  "name" : "",
-                  "returnType" : "void",
-                  "scope" : "instance"
-               },
-               {
                   "declaration" : "var CPCharacterSetInvertedKey = @\"CPCharacterSetInvertedKey\"",
                   "kind" : "global_variable",
                   "name" : "CPCharacterSetInvertedKey",
@@ -83913,11 +83950,15 @@
                {
                   "declaration" : "- (BOOL)hasMemberInPlane:(int)plane // TO DO : when inverted",
                   "kind" : "method",
-                  "name" : "hasMemberInPlane:",
+                  "name" : "hasMemberInPlane:DO:",
                   "parameters" : [
                      {
                         "name" : "plane",
                         "type" : "int"
+                     },
+                     {
+                        "name" : "when",
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "BOOL",
@@ -88953,11 +88994,19 @@
                {
                   "declaration" : "+ (CPDelayedPerform)delayedPerformWithObject:anObject selector:(SEL)aSelector argument:anArgument",
                   "kind" : "method",
-                  "name" : "selector:",
+                  "name" : "delayedPerformWithObject:selector:argument:",
                   "parameters" : [
+                     {
+                        "name" : "anObject",
+                        "type" : "id"
+                     },
                      {
                         "name" : "aSelector",
                         "type" : "SEL"
+                     },
+                     {
+                        "name" : "anArgument",
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "CPDelayedPerform",
@@ -89030,11 +89079,19 @@
                {
                   "declaration" : "+ (void)cancelPreviousPerformRequestsWithTarget:target selector:(SEL)selector object:argument",
                   "kind" : "method",
-                  "name" : "selector:",
+                  "name" : "cancelPreviousPerformRequestsWithTarget:selector:object:",
                   "parameters" : [
+                     {
+                        "name" : "target",
+                        "type" : "id"
+                     },
                      {
                         "name" : "selector",
                         "type" : "SEL"
+                     },
+                     {
+                        "name" : "argument",
+                        "type" : "id"
                      }
                   ],
                   "returnType" : "void",
@@ -89043,18 +89100,32 @@
                {
                   "declaration" : "+ (void)cancelPreviousPerformRequestsWithTarget:target",
                   "kind" : "method",
-                  "name" : "",
+                  "name" : "cancelPreviousPerformRequestsWithTarget:",
+                  "parameters" : [
+                     {
+                        "name" : "target",
+                        "type" : "id"
+                     }
+                  ],
                   "returnType" : "void",
                   "scope" : "class"
                },
                {
                   "declaration" : "+ (void)object:object performSelector:(SEL)selector withObject:argument afterDelay:(CPTimeInterval)delay inModes:(CPArray)modes",
                   "kind" : "method",
-                  "name" : "performSelector:afterDelay:inModes:",
+                  "name" : "object:performSelector:withObject:afterDelay:inModes:",
                   "parameters" : [
+                     {
+                        "name" : "object",
+                        "type" : "id"
+                     },
                      {
                         "name" : "selector",
                         "type" : "SEL"
+                     },
+                     {
+                        "name" : "argument",
+                        "type" : "id"
                      },
                      {
                         "name" : "delay",
@@ -89071,11 +89142,15 @@
                {
                   "declaration" : "- (void)performSelector:(SEL)selector withObject:object afterDelay:(CPTimeInterval)delay",
                   "kind" : "method",
-                  "name" : "performSelector:afterDelay:",
+                  "name" : "performSelector:withObject:afterDelay:",
                   "parameters" : [
                      {
                         "name" : "selector",
                         "type" : "SEL"
+                     },
+                     {
+                        "name" : "object",
+                        "type" : "id"
                      },
                      {
                         "name" : "delay",
@@ -89088,11 +89163,15 @@
                {
                   "declaration" : "- (void)performSelector:(SEL)selector withObject:object afterDelay:(CPTimeInterval)delay inModes:(CPArray)modes",
                   "kind" : "method",
-                  "name" : "performSelector:afterDelay:inModes:",
+                  "name" : "performSelector:withObject:afterDelay:inModes:",
                   "parameters" : [
                      {
                         "name" : "selector",
                         "type" : "SEL"
+                     },
+                     {
+                        "name" : "object",
+                        "type" : "id"
                      },
                      {
                         "name" : "delay",
@@ -90997,8 +91076,12 @@
                {
                   "declaration" : "- (id)expressionValueWithObject:object context:(CPDictionary)context",
                   "kind" : "method",
-                  "name" : "context:",
+                  "name" : "expressionValueWithObject:context:",
                   "parameters" : [
+                     {
+                        "name" : "object",
+                        "type" : "id"
+                     },
                      {
                         "name" : "context",
                         "type" : "CPDictionary"
@@ -91573,13 +91656,6 @@
                         "type" : "id"
                      }
                   ],
-                  "returnType" : "BOOL",
-                  "scope" : "instance"
-               },
-               {
-                  "declaration" : "- (BOOL)_evaluateValue:lhs rightValue:rhs",
-                  "kind" : "method",
-                  "name" : "",
                   "returnType" : "BOOL",
                   "scope" : "instance"
                },
@@ -93145,8 +93221,12 @@
                {
                   "declaration" : "- (id)expressionValueWithObject:object context:(CPDictionary)context",
                   "kind" : "method",
-                  "name" : "context:",
+                  "name" : "expressionValueWithObject:context:",
                   "parameters" : [
+                     {
+                        "name" : "object",
+                        "type" : "id"
+                     },
                      {
                         "name" : "context",
                         "type" : "CPDictionary"

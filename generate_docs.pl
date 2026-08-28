@@ -117,7 +117,6 @@ sub parse_file {
     };
     
     # Helper to parse and store method signatures
-    # Helper to parse and store method signatures
     my $process_method = sub {
         my ($str) = @_;
 
@@ -126,19 +125,20 @@ sub parse_file {
             $str =~ s/;\s*$//;
             $str =~ s/\s+$//;
 
-            # Save a cleaner declaration string (preserves original comments in documentation)
+            # Save a cleaner declaration string
             my $decl = $str;
             $decl =~ s/^\s+//;
-            $decl =~ s/\s+/ /g; # compact multiple spaces purely for display
+            $decl =~ s/\s+/ /g;
 
             # Clean inline comments on a working copy for accurate regex parsing
             my $clean_str = $str;
             $clean_str =~ s{/\*.*?\*/}{}g;
 
-            return unless $clean_str =~ /^\s*([-+])\s*\(([^)]+)\)\s*(.*)$/;
+            # Return type in parentheses is optional (defaults to 'id')
+            return unless $clean_str =~ /^\s*([-+])\s*(?:\(([^)]+)\))?\s*(.*)$/;
 
             my $scope = $1 eq '+' ? 'class' : 'instance';
-            my $ret   = $2;
+            my $ret   = $2 // 'id';
             my $sig   = $3;
 
             $ret =~ s/^\s+|\s+$//g;
@@ -150,12 +150,19 @@ sub parse_file {
                 $name = $sig;
                 $name =~ s/\s+//g;
             } else {
-                # Parse parameters: Segment:(Type)argName
-                while ($sig =~ /([A-Za-z0-9_]+):\s*\(([^)]+)\)\s*([A-Za-z0-9_]+)/g) {
-                    $name .= "$1:";
-                    my ($p_type, $p_name) = ($2, $3);
+                # Parse parameters: Segment:(optional_type)argName or Segment:argName
+                while ($sig =~ /([A-Za-z0-9_]+)\s*:\s*(?:\(([^)]+)\))?\s*([A-Za-z0-9_]+)?/g) {
+                    my $keyword = $1;
+                    my $p_type  = $2 // 'id';
+                    my $p_name  = $3 // '';
+
+                    $name .= "$keyword:";
                     $p_type =~ s/^\s+|\s+$//g;
-                    push @params, { type => $p_type, name => $p_name };
+                    $p_name =~ s/^\s+|\s+$//g;
+
+                    my $param_info = { type => $p_type };
+                    $param_info->{name} = $p_name if length $p_name;
+                    push @params, $param_info;
                 }
             }
 
@@ -176,7 +183,6 @@ sub parse_file {
 
             push @{$current_topic->{symbols}}, $sym;
         };
-    
 
     while (my $line = <$fh>) {
         chomp $line;
