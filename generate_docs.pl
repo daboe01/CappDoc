@@ -234,6 +234,33 @@ sub parse_file {
         };
     };
 
+    # Helper to check if a closed docblock is a Section Header (@name) or Class Docblock (@class)
+    my $handle_closed_docblock = sub {
+        return unless @doc_buffer;
+
+        # 1. Check for @name Topic Header (e.g. /*! @name Initializing a Template */)
+        my ($topic_name) = map { /^\s*[@\\]name\s+(.+)$/ ? $1 : () } @doc_buffer;
+        if ($topic_name) {
+            $topic_name =~ s/^\s+|\s+$//g;
+            if (@{$current_topic->{symbols}}) {
+                push @topics, { title => $current_topic->{title}, symbols => [@{$current_topic->{symbols}}] };
+            }
+            $current_topic = { title => $topic_name, symbols => [] };
+            @doc_buffer = ();
+            return;
+        }
+
+        # 2. Check for @class docblock (placed after ivars or before methods)
+        my ($doc_cname) = map { /^\s*[@\\]class\s+([A-Za-z0-9_]+)/ ? $1 : () } @doc_buffer;
+        if ($doc_cname && $class_name && $doc_cname eq $class_name) {
+            my $doc = $consume_doc->();
+            $class_abstract   = $doc->{abstract}   if $doc->{abstract};
+            $class_discussion = $doc->{discussion} if $doc->{discussion};
+            $class_deprecated = $doc->{deprecated} if $doc->{deprecated};
+            return;
+        }
+    };
+
     # Helper to parse and store method signatures
     my $process_method = sub {
         my ($str) = @_;
@@ -290,7 +317,7 @@ sub parse_file {
                     my $param = { type => $p_type };
                     $param->{name} = $p_name if length $p_name;
 
-                    # Match param description by name or single parameter fallback
+                    # Match param description by name
                     if ($p_name && exists $param_docs->{$p_name}) {
                         $param->{description} = $param_docs->{$p_name};
                     }
@@ -298,7 +325,7 @@ sub parse_file {
                     push @params, $param;
                 }
 
-                # Fallback: if only 1 parameter and 1 @param doc existed with informal naming
+                # Fallback: if only 1 parameter and 1 @param doc existed
                 if (@params == 1 && keys %$param_docs == 1 && !$params[0]->{description}) {
                     $params[0]->{description} = (values %$param_docs)[0];
                 }
@@ -330,6 +357,7 @@ sub parse_file {
                 if ($line =~ m{(.*?)\*/}) {
                     push @doc_buffer, $1;
                     $state = 'search';
+                    $handle_closed_docblock->();
                 } else {
                     push @doc_buffer, $line;
                 }
@@ -413,14 +441,14 @@ sub parse_file {
 
                 # --- Base Search State ---
 
-                # 1. Detect DocBlock Starts
-                if ($line =~ m{/\*\!(.*)}) {
-                    @doc_buffer = ();
+                # 1. Detect DocBlock Starts (supports /*! and /**)
+                if ($line =~ m{/\*[\!*](.*)}) {
                     my $rest = $1;
                     if ($rest =~ m{(.*?)\*/}) {
-                        push @doc_buffer, $1;
+                        @doc_buffer = ($1);
+                        $handle_closed_docblock->();
                     } else {
-                        push @doc_buffer, $rest;
+                        @doc_buffer = ($rest);
                         $state = 'doc';
                     }
                     next;
@@ -456,9 +484,9 @@ sub parse_file {
                     $superclass = $parsed_sclass if $parsed_sclass;
 
                     my $doc = $consume_doc->();
-                    $class_abstract = $doc->{abstract};
-                    $class_discussion = $doc->{discussion};
-                    $class_deprecated = $doc->{deprecated};
+                    $class_abstract   = $doc->{abstract}   if $doc->{abstract};
+                    $class_discussion = $doc->{discussion} if $doc->{discussion};
+                    $class_deprecated = $doc->{deprecated} if $doc->{deprecated};
                 }
             } else {
                 if (@{$current_topic->{symbols}}) {
@@ -494,7 +522,7 @@ sub parse_file {
                 declaration => "var $name = $val",
                 type        => 'id'
             };
-            $sym->{abstract}   = $doc->{abstract} if $doc->{abstract};
+            $sym->{abstract}   = $doc->{abstract}   if $doc->{abstract};
             $sym->{discussion} = $doc->{discussion} if $doc->{discussion};
             $sym->{deprecated} = $doc->{deprecated} if $doc->{deprecated};
             push @{$current_topic->{symbols}}, $sym;

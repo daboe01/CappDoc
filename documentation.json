@@ -8118,9 +8118,9 @@
          "title" : "CPSplitViewController"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "A container view controller that manages two or more child view controllers in a split view interface.",
          "declaration" : "@implementation CPSplitViewController : CPViewController <CPSplitViewDelegate>",
-         "discussion" : ""
+         "discussion" : "This class provides a controller-level abstraction for CPSplitView,\nmanaging the addition, removal, and arrangement of view controllers\nthrough CPSplitViewItem instances.\n\nThis implementation was synthesized with the assistance of an LLM,\ndirected by the author."
       },
       "topics" : [
          {
@@ -8153,13 +8153,16 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the CPSplitView instance managed by the controller.",
                   "declaration" : "- (CPSplitView)splitView",
                   "kind" : "method",
                   "name" : "splitView",
                   "returnType" : "CPSplitView",
+                  "returns" : "s {CPSplitView} The split view.",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Sets a custom split view for the controller.",
                   "declaration" : "- (void)setSplitView:(CPSplitView)splitView",
                   "kind" : "method",
                   "name" : "setSplitView:",
@@ -8173,13 +8176,16 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the array of split view items.",
                   "declaration" : "- (CPArray)splitViewItems",
                   "kind" : "method",
                   "name" : "splitViewItems",
                   "returnType" : "CPArray",
+                  "returns" : "s {CPArray} The array of CPSplitViewItem objects.",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Sets the array of split view items, replacing any existing items.",
                   "declaration" : "- (void)setSplitViewItems:(CPArray)splitViewItems",
                   "kind" : "method",
                   "name" : "setSplitViewItems:",
@@ -8193,6 +8199,7 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Adds a split view item to the end of the split view.",
                   "declaration" : "- (void)addSplitViewItem:(CPSplitViewItem)splitViewItem",
                   "kind" : "method",
                   "name" : "addSplitViewItem:",
@@ -8206,6 +8213,7 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Inserts a split view item at a specific index.",
                   "declaration" : "- (void)insertSplitViewItem:(CPSplitViewItem)splitViewItem atIndex:(CPInteger)index",
                   "kind" : "method",
                   "name" : "insertSplitViewItem:atIndex:",
@@ -8223,6 +8231,7 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Removes the specified split view item.",
                   "declaration" : "- (void)removeSplitViewItem:(CPSplitViewItem)splitViewItem",
                   "kind" : "method",
                   "name" : "removeSplitViewItem:",
@@ -8236,6 +8245,7 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Retrieves the split view item associated with a given view controller.",
                   "declaration" : "- (CPSplitViewItem)splitViewItemForViewController:(CPViewController)viewController",
                   "kind" : "method",
                   "name" : "splitViewItemForViewController:",
@@ -8246,9 +8256,11 @@
                      }
                   ],
                   "returnType" : "CPSplitViewItem",
+                  "returns" : "s {CPSplitViewItem | null} The corresponding split view item, or nil if not found.",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Toggles the collapsed state of the first split view item, typically a sidebar.",
                   "declaration" : "- (void)toggleSidebar:(id)sender",
                   "kind" : "method",
                   "name" : "toggleSidebar:",
@@ -8262,6 +8274,7 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Toggles the collapsed state of the last split view item, typically an inspector.",
                   "declaration" : "- (void)toggleInspector:(id)sender",
                   "kind" : "method",
                   "name" : "toggleInspector:",
@@ -8275,10 +8288,12 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the minimum thickness for sidebars to be displayed inline.",
                   "declaration" : "- (CPNumber)minimumThicknessForInlineSidebars",
                   "kind" : "method",
                   "name" : "minimumThicknessForInlineSidebars",
                   "returnType" : "CPNumber",
+                  "returns" : "s {CPNumber} The minimum thickness.",
                   "scope" : "instance"
                },
                {
@@ -8379,6 +8394,7 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Creates and returns a new split view item with the specified view controller.",
                   "declaration" : "+ (instancetype)splitViewItemWithViewController:(CPViewController)viewController",
                   "kind" : "method",
                   "name" : "splitViewItemWithViewController:",
@@ -8389,9 +8405,11 @@
                      }
                   ],
                   "returnType" : "instancetype",
+                  "returns" : "s {instancetype} A new CPSplitViewItem instance.",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Initializes a new split view item with the specified view controller.",
                   "declaration" : "- (id)initWithViewController:(CPViewController)viewController",
                   "kind" : "method",
                   "name" : "initWithViewController:",
@@ -8402,24 +8420,31 @@
                      }
                   ],
                   "returnType" : "id",
+                  "returns" : "s {id} The initialized CPSplitViewItem instance.",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the view controller associated with the item.",
                   "declaration" : "- (CPViewController)viewController",
                   "kind" : "method",
                   "name" : "viewController",
                   "returnType" : "CPViewController",
+                  "returns" : "s {CPViewController} The associated view controller.",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns a boolean value indicating whether the item is collapsed.",
                   "declaration" : "- (BOOL)isCollapsed",
                   "kind" : "method",
                   "name" : "isCollapsed",
                   "returnType" : "BOOL",
+                  "returns" : "s {BOOL} YES if the item is collapsed, otherwise NO.",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Sets the collapsed state of the item.",
                   "declaration" : "- (void)setCollapsed:(BOOL)shouldCollapse",
+                  "discussion" : "When collapsed, the view controller's view is hidden.",
                   "kind" : "method",
                   "name" : "setCollapsed:",
                   "parameters" : [
@@ -8432,10 +8457,12 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the split view controller that owns this item.",
                   "declaration" : "- (CPSplitViewController)splitViewController",
                   "kind" : "method",
                   "name" : "splitViewController",
                   "returnType" : "CPSplitViewController",
+                  "returns" : "s {CPSplitViewController | null} The parent split view controller.",
                   "scope" : "instance"
                }
             ],
@@ -15615,9 +15642,9 @@
          "title" : "CPApplication"
       },
       "primaryContent" : {
-         "abstract" : "CPApplication is THE way to start up the Cappuccino framework for your application to use.",
+         "abstract" : "Starts the GUI and Cappuccino frameworks.",
          "declaration" : "@implementation CPApplication : CPResponder",
-         "discussion" : "Every GUI application has exactly one instance of CPApplication (or of a custom subclass of CPApplication). Your program's main() function can create that instance by calling the\n\n    <pre>\n    function main(args, namedArgs)\n    {\n        CPApplicationMain(args, namedArgs);\n    }\n    </pre>\n\n    Sent from the notification center after the app initializes, but before\n    receiving events.\n\n    Sent from the notification center before the app is initialized."
+         "discussion" : "This function should be called from the <code>main</code>() function of your program."
       },
       "topics" : [
          {
@@ -16453,9 +16480,7 @@
                   "scope" : "class"
                },
                {
-                  "abstract" : "Starts the GUI and Cappuccino frameworks.",
                   "declaration" : "var _CPAppBootstrapperActions = nil",
-                  "discussion" : "This function should be called from the <code>main</code>() function of your program.",
                   "kind" : "global_variable",
                   "name" : "_CPAppBootstrapperActions",
                   "type" : "id"
@@ -34131,6 +34156,7 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "CPTableViewDataSource methods **",
                   "declaration" : "- (CPInteger)numberOfRowsInTableView:(CPTableView)anOutlineView",
                   "kind" : "method",
                   "name" : "numberOfRowsInTableView:",
@@ -61735,9 +61761,9 @@
          "title" : "CPPredicateEditor"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "CPPredicateEditor is a subclass of CPRuleEditor that is specialized for editing CPPredicate objects.",
          "declaration" : "@implementation CPPredicateEditor : CPRuleEditor",
-         "discussion" : ""
+         "discussion" : "CPPredicateEditor provides a CPPredicate property—objectValue (inherited from CPControl)—that you can get and set directly, and that you can bind using bindings (you typically configure a predicate editor in Interface Builder). CPPredicateEditor depends on another class, CPPredicateEditorRowTemplate, that describes the available predicates and how to display them.\n\n    Unlike CPRuleEditor, CPPredicateEditor does not depend on its delegate to populate its rows (and does not call the populating delegate methods). Instead, its rows are populated from its objectValue property (an instance of CPPredicate). CPPredicateEditor relies on instances CPPredicateEditorRowTemplate, which are responsible for mapping back and forth between the displayed view values and various predicates.\n\n    CPPredicateEditor exposes one property, rowTemplates, which is an array of CPPredicateEditorRowTemplate objects."
       },
       "topics" : [
          {
@@ -62073,7 +62099,12 @@
                   ],
                   "returnType" : "id",
                   "scope" : "instance"
-               },
+               }
+            ],
+            "title" : "General"
+         },
+         {
+            "symbols" : [
                {
                   "abstract" : "Returns the receiver’s delegate.",
                   "declaration" : "- (id)delegate",
@@ -62217,7 +62248,12 @@
                   ],
                   "returnType" : "void",
                   "scope" : "instance"
-               },
+               }
+            ],
+            "title" : "Configuring a Rule Editor"
+         },
+         {
+            "symbols" : [
                {
                   "abstract" : "Returns the formatting dictionary for the receiver.",
                   "declaration" : "- (CPDictionary)formattingDictionary",
@@ -62286,7 +62322,12 @@
                   ],
                   "returnType" : "void",
                   "scope" : "instance"
-               },
+               }
+            ],
+            "title" : "Working with Formatting"
+         },
+         {
+            "symbols" : [
                {
                   "abstract" : "Instructs the receiver to refetch criteria from its delegate.",
                   "declaration" : "- (void)reloadCriteria",
@@ -62335,7 +62376,12 @@
                   "returnType" : "id",
                   "returns" : "The currently chosen items for row @a row.",
                   "scope" : "instance"
-               },
+               }
+            ],
+            "title" : "Providing Data"
+         },
+         {
+            "symbols" : [
                {
                   "abstract" : "Returns the chosen values for a given row.",
                   "declaration" : "- (CPMutableArray)displayValuesForRow:(CPInteger)row",
@@ -62438,7 +62484,12 @@
                   ],
                   "returnType" : "void",
                   "scope" : "instance"
-               },
+               }
+            ],
+            "title" : "Working with the Selection"
+         },
+         {
+            "symbols" : [
                {
                   "abstract" : "Adds a row to the receiver.",
                   "declaration" : "- (void)addRow:(id)sender",
@@ -62518,7 +62569,12 @@
                   ],
                   "returnType" : "void",
                   "scope" : "instance"
-               },
+               }
+            ],
+            "title" : "Manipulating Rows"
+         },
+         {
+            "symbols" : [
                {
                   "abstract" : "Returns the predicate for the receiver.",
                   "declaration" : "- (CPPredicate)predicate",
@@ -62551,7 +62607,12 @@
                   "returnType" : "CPPredicate",
                   "returns" : "The predicate for the row at @a aRow.",
                   "scope" : "instance"
-               },
+               }
+            ],
+            "title" : "Working with Predicates"
+         },
+         {
+            "symbols" : [
                {
                   "abstract" : "Returns the class used to create a new row in the “rows” binding.",
                   "declaration" : "- (Class)rowClass",
@@ -62675,7 +62736,12 @@
                   ],
                   "returnType" : "void",
                   "scope" : "instance"
-               },
+               }
+            ],
+            "title" : "Supporting Bindings"
+         },
+         {
+            "symbols" : [
                {
                   "abstract" : "Returns the current animation for the receiver.",
                   "declaration" : "- (id)animation",
@@ -62699,7 +62765,12 @@
                   ],
                   "returnType" : "void",
                   "scope" : "instance"
-               },
+               }
+            ],
+            "title" : "Configuring Rows Animation"
+         },
+         {
+            "symbols" : [
                {
                   "declaration" : "- (BOOL)acceptsFirstResponder",
                   "kind" : "method",
@@ -62979,7 +63050,7 @@
                   "scope" : "instance"
                }
             ],
-            "title" : "General"
+            "title" : "Delegate Methods"
          },
          {
             "symbols" : [
@@ -63286,9 +63357,9 @@
          "title" : "CPPredicateEditorRowTemplate"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "CPPredicateEditorRowTemplate describes available predicates and how to display them.",
          "declaration" : "@implementation CPPredicateEditorRowTemplate : CPObject",
-         "discussion" : ""
+         "discussion" : "You can create instances of CPPredicateEditorRowTemplate programmatically or in Interface Builder. By default, a non-compound row template has three views: a popup (or static text field) on the left, a popup or static text field for operators, and either a popup or other view on the right.  You can subclass CPPredicateEditorRowTemplate to create a row template with different numbers or types of views.\n\n    CPPredicateEditorRowTemplate is a concrete class, but it has five primitive methods which are called by CPPredicateEditor: -#templateViews, -#matchForPredicate:, -#setPredicate:, -#displayableSubpredicatesOfPredicate:, and -#predicateWithSubpredicates:. CPPredicateEditorRowTemplate implements all of them, but you can override them for custom templates. The primitive methods are used by an instance of CPPredicateEditor as follows.\n\n    First, an instance of CPPredicateEditor is created, and some row templates are set on it—either through a nib file or programmatically. The first thing predicate editor does is ask each of the templates for their views, using templateViews.\n\n    After setting up the predicate editor, you typically send it a  CPPredicateEditor#setObjectValue: message to restore a saved predicate. CPPredicateEditor needs to determine which of its templates should display each predicate in the predicate tree. It does this by sending each of its row templates a matchForPredicate: message and choosing the one that returns the highest value.\n\n    After finding the best match for a predicate, CPPredicateEditor copies that template to get fresh views, inserts them into the proper row, and then sets the predicate on the template using setPredicate:. Within that method, the CPPredicateEditorRowTemplate object must set its views' values to represent that predicate.\n\n    CPPredicateEditorRowTemplate next asks the template for the “displayable sub-predicates” of the predicate by sending a -#displayableSubpredicatesOfPredicate: message. If a template represents a predicate in its entirety, or if the predicate has no subpredicates, it can return nil for this.  Otherwise, it should return a list of predicates to be made into sub-rows of that template's row. The whole process repeats for each sub-predicate.\n\n    At this point, the user sees the predicate that was saved.  If the user then makes some changes to the views of the templates, this causes CPPredicateEditor to recompute its predicate by asking each of the templates to return the predicate represented by the new view values, passing in the subpredicates represented by the sub-rows (an empty array if there are none, or nil if they aren't supported by that predicate type)."
       },
       "topics" : [
          {
@@ -63380,7 +63451,12 @@
                   "returnType" : "id",
                   "returns" : "A row template initialized for displaying compound predicates of the types specified by @a compoundTypes.",
                   "scope" : "instance"
-               },
+               }
+            ],
+            "title" : "Initializing a Template"
+         },
+         {
+            "symbols" : [
                {
                   "abstract" : "Returns a positive number if the receiver can represent a given predicate, and 0 if it cannot.",
                   "declaration" : "- (double)matchForPredicate:(CPPredicate)predicate",
@@ -63454,7 +63530,12 @@
                   "returnType" : "CPPredicate",
                   "returns" : "The predicate represented by the values of the template's views and the given @a subpredicates. You can override this method to return the predicate represented by your custom views.",
                   "scope" : "instance"
-               },
+               }
+            ],
+            "title" : "Primitive Methods"
+         },
+         {
+            "symbols" : [
                {
                   "abstract" : "Returns the left hand expressions for the receiver.",
                   "declaration" : "- (CPArray)leftExpressions",
@@ -63542,7 +63623,7 @@
                   "scope" : "instance"
                }
             ],
-            "title" : "General"
+            "title" : "Information About a Row Template"
          },
          {
             "symbols" : [
@@ -75029,7 +75110,12 @@
                   "name" : "init",
                   "returnType" : "id",
                   "scope" : "instance"
-               },
+               }
+            ],
+            "title" : "General"
+         },
+         {
+            "symbols" : [
                {
                   "declaration" : "+ (CPString)stringFromByteCount:(int)byteCount countStyle:(int)countStyle",
                   "kind" : "method",
@@ -75094,7 +75180,12 @@
                   ],
                   "returnType" : "BOOL",
                   "scope" : "instance"
-               },
+               }
+            ],
+            "title" : "Creating Strings from Byte Count"
+         },
+         {
+            "symbols" : [
                {
                   "declaration" : "- (int)countStyle",
                   "kind" : "method",
@@ -75256,7 +75347,7 @@
                   "scope" : "instance"
                }
             ],
-            "title" : "General"
+            "title" : "Setting Formatting Styles"
          },
          {
             "symbols" : [
@@ -81593,6 +81684,7 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Return a new date representing the receiver's time plus the given interval into the future, or into the past for a negative interval.",
                   "declaration" : "- (id)dateByAddingTimeInterval:(CPTimeInterval)seconds",
                   "kind" : "method",
                   "name" : "dateByAddingTimeInterval:",
