@@ -17,18 +17,18 @@ unless (@valid_dirs) {
 
 my @files;
 find({
-    wanted => sub {
-        # Skip testsuite directories entirely
-        if (-d $_ && $_ =~ /testsuite/i) {
-            $File::Find::prune = 1;
-            return;
-        }
-        # Keep only .j files
-        if (-f $_ && /\.j$/) {
-            push @files, $File::Find::name;
-        }
-    },
-    no_chdir => 1,
+     wanted => sub {
+     # Skip testsuite directories entirely
+     if (-d $_ && $_ =~ /testsuite/i) {
+     $File::Find::prune = 1;
+     return;
+     }
+# Keep only .j files
+if (-f $_ && /\.j$/) {
+    push @files, $File::Find::name;
+}
+},
+no_chdir => 1,
 }, @valid_dirs);
 
 my @all_classes;
@@ -47,6 +47,7 @@ print $json;
 # ----------------------------------------------------------------------
 sub parse_file {
     my ($filepath) = @_;
+    # 1. UTF-8 Layer prevents Mojibake / encoding errors
     open my $fh, '<:encoding(UTF-8)', $filepath or return;
 
     # Safely categorize the module based on the path
@@ -63,20 +64,39 @@ sub parse_file {
     my $class_abstract = "";
     my $class_discussion = "";
     my $class_deprecated = "";
-    
+
     my @topics;
     my $current_topic = { title => "General", symbols => [] };
-    
+
     my @doc_buffer;
     my $state = 'search';
     my $method_str = "";
     my $brace_depth = 0;
-    
+
     my $typedef_name = "";
     my $typedef_decl = "";
     my @typedef_vals = ();
-    
-    # Helper to consume doc blocks, retaining structure
+
+    # Helper to strip comments and strings temporarily for structural checks
+    my $strip_code = sub {
+        my ($str) = @_;
+        $str =~ s{/\*.*?\*/}{}gs;       # Remove block comments
+        $str =~ s{//.*}{}g;              # Remove line comments
+        $str =~ s/"(?:[^"\\]|\\.)*"//g;  # Remove double quoted strings
+        $str =~ s/'(?:[^'\\]|\\.)*'//g;  # Remove single quoted strings
+        return $str;
+    };
+
+    # Helper to accurately count braces ignoring comments and strings
+    my $count_braces = sub {
+        my ($str) = @_;
+        my $clean = $strip_code->($str);
+        my $open  = () = $clean =~ /\{/g;
+            my $close = () = $clean =~ /\}/g;
+        return $open - $close;
+    };
+
+    # Helper to consume doc blocks, extracting sentences, @param and @return tags
     my $consume_doc = sub {
         my @raw_lines;
         my $deprecated = "";
@@ -90,7 +110,13 @@ sub parse_file {
             $l =~ s/^\s*\*\s?//; # Strip leading asterisks
             $l =~ s/\s+$//;      # Strip trailing spaces
 
-            # 1. Parse HeaderDoc / Doxygen directives
+            # Single-line administrative directives: skip and reset tag
+            if ($l =~ /^\s*[@\\](ingroup|class|category|file|module|header|framework)\b/i) {
+                $current_tag = "";
+                next;
+            }
+
+            # Directives with content
             if ($l =~ /^\s*[@\\]deprecated(?:\s+(.*))?$/i) {
                 $current_tag = 'deprecated';
                 $deprecated = $1 // "";
@@ -112,16 +138,12 @@ sub parse_file {
                 $return_doc = $1 // "";
                 next;
             }
-            elsif ($l =~ /^\s*[@\\](ingroup|class|category|file|module|header|framework)\b/i) {
-                $current_tag = 'ignore';
-                next;
-            }
             elsif ($l =~ /^\s*[@\\][a-zA-Z]/) {
-                $current_tag = 'ignore';
+                $current_tag = "";
                 next;
             }
 
-            # Blank line resets tag continuation
+            # Empty lines reset tag continuation
             if ($l =~ /^\s*$/) {
                 $current_tag = "";
                 push @raw_lines, "" unless @raw_lines && $raw_lines[-1] eq "";
@@ -141,34 +163,31 @@ sub parse_file {
             elsif ($current_tag eq 'return') {
                 $return_doc .= " " . $l;
             }
-            elsif ($current_tag eq 'ignore') {
-                next;
-            }
             else {
                 push @raw_lines, $l;
             }
         }
         @doc_buffer = ();
 
-        # Clean tags and format inline code
+        # Clean tags and format inline code (leaving punctuation outside <code>)
         for my $k (keys %param_docs) {
             $param_docs{$k} =~ s/^\s+|\s+$//g;
-            $param_docs{$k} =~ s{[@\\]c\s+([A-Za-z0-9_:.()]+)}{<code>$1</code>}g;
+            $param_docs{$k} =~ s{[@\\]c\s+([A-Za-z0-9_:]+)}{<code>$1</code>}g;
             $param_docs{$k} =~ s{\\@}{@}g;
         }
         for my $var (\$return_doc, \$deprecated, \$brief) {
             $$var =~ s/^\s+|\s+$//g;
-            $$var =~ s{[@\\]c\s+([A-Za-z0-9_:.()]+)}{<code>$1</code>}g;
+            $$var =~ s{[@\\]c\s+([A-Za-z0-9_:]+)}{<code>$1</code>}g;
             $$var =~ s{\\@}{@}g;
         }
 
-        # Trim leading and trailing empty lines
+        # Trim empty leading/trailing lines
         while (@raw_lines && $raw_lines[0] =~ /^\s*$/) { shift @raw_lines; }
         while (@raw_lines && $raw_lines[-1] =~ /^\s*$/) { pop @raw_lines; }
 
         my @processed_lines;
         for my $line (@raw_lines) {
-            $line =~ s{[@\\]c\s+([A-Za-z0-9_:.()]+)}{<code>$1</code>}g;
+            $line =~ s{[@\\]c\s+([A-Za-z0-9_:]+)}{<code>$1</code>}g;
             $line =~ s{\\@}{@}g;
             push @processed_lines, $line;
         }
@@ -182,16 +201,14 @@ sub parse_file {
         if ($abstract) {
             $discussion = $full_text;
         } elsif ($full_text) {
-            # Split into paragraphs by blank lines
+            # Extract first sentence as abstract if no @brief is given
             my @paragraphs = split(/\n\s*\n/, $full_text);
             my $first_p = shift @paragraphs;
 
-            # Flatten newlines within the first paragraph for sentence extraction
             my $p_flattened = $first_p;
             $p_flattened =~ s/\n/ /g;
             $p_flattened =~ s/\s+/ /g;
 
-            # Match first complete sentence ending in a dot
             if ($p_flattened =~ /^(.+?\.)(?:\s+(.*))?$/s) {
                 $abstract = $1;
                 my $rest_of_p = $2;
@@ -217,32 +234,11 @@ sub parse_file {
         };
     };
 
-    # Helper to accurately count braces ignoring comments and strings
-    my $count_braces = sub {
-        my ($str) = @_;
-        $str =~ s/\/\/.*//;       # Remove line comments
-        $str =~ s/"[^"]*"//g;     # Remove double quoted strings
-        $str =~ s/'[^']*'//g;     # Remove single quoted strings
-        my $open  = () = $str =~ /\{/g;
-        my $close = () = $str =~ /\}/g;
-        return $open - $close;
-    };
-
-    # Helper to strip comments and strings temporarily for structural checks
-    my $strip_code = sub {
-        my ($str) = @_;
-        $str =~ s{/\*.*?\*/}{}gs;       # Remove block comments
-        $str =~ s{//.*}{}g;              # Remove line comments
-        $str =~ s/"(?:[^"\\]|\\.)*"//g;  # Remove double quoted strings
-        $str =~ s/'(?:[^'\\]|\\.)*'//g;  # Remove single quoted strings
-        return $str;
-    };
-
     # Helper to parse and store method signatures
     my $process_method = sub {
         my ($str) = @_;
 
-        # Strip method body and trailing semicolons safely (ignoring braces inside comments/strings)
+        # Mask comments/strings to safely remove body '{'
         my @masked;
         my $masked_str = $str;
         $masked_str =~ s{(/\*.*?\*/|//.*|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')}{
@@ -254,13 +250,13 @@ sub parse_file {
             $masked_str =~ s/;\s*$//;
             $masked_str =~ s/\s+$//;
 
-            # Restore original comments/strings for declaration display
+            # Restore original comments/strings for clean declaration
             my $decl = $masked_str;
             $decl =~ s{___TOKEN_(\d+)___}{$masked[$1]}ge;
             $decl =~ s/^\s+//;
             $decl =~ s/\s+/ /g;
 
-            # Create a clean version without comments/strings for regex parsing
+            # Clean string for regex parsing
             my $clean_str = $strip_code->($decl);
 
             return unless $clean_str =~ /^\s*([-+])\s*(?:\(([^)]+)\))?\s*(.*)$/s;
@@ -274,7 +270,6 @@ sub parse_file {
             my $name = "";
             my @params = ();
 
-            # Get parsed documentation from docblock
             my $doc_data = $consume_doc->();
             my ($abstract, $discussion, $deprecated, $param_docs, $return_doc) =
             @{$doc_data}{qw(abstract discussion deprecated param_docs return_doc)};
@@ -283,7 +278,6 @@ sub parse_file {
                 $name = $sig;
                 $name =~ s/\s+//g;
             } else {
-                # Parse parameters: Segment:(optional_type)argName or Segment:argName
                 while ($sig =~ /([A-Za-z0-9_]+)\s*:\s*(?:\(([^)]+)\))?\s*([A-Za-z0-9_]+)?/g) {
                     my $kw     = $1;
                     my $p_type = $2 // 'id';
@@ -296,12 +290,17 @@ sub parse_file {
                     my $param = { type => $p_type };
                     $param->{name} = $p_name if length $p_name;
 
-                    # Attach description if documented via @param
+                    # Match param description by name or single parameter fallback
                     if ($p_name && exists $param_docs->{$p_name}) {
                         $param->{description} = $param_docs->{$p_name};
                     }
 
                     push @params, $param;
+                }
+
+                # Fallback: if only 1 parameter and 1 @param doc existed with informal naming
+                if (@params == 1 && keys %$param_docs == 1 && !$params[0]->{description}) {
+                    $params[0]->{description} = (values %$param_docs)[0];
                 }
             }
 
@@ -322,57 +321,55 @@ sub parse_file {
 
             push @{$current_topic->{symbols}}, $sym;
         };
-        
-    while (my $line = <$fh>) {
-        chomp $line;
-        
-        # --- Multi-line Doc State ---
-        if ($state eq 'doc') {
-            if ($line =~ m{(.*?)\*/}) {
-                push @doc_buffer, $1;
-                $state = 'search';
-            } else {
-                push @doc_buffer, $line;
+
+        while (my $line = <$fh>) {
+            chomp $line;
+
+            # --- Multi-line Doc State ---
+            if ($state eq 'doc') {
+                if ($line =~ m{(.*?)\*/}) {
+                    push @doc_buffer, $1;
+                    $state = 'search';
+                } else {
+                    push @doc_buffer, $line;
+                }
+                next;
             }
-            next;
-        }
-        
-        # --- Multi-line Typedef State ---
-        if ($state eq 'typedef') {
-            if ($line =~ /^\s*$/ || $line =~ /^\s*\@/ || $line =~ /^\s*\#/) {
-                my ($abstract, $discussion, $deprecated) = $consume_doc->();
+
+            # --- Multi-line Typedef State ---
+            if ($state eq 'typedef') {
+                if ($line =~ /^\s*$/ || $line =~ /^\s*\@/ || $line =~ /^\s*\#/) {
+                    my $doc = $consume_doc->();
                 my $sym = {
                     kind        => 'typedef',
                     name        => $typedef_name,
                     declaration => $typedef_decl
                 };
                 $sym->{values}     = [@typedef_vals] if @typedef_vals;
-                $sym->{abstract}   = $abstract if $abstract;
-                $sym->{discussion} = $discussion if $discussion;
-                $sym->{deprecated} = $deprecated if $deprecated;
+                $sym->{abstract}   = $doc->{abstract} if $doc->{abstract};
+                $sym->{discussion} = $doc->{discussion} if $doc->{discussion};
+                $sym->{deprecated} = $doc->{deprecated} if $doc->{deprecated};
                 push @{$current_topic->{symbols}}, $sym;
-                
+
                 $state = 'search';
             } else {
                 $typedef_decl .= "\n$line";
-                # Extract constants with option for deprecated inline comments
-                # Match: CPSwitchButton = 3; // Deprecated, use CPCheckBox instead.
                 if ($line =~ /([A-Za-z0-9_]+)\s*=\s*([^;\/]+)\s*;\s*(?:\/\/\s*(.*))?/) {
                     my $val_name = $1;
                     my $val_value = $2;
                     my $val_comment = $3 || "";
-                    
+
                     $val_value =~ s/\s+$//;
                     $val_comment =~ s/\s+$//;
-                    
+
                     my $val_dep = "";
                     if ($val_comment =~ /deprecated/i) {
                         $val_dep = $val_comment;
                     }
-                    
-                    push @typedef_vals, { 
-                        name => $val_name, 
-                        value => $val_value, 
+
+                    push @typedef_vals, {
+                        name => $val_name,
+                        value => $val_value,
                         comment => $val_comment,
                         deprecated => $val_dep || undef
                     };
@@ -380,105 +377,102 @@ sub parse_file {
                 next;
             }
         }
-        
+
         # --- Multi-line Method Signature State ---
         if ($state eq 'method_sig') {
             my $clean_line = $line;
             $clean_line =~ s/^\s+//;
             $method_str .= " " . $clean_line;
-            
-            if ($method_str =~ /\{/ || $method_str =~ /;\s*$/) {
+
+            my $test_code = $strip_code->($method_str);
+            if ($test_code =~ /\{/ || $test_code =~ /;\s*$/) {
                 $process_method->($method_str);
-                
-                # Check if we should transition to skipping the body block
-                if ($method_str =~ /\{/) {
+
+                if ($test_code =~ /\{/) {
                     $state = 'in_body';
                     $brace_depth = $count_braces->($method_str);
                     $state = 'search' if $brace_depth <= 0;
                 } else {
                     $state = 'search';
                 }
-                $method_str = "";
+                    $method_str = "";
+                }
+                next;
             }
-            next;
-        }
-        
-        # --- Inside Method Body State ---
-        if ($state eq 'in_body') {
-            $brace_depth += $count_braces->($line);
-            
-            if ($brace_depth <= 0) {
-                $state = 'search';
-                $brace_depth = 0;
-            }
-            next; # Skip all lines while inside a method body!
-        }
 
-        # --- Base Search State ---
-        
-        # 1. Detect DocBlock Starts
-        if ($line =~ m{/\*\!(.*)}) {
-            @doc_buffer = (); # Clear stale, unconsumed docs to prevent them from bleeding into the class block
-            my $rest = $1;
-            if ($rest =~ m{(.*?)\*/}) {
-                push @doc_buffer, $1;
-            } else {
-                push @doc_buffer, $rest;
-                $state = 'doc';
-            }
-            next;
-        }
+                # --- Inside Method Body State ---
+                if ($state eq 'in_body') {
+                    $brace_depth += $count_braces->($line);
 
-        # 2. Pragma Marks
-        if ($line =~ /^\s*\#pragma\s+mark\s+-(?:\s*$)/) {
-            next; # Ignore blank separators
-        }
-        if ($line =~ /^\s*\#pragma\s+mark\s+(.+)$/) {
-            my $title = $1;
-            $title =~ s/^-?\s*//; 
+                    if ($brace_depth <= 0) {
+                        $state = 'search';
+                        $brace_depth = 0;
+                    }
+                    next;
+                }
+
+                # --- Base Search State ---
+
+                # 1. Detect DocBlock Starts
+                if ($line =~ m{/\*\!(.*)}) {
+                    @doc_buffer = ();
+                    my $rest = $1;
+                    if ($rest =~ m{(.*?)\*/}) {
+                        push @doc_buffer, $1;
+                    } else {
+                        push @doc_buffer, $rest;
+                        $state = 'doc';
+                    }
+                    next;
+                }
+
+                # 2. Pragma Marks
+                if ($line =~ /^\s*\#pragma\s+mark\s+-(?:\s*$)/) {
+                    next;
+            }
+            if ($line =~ /^\s*\#pragma\s+mark\s+(.+)$/) {
+                my $title = $1;
+            $title =~ s/^-?\s*//;
             $title =~ s/\s+$//;
-            
+
             if (@{$current_topic->{symbols}}) {
                 push @topics, { title => $current_topic->{title}, symbols => [@{$current_topic->{symbols}}] };
             }
             $current_topic = { title => $title, symbols => [] };
             next;
         }
-        
-        # 3. Class Implementation (Prevent Category from overwriting Main class)
+
+        # 3. Class Implementation
         if ($line =~ /^\s*\@(implementation|interface)\s+([A-Za-z0-9_]+)(?:\s*:\s*([A-Za-z0-9_]+))?(?:\s*\(\s*([A-Za-z0-9_]*)\s*\))?(?:\s*<\s*([^>]+)\s*>)?/) {
             my $parsed_cname = $2;
             my $parsed_sclass = $3;
             my $parsed_category = $4;
-            
+
             if (!defined $parsed_category) {
-                # Primary class definition
                 if (!$class_name || $class_name eq $parsed_cname) {
                     $class_decl = $line;
                     $class_decl =~ s/^\s+//;
                     $class_name = $parsed_cname;
                     $superclass = $parsed_sclass if $parsed_sclass;
-                    
-                    my ($abstract, $discussion, $deprecated) = $consume_doc->();
-                    $class_abstract = $abstract if $abstract;
-                    $class_discussion = $discussion if $discussion;
-                    $class_deprecated = $deprecated if $deprecated;
+
+                    my $doc = $consume_doc->();
+                    $class_abstract = $doc->{abstract};
+                    $class_discussion = $doc->{discussion};
+                    $class_deprecated = $doc->{deprecated};
                 }
             } else {
-                # It is a category like `(CPCoding)` or an extension `()`.
-                # Start a new topic grouping for it so methods don't bleed into previous pragmas.
                 if (@{$current_topic->{symbols}}) {
                     push @topics, { title => $current_topic->{title}, symbols => [@{$current_topic->{symbols}}] };
                 }
-                
+
                 my $topic_title = $parsed_category ? "$parsed_category" : "Extension";
                 $current_topic = { title => $topic_title, symbols => [] };
-                
+
                 $consume_doc->();
             }
             next;
         }
-        
+
         # 4. Typedefs
         if ($line =~ /^\s*\@typedef\s+([A-Za-z0-9_]+)/) {
             $typedef_name = $1;
@@ -488,74 +482,72 @@ sub parse_file {
             @typedef_vals = ();
             next;
         }
-        
-        # 5. Global Variables (Only triggers because we are securely in `search` state outside of method bodies)
+
+        # 5. Global Variables
         if ($line =~ /^\s*var\s+([A-Za-z0-9_]+)\s*=\s*(.*?);/) {
             my $name = $1;
             my $val = $2;
-            my ($abstract, $discussion, $deprecated) = $consume_doc->();
+            my $doc = $consume_doc->();
             my $sym = {
                 kind        => 'global_variable',
                 name        => $name,
                 declaration => "var $name = $val",
                 type        => 'id'
             };
-            $sym->{abstract} = $abstract if $abstract;
-            $sym->{discussion} = $discussion if $discussion;
-            $sym->{deprecated} = $deprecated if $deprecated;
+            $sym->{abstract}   = $doc->{abstract} if $doc->{abstract};
+            $sym->{discussion} = $doc->{discussion} if $doc->{discussion};
+            $sym->{deprecated} = $doc->{deprecated} if $doc->{deprecated};
             push @{$current_topic->{symbols}}, $sym;
             next;
         }
-        
-        # 6. Method Starts (+ or -) tolerating leading spaces
-        if ($line =~ /^\s*([-+])\s*\(/) {
+
+        # 6. Method Starts (+ or -)
+        if ($line =~ /^\s*([-+])\s*(?:\(|$|[A-Za-z])/) {
             $method_str = $line;
-            if ($method_str =~ /\{/ || $method_str =~ /;\s*$/) {
+
+            my $test_code = $strip_code->($method_str);
+            if ($test_code =~ /\{/ || $test_code =~ /;\s*$/) {
                 $process_method->($method_str);
-                
-                if ($method_str =~ /\{/) {
+
+                if ($test_code =~ /\{/) {
                     $state = 'in_body';
                     $brace_depth = $count_braces->($method_str);
                     $state = 'search' if $brace_depth <= 0;
                 } else {
                     $state = 'search';
                 }
-                $method_str = "";
-            } else {
-                $state = 'method_sig';
+                    $method_str = "";
+                } else {
+                    $state = 'method_sig';
+                }
+                next;
             }
-            next;
+            }
+
+            close $fh;
+
+            return undef unless $class_name;
+            return undef if $class_name =~ /^NS/;
+
+            if (@{$current_topic->{symbols}}) {
+                push @topics, { title => $current_topic->{title}, symbols => [@{$current_topic->{symbols}}] };
+            }
+
+            return {
+                metadata => {
+                    module         => $module,
+                    framework      => $module,
+                    role           => "class",
+                    title          => $class_name,
+                    superclass     => $superclass,
+                    navigatorTitle => $class_name,
+                    deprecated     => $class_deprecated || undef
+                },
+                primaryContent => {
+                    declaration => $class_decl,
+                    abstract    => $class_abstract,
+                    discussion  => $class_discussion
+                },
+                topics => \@topics
+            };
         }
-    }
-    
-    close $fh;
-    
-    # Check 1: Skip if no class found
-    return undef unless $class_name;
-    
-    # Check 2: Skip any NS* classes
-    return undef if $class_name =~ /^NS/;
-    
-    # Flush remaining topic
-    if (@{$current_topic->{symbols}}) {
-        push @topics, { title => $current_topic->{title}, symbols => [@{$current_topic->{symbols}}] };
-    }
-    
-    return {
-        metadata => {
-            module         => $module,
-            framework      => $module, # Changed from "Cappuccino" to AppKit/Foundation dynamically
-            role           => "class",
-            title          => $class_name,
-            superclass     => $superclass,
-            navigatorTitle => $class_name,
-            deprecated     => $class_deprecated || undef
-        },
-        primaryContent => {
-            declaration => $class_decl,
-            abstract    => $class_abstract,
-            discussion  => $class_discussion
-        },
-        topics => \@topics
-    };
-}
