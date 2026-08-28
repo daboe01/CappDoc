@@ -47,7 +47,7 @@ print $json;
 # ----------------------------------------------------------------------
 sub parse_file {
     my ($filepath) = @_;
-    open my $fh, '<', $filepath or return;
+    open my $fh, '<:encoding(UTF-8)', $filepath or return;
 
     # Safely categorize the module based on the path
     my $module = "Unknown";
@@ -78,33 +78,69 @@ sub parse_file {
     
     # Helper to consume doc blocks, retaining structure
     my $consume_doc = sub {
-        my @lines;
+        my @raw_lines;
         my $deprecated = "";
+        my $brief = "";
+
         for my $l (@doc_buffer) {
             $l =~ s/^\s*\*\s?//; # Strip leading asterisks
             $l =~ s/\s+$//;      # Strip trailing spaces
-            
-            # Extract @deprecated directives and their descriptive text
-            if ($l =~ /^\@deprecated\s+(.*)/i) {
+
+            # 1. Extract @deprecated directive
+            if ($l =~ /^\s*[@\\]deprecated\s*(.*)/i) {
                 $deprecated = $1;
-            } else {
-                push @lines, $l;
+                next;
             }
+
+            # 2. Extract @brief / \brief directive for the abstract
+            if ($l =~ /^\s*[@\\]brief\s+(.*)/i) {
+                $brief = $1;
+                next;
+            }
+
+            # 3. Filter out administrative directives (HeaderDoc/Doxygen)
+            if ($l =~ /^\s*[@\\](ingroup|class|category|file|module|header|framework)\b/i) {
+                next;
+            }
+
+            push @raw_lines, $l;
         }
         @doc_buffer = ();
-        
+
         # Trim leading and trailing empty lines
-        while (@lines && $lines[0] =~ /^\s*$/) { shift @lines; }
-        while (@lines && $lines[-1] =~ /^\s*$/) { pop @lines; }
-        
-        return ("", "", "") unless @lines || $deprecated;
-        
-        my $abstract = shift @lines || "";
-        my $discussion = join("\n", @lines); # Maintain newlines for @code
-        
+        while (@raw_lines && $raw_lines[0] =~ /^\s*$/) { shift @raw_lines; }
+        while (@raw_lines && $raw_lines[-1] =~ /^\s*$/) { pop @raw_lines; }
+
+        # Unescape and format inline tags (\c foo -> <code>foo</code>, \@ -> @)
+        my @processed_lines;
+        for my $line (@raw_lines) {
+            # Format \c identifier or @c identifier into <code>identifier</code>
+            $line =~ s{[@\\]c\s+([A-Za-z0-9_:.()]+)}{<code>$1</code>}g;
+            # Unescape \@ to @
+            $line =~ s{\\@}{@}g;
+            push @processed_lines, $line;
+        }
+
+        # Abstract resolution: Use explicit @brief if present, otherwise the first text line
+        my $abstract = $brief;
+        if (!$abstract && @processed_lines) {
+            $abstract = shift @processed_lines;
+        }
+
+        if ($abstract) {
+            $abstract =~ s{[@\\]c\s+([A-Za-z0-9_:.()]+)}{<code>$1</code>}g;
+            $abstract =~ s{\\@}{@}g;
+            $abstract =~ s/^\s+|\s+$//g;
+        }
+
+        # Clean remaining discussion lines
+        while (@processed_lines && $processed_lines[0] =~ /^\s*$/) { shift @processed_lines; }
+        my $discussion = join("\n", @processed_lines);
+        $discussion =~ s/^\s+|\s+$//g;
+
         return ($abstract, $discussion, $deprecated);
     };
-    
+
     # Helper to accurately count braces ignoring comments and strings
     my $count_braces = sub {
         my ($str) = @_;
