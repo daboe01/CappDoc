@@ -39420,7 +39420,7 @@
          "title" : "CPController"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "An abstract base controller class that provides editing management and coordination support for controller objects and Cappuccino bindings.",
          "declaration" : "@implementation CPController : CPObject",
          "discussion" : ""
       },
@@ -39434,18 +39434,22 @@
                   "type" : "id"
                },
                {
+                  "abstract" : "Initializes a newly allocated controller instance.",
                   "declaration" : "- (id)init",
                   "kind" : "method",
                   "name" : "init",
                   "returnType" : "id",
+                  "returns" : "the initialized controller instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Encodes the receiver's declared keys using the provided coder.",
                   "declaration" : "- (void)encodeWithCoder:(CPCoder)aCoder",
                   "kind" : "method",
                   "name" : "encodeWithCoder:",
                   "parameters" : [
                      {
+                        "description" : "the coder to encode data into",
                         "name" : "aCoder",
                         "type" : "CPCoder"
                      }
@@ -39454,33 +39458,41 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Initializes the receiver from an unarchiver.",
                   "declaration" : "- (id)initWithCoder:(CPCoder)aDecoder",
                   "kind" : "method",
                   "name" : "initWithCoder:",
                   "parameters" : [
                      {
+                        "description" : "the decoder containing the archived controller state",
                         "name" : "aDecoder",
                         "type" : "CPCoder"
                      }
                   ],
                   "returnType" : "id",
+                  "returns" : "the initialized controller instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns whether the receiver is currently tracking any active editors.",
                   "declaration" : "- (BOOL)isEditing",
                   "kind" : "method",
                   "name" : "isEditing",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if one or more editors are active, otherwise <code>NO</code>",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Attempts to commit any pending edits across all active registered editors.",
                   "declaration" : "- (BOOL)commitEditing",
                   "kind" : "method",
                   "name" : "commitEditing",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if all editors successfully committed edits, otherwise <code>NO</code>",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Discards changes across all active registered editors.",
                   "declaration" : "- (void)discardEditing",
                   "kind" : "method",
                   "name" : "discardEditing",
@@ -39488,11 +39500,13 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Notifies the controller that a registered editor has begun editing.",
                   "declaration" : "- (void)objectDidBeginEditing:(id)anEditor",
                   "kind" : "method",
                   "name" : "objectDidBeginEditing:",
                   "parameters" : [
                      {
+                        "description" : "the editor object that began editing",
                         "name" : "anEditor",
                         "type" : "id"
                      }
@@ -39501,11 +39515,13 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Notifies the controller that a registered editor has ended editing.",
                   "declaration" : "- (void)objectDidEndEditing:(id)anEditor",
                   "kind" : "method",
                   "name" : "objectDidEndEditing:",
                   "parameters" : [
                      {
+                        "description" : "the editor object that finished editing",
                         "name" : "anEditor",
                         "type" : "id"
                      }
@@ -69134,7 +69150,7 @@
          "title" : "BKThemeDescriptor"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "BKThemeDescriptor provides descriptors and template definitions for themeable controls and views in BlendKit and ThemeBuilder.",
          "declaration" : "@implementation BKThemeDescriptor : CPObject",
          "discussion" : ""
       },
@@ -69142,53 +69158,67 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Finds and returns an array of all available theme descriptor classes.",
                   "declaration" : "+ (CPArray)allThemeDescriptorClasses",
                   "kind" : "method",
                   "name" : "allThemeDescriptorClasses",
                   "returnType" : "CPArray",
+                  "returns" : "an array of theme descriptor <code>Class</code> objects",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Returns a light checkerboard pattern color used as a canvas background.",
                   "declaration" : "+ (CPColor)lightCheckersColor",
                   "kind" : "method",
                   "name" : "lightCheckersColor",
                   "returnType" : "CPColor",
+                  "returns" : "the light checkerboard <code>CPColor</code>",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Returns a dark checkerboard pattern color used as a canvas background.",
                   "declaration" : "+ (CPColor)darkCheckersColor",
                   "kind" : "method",
                   "name" : "darkCheckersColor",
                   "returnType" : "CPColor",
+                  "returns" : "the dark checkerboard <code>CPColor</code>",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Returns the standard window background color.",
                   "declaration" : "+ (CPColor)windowBackgroundColor",
                   "kind" : "method",
                   "name" : "windowBackgroundColor",
                   "returnType" : "CPColor",
+                  "returns" : "the window background <code>CPColor</code>",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Returns the default showcase canvas background color.",
                   "declaration" : "+ (CPColor)defaultShowcaseBackgroundColor",
                   "kind" : "method",
                   "name" : "defaultShowcaseBackgroundColor",
                   "returnType" : "CPColor",
+                  "returns" : "the default showcase background <code>CPColor</code>",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Returns the showcase canvas background color for this theme descriptor.",
                   "declaration" : "+ (CPColor)showcaseBackgroundColor",
                   "kind" : "method",
                   "name" : "showcaseBackgroundColor",
                   "returnType" : "CPColor",
+                  "returns" : "the showcase background <code>CPColor</code>",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Sets the showcase canvas background color for this theme descriptor.",
                   "declaration" : "+ (void)setShowcaseBackgroundColor:(CPColor)aColor",
                   "kind" : "method",
                   "name" : "setShowcaseBackgroundColor:",
                   "parameters" : [
                      {
+                        "description" : "the new background color",
                         "name" : "aColor",
                         "type" : "CPColor"
                      }
@@ -69197,27 +69227,34 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Returns the bounding item size required to display the themed object templates.",
                   "declaration" : "+ (CGSize)itemSize",
                   "kind" : "method",
                   "name" : "itemSize",
                   "returnType" : "CGSize",
+                  "returns" : "the item <code>CGSize</code>",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Returns an array of all themed object templates defined on the descriptor.",
                   "declaration" : "+ (CPArray)themedObjectTemplates",
                   "kind" : "method",
                   "name" : "themedObjectTemplates",
                   "returnType" : "CPArray",
+                  "returns" : "an array of <code>BKThemedObjectTemplate</code> objects",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Returns an array of themed object templates filtered for display in the showcase.",
                   "declaration" : "+ (CPArray)themedShowcaseObjectTemplates",
                   "kind" : "method",
                   "name" : "themedShowcaseObjectTemplates",
                   "returnType" : "CPArray",
+                  "returns" : "an array of showcase <code>BKThemedObjectTemplate</code> objects",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Calculates templates, dimensions, and showcase configurations from all class methods starting with <code>themed</code>.",
                   "declaration" : "+ (void)calculateThemedObjectTemplates",
                   "kind" : "method",
                   "name" : "calculateThemedObjectTemplates",
@@ -69225,28 +69262,34 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Compares the receiver to another theme descriptor alphabetically by theme name.",
                   "declaration" : "+ (int)compare:(BKThemeDescriptor)aThemeDescriptor",
                   "kind" : "method",
                   "name" : "compare:",
                   "parameters" : [
                      {
+                        "description" : "the theme descriptor to compare with",
                         "name" : "aThemeDescriptor",
                         "type" : "BKThemeDescriptor"
                      }
                   ],
                   "returnType" : "int",
+                  "returns" : "comparison result",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Registers an array of theme values on an object.",
                   "declaration" : "+ (void)registerThemeValues:(CPArray)themeValues forObject:(id)anObject",
                   "kind" : "method",
                   "name" : "registerThemeValues:forObject:",
                   "parameters" : [
                      {
+                        "description" : "an array of tuples \\c [attribute, value, state]",
                         "name" : "themeValues",
                         "type" : "CPArray"
                      },
                      {
+                        "description" : "the target object",
                         "name" : "anObject",
                         "type" : "id"
                      }
@@ -69255,15 +69298,18 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Registers an array of theme attribute values on a view.",
                   "declaration" : "+ (void)registerThemeValues:(CPArray)themeValues forView:(CPView)aView",
                   "kind" : "method",
                   "name" : "registerThemeValues:forView:",
                   "parameters" : [
                      {
+                        "description" : "an array of tuples \\c [attribute, value, state]",
                         "name" : "themeValues",
                         "type" : "CPArray"
                      },
                      {
+                        "description" : "the target view",
                         "name" : "aView",
                         "type" : "CPView"
                      }
@@ -69272,19 +69318,23 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Registers theme values on an object while inheriting and adapting values from a parent theme definition.",
                   "declaration" : "+ (void)registerThemeValues:(CPArray)themeValues forObject:(id)anObject inherit:(CPArray)inheritedValues",
                   "kind" : "method",
                   "name" : "registerThemeValues:forObject:inherit:",
                   "parameters" : [
                      {
+                        "description" : "an array of override theme values",
                         "name" : "themeValues",
                         "type" : "CPArray"
                      },
                      {
+                        "description" : "the target object",
                         "name" : "anObject",
                         "type" : "id"
                      },
                      {
+                        "description" : "an array of inherited theme values",
                         "name" : "inheritedValues",
                         "type" : "CPArray"
                      }
@@ -69293,19 +69343,23 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Registers theme values on a view while inheriting and adapting values from a parent theme definition.",
                   "declaration" : "+ (void)registerThemeValues:(CPArray)themeValues forView:(CPView)aView inherit:(CPArray)inheritedValues",
                   "kind" : "method",
                   "name" : "registerThemeValues:forView:inherit:",
                   "parameters" : [
                      {
+                        "description" : "an array of override theme values",
                         "name" : "themeValues",
                         "type" : "CPArray"
                      },
                      {
+                        "description" : "the target view",
                         "name" : "aView",
                         "type" : "CPView"
                      },
                      {
+                        "description" : "an array of inherited theme values",
                         "name" : "inheritedValues",
                         "type" : "CPArray"
                      }
@@ -69314,19 +69368,23 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Registers theme values on a view, copying all existing attributes from another view first.",
                   "declaration" : "+ (void)registerThemeValues:(CPArray)themeValues forView:(CPView)aView inheritFrom:(CPView)anotherView",
                   "kind" : "method",
                   "name" : "registerThemeValues:forView:inheritFrom:",
                   "parameters" : [
                      {
+                        "description" : "an array of override theme values",
                         "name" : "themeValues",
                         "type" : "CPArray"
                      },
                      {
+                        "description" : "the target view",
                         "name" : "aView",
                         "type" : "CPView"
                      },
                      {
+                        "description" : "the source view from which to inherit attributes",
                         "name" : "anotherView",
                         "type" : "CPView"
                      }
@@ -69335,6 +69393,7 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Creates a pattern color using <code>_CPCibCustomResource</code> as the image factory.",
                   "declaration" : "var args = Array.prototype.slice.apply(arguments)",
                   "kind" : "global_variable",
                   "name" : "args",

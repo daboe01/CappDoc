@@ -1,14 +1,15 @@
 @import <Foundation/Foundation.j>
 @import <AppKit/AppKit.j>
+@import <Foundation/CPLanguageModel.j>
 
 // ==============================================================================
-// DocNode: Das Model für unsere Baumstruktur
+// DocNode: Model for our documentation tree structure
 // ==============================================================================
 @implementation DocNode : CPObject
 {
     CPString _title    @accessors(property=title);
     CPString _type     @accessors(property=type); // "class", "topic", "symbol"
-    id       _data     @accessors(property=data); // Das zugrundeliegende JSON-Objekt
+    id       _data     @accessors(property=data); // Underlying JSON data
     CPArray  _children @accessors(property=children);
     DocNode  _parent   @accessors(property=parent);
 }
@@ -30,31 +31,78 @@
 
 
 // ==============================================================================
-// AppController: Der Main Controller der App
+// AppController: Main Controller
 // ==============================================================================
 @implementation AppController : CPObject
 {
-    CPWindow        theWindow;
-    CPOutlineView   outlineView;
-    CPWebView       docWebView;
-    CPScrollView    leftScroll;
+    CPWindow            theWindow;
+    CPOutlineView       outlineView;
+    CPWebView           docWebView;
+    CPScrollView        leftScroll;
 
-    CPSearchField   searchField;
-    CPTextField     _searchStatusLabel;
-    CPCheckBox      showPrivateCheckbox;
-    CPCheckBox      searchTitlesOnlyCheckbox;
+    CPSearchField       searchField;
+    CPTextField         _searchStatusLabel;
+    CPCheckBox          showPrivateCheckbox;
+    CPCheckBox          searchTitlesOnlyCheckbox;
 
-    CPArray         _allRoots;       // Das Original-Wurzelobjekt
-    CPArray         _matchedNodes;   // Die Suchergebnisse
-    int             _currentMatchIndex;
+    CPArray             _allRoots;       // Root documentation nodes
+    CPArray             _matchedNodes;   // Filtered search matches
+    int                 _currentMatchIndex;
     
-    BOOL            _showPrivateClasses;
-    BOOL            _searchTitlesOnly;
-    CPString        _currentSearchTerm;
+    BOOL                _showPrivateClasses;
+    BOOL                _searchTitlesOnly;
+    CPString            _currentSearchTerm;
+    CPString            _currentHTML;    // Stored right-hand side HTML
+
+    // --- AI Assistant UI Components ---
+    CPWindow            _aiAssistantWindow;
+    CPTextField         _aiContextLabel;
+    CPTextView          _aiPromptTextView;
+    CPTextView          _aiResultTextView;
+    CPButton            _aiGenerateButton;
+    CPButton            _aiCopyButton;
+    CPProgressIndicator _aiSpinner;
+    CPTextField         _aiStatusLabel;
+    CPString            _rawAIResultText;
+
+    // --- AI Settings UI Components ---
+    CPWindow            _settingsWindow;
+    CPPopUpButton       _servicePopUp;
+    CPTextField         _endpointField;
+    CPTextField         _modelField;
+    CPTextField         _apiKeyField;
+    
+    CPLanguageModelSession _aiSession;
 }
 
 - (void)applicationDidFinishLaunching:(CPNotification)aNotification
 {
+    // 1. Initialize default AI backend preferences
+    var defaults = [CPUserDefaults standardUserDefaults];
+    var defaultSettings = [CPDictionary dictionaryWithObjects:[
+        @"ollama",
+        @"http://localhost:11434/api/generate",
+        @"gemma4:e4b",
+        @""
+    ] forKeys:[
+        @"LLMTestServiceType",
+        @"LLMTestEndpoint",
+        @"LLMTestModel",
+        @"LLMTestAPIKey"
+    ]];
+    [defaults registerDefaults:defaultSettings];
+
+    var activeService = [defaults objectForKey:@"LLMTestServiceType"],
+        endpoint      = [defaults objectForKey:@"LLMTestEndpoint"],
+        model         = [defaults objectForKey:@"LLMTestModel"],
+        apiKey        = [defaults objectForKey:@"LLMTestAPIKey"];
+
+    [CPLanguageModelSession setFallbackServiceType:activeService
+                                         endpoint:endpoint
+                                            model:model
+                                           apiKey:apiKey];
+
+    // 2. Main Window setup
     theWindow = [[CPWindow alloc] initWithContentRect:CGRectMakeZero() styleMask:CPBorderlessBridgeWindowMask];
     
     // Set up global callback for handling hypertext clicks inside CPWebView
@@ -64,7 +112,6 @@
         [[CPRunLoop currentRunLoop] limitDateForMode:CPDefaultRunLoopMode];
     };
 
-    // 1. Order the window front first so it scales to the browser viewport
     [theWindow orderFront:self];
     
     var contentView = [theWindow contentView];
@@ -75,57 +122,75 @@
     _currentSearchTerm = @"";
     _matchedNodes = [];
     _currentMatchIndex = -1;
+    _rawAIResultText = @"";
+    _currentHTML = @"";
 
+    // Top Navigation & Control Bar
     var topBarHeight = 50.0;
     var topBar = [[CPView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(bounds), topBarHeight)];
     [topBar setAutoresizingMask:CPViewWidthSizable | CPViewMaxYMargin];
     [topBar setBackgroundColor:[CPColor colorWithHexString:@"ececec"]];
     
-    var searchFieldWidth = 250;
-    searchField = [[CPSearchField alloc] initWithFrame:CGRectMake(20, 10, searchFieldWidth, 30)];
+    var searchFieldWidth = 220;
+    searchField = [[CPSearchField alloc] initWithFrame:CGRectMake(15, 10, searchFieldWidth, 30)];
     [searchField setPlaceholderString:@"Search full text..."];
     [searchField setTarget:self];
     [searchField setAction:@selector(searchAction:)];
     [topBar addSubview:searchField];
     
-    searchTitlesOnlyCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(285, 15, 150, 20)];
-    [searchTitlesOnlyCheckbox setTitle:@"Search titles only"];
+    searchTitlesOnlyCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(245, 15, 130, 20)];
+    [searchTitlesOnlyCheckbox setTitle:@"Titles only"];
     [searchTitlesOnlyCheckbox setState:CPOffState];
     [searchTitlesOnlyCheckbox setTarget:self];
     [searchTitlesOnlyCheckbox setAction:@selector(toggleSearchTitlesOnlyAction:)];
     [topBar addSubview:searchTitlesOnlyCheckbox];
 
-    var prevBtn = [[CPButton alloc] initWithFrame:CGRectMake(450, 13, 30, 24)];
+    var prevBtn = [[CPButton alloc] initWithFrame:CGRectMake(380, 13, 26, 24)];
     [prevBtn setTitle:@"<"];
     [prevBtn setTarget:self];
     [prevBtn setAction:@selector(prevMatch:)];
     [topBar addSubview:prevBtn];
 
-    var nextBtn = [[CPButton alloc] initWithFrame:CGRectMake(485, 13, 30, 24)];
+    var nextBtn = [[CPButton alloc] initWithFrame:CGRectMake(410, 13, 26, 24)];
     [nextBtn setTitle:@">"];
     [nextBtn setTarget:self];
     [nextBtn setAction:@selector(nextMatch:)];
     [topBar addSubview:nextBtn];
     
-    _searchStatusLabel = [[CPTextField alloc] initWithFrame:CGRectMake(525, 15, 100, 20)];
+    _searchStatusLabel = [[CPTextField alloc] initWithFrame:CGRectMake(442, 15, 75, 20)];
     [_searchStatusLabel setStringValue:@""];
     [_searchStatusLabel setAlignment:CPLeftTextAlignment];
+    [_searchStatusLabel setFont:[CPFont systemFontOfSize:11.0]];
     [topBar addSubview:_searchStatusLabel];
 
-    var privateCheckboxWidth = 180;
-    var privateCheckboxX = CGRectGetWidth(bounds) - privateCheckboxWidth - 20; // 20px Abstand vom rechten Rand
-    
+    // Right aligned Action buttons
+    var privateCheckboxWidth = 150;
+    var privateCheckboxX = CGRectGetWidth(bounds) - privateCheckboxWidth - 15;
     showPrivateCheckbox = [[CPCheckBox alloc] initWithFrame:CGRectMake(privateCheckboxX, 15, privateCheckboxWidth, 20)];
-    [showPrivateCheckbox setTitle:@"Show private classes"];
+    [showPrivateCheckbox setTitle:@"Show private"];
     [showPrivateCheckbox setState:CPOffState];
     [showPrivateCheckbox setTarget:self];
     [showPrivateCheckbox setAction:@selector(togglePrivateAction:)];
-    [showPrivateCheckbox setAutoresizingMask:CPViewMinXMargin]; // Hält das Element rechts beim Skalieren
+    [showPrivateCheckbox setAutoresizingMask:CPViewMinXMargin];
     [topBar addSubview:showPrivateCheckbox];
+
+    var aiSettingsBtn = [[CPButton alloc] initWithFrame:CGRectMake(privateCheckboxX - 95, 12, 85, 26)];
+    [aiSettingsBtn setTitle:@"⚙️ Settings"];
+    [aiSettingsBtn setTarget:self];
+    [aiSettingsBtn setAction:@selector(openSettingsSheet:)];
+    [aiSettingsBtn setAutoresizingMask:CPViewMinXMargin];
+    [topBar addSubview:aiSettingsBtn];
+
+    var aiButton = [[CPButton alloc] initWithFrame:CGRectMake(privateCheckboxX - 225, 12, 120, 26)];
+    [aiButton setTitle:@"✨ AI Assistant"];
+    [aiButton setTarget:self];
+    [aiButton setAction:@selector(openAIAssistantSheet:)];
+    [aiButton setAutoresizingMask:CPViewMinXMargin];
+    [topBar addSubview:aiButton];
     
     [contentView addSubview:topBar];
 
-    // 3. Main Split View (Links: Outline, Rechts: WebView)
+    // 3. Main Split View (Left: OutlineView, Right: WebView)
     var splitView = [[CPSplitView alloc] initWithFrame:CGRectMake(0, topBarHeight, CGRectGetWidth(bounds), CGRectGetHeight(bounds) - topBarHeight)];
     [splitView setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
     [splitView setVertical:YES];
@@ -156,18 +221,18 @@
     [rightView addSubview:docWebView];
 
     [splitView addSubview:rightView];
-
     [splitView adjustSubviews];
-
     [contentView addSubview:splitView];
 
-    // Daten laden
+    // Load data
     _allRoots = [[CPMutableArray alloc] init];
     [self loadDocumentationData];
 }
 
 - (void)updateWebViewWithHTML:(CPString)html
 {
+    _currentHTML = html || @"";
+
     var parentView = [docWebView superview];
     if (parentView)
     {
@@ -192,7 +257,7 @@
     
     [CPURLConnection sendAsynchronousRequest:request queue:[CPOperationQueue mainQueue] completionHandler:function(response, data, error) {
         if (error || !data) {
-            CPLog.error("Fehler beim Laden der documentation.json: " + error);
+            CPLog.error("Error loading documentation.json: " + error);
             return;
         }
         
@@ -200,7 +265,7 @@
             var jsonArray = JSON.parse(data);
             [self buildTreeFromJSON:jsonArray];
         } catch (e) {
-            CPLog.error("Fehler beim Parsen der JSON: " + e.message);
+            CPLog.error("Error parsing JSON: " + e.message);
         }
     }];
 }
@@ -217,17 +282,15 @@
         
         var topics = clsData.topics || [];
         
-        // --- 1. Dedupliziere Symbole innerhalb der Klasse anhand eines Quality-Scores ---
+        // --- 1. Deduplicate symbols with quality score ---
         var uniqueSymbols = {};
         for (var j = 0; j < topics.length; j++) {
             var symbols = topics[j].symbols || [];
             
             for (var k = 0; k < symbols.length; k++) {
                 var sym = symbols[k];
-                // Schlüsselkombination aus Scope, Name und Kind (sicher gegen Typ-Kollisionen)
                 var symKey = (sym.scope || "instance") + "_" + sym.name + "_" + (sym.kind || "symbol");
                 
-                // Score berechnen (je vollständiger, desto höher der Score)
                 var score = 0;
                 if (sym.abstract) score += 2;
                 if (sym.discussion) score += 2;
@@ -239,14 +302,13 @@
                 sym._topicIndex = j; 
                 
                 var existingSym = uniqueSymbols[symKey];
-                // Behalte das Symbol, wenn es neu ist ODER gehaltvoller ist als das bisher gefundene
                 if (!existingSym || score > existingSym._score) {
                     uniqueSymbols[symKey] = sym;
                 }
             }
         }
         
-        // --- 2. Gruppiere die "Gewinner"-Symbole zurück in ihre Topics ---
+        // --- 2. Group winning symbols back to topics ---
         var finalTopicsMap = {};
         for (var key in uniqueSymbols) {
             if (uniqueSymbols.hasOwnProperty(key)) {
@@ -257,7 +319,7 @@
             }
         }
         
-        // --- 3. Aufbauen der Tree-Knoten aus den sauberen Symbolen ---
+        // --- 3. Build tree nodes ---
         for (var tIndexStr in finalTopicsMap) {
             if (finalTopicsMap.hasOwnProperty(tIndexStr)) {
                 var tIndex = parseInt(tIndexStr, 10);
@@ -265,7 +327,6 @@
                 var syms = finalTopicsMap[tIndexStr];
                 
                 if (topicData.title === "General") {
-                    // "General" Topic auflösen: Symbole direkt der Klasse unterordnen
                     for (var k = 0; k < syms.length; k++) {
                         var symNode = [[DocNode alloc] initWithTitle:syms[k].name type:"symbol" data:syms[k]];
                         [symNode setParent:clsNode];
@@ -289,7 +350,7 @@
         allClasses.push(clsNode);
     }
     
-    // 4. CPObject-Wurzel ausfindig machen
+    // 4. Root setup
     var rootNode = classMap["CPObject"];
     if (!rootNode) {
         rootNode = [[DocNode alloc] initWithTitle:@"CPObject" type:@"class" data:{}];
@@ -299,7 +360,7 @@
     [_allRoots removeAllObjects];
     [_allRoots addObject:rootNode];
     
-    // 5. Hierarchie aufbauen
+    // 5. Hierarchy
     for (var i = 0; i < allClasses.length; i++) {
         var clsNode = allClasses[i];
         var title = [clsNode title];
@@ -325,7 +386,6 @@
         var typeA = [a type];
         var typeB = [b type];
         
-        // Ordnet Subklassen (Type "class") unterhalb von Topics (1) und Symbols (2) ein.
         var weightA = (typeA === "topic") ? 1 : ((typeA === "symbol") ? 2 : 3);
         var weightB = (typeB === "topic") ? 1 : ((typeB === "symbol") ? 2 : 3);
         
@@ -429,7 +489,6 @@
         p = [p parent];
     }
     
-    // Save current animation state and disable during batch expansion
     var wasAnimates = [outlineView animates];
     [outlineView setAnimates:NO];
 
@@ -437,7 +496,6 @@
         [outlineView expandItem:pathToExpand[i]];
     }
 
-    // Restore animation state
     [outlineView setAnimates:wasAnimates];
     
     var row = [outlineView rowForItem:node];
@@ -460,7 +518,6 @@
     if ([_currentSearchTerm length] > 0) [self searchAction:searchField];
 }
 
-// Interne Selektionsnavigation
 - (void)selectNodeWithTitle:(CPString)aTitle
 {
     var matchedNode = [self findNodeWithTitle:aTitle inNodes:_allRoots];
@@ -502,7 +559,6 @@
     return nil;
 }
 
-// Hilfsmethode, um Strings sicher über Javascript-URLs zu injizieren
 - (CPString)safeJSString:(CPString)str
 {
     if (!str) return @"";
@@ -510,7 +566,7 @@
 }
 
 // ==============================================================================
-// CPOutlineView Data Source & Delegate (dynamischer Filter für Private)
+// CPOutlineView Data Source & Delegate
 // ==============================================================================
 - (CPArray)visibleChildrenOfItem:(DocNode)anItem
 {
@@ -544,11 +600,10 @@
     var type = [anItem type];
     var title = [anItem title];
     var data = [anItem data];
-    var icon = "⚪ "; // Default indicator
+    var icon = "⚪ ";
     var isDep = NO;
 
     if (type === "class") {
-        // Fallback checks for class framework identification
         var isFoundation = YES;
         if (data && data.metadata && data.metadata.framework) {
             isFoundation = (data.metadata.framework === "Foundation");
@@ -558,13 +613,13 @@
             isFoundation = NO;
         }
 
-        icon = isFoundation ? "🔘 " : "🔵 "; // Foundation: Gray, AppKit: Blue
+        icon = isFoundation ? "🔘 " : "🔵 ";
 
         if (data && data.metadata && data.metadata.deprecated) {
             isDep = YES;
         }
     } else if (type === "topic") {
-        icon = "🟢 "; // Topic
+        icon = "🟢 ";
     } else if (type === "symbol") {
         if (data) {
             if (data.deprecated) {
@@ -572,14 +627,14 @@
             }
             if (data.kind === "method") {
                 if (data.scope === "class") {
-                    icon = "🟠 "; // Class Method
+                    icon = "🟠 ";
                 } else {
-                    icon = "🔴 "; // Instance Method
+                    icon = "🔴 ";
                 }
             } else if (data.kind === "global_variable") {
-                icon = "🟡 "; // Global Variable
+                icon = "🟡 ";
             } else if (data.kind === "typedef") {
-                icon = "🟤 "; // Typedef
+                icon = "🟤 ";
             }
         }
     }
@@ -603,7 +658,7 @@
 }
 
 // ==============================================================================
-// HTML Rendering & Hilfsfunktionen
+// HTML Rendering & Helper Functions
 // ==============================================================================
 - (CPString)escapeHTML:(CPString)str
 {
@@ -624,11 +679,7 @@
         
         var html = [self htmlHeader];
 
-        // -----------------------------------------------------------
-        // CLASS RENDERER
-        // -----------------------------------------------------------
         if (type === "class") {
-            // Deprecation Warning
             var classDep = (data.metadata && data.metadata.deprecated) ? data.metadata.deprecated : nil;
             if (classDep) {
                 html += "<div class='deprecation-warning'><strong>⚠️ Class Deprecated:</strong> " + [self escapeHTML:classDep] + "</div>";
@@ -668,7 +719,6 @@
                 html += "<h2>Discussion</h2><div class='discussion'>" + [self cleanText:data.primaryContent.discussion] + "</div>";
             }
             
-            // Sammle direkt abhängige Topics & Symbole ("General") zur besseren Übersicht
             var kids = [node children];
             var topics = [];
             var generalSyms = [];
@@ -726,10 +776,6 @@
                 html += "</ul>";
             }
         } 
-        
-        // -----------------------------------------------------------
-        // TOPIC RENDERER
-        // -----------------------------------------------------------
         else if (type === "topic") {
             html += "<h1>" + [self escapeHTML:[node title]] + "</h1>";
             if (data.abstract) {
@@ -772,10 +818,6 @@
             }
             html += "</ul>";
         } 
-        
-        // -----------------------------------------------------------
-        // SYMBOL RENDERER (Methoden, Global Variables, Typedefs etc.)
-        // -----------------------------------------------------------
         else if (type === "symbol") {
             var isDep = data.deprecated;
             if (isDep) {
@@ -807,7 +849,6 @@
                 html += "<h2>Declaration</h2><pre>" + [self escapeHTML:data.declaration] + "</pre>";
             }
             
-            // Falls es sich um eine Variable handelt, zeige den Typ explizit an
             if (data.type && data.kind !== "method") {
                 html += "<h2>Type</h2><p><code>" + [self escapeHTML:data.type] + "</code></p>";
             }
@@ -868,54 +909,39 @@
     try {
         var cleaned = str.replace(/^[ \t]+/gm, '');
         cleaned = cleaned.replace(/@(class|ingroup|brief|details|deprecated)\s+[^\n]*\n?/gi, '');
-        
-        // Escape standard characters
         cleaned = cleaned.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         
-        // Selektives Wiederherstellen standardmäßiger Formatierungs-Tags (HTML-Whitelist)
         cleaned = cleaned.replace(/&lt;(\/?(?:p|strong|pre|br|code|em|ul|ol|li|b|i|blockquote|span|div|a)\b[^&]*\/?)&gt;/gi, function(match, p1) {
             return "<" + p1.replace(/&quot;/g, '"').replace(/&amp;/g, '&') + ">";
         });
 
-        // Support für @code ... @endcode blocks
         cleaned = cleaned.replace(/@code\s*([\s\S]*?)\s*@endcode/gi, "<pre><code>$1</code></pre>");
-
-        // Inline-Code Formatierung (\c syntax)
         cleaned = cleaned.replace(/\\c\s+([^\s,.;:]+)/g, "<code>$1</code>");
         
-        // Support für Markdown Headings (e.g. ### Title)
         cleaned = cleaned.replace(/^###\s+([^\n]+)/gm, "<h3>$1</h3>");
         cleaned = cleaned.replace(/^##\s+([^\n]+)/gm, "<h2>$1</h2>");
         cleaned = cleaned.replace(/^#\s+([^\n]+)/gm, "<h1>$1</h1>");
 
-        // Support für Markdown Lists (- or *)
         cleaned = cleaned.replace(/^[-*]\s+([^\n]+)/gm, "<li>$1</li>");
-        // Consecutive <li> blocks in <ul> wrap
         cleaned = cleaned.replace(/((?:<li>[^\n]+<\/li>\s*)+)/g, "<ul>$1</ul>");
 
-        // @param name description
         cleaned = cleaned.replace(/@param\s+([a-zA-Z0-9_]+)\s+([\s\S]*?)(?=\s*@\w+|$)/g, 
             "<div class='doc-tag'><span class='tag-label'>Parameter <code>$1</code>:</span> <span class='tag-desc'>$2</span></div>");
         
-        // @return oder @returns
         cleaned = cleaned.replace(/@returns?\s+([\s\S]*?)(?=\s*@\w+|$)/g, 
             "<div class='doc-tag'><span class='tag-label'>Returns:</span> <span class='tag-desc'>$1</span></div>");
         
-        // @throws exception description
         cleaned = cleaned.replace(/@throws\s+([a-zA-Z0-9_]+)\s+([\s\S]*?)(?=\s*@\w+|$)/g, 
             "<div class='doc-tag'><span class='tag-label'>Throws <code>$1</code>:</span> <span class='tag-desc'>$2</span></div>");
 
-        // @delegate signature \n description
         cleaned = cleaned.replace(/@delegate\s+([^\n]+)\n?([\s\S]*?)(?=\s*@\w+|$)/g, 
             "<div class='doc-tag delegate-tag'><div class='delegate-sig'><code>$1</code></div><div class='tag-desc'>$2</div></div>");
 
-        // @par title
         cleaned = cleaned.replace(/@par\s+([^\n]+)/g, "<h3 class='doc-par'>$1</h3>");
 
-        // --- Paragraph processing & Silly newline cleanup ---
         var parts = cleaned.split(/(<(?:pre|ul|ol|h1|h2|h3|div)[\b>][\s\S]*?<\/\1>)/i);
         for (var i = 0; i < parts.length; i++) {
-            if (i % 2 === 0) { // Plain text content blocks
+            if (i % 2 === 0) {
                 var text = parts[i];
                 text = text.replace(/\r\n/g, '\n');
                 text = text.replace(/\n{3,}/g, '\n\n');
@@ -924,9 +950,8 @@
                 for (var p = 0; p < paragraphs.length; p++) {
                     var pText = paragraphs[p].trim();
                     if (pText.length > 0) {
-                        pText = pText.replace(/\n/g, ' '); // Collapse single newlines
+                        pText = pText.replace(/\n/g, ' ');
                         
-                        // Parse plain text URLs to beautiful clickable links
                         pText = pText.replace(/<a\s+[^>]*>[\s\S]*?<\/a>|<[^>]+>|(https?:\/\/[^\s<]+)/gi, function(match, url) {
                             if (url) {
                                 var trailingPunctuation = "";
@@ -939,7 +964,6 @@
                             return match;
                         });
                         
-                        // Parse and format @note tags
                         if (/^@note/i.test(pText)) {
                             pText = pText.replace(/^@note\s+/i, "");
                             paragraphs[p] = "<div class='doc-note'><strong>Note:</strong> " + pText + "</div>";
@@ -964,7 +988,6 @@
 
 - (CPString)htmlHeader
 {
-    // Added '<meta charset="utf-8">' to correctly decode and render the curly apostrophe (’)
     return @"<!DOCTYPE html><html><head><meta charset='utf-8'><style>" +
            @"body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; padding: 30px; color: #1d1d1f; line-height: 1.5; }" +
            @"h1 { font-size: 32px; margin-bottom: 5px; font-weight: 600; }" +
@@ -1008,6 +1031,452 @@
 - (CPString)htmlFooter
 {
     return @"</body></html>";
+}
+
+// ==============================================================================
+// AI Context Extraction & Prompt Enrichment
+// ==============================================================================
+- (DocNode)currentlySelectedNode
+{
+    var row = [outlineView selectedRow];
+    if (row >= 0) {
+        return [outlineView itemAtRow:row];
+    }
+    return nil;
+}
+
+// ==============================================================================
+// AI Assistant Window & Operations
+// ==============================================================================
+- (void)openAIAssistantSheet:(id)sender
+{
+    if (!_aiAssistantWindow)
+    {
+        _aiAssistantWindow = [[CPWindow alloc] initWithContentRect:CGRectMake(0, 0, 720, 600)
+                                                         styleMask:CPTitledWindowMask | CPClosableWindowMask | CPResizableWindowMask];
+        [_aiAssistantWindow setTitle:@"✨ Cappuccino AI Assistant"];
+        
+        var sheetContentView = [_aiAssistantWindow contentView];
+        var sheetBounds = [sheetContentView bounds];
+
+        // 1. Context header
+        var ctxHeader = [[CPTextField alloc] initWithFrame:CGRectMake(15, 12, 690, 18)];
+        [ctxHeader setStringValue:@"Active Documentation Context:"];
+        [ctxHeader setFont:[CPFont boldSystemFontOfSize:11.0]];
+        [ctxHeader setTextColor:[CPColor darkGrayColor]];
+        [sheetContentView addSubview:ctxHeader];
+
+        _aiContextLabel = [[CPTextField alloc] initWithFrame:CGRectMake(15, 30, CGRectGetWidth(sheetBounds) - 30, 20)];
+        [_aiContextLabel setStringValue:@"None"];
+        [_aiContextLabel setFont:[CPFont systemFontOfSize:12.0]];
+        [_aiContextLabel setAutoresizingMask:CPViewWidthSizable];
+        [sheetContentView addSubview:_aiContextLabel];
+
+        // 2. User prompt / Snippet Input area
+        var inputLabel = [[CPTextField alloc] initWithFrame:CGRectMake(15, 55, 690, 18)];
+        [inputLabel setStringValue:@"Your Prompt or Code Snippet:"];
+        [inputLabel setFont:[CPFont boldSystemFontOfSize:11.0]];
+        [inputLabel setTextColor:[CPColor darkGrayColor]];
+        [sheetContentView addSubview:inputLabel];
+
+        var promptScroll = [[CPScrollView alloc] initWithFrame:CGRectMake(15, 75, CGRectGetWidth(sheetBounds) - 30, 90)];
+        [promptScroll setAutoresizingMask:CPViewWidthSizable];
+        [promptScroll setAutohidesScrollers:YES];
+        
+        _aiPromptTextView = [[CPTextView alloc] initWithFrame:[promptScroll bounds]];
+        [_aiPromptTextView setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
+        [_aiPromptTextView setEditable:YES];
+        [_aiPromptTextView setFont:[CPFont fontWithName:@"SF Mono, Menlo, Consolas, monospace" size:12.0]];
+        [_aiPromptTextView setString:@"Please explain this stuff to me."];
+        [promptScroll setDocumentView:_aiPromptTextView];
+        [sheetContentView addSubview:promptScroll];
+
+        // Action controls
+        _aiGenerateButton = [[CPButton alloc] initWithFrame:CGRectMake(15, 172, 190, 28)];
+        [_aiGenerateButton setTitle:@"✨ Generate"];
+        [_aiGenerateButton setTarget:self];
+        [_aiGenerateButton setAction:@selector(runAIGeneration:)];
+        [sheetContentView addSubview:_aiGenerateButton];
+
+        _aiSpinner = [[CPProgressIndicator alloc] initWithFrame:CGRectMake(215, 178, 16, 16)];
+        [_aiSpinner setStyle:CPProgressIndicatorSpinningStyle];
+        [_aiSpinner setControlSize:CPSmallControlSize];
+        [_aiSpinner setIndeterminate:YES];
+        [sheetContentView addSubview:_aiSpinner];
+
+        _aiStatusLabel = [[CPTextField alloc] initWithFrame:CGRectMake(240, 178, 300, 18)];
+        [_aiStatusLabel setStringValue:@""];
+        [_aiStatusLabel setFont:[CPFont systemFontOfSize:11.0]];
+        [sheetContentView addSubview:_aiStatusLabel];
+
+        // 3. Result / Ready-to-copy code output area
+        var resultLabel = [[CPTextField alloc] initWithFrame:CGRectMake(15, 208, 690, 18)];
+        [resultLabel setStringValue:@"AI Generated Code & Explanation (Ready for Copy-Paste):"];
+        [resultLabel setFont:[CPFont boldSystemFontOfSize:11.0]];
+        [resultLabel setTextColor:[CPColor darkGrayColor]];
+        [sheetContentView addSubview:resultLabel];
+
+        var resultScrollHeight = CGRectGetHeight(sheetBounds) - 275;
+        var resultScroll = [[CPScrollView alloc] initWithFrame:CGRectMake(15, 228, CGRectGetWidth(sheetBounds) - 30, resultScrollHeight)];
+        [resultScroll setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
+        [resultScroll setAutohidesScrollers:YES];
+
+        _aiResultTextView = [[CPTextView alloc] initWithFrame:[resultScroll bounds]];
+        [_aiResultTextView setAutoresizingMask:CPViewWidthSizable];
+        [_aiResultTextView setEditable:NO];
+        [_aiResultTextView setRichText:YES];
+        [_aiResultTextView setSelectable:YES];
+        [_aiResultTextView setVerticallyResizable:YES];
+        [_aiResultTextView setHorizontallyResizable:NO];
+        [[_aiResultTextView textContainer] setWidthTracksTextView:YES];
+        [_aiResultTextView setFont:[CPFont systemFontOfSize:12.0]];
+        [resultScroll setDocumentView:_aiResultTextView];
+        [sheetContentView addSubview:resultScroll];
+
+        // Bottom action buttons
+        var bottomY = CGRectGetHeight(sheetBounds) - 38;
+
+        _aiCopyButton = [[CPButton alloc] initWithFrame:CGRectMake(15, bottomY, 170, 28)];
+        [_aiCopyButton setTitle:@"📋 Copy to Clipboard"];
+        [_aiCopyButton setTarget:self];
+        [_aiCopyButton setAction:@selector(copyResultToClipboard:)];
+        [_aiCopyButton setAutoresizingMask:CPViewMaxXMargin | CPViewMinYMargin];
+        [sheetContentView addSubview:_aiCopyButton];
+
+        var closeBtn = [[CPButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(sheetBounds) - 105, bottomY, 90, 28)];
+        [closeBtn setTitle:@"Close"];
+        [closeBtn setTarget:self];
+        [closeBtn setAction:@selector(closeAIAssistantSheet:)];
+        [closeBtn setAutoresizingMask:CPViewMinXMargin | CPViewMinYMargin];
+        [sheetContentView addSubview:closeBtn];
+    }
+
+    // Refresh context string in label
+    var selectedNode = [self currentlySelectedNode];
+    if (selectedNode) {
+        [_aiContextLabel setStringValue:@"[" + [selectedNode type].toUpperCase() + @"] " + [selectedNode title]];
+    } else {
+        [_aiContextLabel setStringValue:@"No node selected. Using overall Cappuccino environment."];
+    }
+
+    [_aiStatusLabel setStringValue:@""];
+
+    [CPApp beginSheet:_aiAssistantWindow
+        modalForWindow:theWindow
+         modalDelegate:self
+        didEndSelector:nil
+           contextInfo:nil];
+}
+
+- (void)closeAIAssistantSheet:(id)sender
+{
+    [CPApp endSheet:_aiAssistantWindow];
+    [_aiAssistantWindow orderOut:self];
+}
+
+- (void)updateAIResultViewWithMarkdown:(CPString)markdownText
+{
+    _rawAIResultText = markdownText || @"";
+
+    try {
+        var parsedAttrStr = [CPMarkdownParser attributedStringFromMarkdown:_rawAIResultText];
+        [_aiResultTextView setEditable:YES];
+        [_aiResultTextView setString:@""];
+        [_aiResultTextView insertText:parsedAttrStr];
+        [_aiResultTextView setEditable:NO];
+    }
+    catch (e)
+    {
+        console.error("Markdown parsing failure: ", e);
+        [_aiResultTextView setEditable:YES];
+        [_aiResultTextView setString:_rawAIResultText];
+        [_aiResultTextView setEditable:NO];
+    }
+}
+
+- (CPString)cleanHTMLForAI:(CPString)html
+{
+    if (!html || [html length] === 0)
+        return @"";
+
+    try {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(html, "text/html");
+
+        // 1. Remove head, styles, and scripts
+        var unwanted = doc.querySelectorAll("head, style, script");
+        for (var i = 0; i < unwanted.length; i++) {
+            unwanted[i].parentNode.removeChild(unwanted[i]);
+        }
+
+        // 2. Convert headings to markdown
+        var headings = doc.querySelectorAll("h1, h2, h3");
+        for (var i = 0; i < headings.length; i++) {
+            var h = headings[i];
+            h.textContent = "\n\n## " + h.textContent.trim() + "\n";
+        }
+
+        // 3. Format code blocks
+        var pres = doc.querySelectorAll("pre");
+        for (var i = 0; i < pres.length; i++) {
+            var p = pres[i];
+            p.textContent = "\n```\n" + p.textContent.trim() + "\n```\n";
+        }
+
+        // 4. Format list items as bullet points
+        var listItems = doc.querySelectorAll("li");
+        for (var i = 0; i < listItems.length; i++) {
+            var li = listItems[i];
+            li.textContent = "\n* " + li.textContent.trim();
+        }
+
+        // 5. Extract clean text
+        var text = doc.body ? (doc.body.innerText || doc.body.textContent) : "";
+
+        // Collapse excess blank lines
+        text = text.replace(/\n{3,}/g, "\n\n").trim();
+        return text;
+    } 
+    catch (e) {
+        // Fallback regex if DOMParser fails
+        return html.replace(/<style[\s\S]*?<\/style>/gi, '')
+                   .replace(/<script[\s\S]*?<\/script>/gi, '')
+                   .replace(/<[^>]+>/g, ' ')
+                   .replace(/\s+/g, ' ')
+                   .trim();
+    }
+}
+
+- (void)runAIGeneration:(id)sender
+{
+    var userInput = [_aiPromptTextView string];
+    if (!userInput || [userInput stringByTrimmingWhitespace] === @"") {
+        [_aiStatusLabel setStringValue:@"Please enter a prompt or snippet first."];
+        return;
+    }
+
+    // Strip HTML into clean structured documentation text
+    var cleanContext = [self cleanHTMLForAI:_currentHTML];
+    if ([cleanContext length] === 0) {
+        cleanContext = @"No documentation currently displayed.";
+    }
+
+    var fullPrompt = @"You are an expert Objective-J and Cappuccino framework developer.\n" +
+                     @"The user is already an experienced Cappuccino developer.\n\n" +
+                     @"GUIDELINES:\n" +
+                     @"- Give a concise, direct, high-level summary and practical usage.\n" +
+                     @"- Do NOT explain basic language syntax (e.g. do not explain what @implementation or inheritance is).\n" +
+                     @"- Do NOT break down class definitions line-by-line.\n" +
+                     @"- Start directly with your answer. No preamble or meta-commentary.\n" +
+                     @"- Always write valid Objective-J syntax (bracket messaging [receiver msg], never JS class or C-pointers).\n\n" +
+                     @"=== DOCUMENTATION CONTEXT ===\n" +
+                     cleanContext + @"\n\n" +
+                     @"=== USER REQUEST ===\n" +
+                     userInput;
+
+    [_aiGenerateButton setEnabled:NO];
+    [_aiSpinner startAnimation:self];
+    [_aiStatusLabel setStringValue:@"Generating snippet..."];
+    [self updateAIResultViewWithMarkdown:@"Generating response..."];
+
+    if (!_aiSession) {
+        _aiSession = [[CPLanguageModelSession alloc] initWithInstructions:@"You are an expert Cappuccino and Objective-J coding assistant. You write concise, idiomatic Objective-J code and clear technical explanations without trivial syntax hand-holding."];
+    }
+
+    [_aiSession respondToPrompt:fullPrompt
+                        options:nil
+              completionHandler:function(finalText, error) {
+        [_aiGenerateButton setEnabled:YES];
+        [_aiSpinner stopAnimation:self];
+
+        if (error) {
+            [_aiStatusLabel setStringValue:@"Generation error."];
+            [self updateAIResultViewWithMarkdown:@"Error generating code: " + [error localizedDescription]];
+        } else {
+            [_aiStatusLabel setStringValue:@"Completed!"];
+            [self updateAIResultViewWithMarkdown:finalText];
+        }
+    }];
+}
+
+- (void)copyResultToClipboard:(id)sender
+{
+    var text = _rawAIResultText || [_aiResultTextView string];
+    if (!text || [text length] === 0 || [text isEqualToString:@"Generating response..."]) {
+        [_aiStatusLabel setStringValue:@"Nothing to copy."];
+        return;
+    }
+
+    try {
+        if (window.navigator && window.navigator.clipboard && window.navigator.clipboard.writeText) {
+            window.navigator.clipboard.writeText(text);
+            [_aiStatusLabel setStringValue:@"✅ Copied to clipboard!"];
+        } else {
+            // Fallback for older browsers
+            var tempTextArea = document.createElement("textarea");
+            tempTextArea.value = text;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempTextArea);
+            [_aiStatusLabel setStringValue:@"✅ Copied to clipboard!"];
+        }
+    } catch (e) {
+        CPLog.error("Clipboard copy error: " + e);
+        [_aiStatusLabel setStringValue:@"Failed to copy to clipboard."];
+    }
+}
+
+// ==============================================================================
+// AI Fallback Settings Sheet
+// ==============================================================================
+- (void)openSettingsSheet:(id)sender
+{
+    if (!_settingsWindow)
+    {
+        _settingsWindow = [[CPWindow alloc] initWithContentRect:CGRectMake(0, 0, 420, 260)
+                                                      styleMask:CPTitledWindowMask | CPClosableWindowMask];
+        [_settingsWindow setTitle:@"AI Model & Fallback Settings"];
+        
+        var sheetContentView = [_settingsWindow contentView];
+        var sheetBounds = [sheetContentView bounds];
+
+        var serviceLabel = [[CPTextField alloc] initWithFrame:CGRectMake(15, 25, 110, 20)];
+        [serviceLabel setStringValue:@"Service Type:"];
+        [serviceLabel setFont:[CPFont systemFontOfSize:12.0]];
+        [serviceLabel setAlignment:CPRightTextAlignment];
+        [sheetContentView addSubview:serviceLabel];
+
+        _servicePopUp = [[CPPopUpButton alloc] initWithFrame:CGRectMake(135, 22, 180, 26) pullsDown:NO];
+        [_servicePopUp addItemWithTitle:@"Ollama (Local)"];
+        [[_servicePopUp lastItem] setRepresentedObject:@"ollama"];
+        [_servicePopUp addItemWithTitle:@"Groq API"];
+        [[_servicePopUp lastItem] setRepresentedObject:@"groq"];
+        [_servicePopUp addItemWithTitle:@"Google Gemini"];
+        [[_servicePopUp lastItem] setRepresentedObject:@"gemini"];
+        [_servicePopUp addItemWithTitle:@"OpenRouter"];
+        [[_servicePopUp lastItem] setRepresentedObject:@"openrouter"];
+        [_servicePopUp setTarget:self];
+        [_servicePopUp setAction:@selector(serviceTypeDidChange:)];
+        [sheetContentView addSubview:_servicePopUp];
+
+        var endpointLabel = [[CPTextField alloc] initWithFrame:CGRectMake(15, 67, 110, 20)];
+        [endpointLabel setStringValue:@"Endpoint URL:"];
+        [endpointLabel setAlignment:CPRightTextAlignment];
+        [sheetContentView addSubview:endpointLabel];
+
+        _endpointField = [[CPTextField alloc] initWithFrame:CGRectMake(135, 62, CGRectGetWidth(sheetBounds) - 155, 27)];
+        [_endpointField setEditable:YES];
+        [_endpointField setBezeled:YES];
+        [sheetContentView addSubview:_endpointField];
+
+        var modelLabel = [[CPTextField alloc] initWithFrame:CGRectMake(15, 107, 110, 20)];
+        [modelLabel setStringValue:@"Model Name:"];
+        [modelLabel setAlignment:CPRightTextAlignment];
+        [sheetContentView addSubview:modelLabel];
+
+        _modelField = [[CPTextField alloc] initWithFrame:CGRectMake(135, 102, CGRectGetWidth(sheetBounds) - 155, 27)];
+        [_modelField setEditable:YES];
+        [_modelField setBezeled:YES];
+        [sheetContentView addSubview:_modelField];
+
+        var apiKeyLabel = [[CPTextField alloc] initWithFrame:CGRectMake(15, 147, 110, 20)];
+        [apiKeyLabel setStringValue:@"API Key:"];
+        [apiKeyLabel setAlignment:CPRightTextAlignment];
+        [sheetContentView addSubview:apiKeyLabel];
+
+        _apiKeyField = [[CPTextField alloc] initWithFrame:CGRectMake(135, 142, CGRectGetWidth(sheetBounds) - 155, 27)];
+        [_apiKeyField setEditable:YES];
+        [_apiKeyField setBezeled:YES];
+        [_apiKeyField setSecure:YES];
+        [sheetContentView addSubview:_apiKeyField];
+
+        var btnY = CGRectGetHeight(sheetBounds) - 45;
+
+        var cancelBtn = [[CPButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(sheetBounds) - 205, btnY, 90, 26)];
+        [cancelBtn setTitle:@"Cancel"];
+        [cancelBtn setTarget:self];
+        [cancelBtn setAction:@selector(closeSettingsSheet:)];
+        [sheetContentView addSubview:cancelBtn];
+
+        var saveBtn = [[CPButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(sheetBounds) - 105, btnY, 90, 26)];
+        [saveBtn setTitle:@"Save"];
+        [saveBtn setTarget:self];
+        [saveBtn setAction:@selector(saveSettings:)];
+        [sheetContentView addSubview:saveBtn];
+    }
+
+    var defaults = [CPUserDefaults standardUserDefaults];
+    var activeService = [defaults objectForKey:@"LLMTestServiceType"] || @"ollama";
+
+    if (activeService === @"ollama") [_servicePopUp selectItemAtIndex:0];
+    else if (activeService === @"groq") [_servicePopUp selectItemAtIndex:1];
+    else if (activeService === @"gemini") [_servicePopUp selectItemAtIndex:2];
+    else if (activeService === @"openrouter") [_servicePopUp selectItemAtIndex:3];
+
+    [_endpointField setStringValue:[defaults objectForKey:@"LLMTestEndpoint"] || @"http://localhost:11434/api/generate"];
+    [_modelField setStringValue:[defaults objectForKey:@"LLMTestModel"] || @"gemma4:e4b"];
+    [_apiKeyField setStringValue:[defaults objectForKey:@"LLMTestAPIKey"] || @""];
+
+    [self updateFieldsForService:activeService];
+
+    [CPApp beginSheet:_settingsWindow
+        modalForWindow:theWindow
+         modalDelegate:self
+        didEndSelector:nil
+           contextInfo:nil];
+}
+
+- (void)updateFieldsForService:(CPString)serviceType
+{
+    if (serviceType === @"ollama") {
+        [_endpointField setEnabled:YES];
+        [_apiKeyField setEnabled:NO];
+        [_apiKeyField setPlaceholderString:@"Not required"];
+    } else {
+        [_endpointField setEnabled:NO];
+        [_endpointField setPlaceholderString:@"Default platform endpoint used"];
+        [_apiKeyField setEnabled:YES];
+        [_apiKeyField setPlaceholderString:@"API Token value"];
+    }
+}
+
+- (void)serviceTypeDidChange:(id)sender
+{
+    var newService = [[_servicePopUp selectedItem] representedObject];
+    [self updateFieldsForService:newService];
+}
+
+- (void)closeSettingsSheet:(id)sender
+{
+    [CPApp endSheet:_settingsWindow];
+    [_settingsWindow orderOut:self];
+}
+
+- (void)saveSettings:(id)sender
+{
+    var defaults = [CPUserDefaults standardUserDefaults];
+    var activeService = [[_servicePopUp selectedItem] representedObject] || @"ollama";
+    var endpoint = [_endpointField stringValue];
+    var model = [_modelField stringValue];
+    var apiKey = [_apiKeyField stringValue];
+
+    [defaults setObject:activeService forKey:@"LLMTestServiceType"];
+    [defaults setObject:endpoint forKey:@"LLMTestEndpoint"];
+    [defaults setObject:model forKey:@"LLMTestModel"];
+    [defaults setObject:apiKey forKey:@"LLMTestAPIKey"];
+
+    [CPLanguageModelSession setFallbackServiceType:activeService
+                                         endpoint:endpoint
+                                            model:model
+                                           apiKey:apiKey];
+
+    if (_aiSession) {
+        [_aiSession destroy];
+        _aiSession = nil;
+    }
+
+    [self closeSettingsSheet:sender];
 }
 
 @end
