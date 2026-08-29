@@ -15054,7 +15054,7 @@
          "title" : "CPTheme"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "CPTheme manages UI themes, skin attributes, colors, and styling rules across Cappuccino controls and views.",
          "declaration" : "@implementation CPTheme : CPObject",
          "discussion" : ""
       },
@@ -15062,11 +15062,13 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Sets the global default theme for the application.",
                   "declaration" : "+ (void)setDefaultTheme:(CPTheme)aTheme",
                   "kind" : "method",
                   "name" : "setDefaultTheme:",
                   "parameters" : [
                      {
+                        "description" : "the theme to set as default",
                         "name" : "aTheme",
                         "type" : "CPTheme"
                      }
@@ -15075,20 +15077,23 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Returns the global default theme for the application.",
                   "declaration" : "+ (CPTheme)defaultTheme",
                   "kind" : "method",
                   "name" : "defaultTheme",
                   "returnType" : "CPTheme",
+                  "returns" : "the default <code>CPTheme</code> instance",
                   "scope" : "class"
                },
                {
-                  "abstract" : "Set the default HUD theme.",
+                  "abstract" : "Sets the default HUD theme.",
                   "declaration" : "+ (void)setDefaultHudTheme:(CPTheme)aTheme",
-                  "discussion" : "If set to nil, the default described in defaultHudTheme will be used.",
+                  "discussion" : "If set to <code>nil</code>, the default described in <code>defaultHudTheme</code> is used.",
                   "kind" : "method",
                   "name" : "setDefaultHudTheme:",
                   "parameters" : [
                      {
+                        "description" : "the HUD theme to set",
                         "name" : "aTheme",
                         "type" : "CPTheme"
                      }
@@ -15106,29 +15111,35 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Returns a registered theme matching the specified name.",
                   "declaration" : "+ (CPTheme)themeNamed:(CPString)aName",
                   "kind" : "method",
                   "name" : "themeNamed:",
                   "parameters" : [
                      {
+                        "description" : "the name of the theme",
                         "name" : "aName",
                         "type" : "CPString"
                      }
                   ],
                   "returnType" : "CPTheme",
+                  "returns" : "the matching <code>CPTheme</code>, or <code>nil</code> if not found",
                   "scope" : "class"
                },
                {
+                  "abstract" : "Initializes a newly allocated theme with a given name.",
                   "declaration" : "- (id)initWithName:(CPString)aName",
                   "kind" : "method",
                   "name" : "initWithName:",
                   "parameters" : [
                      {
+                        "description" : "the name of the theme",
                         "name" : "aName",
                         "type" : "CPString"
                      }
                   ],
                   "returnType" : "id",
+                  "returns" : "the initialized theme instance",
                   "scope" : "instance"
                },
                {
@@ -15253,11 +15264,13 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Extracts and merges theme attributes from a view or control instance into this theme.",
                   "declaration" : "- (void)takeThemeFromObject:(id)anObject",
                   "kind" : "method",
                   "name" : "takeThemeFromObject:",
                   "parameters" : [
                      {
+                        "description" : "the target object from which to copy attributes",
                         "name" : "anObject",
                         "type" : "id"
                      }
@@ -15271,24 +15284,29 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Initializes a theme from an unarchiver.",
                   "declaration" : "- (id)initWithCoder:(CPCoder)aCoder",
                   "kind" : "method",
                   "name" : "initWithCoder:",
                   "parameters" : [
                      {
+                        "description" : "the coder object",
                         "name" : "aCoder",
                         "type" : "CPCoder"
                      }
                   ],
                   "returnType" : "id",
+                  "returns" : "the unarchived theme instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Archives the theme's name and attributes.",
                   "declaration" : "- (void)encodeWithCoder:(CPCoder)aCoder",
                   "kind" : "method",
                   "name" : "encodeWithCoder:",
                   "parameters" : [
                      {
+                        "description" : "the coder object",
                         "name" : "aCoder",
                         "type" : "CPCoder"
                      }
@@ -15308,11 +15326,13 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Updates the dynamic attributes set of the default theme and reapplies styling across application windows and menus.",
                   "declaration" : "+ (void)updateDefaultThemeDynamicAttributesSetWithSet:(CPDictionary)dynamicSet",
                   "kind" : "method",
                   "name" : "updateDefaultThemeDynamicAttributesSetWithSet:",
                   "parameters" : [
                      {
+                        "description" : "a dictionary containing the new dynamic attribute values, or <code>nil</code> to restore defaults",
                         "name" : "dynamicSet",
                         "type" : "CPDictionary"
                      }
@@ -15321,11 +15341,13 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Updates the resource path placeholder (\"%%\") in all CSS directives within the theme.",
                   "declaration" : "- (void)setCSSResourcesPath:(CPString)pathToResources",
                   "kind" : "method",
                   "name" : "setCSSResourcesPath:",
                   "parameters" : [
                      {
+                        "description" : "the path to the resources directory",
                         "name" : "pathToResources",
                         "type" : "CPString"
                      }
@@ -15334,11 +15356,13 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Applies a dynamic attribute substitution set across all CSS-defined attributes in the theme.",
                   "declaration" : "- (void)applyDynamicSet:(CPDictionary)dynamicSet",
                   "kind" : "method",
                   "name" : "applyDynamicSet:",
                   "parameters" : [
                      {
+                        "description" : "dictionary of dynamic values to replace",
                         "name" : "dynamicSet",
                         "type" : "CPDictionary"
                      }
@@ -15347,16 +15371,18 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns whether the theme is CSS-based.",
                   "declaration" : "- (BOOL)isCSSBased",
                   "kind" : "method",
                   "name" : "isCSSBased",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if the theme is CSS-based, otherwise <code>NO</code>",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "ThemeStates are immutable objects representing a particular ThemeState.",
+                  "abstract" : "ThemeState represents an immutable theme state identifier (or composite of states).",
                   "declaration" : "var stateNameKeys = []",
-                  "discussion" : "Applications should never be creating ThemeStates directly but should instead use the CPThemeState function.",
+                  "discussion" : "Applications should not construct ThemeStates directly, but rather use <code>CPThemeState</code>().",
                   "kind" : "global_variable",
                   "name" : "stateNameKeys",
                   "type" : "id"
@@ -15368,12 +15394,14 @@
                   "type" : "id"
                },
                {
+                  "abstract" : "Returns a new theme state with the specified state components removed.",
                   "declaration" : "var newStates = {}",
                   "kind" : "global_variable",
                   "name" : "newStates",
                   "type" : "id"
                },
                {
+                  "abstract" : "Returns a new composite theme state combined with the specified state.",
                   "declaration" : "var themeState = CPThemeStates[String(aState)]",
                   "kind" : "global_variable",
                   "name" : "themeState",
@@ -15424,145 +15452,180 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Initializes a theme attribute with a given name, default value, and fallback default attribute.",
                   "declaration" : "- (id)initWithName:(CPString)aName defaultValue:(id)aDefaultValue defaultAttribute:(_CPThemeAttribute)aDefaultAttribute",
                   "kind" : "method",
                   "name" : "initWithName:defaultValue:defaultAttribute:",
                   "parameters" : [
                      {
+                        "description" : "the name of the attribute",
                         "name" : "aName",
                         "type" : "CPString"
                      },
                      {
+                        "description" : "the fallback default value",
                         "name" : "aDefaultValue",
                         "type" : "id"
                      },
                      {
+                        "description" : "parent fallback attribute",
                         "name" : "aDefaultAttribute",
                         "type" : "_CPThemeAttribute"
                      }
                   ],
                   "returnType" : "id",
+                  "returns" : "the initialized attribute object",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the name of the attribute.",
                   "declaration" : "- (CPString)name",
                   "kind" : "method",
                   "name" : "name",
                   "returnType" : "CPString",
+                  "returns" : "the attribute name",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the default value of the attribute.",
                   "declaration" : "- (id)defaultValue",
                   "kind" : "method",
                   "name" : "defaultValue",
                   "returnType" : "id",
+                  "returns" : "the default value",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns whether this attribute contains custom values.",
                   "declaration" : "- (BOOL)hasValues",
                   "kind" : "method",
                   "name" : "hasValues",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if values exist, otherwise <code>NO</code>",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns a copy of the attribute with a new value set for the normal state.",
                   "declaration" : "- (_CPThemeAttribute)attributeBySettingValue:(id)aValue",
                   "kind" : "method",
                   "name" : "attributeBySettingValue:",
                   "parameters" : [
                      {
+                        "description" : "the value to assign",
                         "name" : "aValue",
                         "type" : "id"
                      }
                   ],
                   "returnType" : "_CPThemeAttribute",
+                  "returns" : "a new <code>_CPThemeAttribute</code> instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns a copy of the attribute with a new value set for the specified theme state.",
                   "declaration" : "- (_CPThemeAttribute)attributeBySettingValue:(id)aValue forState:(ThemeState)aState",
                   "kind" : "method",
                   "name" : "attributeBySettingValue:forState:",
                   "parameters" : [
                      {
+                        "description" : "the value to assign",
                         "name" : "aValue",
                         "type" : "id"
                      },
                      {
+                        "description" : "the target theme state",
                         "name" : "aState",
                         "type" : "ThemeState"
                      }
                   ],
                   "returnType" : "_CPThemeAttribute",
+                  "returns" : "a new <code>_CPThemeAttribute</code> instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the value in the normal state.",
                   "declaration" : "- (id)value",
                   "kind" : "method",
                   "name" : "value",
                   "returnType" : "id",
+                  "returns" : "the normal state value",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Resolves and returns the attribute value for a given theme state, checking caches, exact matches, composite partial subsets, and fallbacks.",
                   "declaration" : "- (id)valueForState:(ThemeState)aState",
                   "kind" : "method",
                   "name" : "valueForState:",
                   "parameters" : [
                      {
+                        "description" : "the theme state to resolve",
                         "name" : "aState",
                         "type" : "ThemeState"
                      }
                   ],
                   "returnType" : "id",
+                  "returns" : "the matching attribute value",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Finds the largest subset match among existing state definitions for a given theme state.",
                   "declaration" : "- (CPInteger)largestThemeStateMatchForState:(ThemeState)aState returnedValue:(id)valueRef",
                   "kind" : "method",
                   "name" : "largestThemeStateMatchForState:returnedValue:",
                   "parameters" : [
                      {
+                        "description" : "the target theme state",
                         "name" : "aState",
                         "type" : "ThemeState"
                      },
                      {
+                        "description" : "reference that receives the matched value",
                         "name" : "valueRef",
                         "type" : "id"
                      }
                   ],
                   "returnType" : "CPInteger",
+                  "returns" : "the length/count of the matched state subset",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns a copy of this attribute with a new parent default attribute.",
                   "declaration" : "- (_CPThemeAttribute)attributeBySettingParentAttribute:(_CPThemeAttribute)anAttribute",
                   "kind" : "method",
                   "name" : "attributeBySettingParentAttribute:",
                   "parameters" : [
                      {
+                        "description" : "the fallback parent attribute",
                         "name" : "anAttribute",
                         "type" : "_CPThemeAttribute"
                      }
                   ],
                   "returnType" : "_CPThemeAttribute",
+                  "returns" : "a new <code>_CPThemeAttribute</code> instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns a new attribute merging values from another attribute over this attribute's values.",
                   "declaration" : "- (_CPThemeAttribute)attributeMergedWithAttribute:(_CPThemeAttribute)anAttribute",
                   "kind" : "method",
                   "name" : "attributeMergedWithAttribute:",
                   "parameters" : [
                      {
+                        "description" : "the attribute to merge from",
                         "name" : "anAttribute",
                         "type" : "_CPThemeAttribute"
                      }
                   ],
                   "returnType" : "_CPThemeAttribute",
+                  "returns" : "a new <code>_CPThemeAttribute</code> instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns a string description of the attribute.",
                   "declaration" : "- (CPString)description",
                   "kind" : "method",
                   "name" : "description",
                   "returnType" : "CPString",
+                  "returns" : "the string representation",
                   "scope" : "instance"
                },
                {
@@ -15577,24 +15640,29 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Initializes the theme attribute from an unarchiver.",
                   "declaration" : "- (id)initWithCoder:(CPCoder)aCoder",
                   "kind" : "method",
                   "name" : "initWithCoder:",
                   "parameters" : [
                      {
+                        "description" : "the coder object",
                         "name" : "aCoder",
                         "type" : "CPCoder"
                      }
                   ],
                   "returnType" : "id",
+                  "returns" : "the unarchived instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Archives the theme attribute.",
                   "declaration" : "- (void)encodeWithCoder:(CPCoder)aCoder",
                   "kind" : "method",
                   "name" : "encodeWithCoder:",
                   "parameters" : [
                      {
+                        "description" : "the coder object",
                         "name" : "aCoder",
                         "type" : "CPCoder"
                      }
@@ -15603,12 +15671,14 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Encodes a theme attribute into a coder.",
                   "declaration" : "var state = [values allKeys][0]",
                   "kind" : "global_variable",
                   "name" : "state",
                   "type" : "id"
                },
                {
+                  "abstract" : "Decodes a theme attribute from a coder.",
                   "declaration" : "var key = \"$a\" + attribute._name",
                   "kind" : "global_variable",
                   "name" : "key",
