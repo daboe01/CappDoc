@@ -52288,7 +52288,7 @@
          "title" : "CPFontDescriptor"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "CPFontDescriptor encapsulates font dictionaries and attributes (such as family, size, face, and traits) for querying, creating, and manipulating typography.",
          "declaration" : "@implementation CPFontDescriptor : CPObject",
          "discussion" : ""
       },
@@ -52296,137 +52296,147 @@
          {
             "symbols" : [
                {
-                  "abstract" : "Returns a font descriptor with the specified attributes.",
+                  "abstract" : "Creates and returns a font descriptor initialized with the specified attributes.",
                   "declaration" : "+ (CPFontDescriptor)fontDescriptorWithFontAttributes:(CPDictionary)attributes",
                   "kind" : "method",
                   "name" : "fontDescriptorWithFontAttributes:",
                   "parameters" : [
                      {
-                        "description" : "a dictionary that describe the desired font descriptor",
+                        "description" : "a dictionary describing the font attributes",
                         "name" : "attributes",
                         "type" : "CPDictionary"
                      }
                   ],
                   "returnType" : "CPFontDescriptor",
-                  "returns" : "the requested font descriptor",
+                  "returns" : "the initialized font descriptor",
                   "scope" : "class"
                },
                {
-                  "abstract" : "Returns a font descriptor with the specified name and size.",
+                  "abstract" : "Creates and returns a font descriptor initialized with the specified font name and size.",
                   "declaration" : "+ (CPFontDescriptor)fontDescriptorWithName:(CPString)fontName size:(float)size",
                   "kind" : "method",
                   "name" : "fontDescriptorWithName:size:",
                   "parameters" : [
                      {
-                        "description" : "the name of the font",
+                        "description" : "the name or family name of the font",
                         "name" : "fontName",
                         "type" : "CPString"
                      },
                      {
+                        "description" : "the size of the font (in points)",
                         "name" : "size",
                         "type" : "float"
                      }
                   ],
                   "returnType" : "CPFontDescriptor",
-                  "returns" : "the requested font descriptor",
+                  "returns" : "the initialized font descriptor",
                   "scope" : "class"
                },
                {
-                  "abstract" : "Initialize a font descriptor with the specified attributes.",
+                  "abstract" : "Initializes a font descriptor with the specified attributes dictionary.",
                   "declaration" : "- (id)initWithFontAttributes:(CPDictionary)attributes",
                   "kind" : "method",
                   "name" : "initWithFontAttributes:",
                   "parameters" : [
                      {
-                        "description" : "a dictionary that describe the desired font descriptor",
+                        "description" : "a dictionary describing the font attributes",
                         "name" : "attributes",
                         "type" : "CPDictionary"
                      }
                   ],
                   "returnType" : "id",
-                  "returns" : "the requested font descriptor",
+                  "returns" : "the initialized font descriptor",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns a new font descriptor that is the same as the receiver but with the specified attributes taking precedence over the existing ones.",
+                  "abstract" : "Returns a new font descriptor copy with the specified attributes taking precedence over existing ones.",
                   "declaration" : "- (CPFontDescriptor)fontDescriptorByAddingAttributes:(CPDictionary)attributes",
                   "kind" : "method",
                   "name" : "fontDescriptorByAddingAttributes:",
                   "parameters" : [
                      {
-                        "description" : "a dictionary that describe the desired font descriptor",
+                        "description" : "a dictionary of attributes to merge/override",
                         "name" : "attributes",
                         "type" : "CPDictionary"
                      }
                   ],
                   "returnType" : "CPFontDescriptor",
-                  "returns" : "the new font descriptor",
+                  "returns" : "a new <code>CPFontDescriptor</code> instance",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns a new font descriptor that is the same as the receiver but with the specified size taking precedence over the existing ones.",
+                  "abstract" : "Returns a new font descriptor copy with the specified font size taking precedence.",
                   "declaration" : "- (CPFontDescriptor)fontDescriptorWithSize:(float)aSize",
                   "kind" : "method",
                   "name" : "fontDescriptorWithSize:",
                   "parameters" : [
                      {
-                        "description" : "the new size",
+                        "description" : "the new size in points",
                         "name" : "aSize",
                         "type" : "float"
                      }
                   ],
                   "returnType" : "CPFontDescriptor",
-                  "returns" : "the new font descriptor",
+                  "returns" : "a new <code>CPFontDescriptor</code> instance",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns a new font descriptor that is the same as the receiver but with the specified symbolic traits taking precedence over the existing ones.",
+                  "abstract" : "Returns a new font descriptor copy with the specified symbolic traits taking precedence.",
                   "declaration" : "- (CPFontDescriptor)fontDescriptorWithSymbolicTraits:(CPFontSymbolicTraits)symbolicTraits",
                   "kind" : "method",
                   "name" : "fontDescriptorWithSymbolicTraits:",
                   "parameters" : [
                      {
-                        "description" : "the desired new symbolic traits",
+                        "description" : "the new symbolic trait bitmask",
                         "name" : "symbolicTraits",
                         "type" : "CPFontSymbolicTraits"
                      }
                   ],
                   "returnType" : "CPFontDescriptor",
-                  "returns" : "the new font descriptor",
+                  "returns" : "a new <code>CPFontDescriptor</code> instance",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the attribute value associated with a given key.",
                   "declaration" : "- (id)objectForKey:(id)aKey",
                   "kind" : "method",
                   "name" : "objectForKey:",
                   "parameters" : [
                      {
+                        "description" : "the attribute key name",
                         "name" : "aKey",
                         "type" : "id"
                      }
                   ],
                   "returnType" : "id",
+                  "returns" : "the attribute value, or <code>nil</code>",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the dictionary of font attributes for the descriptor.",
                   "declaration" : "- (CPDictionary)fontAttributes",
                   "kind" : "method",
                   "name" : "fontAttributes",
                   "returnType" : "CPDictionary",
+                  "returns" : "the attributes dictionary",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the point size attribute of the font descriptor.",
                   "declaration" : "- (float)pointSize",
                   "kind" : "method",
                   "name" : "pointSize",
                   "returnType" : "float",
+                  "returns" : "the point size as a float value",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the symbolic traits bitmask of the font descriptor.",
                   "declaration" : "- (CPFontSymbolicTraits)symbolicTraits",
                   "kind" : "method",
                   "name" : "symbolicTraits",
                   "returnType" : "CPFontSymbolicTraits",
+                  "returns" : "the symbolic traits bitmask",
                   "scope" : "instance"
                },
                {
@@ -52447,23 +52457,23 @@
                   "name" : "initWithCoder:",
                   "parameters" : [
                      {
-                        "description" : "the coder from which to read the font descriptor data",
+                        "description" : "the coder object",
                         "name" : "aCoder",
                         "type" : "CPCoder"
                      }
                   ],
                   "returnType" : "id",
-                  "returns" : "the initialized font",
+                  "returns" : "the unarchived font descriptor",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Writes the font descriptor to a coder.",
+                  "abstract" : "Archives the font descriptor attributes into a coder.",
                   "declaration" : "- (void)encodeWithCoder:(CPCoder)aCoder",
                   "kind" : "method",
                   "name" : "encodeWithCoder:",
                   "parameters" : [
                      {
-                        "description" : "the coder to which the data will be written",
+                        "description" : "the coder object",
                         "name" : "aCoder",
                         "type" : "CPCoder"
                      }
@@ -52483,45 +52493,61 @@
          {
             "symbols" : [
                {
+                  "abstract" : "Returns the CSS font-style string (e.g.",
                   "declaration" : "- (CPString)fontStyleCSSString",
+                  "discussion" : "\\c @\"italic\" or \\c @\"normal\").",
                   "kind" : "method",
                   "name" : "fontStyleCSSString",
                   "returnType" : "CPString",
+                  "returns" : "the CSS font style string",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the CSS font-weight string (e.g.",
                   "declaration" : "- (CPString)fontWeightCSSString",
+                  "discussion" : "\\c @\"bold\", \\c @\"normal\", or numerical weight).",
                   "kind" : "method",
                   "name" : "fontWeightCSSString",
                   "returnType" : "CPString",
+                  "returns" : "the CSS font weight string",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the CSS font-size string with pixel units (e.g.",
                   "declaration" : "- (CPString)fontSizeCSSString",
+                  "discussion" : "\\c @\"12px\").",
                   "kind" : "method",
                   "name" : "fontSizeCSSString",
                   "returnType" : "CPString",
+                  "returns" : "the CSS font size string",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the CSS font-family string.",
                   "declaration" : "- (CPString)fontFamilyCSSString",
                   "kind" : "method",
                   "name" : "fontFamilyCSSString",
                   "returnType" : "CPString",
+                  "returns" : "the formatted CSS font family string",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the CSS font-variant string (e.g.",
                   "declaration" : "- (CPString)fontVariantCSSString",
+                  "discussion" : "\\c @\"small-caps\" or \\c @\"normal\").",
                   "kind" : "method",
                   "name" : "fontVariantCSSString",
                   "returnType" : "CPString",
+                  "returns" : "the CSS font variant string",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the complete shorthand CSS font property string.",
                   "declaration" : "- (CPString)cssString",
                   "kind" : "method",
                   "name" : "cssString",
                   "returnType" : "CPString",
+                  "returns" : "the CSS font shorthand string",
                   "scope" : "instance"
                }
             ],

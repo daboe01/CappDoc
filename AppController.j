@@ -1268,7 +1268,7 @@
                      @"- Do NOT explain basic language syntax (e.g. do not explain what @implementation or inheritance is).\n" +
                      @"- Do NOT break down class definitions line-by-line.\n" +
                      @"- Start directly with your answer. No preamble or meta-commentary.\n" +
-                     @"- Always write valid Objective-J syntax (bracket messaging [receiver msg], never JS class or C-pointers).\n\n" +
+                     @"- Always write valid Objective-J syntax (bracket messaging [receiver msg], never dot-syntax, JS class or C-pointers).\n\n" +
                      @"=== DOCUMENTATION CONTEXT ===\n" +
                      cleanContext + @"\n\n" +
                      @"=== USER REQUEST ===\n" +
