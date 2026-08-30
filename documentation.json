@@ -44955,7 +44955,7 @@
          "title" : "CPFontManager"
       },
       "primaryContent" : {
-         "abstract" : "",
+         "abstract" : "The CPFontManager class manages font conversion, font selection, available fonts detection, and interaction with the shared <code>CPFontPanel</code>.",
          "declaration" : "@implementation CPFontManager : CPObject",
          "discussion" : ""
       },
@@ -44963,21 +44963,22 @@
          {
             "symbols" : [
                {
-                  "abstract" : "Returns the application's font manager.",
+                  "abstract" : "Returns the shared font manager for the application, creating it if it does not yet exist.",
                   "declaration" : "+ (CPFontManager)sharedFontManager",
-                  "discussion" : "If the font manager does not exist yet, it will be created.",
                   "kind" : "method",
                   "name" : "sharedFontManager",
                   "returnType" : "CPFontManager",
+                  "returns" : "the shared <code>CPFontManager</code> instance",
                   "scope" : "class"
                },
                {
-                  "abstract" : "Sets the class that will be used to create the application's font manager.",
+                  "abstract" : "Sets the class used to instantiate the application's shared font manager.",
                   "declaration" : "+ (void)setFontManagerFactory:(Class)aClass",
                   "kind" : "method",
                   "name" : "setFontManagerFactory:",
                   "parameters" : [
                      {
+                        "description" : "the font manager subclass",
                         "name" : "aClass",
                         "type" : "Class"
                      }
@@ -44986,12 +44987,13 @@
                   "scope" : "class"
                },
                {
-                  "abstract" : "Sets the class that will be used to create the application's Font panel.",
+                  "abstract" : "Sets the class used to instantiate the application's font panel.",
                   "declaration" : "+ (void)setFontPanelFactory:(Class)aClass",
                   "kind" : "method",
                   "name" : "setFontPanelFactory:",
                   "parameters" : [
                      {
+                        "description" : "the font panel subclass",
                         "name" : "aClass",
                         "type" : "Class"
                      }
@@ -45000,22 +45002,25 @@
                   "scope" : "class"
                },
                {
+                  "abstract" : "Initializes a newly allocated font manager instance.",
                   "declaration" : "- (id)init",
                   "kind" : "method",
                   "name" : "init",
                   "returnType" : "id",
+                  "returns" : "the initialized font manager",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns an array of the available fonts",
+                  "abstract" : "Returns an array of names of all fonts available in the current environment.",
                   "declaration" : "- (CPArray)availableFonts",
                   "kind" : "method",
                   "name" : "availableFonts",
                   "returnType" : "CPArray",
+                  "returns" : "an array of available font family name strings",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Returns the available fonts matching the provided name.",
+                  "abstract" : "Returns whether the font matching the provided name is available.",
                   "declaration" : "- (CPArray)fontWithNameIsAvailable:(CPString)aFontName",
                   "kind" : "method",
                   "name" : "fontWithNameIsAvailable:",
@@ -45027,18 +45032,22 @@
                      }
                   ],
                   "returnType" : "CPArray",
+                  "returns" : "<code>YES</code> if available, otherwise <code>NO</code>",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Sets the currently selected font and indicates whether multiple fonts are selected.",
                   "declaration" : "- (void)setSelectedFont:(CPFont)aFont isMultiple:(BOOL)aFlag",
                   "kind" : "method",
                   "name" : "setSelectedFont:isMultiple:",
                   "parameters" : [
                      {
+                        "description" : "the selected font",
                         "name" : "aFont",
                         "type" : "CPFont"
                      },
                      {
+                        "description" : "<code>YES</code> if multiple fonts are in the current selection",
                         "name" : "aFlag",
                         "type" : "BOOL"
                      }
@@ -45047,61 +45056,75 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the currently selected font.",
                   "declaration" : "- (CPFont)selectedFont",
                   "kind" : "method",
                   "name" : "selectedFont",
                   "returnType" : "CPFont",
+                  "returns" : "the selected <code>CPFont</code>",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the approximate weight of the given font.",
                   "declaration" : "- (int)weightOfFont:(CPFont)aFont",
                   "kind" : "method",
                   "name" : "weightOfFont:",
                   "parameters" : [
                      {
+                        "description" : "the font to evaluate",
                         "name" : "aFont",
                         "type" : "CPFont"
                      }
                   ],
                   "returnType" : "int",
+                  "returns" : "the font weight (e.g. 5 for normal, 9 for bold)",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Returns the trait mask for the specified font.",
                   "declaration" : "- (CPFontTraitMask)traitsOfFont:(CPFont)aFont",
                   "kind" : "method",
                   "name" : "traitsOfFont:",
                   "parameters" : [
                      {
+                        "description" : "the font to inspect",
                         "name" : "aFont",
                         "type" : "CPFont"
                      }
                   ],
                   "returnType" : "CPFontTraitMask",
+                  "returns" : "the bitmask of font traits",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Converts a font to use the specified typeface while preserving size and styling traits.",
                   "declaration" : "- (CPFont)convertFont:(CPFont)aFont toFace:(CPString)aTypeface",
                   "kind" : "method",
                   "name" : "convertFont:toFace:",
                   "parameters" : [
                      {
+                        "description" : "the original font",
                         "name" : "aFont",
                         "type" : "CPFont"
                      },
                      {
+                        "description" : "the new typeface name",
                         "name" : "aTypeface",
                         "type" : "CPString"
                      }
                   ],
                   "returnType" : "CPFont",
+                  "returns" : "the converted <code>CPFont</code>",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Action method that adds traits to the current font selection.",
                   "declaration" : "- (@action)addFontTrait:(id)sender",
                   "kind" : "method",
                   "name" : "addFontTrait:",
                   "parameters" : [
                      {
+                        "description" : "the object triggering the action",
                         "name" : "sender",
                         "type" : "id"
                      }
@@ -45110,25 +45133,28 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Sends the font change action message to the target object.",
                   "declaration" : "- (BOOL)sendAction",
                   "kind" : "method",
                   "name" : "sendAction",
                   "returnType" : "BOOL",
+                  "returns" : "<code>YES</code> if the action was sent successfully",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "This method open the font panel, create it if necessary.",
+                  "abstract" : "Returns the shared font panel, optionally creating it if it does not yet exist.",
                   "declaration" : "- (CPFontPanel)fontPanel:(BOOL)createIt",
                   "kind" : "method",
                   "name" : "fontPanel:",
                   "parameters" : [
                      {
-                        "description" : "The object that sent the message.",
+                        "description" : "<code>YES</code> to create the panel if it does not exist",
                         "name" : "createIt",
                         "type" : "BOOL"
                      }
                   ],
                   "returnType" : "CPFontPanel",
+                  "returns" : "the <code>CPFontPanel</code> instance, or <code>nil</code>",
                   "scope" : "instance"
                },
                {
@@ -45154,55 +45180,55 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Convert a font to not have the specified Font traits.",
+                  "abstract" : "Converts a font to remove the specified traits while preserving other attributes.",
                   "declaration" : "- (CPFont)convertFont:(CPFont)aFont toNotHaveTrait:(CPFontTraitMask)fontTrait",
-                  "discussion" : "The font is unchanged expect for the specified Font traits.",
                   "kind" : "method",
                   "name" : "convertFont:toNotHaveTrait:",
                   "parameters" : [
                      {
-                        "description" : "The font to convert.",
+                        "description" : "the font to convert",
                         "name" : "aFont",
                         "type" : "CPFont"
                      },
                      {
-                        "description" : "The font traits mask to remove.",
+                        "description" : "the font traits mask to remove",
                         "name" : "fontTrait",
                         "type" : "CPFontTraitMask"
                      }
                   ],
                   "returnType" : "CPFont",
-                  "returns" : "The converted font or <code>aFont</code> if the conversion failed.",
+                  "returns" : "the converted font, or <code>aFont</code> if conversion failed",
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Convert a font to have specified size.",
+                  "abstract" : "Converts a font to have the specified size in points.",
                   "declaration" : "- (CPFont)convertFont:(CPFont)aFont toSize:(float)aSize",
-                  "discussion" : "The font is unchanged expect for the specified size.",
                   "kind" : "method",
                   "name" : "convertFont:toSize:",
                   "parameters" : [
                      {
-                        "description" : "The font to convert.",
+                        "description" : "the font to convert",
                         "name" : "aFont",
                         "type" : "CPFont"
                      },
                      {
-                        "description" : "The new font size.",
+                        "description" : "the new font size",
                         "name" : "aSize",
                         "type" : "float"
                      }
                   ],
                   "returnType" : "CPFont",
-                  "returns" : "The converted font or <code>aFont</code> if the conversion failed.",
+                  "returns" : "the converted <code>CPFont</code>",
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Orders the shared font panel to the front.",
                   "declaration" : "- (void)orderFrontFontPanel:(id)sender",
                   "kind" : "method",
                   "name" : "orderFrontFontPanel:",
                   "parameters" : [
                      {
+                        "description" : "the object requesting the action",
                         "name" : "sender",
                         "type" : "id"
                      }
@@ -45211,11 +45237,13 @@
                   "scope" : "instance"
                },
                {
+                  "abstract" : "Modifies the current font according to the sender's tag action.",
                   "declaration" : "- (void)modifyFont:(id)sender",
                   "kind" : "method",
                   "name" : "modifyFont:",
                   "parameters" : [
                      {
+                        "description" : "the UI element triggering the modification",
                         "name" : "sender",
                         "type" : "id"
                      }
@@ -45224,13 +45252,13 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "This method causes the receiver to send its action message.",
+                  "abstract" : "Notifies the receiver that a font modification was made via the font panel and sends the action.",
                   "declaration" : "- (void)modifyFontViaPanel:(id)sender",
                   "kind" : "method",
                   "name" : "modifyFontViaPanel:",
                   "parameters" : [
                      {
-                        "description" : "The object that sent the message. (a Font panel)",
+                        "description" : "the font panel initiating the modification",
                         "name" : "sender",
                         "type" : "id"
                      }
@@ -45239,19 +45267,19 @@
                   "scope" : "instance"
                },
                {
-                  "abstract" : "Convert a font according to current font changes, provided by the object that initiated the font change.",
+                  "abstract" : "Converts the provided font according to the current active font action.",
                   "declaration" : "- (CPFont)convertFont:(CPFont)aFont",
                   "kind" : "method",
                   "name" : "convertFont:",
                   "parameters" : [
                      {
-                        "description" : "The font to convert.",
+                        "description" : "the font to convert",
                         "name" : "aFont",
                         "type" : "CPFont"
                      }
                   ],
                   "returnType" : "CPFont",
-                  "returns" : "The converted font or <code>aFont</code> if the conversion failed.",
+                  "returns" : "the converted <code>CPFont</code>",
                   "scope" : "instance"
                },
                {
